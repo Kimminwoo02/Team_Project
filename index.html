@@ -10,9 +10,10 @@
     <link rel="stylesheet" href="./css/reset.css">
     <link rel="stylesheet" href="./css/style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/bxslider/4.2.12/jquery.bxslider.css">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA0bbWpN1KpMaikM781Ldje_IcSh6pM-gQ&callback=initMap&region=kr"></script>
     <script src="https://kit.fontawesome.com/b11f0f5caa.js" crossorigin="anonymous"></script>
     <script src="http://maps.google.com/maps/api/js?key=AIzaSyA0bbWpN1KpMaikM781Ldje_IcSh6pM-gQ&region=kr"></script>
@@ -20,54 +21,62 @@
 
 <body>
     <header>
-        <div class="logo"><i class="fas fa-utensils">Logo</i></div>
-        <nav class="lnb">
-            <ul>
-                <li>
-                    <h1>
-                        <a href="#" class="effect-box">LOGIN</a>
-                    </h1>
-                </li>
-                <li>
-                    <h1>
-                        <a href="#" class="effect-box">MAP</a>
-                    </h1>
-                </li>
-                <li>
-                    <h1>
-                        <a href="#" class="effect-box">ABOUT</a>
-                    </h1>
-                </li>
-                <li>
-                    <h1>
-                        <a href="#" class="effect-box">HOME</a>
-                    </h1>
-                </li>
-            </ul>
-        </nav>
+        <div class="logo"><i class="fas fa-utensils">LOGO</i></div>
+
     </header>
-    <div id="fullpage">
-        <div id="child1" class="section">
 
-
-
-        </div>
-        <div class="section child2">
-            <div class="bxslider">
-                <div><img src="./images/food1.jpeg" title="Funky roots"></div>
-                <div><img src="./images/food2.jpeg" title="The long and winding road"></div>
-                <div><img src="./images/food3.jpeg" title="Happy trees"></div>
-            </div>
-        </div>
-
-        <div class="section  child3">
-            <div id="map"></div>
-
-            <footer>
-                <h1 class="animate__animated animate__flipInX">플립</h1>
-            </footer>
+    <div id="child1" class="section">
+        <div class="container1"><img src="./images/mi1.jpeg" alt="" srcset=""></div>
+        <div class="container2">
+            <div data-aos="fade-left">프론트 앤드 개발자를 꿈꾸는 열정 가득한 신입개발자 김민우입니다.</div>
         </div>
     </div>
+    <div id="child2" class="section">
+        <div class="container1">
+            <div class="wrapper">
+                <div class="item">
+                    <div class="polaroid"><img src="./images/main1.JPG">
+                        <div class="caption"> 노력</div>
+                    </div>
+                </div>
+
+                <div class="item">
+                    <div class="polaroid"><img src="./images/main2.jpeg">
+                        <div class="caption">성실함</div>
+                    </div>
+                </div>
+
+                <div class="item">
+                    <div class="polaroid"><img src="./images/main3.jpeg">
+                        <div class="caption"> 열정 </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <div id="child3" class="section">
+        <div class="container3">
+            <div class="stack"></div>
+            <div class="stack"></div>
+            <div class="stack"></div>
+            <div class="stack"></div>
+            <div class="stack"></div>
+            <div class="stack"></div>
+            <div class="stack"></div>
+            <div class="stack"></div>
+            <div class="stack"></div>
+
+        </div>
+
+
+
+
+        <footer>
+            Copyrightⓒ2008 by XX. All pictures cannot be copied without permission.
+        </footer>
+    </div>
+
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script src="./script/jquery.fullPage.js"></script>
@@ -75,11 +84,19 @@
     <script src="./script/script.js"></script>
 
 
-
-
-
     <script>
+        AOS.init({
+            offset: 120,
+            delay: 1000,
+            duration: 1000,
+            easing: 'ease',
+            once: false,
+            mirror: true
+        });
     </script>
+
+
+
 </body>
 
 </html>

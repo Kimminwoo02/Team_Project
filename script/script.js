@@ -70,26 +70,30 @@ btn2.addEventListener("click", changeMap2);
 btn3.addEventListener("click", changeMap3);
 
 
-function initMap() {
-    navigator.geolocation.getCurrentPosition(
-        function(position) {
+// AOS 애니메이션
 
-            var location = { lat: position.coords.latitude, lng: position.coords.longitude };
 
-            var map = new google.maps.Map(
-                document.getElementById('map'), {
-                    zoom: 16,
-                    center: location
 
-                });
-            var marker = new google.maps.Marker({
-                position: location,
-                map: map,
-                title: "여기 계시군요!"
-            });
+// function initMap() {
+//     navigator.geolocation.getCurrentPosition(
+//         function(position) {
 
-        }
+//             var location = { lat: position.coords.latitude, lng: position.coords.longitude };
 
-    )
+//             var map = new google.maps.Map(
+//                 document.getElementById('map'), {
+//                     zoom: 16,
+//                     center: location
 
-}
+//                 });
+//             var marker = new google.maps.Marker({
+//                 position: location,
+//                 map: map,
+//                 title: "여기 계시군요!"
+//             });
+
+//         }
+
+//     )
+
+// }

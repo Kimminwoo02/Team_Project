@@ -10,9 +10,15 @@
 * Gradle 8.2.1
 * Spring Boot 3.1.3
 
+
 ## 기술 세부 스택
 
 * Spring Web
 * Spring Data JPA
+* Spring Configuration Processor
 * H2 Database
+* Oracle Driver 
 * Lombok
+* Thymeleaf
+
+

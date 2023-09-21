@@ -17,4 +17,11 @@ public class TestController {
     public String facilities(){
         return "facility";
     }
+
+
+    @GetMapping("/matching")
+    public String matching(){
+        return "matching";
+    }
+
 }

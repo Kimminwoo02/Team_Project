@@ -1,0 +1,35 @@
+.layout {
+    width: 90%;
+    height: 90%;
+  
+    display: flex;
+    gap: 8px;
+    
+  }
+  
+.sidebar { 
+    background-color: yellow;
+    }
+
+
+
+.container {
+        display: grid; 
+        grid-template-columns: 1fr 1fr 1fr; 
+        grid-template-rows: 0.5fr 1.5fr 1fr; 
+        gap: 19px 24px; 
+        grid-template-areas: 
+          "title title title"
+          "side body body"
+          "side body body"; 
+}
+
+.body { grid-area: body; }
+.side { grid-area: side; }
+.title { grid-area: title; }
+
+  .map{
+    width: 800px;
+    height: 800px;
+    background-color: red;
+  }

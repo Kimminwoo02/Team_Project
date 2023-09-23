@@ -24,4 +24,18 @@ public class TestController {
         return "matching";
     }
 
+    @GetMapping("/loginPage")
+    public String login(){
+        return "loginPage";
+    }
+    @GetMapping("/findpw")
+    public String findPw(){
+        return "findpw";
+    }
+    @GetMapping("/findemail")
+    public String findEmail(){
+        return "findemailid";
+    }
+
+
 }

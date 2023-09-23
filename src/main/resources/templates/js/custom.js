@@ -5,9 +5,12 @@
 
     // HERO SLIDE
     $('.hero-slide').backstretch([
-      "images/slideshow/white-wall-living-room-have-sofa-decoration-3d-rendering.jpg", 
-      "images/slideshow/interior-wall-mockup-with-sofa-cabinet-living-room-with-empty-white-wall-background-3d-rendering.jpg",
-      "images/slideshow/wood-sideboard-living-room-interior-with-copy-space.jpg"
+      "images/slideshow/1.jpg",
+      "images/slideshow/2.jpg",
+      "images/slideshow/3.jpg",
+      "images/slideshow/4.jpg",
+      "images/slideshow/5.jpg",
+      "images/slideshow/6.jpg",
     ],  {duration: 2000, fade: 750});
 
     // REVIEWS CAROUSEL

@@ -324,13 +324,14 @@ strong {
   font-size: var(--btn-font-size);
   font-weight: var(--font-weight-semibold);
   line-height: normal;
-  padding: 15px 20px;
+
 }
 
 .custom-btn:hover {
   background: transparent;
   border-color: var(--custom-btn-bg-color);
   color: var(--custom-btn-bg-color);
+
 }
 
 .custom-border-btn {
@@ -749,9 +750,13 @@ strong {
   position: relative;
 }
 
+
 .shop-image-wrap:hover .shop-btn-wrap {
   opacity: 1;
+  filter: blur(5px);
 }
+
+
 
 .shop-icons-wrap {
   position: absolute;
@@ -786,6 +791,12 @@ strong {
 .shop-image {
   display: block;
   border-radius: var(--border-radius-medium);
+
+}
+.shop-image:hover {
+  animation: bounce;
+  animation-duration: 1.2s;
+
 }
 
 .shop-body {
@@ -803,16 +814,14 @@ strong {
 }
 
 .shop-btn {
-  background: var(--primary-color);
   font-size: var(--copyright-font-size);
-  width: 100px;
-  height: 100px;
+  z-index: 100;
   text-transform: uppercase;
 }
 
 .shop-btn:hover {
   border-color: transparent;
-  background: var(--secondary-color);
+  z-index: 100;
   color: var(--white-color);
 }
 

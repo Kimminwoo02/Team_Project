@@ -20,3 +20,8 @@ spring:
     cache: false
     check-template-location: true
     enabled: true
+
+  security:
+    user:
+      name: minu
+      password: 1234

@@ -1,5 +1,8 @@
-package com.example.team_project.config;
+package com.example.team_project.security;
 
+import com.example.team_project.repository.MemberRepository;
+import com.example.team_project.service.MemberService;
+import jakarta.persistence.EntityNotFoundException;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -12,8 +15,14 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityCustomizer;
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
+import org.springframework.security.web.csrf.CookieCsrfTokenRepository;
+import org.springframework.security.web.csrf.CsrfTokenRequestAttributeHandler;
+import org.springframework.security.web.csrf.CsrfTokenRequestHandler;
 import org.springframework.security.web.servlet.util.matcher.MvcRequestMatcher;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 import org.springframework.web.servlet.handler.HandlerMappingIntrospector;
@@ -21,8 +30,22 @@ import org.springframework.web.servlet.handler.HandlerMappingIntrospector;
 import java.io.IOException;
 
 @Configuration
+@RequiredArgsConstructor
 @EnableWebSecurity
 public class SecurityConfig {
+    private final UserDetailsService userDetailsService;
+
+    private static final int ONE_MONTH = 2678400;
+
+    @Bean
+    public BCryptPasswordEncoder encode(){
+        return new BCryptPasswordEncoder();
+    }
+
+    @Bean
+    public CustomAuthenticationProvider customAuthenticationProvider(){
+        return new CustomAuthenticationProvider(userDetailsService,encode());
+    }
     @Bean
     public WebSecurityCustomizer webSecurityCustomizer(){
         return (web) -> web.ignoring()
@@ -42,23 +65,30 @@ public class SecurityConfig {
     @Bean
     protected SecurityFilterChain filterChain(HttpSecurity http, HandlerMappingIntrospector introspect) throws Exception {
         return http
-                .csrf(AbstractHttpConfigurer::disable)
+                .csrf(AbstractHttpConfigurer::disable
+                )
 
                 .authorizeHttpRequests(auth->auth
                         .requestMatchers(new MvcRequestMatcher(introspect,"/home")).permitAll()
-                        .requestMatchers(new MvcRequestMatcher(introspect,"/loginPage")).permitAll()
+                        .requestMatchers(new MvcRequestMatcher(introspect,"/login")).permitAll()
+                        .requestMatchers(new MvcRequestMatcher(introspect,"/signup")).permitAll()
                         .anyRequest().authenticated())
-
                 .formLogin(login -> login
-                        .loginPage("/loginPage")
+                        .loginPage("/login")
+                        .loginProcessingUrl("/login")
                         .defaultSuccessUrl("/home")
-                        .loginProcessingUrl("/home")
-                        .usernameParameter("id")
-                        .passwordParameter("password")
+                        .usernameParameter("email")
+                )
 
+                .logout((logout)->logout
+                        .logoutUrl("/logout")
+                        .logoutSuccessUrl("/home")
+                        .permitAll()
                 )
 
                 .build();
-
     }
+
+
+
 }

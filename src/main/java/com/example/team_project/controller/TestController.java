@@ -2,6 +2,7 @@ package com.example.team_project.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 
 @Controller
 public class TestController {
@@ -24,18 +25,7 @@ public class TestController {
         return "matching";
     }
 
-    @GetMapping("/loginPage")
-    public String login(){
-        return "loginPage";
-    }
-    @GetMapping("/findpw")
-    public String findPw(){
-        return "findpw";
-    }
-    @GetMapping("/findemail")
-    public String findEmail(){
-        return "findemailid";
-    }
+
 
 
 }

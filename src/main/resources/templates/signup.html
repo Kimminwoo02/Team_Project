@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="ko"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<meta name="referrer" content="no-referrer-when-downgrade"/>
+<meta name="referrer" content="strict-origin-when-cross-origin"/>
+<style>
+    @import url(css/signup.css);
+</style>
+<script type="text/javascript" src="js/signup.js"></script>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign up</title>
+</head>
+
+<body>
+    <div class="signupcontent">
+
+        <img class="logo" alt="logo" src="images/logo.png">
+<!-- 
+        <div id="idpwText">
+            <p class="idpwText">Sign up</p>
+        </div> -->
+
+
+        <form method="post" enctype="multipart/form-data">
+
+            <div class="redWarningText">
+                <label for="file">
+                    👉 CLICK HERE TO UPLOAD YOUR ADORABLE PICTURE, IF YOU WANT OF COURSE :) 👈
+                </label>
+            </div>
+            <input type="file" id="file" name="file" accept="image/*" onchange="loadFile(this)">
+
+            <div class="fileContainer">
+                <div class="image-show" id="image-show"></div>
+                <div class="fileInput">
+                    FILE NAME:&nbsp;<span id="fileName"></span>
+                </div>
+
+                <script src="js/signup.js"></script>
+            </div>
+            <br>
+            <p id="emailnotification">Email address (to be used as ID)</p>
+            <input type="text" name="email" class="signup_input_text" placeholder="Email ID"><br>
+
+            <p id="emailnotification">Phone Number</p>
+            <input type="text" name="phone" class="signup_input_text" placeholder="Phone Number"><br>
+
+            <p id="emailnotification">Your GORGEOUS name</p>
+            <input type="text" name="name" class="signup_input_text" placeholder="Name"><br>
+
+            <p id="emailnotification">Your own secret password</p>
+            <input type="password" name="password" class="signup_input_text" placeholder="Password" minlength="8"><br>
+
+            <p>Your Gender</p>
+            <input class="radio1" type="radio" name="gender"  placeholder="gender" value="male">male<br>
+            <input class="radio1" type="radio" name="gender" placeholder="gender" value="female">female<br>
+
+            <p id="emaillnotification">Email Notifications</p>
+            <p id="emailnotificationdetails">
+                I accept Spam&nbsp;<input type="checkbox"><br>
+                I accept Ham&nbsp;<input type="checkbox"><br>
+                I accept SpamFried&nbsp;<input type="checkbox"><br>
+                I accept SpamMail&nbsp;<input type="checkbox"><br>
+            </p>
+            <input type="submit" class="signup_btn" value="Sign Up"><br>
+        </form>
+
+        <p id="copyright">Copyright © JihyeHong, MinwooKim, YejunKim, YongsuSon All Rights Reserved.</p>
+    </div>
+</body>
+
+</html>

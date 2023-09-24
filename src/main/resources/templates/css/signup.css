@@ -30,7 +30,7 @@ a {
     text-decoration: none;
 }
 
-#signupcontent{
+.signupcontent{
     position: relative;
     top: calc(50vh - 270px);
     width: 800px;
@@ -47,7 +47,9 @@ a {
     margin-top: -5%;
 
     text-align: center;
-
+}
+.radio1{
+    display: inline;
 }
 
 #emailnotification{
@@ -143,6 +145,15 @@ text-align: left;
     display: flex;
     justify-content: center;
 }
+.button_profileImageInsert {
+    display: flex;
+    justify-content: center;
+}
+.label_profileImageInsert {
+    cursor: pointer;
+    font-size: 1em;
+}
+
 label {
     cursor: pointer;
     font-size: 1em;
@@ -151,4 +162,9 @@ label {
 /* 못생긴 기존 input 숨기기 */
 #chooseFile {
     visibility: hidden;
+}
+.redWarningText label{
+    color: rgb(202, 199, 199);
+    background-color: red;
+
 }

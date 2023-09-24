@@ -1,6 +1,7 @@
 <!doctype html>
 <html lang="ko"
-      xmlns:th="http://www.thymeleaf.org">
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 
     <body>
 
@@ -31,10 +32,12 @@
                         </li>
 
                         <li class="nav-item">
-                            <a class="nav-link" href="http://localhost:8080/loginPage">로그인</a>
+                            <a class="nav-link" sec:authorize="isAnonymous()" href="http://localhost:8080/login">로그인</a>
+                            <a class="nav-link" sec:authorize="isAuthenticated()"><span sec:authentication="name"></span>님 안녕하세요!</a>
+                            <a class="nav-link" sec:authorize="isAuthenticated()" href="http://localhost:8080/login">로그아웃</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="http://localhost:8080/loginPage">회원가입</a>
+                            <a class="nav-link" sec:authorize="isAnonymous()" href="http://localhost:8080/signup">회원가입</a>
                         </li>
                     </ul>
                 </div>

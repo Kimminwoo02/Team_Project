@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calendar</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class = "container">
+    <div class="calendar">
+        <div class="header">
+            <button class="nav-btn go-prev" onclick="prevMonth()">&lt;</button>
+            <div class="year-month","nav-btn go-today" onclick="goToday()"></div>
+            <button class="nav-btn go-next" onclick="nextMonth()">&gt;</button>
+            <div class="nav">
+                
+                <!-- <button class="nav-btn go-today" onclick="goToday()">Today</button> -->
+                
+            </div>
+        </div>
+        <div class="main">
+            <div class="days">
+                <div class="day">SUN</div>
+                <div class="day">MON</div>
+                <div class="day">TUE</div>
+                <div class="day">WED</div>
+                <div class="day">THU</div>
+                <div class="day">FRI</div>
+                <div class="day">SAT</div>
+            </div>
+            <div class="dates"></div>
+        </div>
+    </div>
+    </div>
+    <script src="index.js"></script> 
+</body>
+</html>

@@ -1,27 +1,38 @@
 package com.example.team_project.security;
 
 import com.example.team_project.entity.Member;
-import lombok.Data;
+import lombok.Getter;
 import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 
 
 
-@Data
 
-public class CustomUserDetails implements UserDetails {
+@Getter
 
-    private Member member;
-    public CustomUserDetails(Member member){
+
+public class CustomUserDetails extends User implements UserDetails  {
+
+    private final String myName;
+    private final Member member;
+
+
+
+
+    public CustomUserDetails(Member member, List<GrantedAuthority> authorities){
+        super(member.getEmail(),member.getPassword(),authorities);
+        this.myName = member.getName();
         this.member = member;
     }
 
 
     @Override
-    public Collection<? extends GrantedAuthority> getAuthorities() {
+    public Collection<GrantedAuthority> getAuthorities() {
         Collection<GrantedAuthority> collection = new ArrayList<>();
         collection.add(new GrantedAuthority() {
             @Override
@@ -41,6 +52,8 @@ public class CustomUserDetails implements UserDetails {
     public String getUsername() {
         return member.getEmail();
     }
+
+    public String getName() { return member.getName();}
 
     @Override
     public boolean isAccountNonExpired() {

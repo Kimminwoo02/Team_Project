@@ -21,7 +21,7 @@
 
 
                         <li class="nav-item">
-                            <a class="nav-link" sec:authorize="isAuthenticated()"><span sec:authentication="name" style="color: #0c63e4"></span><span style="color: #1a1e21"> 안녕하세요!</span></a>
+                            <a class="nav-link" sec:authorize="isAuthenticated()"><span sec:authentication="principal.myName"  style="color: #0c63e4"></span><span style="color: #1a1e21">님 안녕하세요!</span></a>
                             <a class="nav-link" href="http://localhost:8080/home">홈</a>
                         </li>
                         <li class="nav-item">

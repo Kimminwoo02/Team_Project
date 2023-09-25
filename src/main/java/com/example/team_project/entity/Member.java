@@ -2,12 +2,8 @@ package com.example.team_project.entity;
 
 import jakarta.persistence.*;
 import lombok.*;
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
-import org.springframework.security.core.userdetails.UserDetails;
 
-import java.util.Collection;
-import java.util.List;
+import java.security.Principal;
 
 @Entity
 @NoArgsConstructor
@@ -32,6 +28,7 @@ public class Member {
     private String phone;
     private String gender;
     private String memberRole;
+
 
 
 }

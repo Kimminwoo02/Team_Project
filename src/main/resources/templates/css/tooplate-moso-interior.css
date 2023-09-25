@@ -10,7 +10,7 @@ https://www.tooplate.com/view/2133-moso-interior
   CUSTOM PROPERTIES ( VARIABLES )             
 -----------------------------------------*/
 *{
-  font-family: 'Black Han Sans', sans-serif;
+
 }
 
 :root {
@@ -106,11 +106,11 @@ h6 {
   font-size: var(--h6-font-size);
 }
 
-p {
-  color: var(--p-color);
-  font-size: var(--p-font-size);
-  font-weight: var(--font-weight-light);
-}
+/*p {*/
+/*  color: var(--p-color);*/
+/*  font-size: var(--p-font-size);*/
+/*  font-weight: var(--font-weight-light);*/
+/*}*/
 
 ul li {
   color: var(--p-color);
@@ -618,6 +618,7 @@ strong {
 -----------------------------------------*/
 .reviews-section {
   background: var(--section-bg-color);
+  z-index: -1;
 }
 
 .reviews-carousel .owl-item img,

@@ -1,17 +1,15 @@
 package com.example.team_project.controller;
 
-import com.example.team_project.dto.CMResponseDto;
-import com.example.team_project.dto.auth.SigninDto;
-import com.example.team_project.dto.auth.SignupResponse;
-import com.example.team_project.dto.member.MemberImgUploadDto;
 import com.example.team_project.dto.auth.SignupDto;
-import com.example.team_project.entity.Member;
 import com.example.team_project.service.MemberService;
-import jakarta.validation.Valid;
+import jakarta.servlet.http.HttpServlet;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -44,10 +42,25 @@ public class UserController {
         return "signup";
     }
 
+    @GetMapping("/logout")
+    public String logout(HttpServletRequest request, HttpServletResponse response){
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        if(authentication != null){
+            new SecurityContextLogoutHandler().logout(request,response,authentication);
+        }
+        return "redirect:/home";
+    }
+
     @PostMapping("/signup")
     public String signup1(@ModelAttribute SignupDto signupDto) throws IOException {
         log.info(String.valueOf(signupDto));
-        memberService.join(signupDto);
+        if(signupDto.getFile().isEmpty()){
+            memberService.joinWithoutFile(signupDto);
+        }
+        else {
+            memberService.join(signupDto);
+        }
+
         return "redirect:/home";
 
     }

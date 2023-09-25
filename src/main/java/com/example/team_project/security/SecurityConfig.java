@@ -58,6 +58,7 @@ public class SecurityConfig {
                 .requestMatchers(new AntPathRequestMatcher("/config/**"))
                 .requestMatchers(new AntPathRequestMatcher("/content/**"))
                 .requestMatchers(new AntPathRequestMatcher("/images/**"));
+
     }
 
 
@@ -72,17 +73,19 @@ public class SecurityConfig {
                         .requestMatchers(new MvcRequestMatcher(introspect,"/home")).permitAll()
                         .requestMatchers(new MvcRequestMatcher(introspect,"/login")).permitAll()
                         .requestMatchers(new MvcRequestMatcher(introspect,"/signup")).permitAll()
+                        .requestMatchers(new MvcRequestMatcher(introspect,"/board")).permitAll()
                         .anyRequest().authenticated())
                 .formLogin(login -> login
                         .loginPage("/login")
                         .loginProcessingUrl("/login")
-                        .defaultSuccessUrl("/home")
+                        .defaultSuccessUrl("/home",true)
                         .usernameParameter("email")
                 )
 
                 .logout((logout)->logout
                         .logoutUrl("/logout")
                         .logoutSuccessUrl("/home")
+                        .deleteCookies("JSESSIONID")
                         .permitAll()
                 )
 

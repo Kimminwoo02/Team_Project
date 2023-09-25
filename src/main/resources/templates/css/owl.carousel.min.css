@@ -5,13 +5,15 @@
  */
 .owl-carousel, .owl-carousel .owl-item {
     -webkit-tap-highlight-color: transparent;
-    position: relative
+    position: relative;
+    z-index: 20;
+
 }
 
 .owl-carousel {
     display: none;
     width: 100%;
-    z-index: 1
+    z-index: 20
 }
 
 .owl-carousel .owl-stage {

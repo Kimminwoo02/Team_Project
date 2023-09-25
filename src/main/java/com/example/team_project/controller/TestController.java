@@ -25,6 +25,11 @@ public class TestController {
         return "matching";
     }
 
+    @GetMapping("/board")
+    public String board(){
+        return "board";
+    }
+
 
 
 

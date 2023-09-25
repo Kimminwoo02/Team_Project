@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="ko"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">>
+
+    <body>
+    <div th:fragment="notificationFragment" sec:authorize="isAuthenticated()" class="notification-container">
+        <i class="fas fa-bell btn-bell">
+            <!-- <button id="notification-button" class="notification-button"> -->
+            <span class="notification-badge">3</span>
+            <!-- Notifications
+        </button> -->
+        </i>
+        <div id="notification-dropdown" class="notification-dropdown">
+            <ul>
+                <!-- <li>Notification 1</li>
+                <li>Notification 2</li>
+                <li>Notification 3</li> -->
+                <div class="head-notification">
+                    <p>알림</p>
+                </div>
+                <div class="body-notification">
+                    <div class="line"></div>
+                    <div class="post">
+                        <div class="circle"></div>
+                        <span class="time">9:45 AM</span>
+                        <span class="alarm_title"><b>미누타우로스</b></span> <span class="post_alarm">님이 게시글에 댓글을 남겼습니다.</span>
+                    </div>
+                    <div class="post">
+                        <div class="circle"></div>
+                        <span class="time">9:36 AM</span>
+                        <span class="alarm_title"><b>한스</b></span> <span class="post_alarm">님이 게시글에 댓글을 남겼습니다.</span>
+                    </div>
+                    <div class="post">
+                        <div class="circle"></div>
+                        <span class="time">9:12 AM</span>
+                        <span class="alarm_title"><b>Lil Wayne</b></span> <span class="post_alarm">님이 게시글에 댓글을 남겼습니다.</span>
+                    </div>
+                </div>
+            </ul>
+        </div>
+    </div>
+
+    </body>
+</html>

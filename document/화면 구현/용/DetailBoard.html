@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" type="text/css" href="DetailBoard.css">
+</head>
+
+<body>
+    <header id="main-header">
+        <!-- 헤더 들어갈 공간 -->
+    </header>
+    <div id="sri_section" class="">
+        <div id="sri_wrap">
+            <div id="content">
+                <div class="company_honest_qna">
+                    <input type="hidden" name="qna_action" value="sub" id="qna_action">
+                    <input type="hidden" name="keyword" value id="keyword">
+                    <input type="hidden" name="qna_searchType" value="hashtag" id="qna_searchType">
+                    <input type="hidden" name="csn" value id="csn">
+                    <input type="hidden" name="influencer" value id="influencer">
+                    <input type="hidden" name="type" value id="type">
+                    <div class="contents_container">
+                        <div class="sub_top_wrap tag_list">
+                            <span class="sub_title_tag">
+                                <strong class="stit">게시글 전체</strong>
+                                방
+                            </span>
+                            <div class="sub_title_desc">
+                                현재까지 등록된 전체 게시글입니다.
+                            </div>
+                        </div>
+                        <div class="wrap_community_topic navigation">
+                            <div class="bx-wrapper">
+                                <ul class="list_category js-category"
+                                    style="width: 120%; position: relative; transition-duration:0; transform: translate3d(0px, 0px, 0px); height:50px;">
+                                    <li aria-hidden="false"
+                                        style="float: left; list-style: none; position: relative; width: 114px; margin-right: 12px;">
+                                        <a class="item_cate selected" href="#"
+                                            onmousedown="SEARCH.Main.gaEvent('main_qst', 'hot_tag')">전체글</a>
+                                    </li>
+                                    <li aria-hidden="false"
+                                        style="float: left; list-style: none; position: relative; width: 114px; margin-right: 12px;">
+                                        <a class="item_cate selected" href="#"
+                                            onmousedown="SEARCH.Main.gaEvent('main_qst', 'hot_tag')">산책</a>
+                                    </li>
+                                    <li aria-hidden="false"
+                                        style="float: left; list-style: none; position: relative; width: 114px; margin-right: 12px;">
+                                        <a class="item_cate selected" href="#"
+                                            onmousedown="SEARCH.Main.gaEvent('main_qst', 'hot_tag')">러닝</a>
+                                    </li>
+                                    <li aria-hidden="false"
+                                        style="float: left; list-style: none; position: relative; width: 114px; margin-right: 12px;">
+                                        <a class="item_cate selected" href="#"
+                                            onmousedown="SEARCH.Main.gaEvent('main_qst', 'hot_tag')">등산</a>
+                                    </li>
+                                    <li aria-hidden="false"
+                                        style="float: left; list-style: none; position: relative; width: 114px; margin-right: 12px;">
+                                        <a class="item_cate selected" href="#"
+                                            onmousedown="SEARCH.Main.gaEvent('main_qst', 'hot_tag')">축구</a>
+                                    </li>
+                                    <li aria-hidden="false"
+                                        style="float: left; list-style: none; position: relative; width: 114px; margin-right: 12px;">
+                                        <a class="item_cate selected" href="#"
+                                            onmousedown="SEARCH.Main.gaEvent('main_qst', 'hot_tag')">농구</a>
+                                    </li>
+                                    <li aria-hidden="false"
+                                        style="float: left; list-style: none; position: relative; width: 114px; margin-right: 12px;">
+                                        <a class="item_cate selected" href="#"
+                                            onmousedown="SEARCH.Main.gaEvent('main_qst', 'hot_tag')">풋살</a>
+                                    </li>
+                                    <li aria-hidden="false"
+                                        style="float: left; list-style: none; position: relative; width: 114px; margin-right: 12px;">
+                                        <a class="item_cate selected" href="#"
+                                            onmousedown="SEARCH.Main.gaEvent('main_qst', 'hot_tag')">배드민턴</a>
+                                    </li>
+                                    <li aria-hidden="false"
+                                        style="float: left; list-style: none; position: relative; width: 114px; margin-right: 12px;">
+                                        <a class="item_cate selected" href="#"
+                                            onmousedown="SEARCH.Main.gaEvent('main_qst', 'hot_tag')">헬스</a>
+                                    </li>
+                                    <li aria-hidden="false"
+                                        style="float: left; list-style: none; position: relative; width: 114px; margin-right: 12px; margin-top: 12px;">
+                                        <a class="item_cate selected" href="#"
+                                            onmousedown="SEARCH.Main.gaEvent('main_qst', 'hot_tag')">잡담</a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="search_form">
+                            <div class="list_num_tit">전체
+                                <strong style>72184</strong>
+                                건
+                            </div>
+                        </div>
+                        <div class="qna_list_wrap">
+                            <div class="qna_list_sort">
+                                <div class="InpBox">
+                                    <select name="option_select_category" title="활동 전체">
+                                        <option value>활동 전체</option>
+                                        <option value>산책</option>
+                                        <option value>러닝</option>
+                                        <option value>등산</option>
+                                        <option value>축구</option>
+                                        <option value>농구</option>
+                                        <option value>풋살</option>
+                                        <option value>배드민턴</option>
+                                        <option value>헬스</option>
+                                        <option value>잡담</option>
+                                    </select>
+                                </div>
+                                <div class="InpBox Line filter">
+                                    <span class="Chk">
+                                        <input type="checkbox" id="popular" class="btn_sort" value="popular">
+                                        <label class="Lbl" for="popular">인기순
+                                        </label>
+                                    </span>
+                                    <span class="Chk">
+                                        <input type="checkbox" id="reg_dt" class="btn_sort" value="reg_dt" checked>
+                                        <label class="Lbl" for="reg_dt">최신순
+                                        </label>
+                                    </span>
+                                    <span class="Chk">
+                                        <input type="checkbox" id="maxLike" class="btn_sort" value="maxLike" checked>
+                                        <label class="Lbl" for="maxLike">공감 많은 순
+                                        </label>
+                                    </span>
+                                </div>
+                                <a href="#" style="float: right; white-space: nowrap;">게시글 작성
+                                </a>
+                            </div>
+                            <ul class="qna_list" id="qst_and_ans_list">
+                                <div class="list_qna">
+                                    <span class="position" style="transform:translateY(66px);">
+                                    </span>
+                                    <li>
+                                        <div class="qna_subject_wrap">
+                                            <hr>
+                                            </hr>
+                                            <em class="label_hot">HOT🔥</em>
+                                            <a href="#" span class="qna_subject" >23살 남자에요! 축구 구직합니다!</span></a>
+                                        </div>
+                                        <span class="qna_desc">
+                                            선출은 아니고 구력 5년 이상입니다. 조기축구 회원이였다가 새로 이사와서 팀 구하고 있어요. 팀플레이 좋아합니다.
+                                        </span>
+                                        <span class="qna_like">
+                                            <img src="/test/images/heart_icon-icons.com_48290.png" style="width:20px;">
+                                            공감하기
+                                        </span>
+                                        <span class="qna_reply">
+                                            <img src="/test/images/pngwing.com.png" style="width: 20px; height:20px;">
+                                            댓글
+                                            <strong>1</strong>
+                                        </span>
+                                        <span class="qna_views">
+                                            <img src="/test/images/clipart870923.png" style="width: 15px; height:15px;">
+                                            조회수
+                                            <strong>155</strong>
+                                        </span>
+                                    </li>
+                                </div>
+                                <hr>
+                                </hr>
+                                </li>
+                                <li>
+                                    <div class="qna_subject_wrap">
+                                        <a href="#" class="qna_subject">도림천 산책하실 분!</span></a>
+                                    </div>
+                                    <span class="qna_desc">
+                                        산책산책산책산책산책산책산책산책산책산책산책산책산책산책산책산책산책산책산책산책산책산책산책산책</span>
+                                    <span class="qna_like">
+                                        <img src="/test/images/heart_icon-icons.com_48290.png" style="width:20px;">
+                                        공감하기
+                                    </span>
+                                    <span class="qna_reply">
+                                        <img src="/test/images/pngwing.com.png" style="width: 20px; height:20px;">
+                                        댓글
+                                        <strong>1</strong>
+                                    </span>
+                                    <span class="qna_views">
+                                        <img src="/test/images/clipart870923.png" style="width: 15px; height:15px;">
+                                        조회수
+                                        <strong>33</strong>
+                                    </span>
+                                    <hr>
+                                    </hr>
+                                </li>
+                                <li>
+                                    <div class="qna_subject_wrap">
+                                        <a href="#" class="qna_subject">도림천 산책하실 분!</span></a>
+                                    </div>
+                                    <span class="qna_desc">
+                                        산책산책산책산책산책산책산책산책산책산책산책산책산책산책산책산책산책산책산책산책산책산책산책산책</span>
+                                    <span class="qna_like">
+                                        <img src="/test/images/heart_icon-icons.com_48290.png" style="width:20px;">
+                                        공감하기
+                                    </span>
+                                    <span class="qna_reply">
+                                        <img src="/test/images/pngwing.com.png" style="width: 20px; height:20px;">
+                                        댓글
+                                        <strong>1</strong>
+                                    </span>
+                                    <span class="qna_views">
+                                        <img src="/test/images/clipart870923.png" style="width: 15px; height:15px;">
+                                        조회수
+                                        <strong>33</strong>
+                                    </span>
+                                    <hr>
+                                    </hr>
+                                </li>
+                                <li>
+                                    <div class="qna_subject_wrap">
+                                        <a href="#" class="qna_subject">도림천 산책하실 분!</span></a>
+                                    </div>
+                                    <span class="qna_desc">
+                                        산책산책산책산책산책산책산책산책산책산책산책산책산책산책산책산책산책산책산책산책산책산책산책산책</span>
+                                    <span class="qna_like">
+                                        <img src="/test/images/heart_icon-icons.com_48290.png" style="width:20px;">
+                                        공감하기
+                                    </span>
+                                    <span class="qna_reply">
+                                        <img src="/test/images/pngwing.com.png" style="width: 20px; height:20px;">
+                                        댓글
+                                        <strong>1</strong>
+                                    </span>
+                                    <span class="qna_views">
+                                        <img src="/test/images/clipart870923.png" style="width: 15px; height:15px;">
+                                        조회수
+                                        <strong>33</strong>
+                                    </span>
+                                    <hr>
+                                    </hr>
+                                </li>
+                                <li>
+                                    <div class="qna_subject_wrap">
+                                        <a href="#" class="qna_subject">도림천 산책하실 분!</span></a>
+                                    </div>
+                                    <span class="qna_desc">
+                                        산책산책산책산책산책산책산책산책산책산책산책산책산책산책산책산책산책산책산책산책산책산책산책산책</span>
+                                    <span class="qna_like">
+                                        <img src="/test/images/heart_icon-icons.com_48290.png" style="width:20px;">
+                                        공감하기
+                                    </span>
+                                    <span class="qna_reply">
+                                        <img src="/test/images/pngwing.com.png" style="width: 20px; height:20px;">
+                                        댓글
+                                        <strong>1</strong>
+                                    </span>
+                                    <span class="qna_views">
+                                        <img src="/test/images/clipart870923.png" style="width: 15px; height:15px;">
+                                        조회수
+                                        <strong>33</strong>
+                                    </span>
+                                    <hr>
+                                    </hr>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

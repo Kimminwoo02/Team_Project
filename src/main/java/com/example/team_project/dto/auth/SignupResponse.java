@@ -21,11 +21,15 @@ public class SignupResponse {
         this.id = member.getMemberId();
         this.email = member.getEmail();
         this.name = member.getName();
-        if(memberImg != null) {
-            this.file = MemberImgDTO.builder()
+        this.file = MemberImgDTO.builder()
                     .folderPath(memberImg.getFolderPath())
                     .storeFileName(memberImg.getStoreFileName())
                     .build();
         }
+
+    public SignupResponse(Member member){
+        this.id = member.getMemberId();
+        this.email = member.getEmail();
+        this.name = member.getName();
     }
 }

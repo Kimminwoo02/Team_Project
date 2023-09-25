@@ -11,7 +11,6 @@ import com.example.team_project.repository.MemberRepository;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -45,13 +44,23 @@ public class MemberService {
         Member memberEntity = memberRepository.save(member);
 
         MemberImg memberImgEntity = null;
-        if(signupDto.getFile() != null){
-            ResultFileStore resultFileStore = filestore.storeProfileFile(signupDto.getFile());
-            MemberImg memberImg = signupDto.toMemberImgEntity(resultFileStore.getFolderPath(), resultFileStore.getStoreFileName(),member);
-            memberImgEntity = memberImgRepository.save(memberImg);
-        }
+        ResultFileStore resultFileStore = filestore.storeProfileFile(signupDto.getFile());
+        MemberImg memberImg = signupDto.toMemberImgEntity(resultFileStore.getFolderPath(), resultFileStore.getStoreFileName(),member);
+        memberImgEntity = memberImgRepository.save(memberImg);
 
         return new SignupResponse(memberEntity,memberImgEntity);
+
+    }
+    @Transactional
+    public void joinWithoutFile (SignupDto signupDto) throws IOException {
+
+        Member member = signupDto.toMemberEntity();
+
+        isDuplicateEmail(member.getName());
+        member.setPassword(passwordEncoder.encode(member.getPassword()));
+        Member memberEntity = memberRepository.save(member);
+
+        new SignupResponse(memberEntity);
 
     }
 

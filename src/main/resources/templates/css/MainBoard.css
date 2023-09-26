@@ -1,13 +1,16 @@
+
 #whole_container {
     display: grid;
     width: 100%;
     height: 100%;
     place-items: center;
+
 }
+
 #container {
     display: flex;
     flex-direction: row-reverse;
-    max-width: 1200px; /* 예시입니다. 필요한 크기로 조절하세요. */
+    max-width: 90vw; /* 예시입니다. 필요한 크기로 조절하세요. */
 }
 /*#body {*/
 /*    width: 100%;*/
@@ -54,15 +57,17 @@
     margin-inline-end: 0px;
 }
 .title {
-    height: 28px;
+    height: 25px;
     font-size: 18px;
-    line-height: 28px;
+    line-height: 2;
+    margin-left: 10px;
     color: #373f57;
 }
 
 .a_deco{
     text-decoration: none;
     color:black;
+    margin:10px;
 }
 #main-content {
     flex-grow: 1;
@@ -240,6 +245,13 @@ vertical-align: top;
     position: relative;
     height: 1px;  
 }
+.list_category{
+    width: 88vw;
+    position: relative;
+    transition-duration: 0.3s;
+    transform: translate3d(0px, 0px, 0px);
+    height: 50px;
+}
 .list_category li {
     display: block;
     overflow: hidden;
@@ -253,10 +265,11 @@ vertical-align: top;
     text-align: center;
     text-overflow: ellipsis;
     white-space: nowrap;
+    margin: 5px;
 }
 .list_category  .selected {
     border-color: #4876ef;
-    color: #4876ef;
+    color: black;
 }
 .section_inner {
     position: relative;

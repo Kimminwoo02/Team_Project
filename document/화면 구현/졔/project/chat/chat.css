@@ -7,7 +7,7 @@
     }
 
     .container {
-        background-color: #eef6fb;
+        background-color: whitesmoke;
         height: 100%;
         width: 100%;
         position: absolute;
@@ -21,16 +21,16 @@
 
     .sidenav {
         background-color: #ffd74f;
+        left: 20px;
+        top: 20px;
         height: 90%;
-        width: 100%;
-        border-radius: 25px;
+        width: 117px;
+        border-radius: 38px;
         display: flex;
         flex-direction: column;
-        left: 15%;
-        top: 2%;
-        position: relative;
+        position: inherit;
         grid-row-start: 1;
-	    grid-row-end: 4;
+        grid-row-end: 4;
         /* grid-template-rows: 1fr 1fr 1fr 1fr 3fr 1fr; */
     }
 
@@ -38,6 +38,8 @@
         border: hidden;
         justify-content: center;
         background-color: #ffd74f;
+        border-radius: 38px;
+        margin-bottom: 20px;
     }
 
     .profileimg1 {
@@ -113,11 +115,11 @@
         border-radius: 5px;
         margin-top: 15px;
         margin-left: 20px;
-        padding:3px;
+        padding: 3px;
         border-radius: 10px;
-        display :grid;
-        grid-template-columns: 70px 200px 200px;
-        grid-template-rows: 35px 25px; 
+        display: grid;
+        grid-template-columns: 70px 197px 240px;
+        grid-template-rows: 35px 25px;
         
     }
 
@@ -175,9 +177,8 @@
         height: 25px;
         border-radius: 50%;
         border: hidden;
-        position: relative;
-        left : 220px;
         text-align: center;
+        margin-left: 197px;
     }
 
     .time{
@@ -273,7 +274,6 @@
         width: 100%;
         height:70%;
         border-radius: 25px;
-        position: relative;
     }
 
     .chatbtn {
@@ -325,7 +325,7 @@
         font-size: 50px;
         grid-row-start: 6;
         grid-row-end: 7;
-        margin-top: 250px;     
+        margin-top: 168px;     
     }
 
     .fa-paperclip{

@@ -77,6 +77,10 @@ option {
     clear: both;
 }
 
+.qna_desc{
+    font-size: 17px;
+}
+
 .sub_top_wrap.tag_list::before{
     position: absolute;
     top:0;

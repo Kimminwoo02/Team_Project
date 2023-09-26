@@ -59,8 +59,8 @@
 
 /* Updated positioning for the dropdown */
 .notification-dropdown {
-    width: 300px;
-    height : 450px;
+    width: 23vw;
+    height : 70vh;
     position: absolute;
     bottom: 100%; /* Position the dropdown above the button */
     right: 50%;

@@ -52,7 +52,7 @@
         background-position: center;
         grid-row-start: 1;
         grid-row-end: 2;
-        margin-top: 20px;
+        margin-top: -1px;
         margin-left: 15px;
     }
  

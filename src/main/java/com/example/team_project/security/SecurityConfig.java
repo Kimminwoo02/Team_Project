@@ -75,6 +75,7 @@ public class SecurityConfig {
                         .requestMatchers(new MvcRequestMatcher(introspect,"/signup")).permitAll()
                         .requestMatchers(new MvcRequestMatcher(introspect,"/board")).permitAll()
                         .requestMatchers(new MvcRequestMatcher(introspect,"/welcome")).permitAll()
+                        .requestMatchers(new MvcRequestMatcher(introspect,"/detail")).permitAll()
                         .anyRequest().authenticated())
                 .formLogin(login -> login
                         .loginPage("/login")

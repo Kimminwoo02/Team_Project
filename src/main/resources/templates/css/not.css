@@ -52,15 +52,15 @@
     border-radius: 50%;
     padding: 6px 10px;
     position: absolute;
-    top: -30px;
-    right: -30px;
+    top: -10px;
+    right: -10px;
     z-index: 200;
 }
 
 /* Updated positioning for the dropdown */
 .notification-dropdown {
-    width: 200px;
-    height : 500px;
+    width: 300px;
+    height : 450px;
     position: absolute;
     bottom: 100%; /* Position the dropdown above the button */
     right: 50%;

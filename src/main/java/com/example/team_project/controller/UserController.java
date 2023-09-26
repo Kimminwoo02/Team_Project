@@ -53,15 +53,15 @@ public class UserController {
 
     @PostMapping("/signup")
     public String signup1(@ModelAttribute SignupDto signupDto) throws IOException {
-        log.info(String.valueOf(signupDto));
-        if(signupDto.getFile().isEmpty()){
+//        log.info(String.valueOf(signupDto));
+//        if(signupDto.getFile().isEmpty()){
             memberService.joinWithoutFile(signupDto);
-        }
-        else {
-            memberService.join(signupDto);
-        }
+//        }
+//        else {
+//            memberService.join(signupDto);
+//        }
 
-        return "redirect:/home";
+        return "redirect:/welcome";
 
     }
 

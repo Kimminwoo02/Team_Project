@@ -13,6 +13,10 @@ public class TestController {
     public String Test2(){
         return "home";
     }
+    @GetMapping("/welcome")
+    public String wel(){
+        return "welcome";
+    }
 
     @GetMapping("/facility")
     public String facilities(){

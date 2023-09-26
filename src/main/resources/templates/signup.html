@@ -1,73 +1,105 @@
-<!DOCTYPE html>
-<html lang="ko"
-      xmlns:th="http://www.thymeleaf.org"
-      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
-<meta name="referrer" content="no-referrer-when-downgrade"/>
-<meta name="referrer" content="strict-origin-when-cross-origin"/>
-<style>
-    @import url(css/signup.css);
-</style>
-<script type="text/javascript" src="js/signup.js"></script>
-
+<html lang="ko">
 <head>
     <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sign up</title>
+    <title>Actimate</title>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <style>
+        body {
+            min-height: 100vh;
+            background-color: #fff;
+        }
+        .input-form {
+            max-width: 680px;
+            margin-top: 80px;
+            padding: 32px;
+            background: #fff;
+            -webkit-border-radius: 10px;
+            -moz-border-radius: 10px;
+            border-radius: 10px;
+            -webkit-box-shadow: 0 8px 20px 0 rgba(0, 0, 0, 0.15);
+            -moz-box-shadow: 0 8px 20px 0 rgba(0, 0, 0, 0.15);
+            box-shadow: 0 8px 20px 0 rgba(0, 0, 0, 0.15)
+        }
+    </style>
 </head>
-
 <body>
-    <div class="signupcontent">
-
-        <a href="http://localhost:8080/home"><img class="logo" alt="logo" src="images/logo.png"></a>
-<!-- 
-        <div id="idpwText">
-            <p class="idpwText">Sign up</p>
-        </div> -->
-
-
-        <form method="post" enctype="multipart/form-data">
-
-            <div class="redWarningText">
-                <label for="file">
-                    👉 CLICK HERE TO UPLOAD YOUR ADORABLE PICTURE, IF YOU WANT OF COURSE :) 👈
-                </label>
-            </div>
-            <input type="file" id="file" name="file" accept="image/*" onchange="loadFile(this)">
-
-            <div class="fileContainer">
-                <div class="image-show" id="image-show"></div>
-                <div class="fileInput">
-                    FILE NAME:&nbsp;<span id="fileName"></span>
+<div class="container">
+    <div class="input-form-backgroud row">
+        <div class="input-form col-md-12 mx-auto">
+            <h4 class="mb-3">회원가입</h4>
+            <form class="validation-form" action="/signup" method="post">
+                <a href="http://localhost:8080/home"><img class="logo" alt="logo" src="images/logo.png" style="width: 100px; height: 50px;margin-left: 39%"></a>
+                <div class="row">
+                    <div class="col-md-6 mb-3">
+                        <label for="name">이름</label>
+                        <input type="text" name="name"  class="form-control" id="name" placeholder="이름을 입력해주세요" value="" required>
+                        <div class="invalid-feedback">
+                            이름을 입력해주세요.
+                        </div>
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <label for="nickname">패스워드</label>
+                        <input type="password" name="password" class="form-control" id="nickname" placeholder="비밀번호를 입력해주세요" value="" required>
+                        <div class="invalid-feedback">
+                            별명을 입력해주세요.
+                        </div>
+                    </div>
                 </div>
-
-                <script src="js/signup.js"></script>
-            </div>
-            <br>
-            <p id="emailnotification">이메일</p>
-            <input type="text" name="email" class="signup_input_text" placeholder="Email ID"><br>
-
-            <p id="emailnotification">패스워드</p>
-            <input type="password" name="password" class="signup_input_text" placeholder="Password" minlength="8"><br>
-
-            <p id="emailnotification">핸드폰번호</p>
-            <input type="text" name="phone" class="signup_input_text" placeholder="Phone Number"><br>
-
-            <p id="emailnotification">이름</p>
-            <input type="text" name="name" class="signup_input_text" placeholder="Name"><br>
-
-
-            <p id="emaillnotification">Email Notifications</p>
-            <p id="emailnotificationdetails">
-                I accept Spam&nbsp;<input type="checkbox"><br>
-                I accept Ham&nbsp;<input type="checkbox"><br>
-                I accept SpamFried&nbsp;<input type="checkbox"><br>
-                I accept SpamMail&nbsp;<input type="checkbox"><br>
-            </p>
-            <input type="submit" class="signup_btn" value="Sign Up"><br>
-        </form>
-
-        <p id="copyright">Copyright © JihyeHong, MinwooKim, YejunKim, YongsuSon All Rights Reserved.</p>
+                <div class="mb-3">
+                    <label for="email">이메일</label>
+                    <input type="email" name="email" class="form-control" id="email" placeholder="아이디로 사용할 이메일입니다." required>
+                    <div class="invalid-feedback">
+                        이메일을 입력해주세요.
+                    </div>
+                </div>
+                <div class="mb-3">
+                    <label for="address">주소</label>
+                    <input type="text" class="form-control" id="address" placeholder="서울특별시 강남구" required>
+                    <div class="invalid-feedback">
+                        주소를 입력해주세요.
+                    </div>
+                </div>
+                <div class="mb-3">
+                    <label for="address2">상세주소<span class="text-muted">&nbsp;(필수 아님)</span></label>
+                    <input type="text" class="form-control" id="address2" placeholder="상세주소를 입력해주세요.">
+                </div>
+                <div class="row">
+                    <div class="col-md-8 mb-3">
+                        <label for="root" style="display: block;">성별</label>
+                        <label><input type="radio" name="gender" value="남자"> 남자</label>
+                        <label><input type="radio" name="gender" value="여자"> 여자</label>
+                    </div>
+                </div>
+                <div class="custom-control custom-checkbox">
+                    <input type="checkbox" class="custom-control-input" id="aggrement" required>
+                    <label class="custom-control-label" for="aggrement">개인정보 수집 및 이용에 동의합니다.</label>
+                </div>
+                <div class="mb-4"></div>
+                <button class="btn btn-primary btn-lg btn-block" type="submit">가입 완료</button>
+            </form>
+        </div>
     </div>
+    <footer class="my-3 text-center text-small">
+        <p class="mb-1">&copy; Copyright © JihyeHong, MinwooKim, YejunKim, YongsuSon All Rights Reserved.</p>
+    </footer>
+</div>
+<script>
+    window.addEventListener('load', () => {
+        const forms = document.getElementsByClassName('validation-form');
+        Array.prototype.filter.call(forms, (form) => {
+            form.addEventListener('submit', function (event) {
+                if (form.checkValidity() === false) {
+                    event.preventDefault();
+                    event.stopPropagation();
+                }
+                form.classList.add('was-validated');
+            }, false);
+        });
+    }, false);
+</script>
 </body>
-
 </html>

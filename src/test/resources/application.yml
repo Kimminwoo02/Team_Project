@@ -1,0 +1,9 @@
+mybatis:
+  type-aliases-package: com.example.team_project
+  configuration:
+    map-underscore-to-camel-case: true
+logging:
+  level:
+    com.example.team_project.repository.mybatis: trace
+
+

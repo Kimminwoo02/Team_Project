@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "=//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.team_project.repository.MemberRepositoryMybatis">
+<!--    namespace는 인터페이스의 경로-->
+
+    <insert id="saveMybatis" useGeneratedKeys="true" keyProperty="memberId">
+        insert into member (email,password,name,phone,gender)
+        values (#{email},#{password},#{name},#{phone},#{gender})
+    </insert>
+
+    <insert id="saveWithoutFileMybatis" useGeneratedKeys="true" keyProperty="memberId">
+        insert into member (email,password,name,phone,gender)
+        values (#{email},#{password},#{name},#{phone},#{gender})
+    </insert>
+
+
+    <select id="findByIdMybatis" resultType="Member">
+        select member_id, name
+        from member
+        where id= #{id}
+    </select>
+
+    <select id="findAllMybatis" resultType="Member">
+        select member_id,name
+        from member
+        <where>
+            <if test="name != null and name != '' ">
+                and name like concat('%', #{name}, '%')
+            </if>
+
+
+        </where>
+    </select>
+
+    <select id="findByEmailMybatis" resultType="Member">
+        select member_id, email
+        from member
+        where email= #{email}
+    </select>
+
+
+
+
+</mapper>
+
+
+

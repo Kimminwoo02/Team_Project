@@ -2,6 +2,7 @@ package com.example.team_project.controller;
 
 import com.example.team_project.dto.auth.SignupDto;
 import com.example.team_project.service.MemberService;
+import com.example.team_project.service.MemberServiceJpa;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;

@@ -1,11 +1,15 @@
 package com.example.team_project.controller;
 
+import com.example.team_project.service.MemberServiceMybatis;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 
 @Controller
+@RequiredArgsConstructor
 public class TestController {
 
+    private final MemberServiceMybatis memberServiceMybatis;
 
 
     @GetMapping("/home")
@@ -37,7 +41,6 @@ public class TestController {
     public String detail(){
         return "detailBoard";
     }
-
 
 
 

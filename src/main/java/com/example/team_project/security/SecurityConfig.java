@@ -1,33 +1,18 @@
 package com.example.team_project.security;
 
-import com.example.team_project.repository.MemberRepository;
-import com.example.team_project.service.MemberService;
-import jakarta.persistence.EntityNotFoundException;
-import jakarta.servlet.ServletException;
-import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityCustomizer;
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
-import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
-import org.springframework.security.web.csrf.CookieCsrfTokenRepository;
-import org.springframework.security.web.csrf.CsrfTokenRequestAttributeHandler;
-import org.springframework.security.web.csrf.CsrfTokenRequestHandler;
 import org.springframework.security.web.servlet.util.matcher.MvcRequestMatcher;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 import org.springframework.web.servlet.handler.HandlerMappingIntrospector;
-
-import java.io.IOException;
 
 @Configuration
 @RequiredArgsConstructor
@@ -75,7 +60,9 @@ public class SecurityConfig {
                         .requestMatchers(new MvcRequestMatcher(introspect,"/signup")).permitAll()
                         .requestMatchers(new MvcRequestMatcher(introspect,"/board")).permitAll()
                         .requestMatchers(new MvcRequestMatcher(introspect,"/welcome")).permitAll()
+                        .requestMatchers(new MvcRequestMatcher(introspect,"/matching")).permitAll()
                         .requestMatchers(new MvcRequestMatcher(introspect,"/detail")).permitAll()
+                        .requestMatchers(new MvcRequestMatcher(introspect,"/chat")).permitAll()
                         .anyRequest().authenticated())
                 .formLogin(login -> login
                         .loginPage("/login")

@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Actimate</title>
     <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+    <link rel="stylesheet" th:href="@{https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css}"
           integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <style>
         body {
@@ -32,13 +32,13 @@
         <div class="input-form col-md-12 mx-auto">
             <h4 class="mb-3">회원가입 완료</h4>
             <form class="validation-form" action="/signup" method="post">
-                <a href="http://localhost:8080/home"><img class="logo" alt="logo" src="images/logo.png" style="width: 100px; height: 50px;margin-left: 39%"></a>
+                <a th:href="@{/home}"><img class="logo" alt="logo" src="images/logo.png" style="width: 100px; height: 50px;margin-left: 39%"></a>
                 <div class="row" style=" height: 400px;">
                     <h1 style="padding: 5px; margin: 3px; margin-left: 22%;">회원가입을 환영합니다!</h1>
                 </div>
-                <img src="images/welcome.png" alt="" width="250px" height="250px" style="position: absolute; left: 40%;top: 36%">
+                <img src="../images/welcome.png" alt="" width="250px" height="250px" style="position: absolute; left: 40%;top: 36%">
                 <div class="row" style=" height: 400px;">
-                    <a href="http://localhost:8080/home" style="padding: 5px; margin: 30px; margin-left: 18%; text-decoration: none"><h2>메인으로</h2></a>
+                    <a th:href="@{/home}" style="padding: 5px; margin: 30px; margin-left: 18%; text-decoration: none"><h2>메인으로</h2></a>
                 </div>
 
 

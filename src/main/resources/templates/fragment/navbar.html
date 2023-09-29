@@ -10,7 +10,7 @@
 
         <nav th:fragment="navFragment" class="navbar navbar-expand-lg bg-light fixed-top shadow-lg"  style="font-family: 'Black Han Sans', sans-serif">
             <div class="container">
-                <a class="navbar-brand" href="http://localhost:8080/home">Acti <span class="tooplate-red">ma</span><span class="tooplate-green">te</span></a>
+                <a class="navbar-brand" th:href="@{/home}">Acti <span class="tooplate-red">ma</span><span class="tooplate-green">te</span></a>
 
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
@@ -22,30 +22,30 @@
 
                         <li class="nav-item">
                             <a class="nav-link" sec:authorize="isAuthenticated()"><span sec:authentication="principal.myName"  style="color: #0c63e4"></span><span style="color: #1a1e21">님 안녕하세요!</span></a>
-                            <a class="nav-link" href="http://localhost:8080/home">홈</a>
+                            <a class="nav-link" th:href="@{/home}">홈</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" sec:authorize="isAuthenticated()" href="http://localhost:8080/home">마이페이지</a>
+                            <a class="nav-link" sec:authorize="isAuthenticated()" th:href="@{/home}">마이페이지</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link " href="http://localhost:8080/facility">시설관리</a>
-                        </li>
-
-                        <li class="nav-item">
-                            <a class="nav-link" href="http://localhost:8080/board">게시판</a>
+                            <a class="nav-link " th:href="@{/facility}">시설관리</a>
                         </li>
 
                         <li class="nav-item">
-                            <a class="nav-link" href="http://localhost:8080/matching">매칭</a>
+                            <a class="nav-link" th:href="@{/board}">게시판</a>
                         </li>
 
                         <li class="nav-item">
-                            <a class="nav-link" sec:authorize="isAnonymous()" href="http://localhost:8080/login">로그인</a>
+                            <a class="nav-link" th:href="@{/matching}">매칭</a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link" sec:authorize="isAnonymous()" th:href="@{/login}">로그인</a>
 <!--                            <a class="nav-link" sec:authorize="isAuthenticated()"><img id="imgId" th:src="@{/accounts/}+${accountDto.userId}" width="100" height="100"  alt="첨부이미지" th:if="${accountDto.profileImgPath() != null}" /></a>-->
-                            <a class="nav-link" sec:authorize="isAuthenticated()" href="http://localhost:8080/logout">로그아웃</a>
+                            <a class="nav-link" sec:authorize="isAuthenticated()" th:href="@{/logout}">로그아웃</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" sec:authorize="isAnonymous()" href="http://localhost:8080/signup">회원가입</a>
+                            <a class="nav-link" sec:authorize="isAnonymous()" th:href="@{/signup}">회원가입</a>
                         </li>
                     </ul>
                 </div>

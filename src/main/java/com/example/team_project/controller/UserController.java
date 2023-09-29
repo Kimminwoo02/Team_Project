@@ -25,21 +25,21 @@ public class UserController {
 
     @GetMapping("/login")
     public String login(){
-        return "loginPage";
+        return "main/loginPage";
     }
 
     @GetMapping("/findpw")
     public String findPw(){
-        return "findpw";
+        return "main/findpw";
     }
     @GetMapping("/findemail")
     public String findEmail(){
-        return "findemailid";
+        return "main/findemailid";
     }
 
     @GetMapping("/signup")
     public String signup(){
-        return "signup";
+        return "main/signup";
     }
 
     @GetMapping("/logout")

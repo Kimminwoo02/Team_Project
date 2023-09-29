@@ -7,7 +7,7 @@ https://www.tooplate.com/view/2133-moso-interior
 */
 
 /*---------------------------------------
-  CUSTOM PROPERTIES ( VARIABLES )             
+  CUSTOM PROPERTIES ( VARIABLES )
 -----------------------------------------*/
 * {
 
@@ -60,7 +60,7 @@ body {
 }
 
 /*---------------------------------------
-  TYPOGRAPHY               
+  TYPOGRAPHY
 -----------------------------------------*/
 
 h2,
@@ -158,7 +158,7 @@ strong {
 
 
 /*---------------------------------------
-  SECTION               
+  SECTION
 -----------------------------------------*/
 .section-padding {
     padding-top: 100px;
@@ -244,7 +244,7 @@ strong {
 
 
 /*---------------------------------------
-  CUSTOM LINK               
+  CUSTOM LINK
 -----------------------------------------*/
 .custom-link {
     color: var(--p-color);
@@ -286,7 +286,7 @@ strong {
 
 
 /*---------------------------------------
-  CUSTOM BADGE               
+  CUSTOM BADGE
 -----------------------------------------*/
 .custom-badge {
     background: var(--white-color);
@@ -316,7 +316,7 @@ strong {
 
 
 /*---------------------------------------
-  CUSTOM BUTTON               
+  CUSTOM BUTTON
 -----------------------------------------*/
 .custom-btn {
     background: var(--custom-btn-bg-color);
@@ -350,7 +350,7 @@ strong {
 
 
 /*---------------------------------------
-  NAVIGATION              
+  NAVIGATION
 -----------------------------------------*/
 .navbar {
     padding-top: 0;
@@ -511,7 +511,7 @@ strong {
 
 
 /*---------------------------------------
-  SITE HEADER              
+  SITE HEADER
 -----------------------------------------*/
 .site-header {
     background-image: url('../images/empty-living-room-with-blue-sofa-plants-table-empty-white-wall-background-3d-rendering.jpg');
@@ -524,7 +524,7 @@ strong {
 
 
 /*---------------------------------------
-  HERO              
+  HERO
 -----------------------------------------*/
 .hero-section {
     position: relative;
@@ -578,7 +578,7 @@ strong {
 
 
 /*---------------------------------------
-  ABOUT              
+  ABOUT
 -----------------------------------------*/
 .about-section {
     padding-top: 150px;
@@ -601,7 +601,7 @@ strong {
 }
 
 /*---------------------------------------
-  FEATURED              
+  FEATURED
 -----------------------------------------*/
 .featured-section {
     background-image: url('../images/empty-living-room-with-blue-sofa-plants-table-empty-white-wall-background-3d-rendering.jpg');
@@ -616,7 +616,7 @@ strong {
 
 
 /*---------------------------------------
-  REVIEWS              
+  REVIEWS
 -----------------------------------------*/
 .reviews-section {
     background: var(--section-bg-color);
@@ -735,7 +735,7 @@ strong {
 
 
 /*---------------------------------------
-  SHOP              
+  SHOP
 -----------------------------------------*/
 .shop-section {
     background: var(--white-color);
@@ -846,7 +846,7 @@ strong {
 
 
 /*---------------------------------------
-  CONTACT               
+  CONTACT
 -----------------------------------------*/
 .contact-section {
     background: var(--white-color);
@@ -869,7 +869,7 @@ strong {
 
 
 /*---------------------------------------
-  CUSTOM FORM               
+  CUSTOM FORM
 -----------------------------------------*/
 .custom-form .input-group {
     background-color: var(--white-color);
@@ -921,7 +921,7 @@ strong {
 
 
 /*---------------------------------------
-  FILTER FORM              
+  FILTER FORM
 -----------------------------------------*/
 .filter-form {
     border: 1px solid var(--border-color);
@@ -944,7 +944,7 @@ strong {
 
 
 /*---------------------------------------
-  SITE FOOTER              
+  SITE FOOTER
 -----------------------------------------*/
 .site-footer {
     background: var(--site-footer-bg-color);
@@ -976,7 +976,7 @@ strong {
 
 
 /*---------------------------------------
-  SOCIAL ICON               
+  SOCIAL ICON
 -----------------------------------------*/
 .social-icon {
     margin: 0;
@@ -1023,7 +1023,7 @@ strong {
 
 
 /*---------------------------------------
-  RESPONSIVE STYLES               
+  RESPONSIVE STYLES
 -----------------------------------------*/
 @media screen and (max-width: 991px) {
     h1 {
@@ -1363,3 +1363,4 @@ strong {
     cursor: default;
     color: #777;
 }
+

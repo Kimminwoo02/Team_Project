@@ -14,32 +14,37 @@ public class TestController {
 
     @GetMapping("/home")
     public String Test2(){
-        return "home";
+        return "main/home";
     }
     @GetMapping("/welcome")
     public String wel(){
-        return "welcome";
+        return "main/welcome";
     }
 
     @GetMapping("/facility")
     public String facilities(){
-        return "facility";
+        return "main/facility";
     }
 
 
     @GetMapping("/matching")
     public String matching(){
-        return "matching";
+        return "main/matching";
     }
 
     @GetMapping("/board")
     public String board(){
-        return "board";
+        return "main/board";
+    }
+
+    @GetMapping("/chat")
+    public String chat(){
+        return "main/chat";
     }
 
     @GetMapping("/detail")
     public String detail(){
-        return "detailBoard";
+        return "main/detailBoard";
     }
 
 

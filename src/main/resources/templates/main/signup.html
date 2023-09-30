@@ -24,6 +24,12 @@
             -moz-box-shadow: 0 8px 20px 0 rgba(0, 0, 0, 0.15);
             box-shadow: 0 8px 20px 0 rgba(0, 0, 0, 0.15)
         }
+        .thumbnail{
+            margin: 20px;
+            width: 150px;
+            height: 150px;
+            border-radius: 20%;
+        }
     </style>
 </head>
 <body>
@@ -31,14 +37,15 @@
     <div class="input-form-backgroud row">
         <div class="input-form col-md-12 mx-auto">
             <h4 class="mb-3">회원가입</h4>
-            <form class="validation-form" action="/signup" method="post">
-                <a href="http://localhost:8080/home"><img class="logo" alt="logo" src="images/logo.png" style="width: 100px; height: 50px;margin-left: 39%"></a>
+            <form class="validation-form" action="/signup" method="post" enctype="multipart/form-data">
+                <a th:href="@{/home}"><img class="logo" alt="logo" src="../images/logo.png" style="width: 100px; height: 50px;margin-left: 39%"></a>
+
                 <div class="row">
                     <div class="col-md-6 mb-3">
-                        <label for="name">이름</label>
-                        <input type="text" name="name"  class="form-control" id="name" placeholder="이름을 입력해주세요" value="" required>
+                        <label for="email">이메일</label>
+                        <input type="email" name="email" class="form-control" id="email" placeholder="아이디로 사용할 이메일입니다." required>
                         <div class="invalid-feedback">
-                            이름을 입력해주세요.
+                            이메일을 입력해주세요.
                         </div>
                     </div>
                     <div class="col-md-6 mb-3">
@@ -49,13 +56,16 @@
                         </div>
                     </div>
                 </div>
+
                 <div class="mb-3">
-                    <label for="email">이메일</label>
-                    <input type="email" name="email" class="form-control" id="email" placeholder="아이디로 사용할 이메일입니다." required>
+                    <label for="name">이름</label>
+                    <input type="text" name="name"  class="form-control" id="name" placeholder="이름을 입력해주세요" value="" required>
                     <div class="invalid-feedback">
-                        이메일을 입력해주세요.
+                        이름을 입력해주세요.
                     </div>
                 </div>
+
+
                 <div class="mb-3">
                     <label for="address">주소</label>
                     <input type="text" class="form-control" id="address" placeholder="서울특별시 강남구" required>
@@ -74,6 +84,20 @@
                         <label><input type="radio" name="gender" value="여자"> 여자</label>
                     </div>
                 </div>
+
+
+                <hr>
+                <div class="frame">
+                    <div class="mb-3 imageContainer">
+                        <label for="nickname">프로필 사진</label>
+                        <div class="frame">
+                            <input name="file" type="file">
+                        </div>
+
+                    </div>
+
+                </div>
+
                 <div class="custom-control custom-checkbox">
                     <input type="checkbox" class="custom-control-input" id="aggrement" required>
                     <label class="custom-control-label" for="aggrement">개인정보 수집 및 이용에 동의합니다.</label>
@@ -100,6 +124,42 @@
             }, false);
         });
     }, false);
+
+
+
+    window.addEventListener('load', function() {
+
+        const container = document.querySelector('.imageContainer');
+        const frame = container.querySelector('.frame');
+        const fileInput = container.querySelector('input[type="file"]');
+
+        fileInput.addEventListener('input', () => {
+
+            if(!isImage(fileInput.files[0])) {
+                alert('Image 파일만 업로드 할 수 있습니다.');
+                return;
+            }
+
+            const reader = new FileReader();
+
+            reader.addEventListener('load', () => {
+
+                const img = document.createElement('IMG');
+                img.classList.add('thumbnail');
+                img.src = reader.result;
+
+                frame.insertAdjacentElement('beforeend', img);
+            });
+
+            reader.readAsDataURL(fileInput.files[0]);
+        });
+
+        function isImage(file){
+            return file.type.indexOf('image') >= 0;
+        }
+    });
+
+
 </script>
 </body>
 </html>

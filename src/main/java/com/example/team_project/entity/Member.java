@@ -29,6 +29,9 @@ public class Member {
     private String gender;
     private String memberRole;
 
+    @OneToOne(mappedBy = "member", cascade = CascadeType.ALL)
+    private MemberImg memberImg;
+
 
 
 }

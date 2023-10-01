@@ -21,7 +21,7 @@ import java.util.Optional;
 
 @RequiredArgsConstructor
 @Log4j2
-
+@Service
 public class MemberServiceJpa implements MemberService {
     private final MemberRepository memberRepository;
     private final MemberImgRepository memberImgRepository;

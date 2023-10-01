@@ -5,6 +5,7 @@ import lombok.Getter;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -20,6 +21,9 @@ public class CustomUserDetails extends User implements UserDetails  {
 
     private final String myName;
     private final Member member;
+    private final String folderPath;
+    private final String storeFileName;
+
 
 
 
@@ -28,7 +32,10 @@ public class CustomUserDetails extends User implements UserDetails  {
         super(member.getEmail(),member.getPassword(),authorities);
         this.myName = member.getName();
         this.member = member;
+        this.folderPath = member.getMemberImg().getFolderPath();
+        this.storeFileName = member.getMemberImg().getStoreFileName();
     }
+
 
 
     @Override

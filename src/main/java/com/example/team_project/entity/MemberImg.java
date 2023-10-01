@@ -11,11 +11,11 @@ import lombok.*;
 @ToString(exclude = {"member"})
 public class MemberImg {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "member_img_id")
-    private Long id;
+    @Column(name = "IMG_ID")
+    private Long imgId;
 
-    @OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name="member_id",nullable = false)
+    @OneToOne
+    @JoinColumn(name = "memberId")
     private Member member;
 
     private String folderPath;

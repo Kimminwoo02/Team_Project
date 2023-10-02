@@ -2,7 +2,6 @@ package com.example.team_project.controller;
 
 import com.example.team_project.dto.auth.SignupDto;
 import com.example.team_project.service.MemberService;
-import com.example.team_project.service.MemberServiceJpa;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
@@ -53,13 +52,13 @@ public class UserController {
 
     @PostMapping("/signup")
     public String signup1(@ModelAttribute SignupDto signupDto) throws IOException {
-//        log.info(String.valueOf(signupDto));
-//        if(signupDto.getFile().isEmpty()){
+        log.info(String.valueOf(signupDto));
+        if(signupDto.getFile().isEmpty()){
             memberService.joinWithoutFile(signupDto);
-//        }
-//        else {
-//            memberService.join(signupDto);
-//        }
+        }
+        else {
+            memberService.join(signupDto);
+        }
 
         return "redirect:/welcome";
 

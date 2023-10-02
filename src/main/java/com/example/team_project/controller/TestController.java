@@ -1,15 +1,23 @@
 package com.example.team_project.controller;
 
+import com.example.team_project.dto.member.MemberImgDTO;
+import com.example.team_project.security.CustomUserDetails;
 import com.example.team_project.service.MemberServiceMybatis;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller
 @RequiredArgsConstructor
+@Slf4j
 public class TestController {
 
-    private final MemberServiceMybatis memberServiceMybatis;
+
 
 
     @GetMapping("/home")
@@ -37,16 +45,12 @@ public class TestController {
         return "main/board";
     }
 
-    @GetMapping("/chat")
-    public String chat(){
-        return "main/chat";
-    }
+
 
     @GetMapping("/detail")
     public String detail(){
         return "main/detailBoard";
     }
-
 
 
 }

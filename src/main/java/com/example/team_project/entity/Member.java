@@ -8,8 +8,8 @@ import java.security.Principal;
 @Entity
 @NoArgsConstructor
 @Getter
-@AllArgsConstructor
-@Builder
+
+
 public class Member {
 
     @Id
@@ -31,6 +31,33 @@ public class Member {
 
     @OneToOne(mappedBy = "member", cascade = CascadeType.ALL)
     private MemberImg memberImg;
+
+    @OneToOne(mappedBy = "member", cascade = CascadeType.ALL)
+    @Setter
+    private Review review;
+
+    @Builder
+    public Member(String email, String password, String name, String phone, String gender ,String memberRole){
+        this.email = email;
+        this.password = password;
+        this.name = name;
+        this.phone = phone;
+        this.gender = gender;
+        this.memberRole = memberRole;
+    }
+
+    public static Member createMember(String email, String password, String name, String phone, String gender ,String memberRole){
+        return Member.builder()
+                .email(email)
+                .password(password)
+                .name(name)
+                .phone(phone)
+                .gender(gender)
+                .memberRole(memberRole)
+                .build();
+    }
+
+
 
 
 

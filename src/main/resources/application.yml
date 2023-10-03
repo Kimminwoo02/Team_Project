@@ -25,13 +25,13 @@ spring:
     multipart:
       max-file-size: 10MB
       max-request-size: 10MB
-      location: /Users/gimmin-u/Desktop/images
+      location: /Users/gimmin-u/Desktop/Team_Project/src/main/resources/static/img
   jpa:
     hibernate:
       ddl-auto: update
 com:
   example:
-    upload : /Users/gimmin-u/Desktop/images
+    upload : /Users/gimmin-u/Desktop/Team_Project/src/main/resources/static/img
 
 
 #mybatis

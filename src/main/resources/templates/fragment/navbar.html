@@ -22,6 +22,10 @@
 
 
                         <li class="nav-item">
+                            <a class="nav-link" sec:authorize="isAuthenticated()"><img id="profile" th:src="@{../images/cat.jpg}"  style="width: 70px;height: 70px;border-radius: 50%;" disabled></a>
+                        </li>
+
+                        <li class="nav-item">
                             <a class="nav-link" sec:authorize="isAuthenticated()"><span sec:authentication="principal.myName"  style="color: #0c63e4"></span><span style="color: #1a1e21">님 안녕하세요!</span></a>
                             <a class="nav-link" th:href="@{/home}">홈</a>
                         </li>
@@ -51,6 +55,18 @@
                     </ul>
                 </div>
             </div>
+
+            <script th:inline="javascript" sec:authorize="isAuthenticated()">
+                const url = [[${#authentication.principal.storeFileName}]];
+                let fullUrl = "/img/"+url;
+
+                console.log(fullUrl);
+
+                $("#profile").attr("src",fullUrl);
+
+
+
+            </script>
         </nav>
 
     </body>

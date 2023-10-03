@@ -26,6 +26,7 @@ public class SignupDto {
     private String phone;
 
     private String gender;
+    private String nickName;
 
     private MultipartFile file;
 
@@ -36,6 +37,7 @@ public class SignupDto {
                 .name(name)
                 .phone(phone)
                 .gender(gender)
+                .nickName(nickName)
                 .build();
 
     }

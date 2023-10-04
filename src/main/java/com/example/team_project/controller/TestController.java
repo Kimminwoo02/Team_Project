@@ -70,4 +70,9 @@ public class TestController {
         reviewService.addReview(reviewDto);
         return "redirect:/welcome";
     }
+
+    @GetMapping("/mypage")
+    public String mypage(){
+        return "main/mypage";
+    }
 }

@@ -7,67 +7,73 @@
     <title></title>
 </head>
 
-    <body>
+<body>
+<div th:fragment="navFragment">
+    <nav class="navbar navbar-expand-lg bg-light fixed-top shadow-lg" style="font-family: 'Black Han Sans', sans-serif">
+        <div class="container">
+            <a class="navbar-brand" th:href="@{/home}">Acti <span class="tooplate-red">ma</span><span
+                    class="tooplate-green">te</span></a>
 
-        <nav th:fragment="navFragment" class="navbar navbar-expand-lg bg-light fixed-top shadow-lg"  style="font-family: 'Black Han Sans', sans-serif">
-            <div class="container">
-                <a class="navbar-brand" th:href="@{/home}">Acti <span class="tooplate-red">ma</span><span class="tooplate-green">te</span></a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                    aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
 
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-
-                <div class="collapse navbar-collapse" id="navbarNav">
-                    <ul class="navbar-nav ms-auto">
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
 
 
-                        <li class="nav-item">
-                            <a class="nav-link" sec:authorize="isAuthenticated()"><img id="profile" th:src="@{../images/cat.jpg}"  style="width: 70px;height: 70px;border-radius: 50%;" disabled></a>
-                        </li>
+                    <li class="nav-item">
+                        <a class="nav-link" sec:authorize="isAuthenticated()"><img id="profile"
+                                                                                   th:src="@{../images/cat.jpg}"
+                                                                                   style="width: 20px;height: 20px;border-radius: 50%;"
+                                                                                   disabled></a>
+                    </li>
 
-                        <li class="nav-item">
-                            <a class="nav-link" sec:authorize="isAuthenticated()"><span sec:authentication="principal.myName"  style="color: #0c63e4"></span><span style="color: #1a1e21">님 안녕하세요!</span></a>
-                            <a class="nav-link" th:href="@{/home}">홈</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" sec:authorize="isAuthenticated()" th:href="@{/home}">마이페이지</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link " th:href="@{/facility}">시설관리</a>
-                        </li>
+                    <li class="nav-item">
+                        <a class="nav-link" sec:authorize="isAuthenticated()"><span
+                                sec:authentication="principal.myName" style="color: #0c63e4"></span><span
+                                style="color: #1a1e21">님 안녕하세요!</span></a>
+                        <a class="nav-link" th:href="@{/home}">홈</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" sec:authorize="isAuthenticated()" th:href="@{/mypage}">마이페이지</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link " th:href="@{/facility}">시설관리</a>
+                    </li>
 
-                        <li class="nav-item">
-                            <a class="nav-link" th:href="@{/board}">게시판</a>
-                        </li>
+                    <li class="nav-item">
+                        <a class="nav-link" th:href="@{/board}">게시판</a>
+                    </li>
 
-                        <li class="nav-item">
-                            <a class="nav-link" th:href="@{/matching}">매칭</a>
-                        </li>
+                    <li class="nav-item">
+                        <a class="nav-link" th:href="@{/matching}">매칭</a>
+                    </li>
 
-                        <li class="nav-item">
-                            <a class="nav-link" sec:authorize="isAnonymous()" th:href="@{/login}">로그인</a>
-<!--                            <a class="nav-link" sec:authorize="isAuthenticated()"><img id="imgId" th:src="@{/accounts/}+${accountDto.userId}" width="100" height="100"  alt="첨부이미지" th:if="${accountDto.profileImgPath() != null}" /></a>-->
-                            <a class="nav-link" sec:authorize="isAuthenticated()" th:href="@{/logout}">로그아웃</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" sec:authorize="isAnonymous()" th:href="@{/signup}">회원가입</a>
-                        </li>
-                    </ul>
-                </div>
+                    <li class="nav-item">
+                        <a class="nav-link" sec:authorize="isAnonymous()" th:href="@{/login}">로그인</a>
+                        <!--                            <a class="nav-link" sec:authorize="isAuthenticated()"><img id="imgId" th:src="@{/accounts/}+${accountDto.userId}" width="100" height="100"  alt="첨부이미지" th:if="${accountDto.profileImgPath() != null}" /></a>-->
+                        <a class="nav-link" sec:authorize="isAuthenticated()" th:href="@{/logout}">로그아웃</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" sec:authorize="isAnonymous()" th:href="@{/signup}">회원가입</a>
+                    </li>
+                </ul>
             </div>
+        </div>
 
-            <script th:inline="javascript" sec:authorize="isAuthenticated()">
-                const url = [[${#authentication.principal.storeFileName}]];
-                let fullUrl = "/img/"+url;
+        <script th:inline="javascript" sec:authorize="isAuthenticated()">
+            const url = [[${#authentication.principal.storeFileName}]];
+            let fullUrl = url;
 
-                console.log(fullUrl);
+            console.log(fullUrl);
 
-                $("#profile").attr("src",fullUrl);
+            $("#profile").attr("src", fullUrl);
 
 
-
-            </script>
-        </nav>
-
-    </body>
+        </script>
+    </nav>
+</div>
+</body>
 </html>

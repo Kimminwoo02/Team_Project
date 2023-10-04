@@ -1,0 +1,104 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
+</head>
+
+<body>
+
+    <form class="form-horizontal">
+    <fieldset>
+
+        
+        <div class="form-group" style="padding: 40px">
+            <p class="centered">
+                <img src="/assets/img/myphoto.jpg" id="userImage" style="width: 100px">
+            </p>
+            <div>
+                <input type="file" name="userImage"
+                    onchange="document.getElementById('userImage').src = window.URL.createObjectURL(this.files[0])"
+                    accept="image/*">
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="control-label col-sm-2" for="grade">이메일</label>
+            <div class="col-sm-3">
+                <input type="text" id="email" name="email" placeholder="이메일" class="form-control">
+
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="control-label col-sm-2" for="orgname">성명</label>
+            <div class="col-sm-3">
+                <input type="text" id="orgname" name="name" placeholder="성명" class="form-control" minlength="4">
+
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label col-sm-2" for="pass">패스워드</label>
+            <div class="col-sm-3">
+                <input type="text" id="pass" name="pass" placeholder="패스워드" class="form-control">
+
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label col-sm-2" for="birthday">생년월일</label>
+            <div class="col-sm-3">
+                <input type="text" id="birthday" name="birthday" placeholder="생년월일" class="form-control">
+
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="col-sm-2 col-sm-2 control-label">우편번호</label>
+            <div class="col-sm-3">
+                <input type="text" class="form-control" name="zipcode" id="zipcode">
+            </div>
+            <div class="col-sm-2">
+                <button type="button" class="btn btn-round btn-primary form-control">우편번호 검색</button>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label col-sm-2" for="addr">주소</label>
+            <div class="col-sm-6">
+                <input type="text" id="addr" name="addr" placeholder="주소" class="form-control">
+
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-2 col-sm-2 control-label"></label>
+            <div class="col-sm-5">
+                <input type="text" class="form-control" name="detailaddr" id="detailaddr">
+            </div>
+
+        </div>
+        <div class="form-group">
+            <label class="control-label col-sm-2" for="phonehome">핸드폰번호</label>
+            <div class="col-sm-5">
+                <input type="text" id="phonecell" name="phonecell" placeholder="핸드폰번호" class="form-control">
+
+            </div>
+        </div>
+        
+        <div class="form-group">
+            <!-- Button -->
+            <div class="col-sm-3 col-sm-offset-2">
+                <input type="submit" value="가입하기" class="btn btn-success" />
+            </div>
+        </div>
+    </fieldset>
+    </form>
+    
+
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
+</body>
+
+</html>

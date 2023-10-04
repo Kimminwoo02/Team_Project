@@ -1,17 +1,10 @@
 package com.example.team_project.controller;
 
-
-import com.example.team_project.dto.ReviewDto;
-import com.example.team_project.entity.Review;
-import com.example.team_project.security.CustomUserDetails;
-import com.example.team_project.service.ReviewService;
+import com.example.team_project.service.MemberServiceMybatis;
 import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
-import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
 
 import java.util.List;
 
@@ -21,7 +14,8 @@ import java.util.List;
 @Slf4j
 public class TestController {
 
-    private final ReviewService reviewService;
+    private final MemberServiceMybatis memberServiceMybatis;
+
 
 
     @GetMapping("/home")
@@ -58,6 +52,12 @@ public class TestController {
         return "main/detailBoard";
     }
 
+
+    @GetMapping("/write")
+    public String write() {
+        return "main/boardWrite";
+
+    }
 
     @PostMapping("/review")
     public String review(ReviewDto reviewDto, @AuthenticationPrincipal CustomUserDetails principal) {

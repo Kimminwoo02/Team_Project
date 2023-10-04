@@ -63,6 +63,7 @@ public class SecurityConfig {
                         .requestMatchers(new MvcRequestMatcher(introspect,"/matching")).permitAll()
                         .requestMatchers(new MvcRequestMatcher(introspect,"/detail")).permitAll()
                         .requestMatchers(new MvcRequestMatcher(introspect,"/chat")).permitAll()
+                        .requestMatchers(new MvcRequestMatcher(introspect,"/write")).permitAll()
                         .anyRequest().authenticated())
                 .formLogin(login -> login
                         .loginPage("/login")

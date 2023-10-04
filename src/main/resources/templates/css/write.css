@@ -1,0 +1,22 @@
+.page-header {
+    padding-top: 30px;
+
+}
+.InpBox{
+    margin-top: 29px;
+    margin-left: 10px;
+    margin-bottom: 30px;
+    border-radius: 30px;
+}
+.content {
+    height: 300px;
+    border-radius: 5px;
+
+}
+.btn_wrap {
+    padding-right: 100px;
+
+}
+.title {
+    border-radius: 5px;
+}

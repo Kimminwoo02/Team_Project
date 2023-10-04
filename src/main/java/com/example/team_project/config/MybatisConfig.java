@@ -19,8 +19,9 @@ public class MybatisConfig {
     public DataSource dataSource() {
         DataSourceBuilder<?> dataSourceBuilder = DataSourceBuilder.create();
         dataSourceBuilder.driverClassName("org.h2.Driver");
-        dataSourceBuilder.url("jdbc:h2:tcp://localhost/~/my-db-test");
+        dataSourceBuilder.url("jdbc:h2:tcp://localhost/C:\\Users\\Playdata\\Desktop\\my-db");
         dataSourceBuilder.username("sa");
+        dataSourceBuilder.password("1234");
 
         return dataSourceBuilder.build();
     }

@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Actimate</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <style>
+        body {
+            min-height: 100vh;
+            background-color: #fff;
+        }
+
+        .input-form {
+            max-width: 680px;
+            margin-top: 80px;
+            padding: 32px;
+            background: #fff;
+            -webkit-border-radius: 10px;
+            -moz-border-radius: 10px;
+            border-radius: 10px;
+            -webkit-box-shadow: 0 8px 20px 0 rgba(0, 0, 0, 0.15);
+            -moz-box-shadow: 0 8px 20px 0 rgba(0, 0, 0, 0.15);
+            box-shadow: 0 8px 20px 0 rgba(0, 0, 0, 0.15)
+        }
+
+        .thumbnail {
+            margin: 20px;
+            width: 150px;
+            height: 150px;
+            border-radius: 20%;
+        }
+    </style>
+</head>
+
+<body>
+<main th:fragment="mypageInfoFragment">
+    <div class="container">
+        <div class="input-form-backgroud row">
+            <div class="input-form col-md-12 mx-auto">
+                <a th:href="@{/home}"><img class="logo" alt="logo" src="../images/logo.png"
+                                           style="width: 100px; height: 50px;margin-left: 39%"></a>
+                <div class="mb-3">
+                    <div class="col-md-12 mb-3">
+                        <label for="email">이메일</label>
+                        <input type="email" name="email" class="form-control" id="email" placeholder="아이디로 사용할 이메일입니다."
+                               required>
+                        <div class="invalid-feedback">
+                            이메일을 입력해주세요.
+                        </div>
+                    </div>
+                </div>
+
+                <div class="mb-3">
+                    <label for="name">이름</label>
+                    <input type="text" name="name" class="form-control" id="name" placeholder="이름을 입력해주세요" value=""
+                           required>
+                    <div class="invalid-feedback">
+                        이름을 입력해주세요.
+                    </div>
+                </div>
+
+                <div class="mb-3">
+                    <label for="name"> 닉네임</label>
+                    <input type="text" name="nickName" class="form-control" id="nickname" placeholder="이름을 입력해주세요"
+                           value="" required>
+                    <div class="invalid-feedback">
+                        별명을 입력하세요!
+                    </div>
+                </div>
+
+
+                <div class="mb-3">
+                    <label for="address">주소</label>
+                    <input type="text" class="form-control" id="address" placeholder="서울특별시 강남구" required>
+                    <div class="invalid-feedback">
+                        주소를 입력해주세요.
+                    </div>
+                </div>
+                <div class="mb-3">
+                    <label for="address2">상세주소<span class="text-muted">&nbsp;(필수 아님)</span></label>
+                    <input type="text" class="form-control" id="address2" placeholder="상세주소를 입력해주세요.">
+                </div>
+                <div class="row">
+                    <div class="col-md-8 mb-3">
+                        <label for="root" style="display: block;">성별</label>
+                        <label><input type="radio" name="gender" value="남자"> 남자</label>
+                        <label><input type="radio" name="gender" value="여자"> 여자</label>
+                    </div>
+                </div>
+
+
+                <hr>
+                <div class="frame">
+                    <div class="mb-3 imageContainer">
+                        <label for="nickname">프로필 사진</label>
+                        <div class="frame">
+                            <input name="file" type="file">
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+        <footer class="my-3 text-center text-small">
+            <p class="mb-1">&copy; Copyright © JihyeHong, MinwooKim, YejunKim, YongsuSon All Rights Reserved.</p>
+        </footer>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm"
+            crossorigin="anonymous"></script>
+</body>
+
+</html>

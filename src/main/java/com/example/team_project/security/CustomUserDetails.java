@@ -23,7 +23,7 @@ public class CustomUserDetails extends User implements UserDetails  {
     private final Member member;
     private final String folderPath;
     private final String storeFileName;
-
+    
 
 
 

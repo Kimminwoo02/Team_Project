@@ -1,6 +1,6 @@
 spring:
   datasource:
-    url: jdbc:h2:tcp://localhost/~/my-db-test
+    url: jdbc:h2:tcp://localhost/C:\Users\Playdata\Desktop\my-db
     username: sa
     driver-class-name: org.h2.Driver
     password: 1234

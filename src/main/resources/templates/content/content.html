@@ -43,7 +43,11 @@
                             </div>
 
                             <div class="reviews-bottom reviews-bottom-up d-flex align-items-center">
+<<<<<<< Updated upstream
                                 <img id="reviewImg" th:src="@{/images/}+ ${data.member.memberImg.storeFileName}"
+=======
+                                <img id="reviewImg" th:src="'http://localhost:9091/'+${data.member.memberImg.storeFileName}"
+>>>>>>> Stashed changes
                                      class="avatar-image img-fluid" alt="">
 
                                 <div class="d-flex align-items-center justify-content-between flex-wrap w-100 ms-3">
@@ -51,7 +55,11 @@
                                         <strong th:text="${data.member.name}">손용수</strong>, <small th:text="${data.member.nickName}">리틀 자이언트</small>
                                     </p>
 
+<<<<<<< Updated upstream
                                     <div class="reviews-icons" >
+=======
+                                    <div class="reviews-icons">
+>>>>>>> Stashed changes
                                         <i th:each="num : ${#numbers.sequence(1,data.rating)}" class="bi-star-fill"></i>
                                         <i th:if="${data.rating} != 5 " th:each="num : ${#numbers.sequence(1,5 - data.rating)}" class="bi-star"></i>
                                     </div>

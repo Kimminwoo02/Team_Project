@@ -1,6 +1,7 @@
 package com.example.team_project.security;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.boot.autoconfigure.security.servlet.PathRequest;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -42,7 +43,8 @@ public class SecurityConfig {
                 .requestMatchers(new AntPathRequestMatcher("/fragment/**"))
                 .requestMatchers(new AntPathRequestMatcher("/config/**"))
                 .requestMatchers(new AntPathRequestMatcher("/content/**"))
-                .requestMatchers(new AntPathRequestMatcher("/images/**"));
+                .requestMatchers(new AntPathRequestMatcher("/images/**"))
+                .requestMatchers(PathRequest.toStaticResources().atCommonLocations());
 
     }
 

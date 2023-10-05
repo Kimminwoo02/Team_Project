@@ -3,6 +3,7 @@ package com.example.team_project.config;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.mybatis.spring.SqlSessionFactoryBean;
 import org.mybatis.spring.annotation.MapperScan;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.jdbc.DataSourceBuilder;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -15,11 +16,14 @@ import javax.sql.DataSource;
 @Configuration
 public class MybatisConfig {
 
+    @Value("${spring.datasource.url}")
+    String databasePath;
+
     @Bean
     public DataSource dataSource() {
         DataSourceBuilder<?> dataSourceBuilder = DataSourceBuilder.create();
         dataSourceBuilder.driverClassName("org.h2.Driver");
-        dataSourceBuilder.url("jdbc:h2:tcp://localhost/C:\\Users\\Playdata\\Desktop\\my-db");
+        dataSourceBuilder.url(databasePath);
         dataSourceBuilder.username("sa");
         dataSourceBuilder.password("1234");
 

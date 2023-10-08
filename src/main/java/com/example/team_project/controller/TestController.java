@@ -34,10 +34,6 @@ public class TestController {
         return "main/welcome";
     }
 
-    @GetMapping("/facility")
-    public String facilities(){
-        return "main/facility";
-    }
 
 
     @GetMapping("/matching")
@@ -45,24 +41,7 @@ public class TestController {
         return "main/matching";
     }
 
-    @GetMapping("/board")
-    public String board(){
-        return "main/board";
-    }
 
-
-
-    @GetMapping("/detail")
-    public String detail(){
-        return "main/detailBoard";
-    }
-
-
-    @GetMapping("/write")
-    public String write() {
-        return "main/boardWrite";
-
-    }
 
     @PostMapping ("/review")
     public String review(ReviewDto reviewDto, @AuthenticationPrincipal CustomUserDetails principal) {
@@ -71,8 +50,4 @@ public class TestController {
         return "redirect:/welcome";
     }
 
-    @GetMapping("/mypage")
-    public String mypage(){
-        return "main/mypage";
-    }
 }

@@ -65,4 +65,15 @@ public class UserController {
     }
 
 
+    @GetMapping("/mypage")
+    public String mypage1(){
+        return "main/mypage";
+    }
+
+    @GetMapping("/mySchedule")
+    public String mypage2(){
+        return "main/mySchedule";
+    }
+
+
 }

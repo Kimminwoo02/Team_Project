@@ -1,6 +1,7 @@
 package com.example.team_project.entity.matching;
 
 import com.example.team_project.entity.AuditingFields;
+import com.example.team_project.entity.Category;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -25,4 +26,8 @@ public class Matching extends AuditingFields {
 
     @OneToMany(mappedBy = "matching", cascade = CascadeType.ALL)
     private List<MatchingMessanger> matchingMessangerList;
+
+    @OneToOne(mappedBy = "categoryId", cascade = CascadeType.ALL)
+    private Category category;
+
 }

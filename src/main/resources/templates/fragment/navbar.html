@@ -65,7 +65,7 @@
 
         <script th:inline="javascript" sec:authorize="isAuthenticated()">
             const url = [[${#authentication.principal.storeFileName}]];
-            let fullUrl = url;
+            let fullUrl ="/images/"+url;
 
             console.log(fullUrl);
 

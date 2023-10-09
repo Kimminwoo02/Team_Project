@@ -45,24 +45,10 @@ public class TestController {
         return "main/matching";
     }
 
-    @GetMapping("/board")
-    public String board(){
-        return "main/board";
-    }
 
 
 
-    @GetMapping("/detail")
-    public String detail(){
-        return "main/detailBoard";
-    }
 
-
-    @GetMapping("/write")
-    public String write() {
-        return "main/boardWrite";
-
-    }
 
     @PostMapping ("/review")
     public String review(ReviewDto reviewDto, @AuthenticationPrincipal CustomUserDetails principal) {

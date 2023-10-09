@@ -186,4 +186,6 @@ package-lock.json
 
 package.json
 
-src/main/resources/static/img/
+src/main/resources/static/images/
+
+

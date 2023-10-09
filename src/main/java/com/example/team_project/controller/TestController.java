@@ -34,19 +34,12 @@ public class TestController {
         return "main/welcome";
     }
 
-    @GetMapping("/facility")
-    public String facilities(){
-        return "main/facility";
-    }
 
 
     @GetMapping("/matching")
     public String matching(){
         return "main/matching";
     }
-
-
-
 
 
 
@@ -57,8 +50,4 @@ public class TestController {
         return "redirect:/welcome";
     }
 
-    @GetMapping("/mypage")
-    public String mypage(){
-        return "main/mypage";
-    }
 }

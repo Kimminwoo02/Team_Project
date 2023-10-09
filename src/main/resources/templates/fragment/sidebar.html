@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="ko"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>CodePen - Bootstrap 3 - Sidebar Layout</title>
+  <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css'>
+<link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/material-design-iconic-font/2.2.0/css/material-design-iconic-font.min.css'><link rel="stylesheet" href="../css/sidebar.css">
+
+</head>
+<body>
+<!-- partial:index.partial.html -->
+<div th:fragment="sidebarFragment" id="viewport" style="font-family: 'Cafe24Ssurround'">
+  <!-- Sidebar -->
+  <div id="sidebar">
+    <header>
+      <a href="#">내 정보</a>
+    </header>
+    <ul class="nav">
+      <li>
+        <a href="#">
+          <i class="zmdi zmdi-view-dashboard"></i> 내 정보
+        </a>
+      </li>
+      <li>
+        <a th:href="@{/mySchedule}">
+          <i class="zmdi zmdi-link"></i> 일정
+        </a>
+      </li>
+      <li>
+        <a href="#">
+<!--          <i class="zmdi zmdi-widgets"></i> Overview-->
+        </a>
+      </li>
+    </ul>
+  </div>
+</div>
+<!-- partial -->
+  
+</body>
+</html>

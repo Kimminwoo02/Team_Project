@@ -1,12 +1,11 @@
 package com.example.team_project.controller;
 
-import com.example.team_project.dto.Response;
+
 import com.example.team_project.dto.article.CreateArticle;
 import com.example.team_project.security.CustomUserDetails;
 import com.example.team_project.service.ArticleService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
+
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;

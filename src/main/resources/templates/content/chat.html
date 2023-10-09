@@ -43,7 +43,7 @@
         </div>
         <div class='chatMember' style="overflow: hidden">
             <div class="chatTitle">멤버</div>
-            <div class="member" id="member">
+            <div id="member"  class="member" >
                 <img class="profileimg3" src="../images/dog.jpg"></img>
                 <span class="memberInfo"></span>
             </div>
@@ -73,6 +73,7 @@
         $(document).ready(function(){
 
             const username = [[${#authentication.principal.myName}]];
+            var isFirst = 0;
 
             $("#disconn").on("click", (e) => {
                 disconnect();
@@ -114,21 +115,21 @@
 
             //채팅창에 들어왔을 때
             function onOpen(evt) {
-                var str = "<div class='col-6'>";
-                str += "<div class='alert alert-secondary' style='background-color: transparent; border-color: transparent'>";
-                str += "<b style='color: #1a1e21'>" + username + "</b>";
-                str += "</div></div>";
-                $("#member").append(str);
+                isFirst = 1
                 websocket.send(str);
 
             }
 
             function onMessage(msg) {
+
                 var data = msg.data;
                 var sessionId = null;
                 //데이터를 보낸 사람
                 var message = null;
                 var arr = data.split(":");
+                console.log(msg)
+                console.log(data)
+
 
                 for(var i=0; i<arr.length; i++){
                     console.log('arr[' + i + ']: ' + arr[i]);
@@ -144,8 +145,30 @@
                 console.log("sessionID : " + sessionId);
                 console.log("cur_session : " + cur_session);
 
+
+                if(isFirst === 1){
+                    if(sessionId === cur_session){
+                        var str = "<div class='col-6'>";
+                        str += "<div class='alert alert-secondary' style='background-color: transparent; border-color: transparent'>";
+                        str += "<b>" + sessionId + "</b>";
+                        str += "</div></div>";
+                        $("#member").append(str);
+                        console.log("더 킹이스 백")
+                        isFirst = 0
+                    }
+                    else{
+                        var str = "<div class='col-6'>";
+                        str += "<div class='alert alert-secondary' style='background-color: transparent; border-color: transparent'>";
+                        str += "<b>" + sessionId + " : " + message + "</b>";
+                        str += "</div></div>";
+                        $("#member").append(str);
+                        console.log("더 킹이스 백")
+                        isFirst = 0
+                    }
+                }
+
                 //로그인 한 클라이언트와 타 클라이언트를 분류하기 위함
-                if(sessionId == cur_session){
+                if(sessionId === cur_session){
                     var str = "<div class='col-6'>";
                     str += "<div class='alert alert-secondary' style='background-color: transparent; border-color: transparent'>";
                     str += "<b>" + sessionId + " : " + message + "</b>";

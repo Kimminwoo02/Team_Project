@@ -182,6 +182,27 @@
             return el;
         }
 
+        function doAction(name,address,longitude,altitude){
+
+            var createFacility = {"longitude" : longitude,"altitude":altitude, "address" : address,"name":name}
+
+
+                $.ajax({
+                    url: '/facility'
+                    , method: 'POST'
+                    , data: createFacility
+                    , success: function (data) {
+                        alert("등록을 완료했습니다!");
+                    }
+
+                })
+
+        }
+
+
+
+
+
         // 마커를 생성하고 지도 위에 마커를 표시하는 함수입니다
         function addMarker(position, idx, title) {
             var imageSrc = 'https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/marker_number_blue.png', // 마커 이미지 url, 스프라이트 이미지를 씁니다

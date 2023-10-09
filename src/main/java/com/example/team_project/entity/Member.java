@@ -4,12 +4,11 @@ import jakarta.persistence.*;
 import lombok.*;
 
 import java.security.Principal;
+import java.util.List;
 
 @Entity
 @NoArgsConstructor
 @Getter
-
-
 public class Member {
 
     @Id
@@ -37,6 +36,10 @@ public class Member {
     @Setter
     private Review review;
 
+    @OneToMany(mappedBy = "member", cascade = CascadeType.ALL)
+    @Setter
+    private List<Article> article;
+
     @Builder
     public Member(String email, String password, String name, String phone, String gender ,String memberRole,String nickName){
         this.email = email;
@@ -47,21 +50,6 @@ public class Member {
         this.nickName = nickName;
         this.memberRole = memberRole;
     }
-
-    public static Member createMember(String email, String password, String name, String phone, String gender ,String memberRole, String nickName){
-        return Member.builder()
-                .email(email)
-                .password(password)
-                .name(name)
-                .phone(phone)
-                .gender(gender)
-                .nickName(nickName)
-                .memberRole(memberRole)
-                .build();
-    }
-
-
-
 
 
 }

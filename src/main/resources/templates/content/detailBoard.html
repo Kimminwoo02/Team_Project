@@ -80,7 +80,7 @@
                                         </label>
                                     </span>
                                 </div>
-                                <a th:href="@{/write}" style="float: right; white-space: nowrap;">게시글 작성
+                                <a th:href="@{/boardWrite}" style="float: right; white-space: nowrap;">게시글 작성
                                 </a>
                             </div>
                                 <ul class="qna_list" id="qst_and_ans_list">
@@ -93,7 +93,7 @@
                                             <hr>
                                             </hr>
                                             <em class="label_hot">HOT🔥</em>
-                                            <a href="#" span class="qna_subject" >23살 남자에요! 축구 구직합니다!</span></a>
+                                            <a th:href="@{/boardUpdate}" span class="qna_subject" >23살 남자에요! 축구팀 구합니다!</span></a>
                                         </div>
                                         <span class="qna_desc">
                                             선출은 아니고 구력 5년 이상입니다. 조기축구 회원이였다가 새로 이사와서 팀 구하고 있어요. 팀플레이 좋아합니다.
@@ -114,84 +114,12 @@
                                         </span>
                                     </li>
                                 </div>
-                                <hr>
-                                </hr>
-                                </li>
-                                <li>
+                                <hr/>
+                                <li  th:each="board:${boardList }">
                                     <div class="qna_subject_wrap">
-                                        <a href="#" class="qna_subject">도림천 산책하실 분!</span></a>
+                                        <a th:href="@{/boardRead(boardId=${board.boardId})}" class="qna_subject"><span th:text="${board.title}+${board.boardId}"></span></a>
                                     </div>
-                                    <span class="qna_desc">
-                                        산책산책산책산책산책산책산책산책산책산책산책산책산책산책산책산책산책산책산책산책산책산책산책산책</span>
-                                    <span class="qna_like">
-                                        <img src="../images/heart_icon-icons.com_48290.png" style="width:20px;">
-                                        공감하기
-                                    </span>
-                                    <span class="qna_reply">
-                                        <img src="../images/pngwing.com.png" style="width: 20px; height:20px;">
-                                        댓글
-                                        <strong>1</strong>
-                                    </span>
-                                    <span class="qna_views">
-                                        <img src="../images/clipart870923.png" style="width: 15px; height:15px;">
-                                        조회수
-                                        <strong>33</strong>
-                                    </span>
-                                    <hr>
-                                    </hr>
-                                </li>
-                                <li>
-                                    <div class="qna_subject_wrap">
-                                        <a href="#" class="qna_subject">도림천 산책하실 분!</span></a>
-                                    </div>
-                                    <span class="qna_desc">
-                                        산책산책산책산책산책산책산책산책산책산책산책산책산책산책산책산책산책산책산책산책산책산책산책산책</span>
-                                    <span class="qna_like">
-                                        <img src="../images/heart_icon-icons.com_48290.png" style="width:20px;">
-                                        공감하기
-                                    </span>
-                                    <span class="qna_reply">
-                                        <img src="../images/pngwing.com.png" style="width: 20px; height:20px;">
-                                        댓글
-                                        <strong>1</strong>
-                                    </span>
-                                    <span class="qna_views">
-                                        <img src="../images/clipart870923.png" style="width: 15px; height:15px;">
-                                        조회수
-                                        <strong>33</strong>
-                                    </span>
-                                    <hr>
-                                    </hr>
-                                </li>
-                                <li>
-                                    <div class="qna_subject_wrap">
-                                        <a href="#" class="qna_subject">도림천 산책하실 분!</span></a>
-                                    </div>
-                                    <span class="qna_desc">
-                                        산책산책산책산책산책산책산책산책산책산책산책산책산책산책산책산책산책산책산책산책산책산책산책산책</span>
-                                    <span class="qna_like">
-                                        <img src="../images/heart_icon-icons.com_48290.png" style="width:20px;">
-                                        공감하기
-                                    </span>
-                                    <span class="qna_reply">
-                                        <img src="../images/pngwing.com.png" style="width: 20px; height:20px;">
-                                        댓글
-                                        <strong>1</strong>
-                                    </span>
-                                    <span class="qna_views">
-                                        <img src="../images/clipart870923.png" style="width: 15px; height:15px;">
-                                        조회수
-                                        <strong>33</strong>
-                                    </span>
-                                    <hr>
-                                    </hr>
-                                </li>
-                                <li>
-                                    <div class="qna_subject_wrap">
-                                        <a href="#" class="qna_subject">도림천 산책하실 분!</span></a>
-                                    </div>
-                                    <span class="qna_desc">
-                                        산책산책산책산책산책산책산책산책산책산책산책산책산책산책산책산책산책산책산책산책산책산책산책산책</span>
+                                    <span class="qna_desc" th:utext="${board.content}"></span>
                                     <span class="qna_like">
                                         <img src="../images/heart_icon-icons.com_48290.png" style="width:20px;">
                                         공감하기

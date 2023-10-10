@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import lombok.*;
 
 import java.security.Principal;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -37,8 +38,8 @@ public class Member {
     private Review review;
 
     @OneToMany(mappedBy = "member", cascade = CascadeType.ALL)
-    @Setter
-    private List<Article> article;
+    private List<Board> board = new ArrayList<>();
+
 
     @Builder
     public Member(String email, String password, String name, String phone, String gender ,String memberRole,String nickName){

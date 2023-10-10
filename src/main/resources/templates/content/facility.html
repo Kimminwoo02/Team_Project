@@ -41,7 +41,7 @@
         </section>
 
     <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=6ef9dd59a0dac58483b3db37cea616fd&libraries=services,clusterer,drawing"></script>
-
+    <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
     <script type="text/javascript">
         var markers = [];
 
@@ -173,6 +173,7 @@
 
         // 검색결과 항목을 Element로 반환하는 함수입니다
         function getListItem(index, places) {
+            console.log(places)
             var x = places.x
             var y = places.y
             var adr = places.address_name
@@ -201,7 +202,8 @@
 
         function doAction(name,address,longitude,altitude){
 
-            var createFacility = {"longitude" : longitude,"altitude":altitude, "address" : address,"name":name}
+            console.log(name +" ### " + address + " ### " +longitude + "  ### " + altitude  )
+            var createFacility = {"name" :name , "address" : address, "longitude" : longitude, "altitude" : altitude}
 
 
                 $.ajax({

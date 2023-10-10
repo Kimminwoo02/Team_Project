@@ -47,7 +47,7 @@ public class TestController {
     public String review(ReviewDto reviewDto, @AuthenticationPrincipal CustomUserDetails principal) {
         reviewDto.setMember(principal.getMember());
         reviewService.addReview(reviewDto);
-        return "redirect:/welcome";
+        return "redirect/home";
     }
 
 }

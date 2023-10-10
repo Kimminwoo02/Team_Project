@@ -5,6 +5,9 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import java.time.LocalDateTime;
 
@@ -12,8 +15,8 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @Getter
 @AllArgsConstructor
-
-public class Review  {
+@EntityListeners(AuditingEntityListener.class)
+public class Review extends AuditingFields {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "review_id")
@@ -25,20 +28,15 @@ public class Review  {
     @JoinColumn(name = "memberId")
     private Member member;
 
+
+
     @Builder
     public Review(int rating, String content, Member member){
-        super();
         this.rating = rating;
         this.content = content;
         this.member = member;
 
     }
 
-    public static Review CreateReview(int rating, String content,Member member){
-        return Review.builder()
-                .rating(rating)
-                .content(content)
-                .member(member)
-                .build();
-    }
+
 }

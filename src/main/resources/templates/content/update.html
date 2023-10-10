@@ -8,7 +8,8 @@
         <h1>게시글 수정</h1>
     </div>
     <div class="starter-template">
-        <form class="form-horizontal" action="/boardUpdate" method="post" id="postForm">
+        <form class="form-horizontal" method="post" action="/board" id="postForm">
+            <input type="hidden" name="_method" value="PUT">
             <div class="form-group">
                 <div class="InpBox" style="margin-top: 30px; margin-left: -32px; margin-bottom: 10px;">
                     <select name="option_select_category" title="활동 전체">
@@ -43,10 +44,38 @@
             <div class="btn_wrap text-center" style="margin-bottom: 130px;">
                 <a th:href="@{/detail}" class="btn btn-outline-dark">목록 가기</a>
                 <button type="submit" class="btn btn-outline-primary" id="submitBoardBtn">수정완료</button>
-                <a th:href="@{/boardDelete(boardId=${board.boardId})}" type="button" class="btn btn-outline-danger">게시글 삭제</a>
+                <form th:action="@{/board/delete/{boardId}(boardId=${board.id})}" method="post" >
+                    <input type="hidden" name="_method" value="DELETE">
+                    <button type="submit" class="btn btn-outline-danger">게시글 삭제</button>
+                </form>
             </div>
         </form>
     </div>
+
+    <script>
+
+        var quill = new Quill('#editor-container', {
+            modules: {
+                toolbar: [
+                    ['bold', 'italic'],
+                    ['link', 'blockquote', 'image'],
+                    [{ list: 'ordered' }, { list: 'bullet' }]
+                ]
+            },
+            placeholder: '내용입력',
+            theme: 'snow'
+        });
+        quill.on('text-change', function() {
+            document.getElementById("quill_html").value = quill.root.innerHTML;
+        });
+
+        quill.setHTML = (html) => {
+            document.getElementById(".ql-editor").children[0].innerHTML = html;
+        };
+
+        var content = document.getElementById("content").value;
+        quill.setHTML('<b>Hello my friend</b>');
+    </script>
 </main>
 
 

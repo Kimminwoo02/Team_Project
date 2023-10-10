@@ -23,7 +23,7 @@ import java.util.List;
 public class BoardController {
     private final BoardServiceJpa boardServiceJpa;
 
-    @GetMapping("/board")
+    @GetMapping("/boardMain")
     public String board(){
         return "main/board";
     }
@@ -58,14 +58,14 @@ public class BoardController {
         return "redirect:/detail";
     }
 
-    @GetMapping("/boardUpdate")
-    public String update1(Long boardId, Model model){
+    @GetMapping("/board/{boardId}")
+    public String update1(@PathVariable Long boardId, Model model){
         BoardDTO board = boardServiceJpa.getBoard(boardId);
         model.addAttribute("board",board);
     return "main/boardUpdate";
     }
 
-    @PostMapping("/boardUpdate")
+    @PutMapping("/board")
     public String update2(@RequestParam String title,@RequestParam String content, Long boardId) {
         BoardUpdate boardUpdate = new BoardUpdate(title, content);
         boardServiceJpa.update(boardUpdate, boardId);
@@ -73,8 +73,9 @@ public class BoardController {
         return "redirect:/detail";
     }
 
-    @GetMapping("boardDelete")
-    public String delete(Long boardId){
+    @DeleteMapping("/board/{boardId}")
+    public String delete(@PathVariable Long boardId){
+        BoardDTO board = boardServiceJpa.getBoard(boardId);
         boardServiceJpa.delete(boardId);
         return "redirect:/detail";
     }

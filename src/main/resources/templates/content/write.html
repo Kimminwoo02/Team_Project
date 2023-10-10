@@ -56,27 +56,19 @@
         </form>
     </div>
     <script>
-        var quill = new Quill('#editor', {
-            theme: 'snow',
+        var quill = new Quill('#editor-container', {
+            modules: {
+                toolbar: [
+                    ['bold', 'italic'],
+                    ['link', 'blockquote', 'image'],
+                    [{ list: 'ordered' }, { list: 'bullet' }]
+                ]
+            },
+            placeholder: '내용입력',
+            theme: 'snow'
         });
-        var content = quill.getText();
-        var title = $("#title").val();
-        var createArticle = {"title" : title,"content" : content}
-        form.addEventListener('submit', function () {
-            $.ajax({
-                url:'/write'
-                ,method: 'POST'
-                ,data :createArticle
-                , success: function (data) {
-                    alert("등록을 완료했습니다!");
-
-                }
-                ,error : function (rs){
-                    console.log("에러 호출")
-                    console.log(rs)
-                }
-            })
-
+        quill.on('text-change', function() {
+            document.getElementById("quill_html").value = quill.root.innerHTML;
         });
     </script>
 </main>

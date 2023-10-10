@@ -1,10 +1,10 @@
 package com.example.team_project.entity;
 
+import com.example.team_project.entity.matching.MatchingMember;
 import jakarta.persistence.*;
 import lombok.*;
 
 import java.security.Principal;
-import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -14,7 +14,7 @@ public class Member {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name="member_id")
+    @Column(name = "member_id")
     private Long memberId;
     @Column(length = 255, nullable = false)
     private String email;
@@ -39,10 +39,11 @@ public class Member {
 
     @OneToMany(mappedBy = "member", cascade = CascadeType.ALL)
     private List<Board> board = new ArrayList<>();
+    private List<MatchingMember> memberMatchingList;
 
 
     @Builder
-    public Member(String email, String password, String name, String phone, String gender ,String memberRole,String nickName){
+    public Member(String email, String password, String name, String phone, String gender, String memberRole, String nickName) {
         this.email = email;
         this.password = password;
         this.name = name;
@@ -51,6 +52,21 @@ public class Member {
         this.nickName = nickName;
         this.memberRole = memberRole;
     }
+
+    public static Member createMember(String email, String password, String name, String phone, String gender ,String memberRole, String nickName){
+        return Member.builder()
+                .email(email)
+                .password(password)
+                .name(name)
+                .phone(phone)
+                .gender(gender)
+                .nickName(nickName)
+                .memberRole(memberRole)
+                .build();
+    }
+
+
+
 
 
 }

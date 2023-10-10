@@ -12,6 +12,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.servlet.ModelAndView;
 
 import java.util.List;
 
@@ -34,20 +35,11 @@ public class TestController {
         return "main/welcome";
     }
 
-
-
-    @GetMapping("/matching")
-    public String matching(){
-        return "main/matching";
-    }
-
-
-
     @PostMapping ("/review")
     public String review(ReviewDto reviewDto, @AuthenticationPrincipal CustomUserDetails principal) {
         reviewDto.setMember(principal.getMember());
         reviewService.addReview(reviewDto);
-        return "redirect/home";
+        return "redirect:/home";
     }
 
 }

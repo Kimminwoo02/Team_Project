@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html">
+<head>
+</head>
+<body>
+<main th:fragment="readFragment" class="container">
+    <div class="page-header" style="margin-top: 100px;">
+        <h1 th:text="${board.title}"></h1>
+    </div>
+    <div class="starter-template">
+        <form class="form-horizontal" action="" method="" id="postForm">
+            <div class="form-group">
+                <div class="InpBox" style="margin-top: 30px; margin-left: -32px; margin-bottom: 10px;">
+                    <select name="option_select_category" title="활동 전체">
+                        <option value>활동 전체</option>
+                        <option value>산책</option>
+                        <option value>러닝</option>
+                        <option value>등산</option>
+                        <option value>축구</option>
+                        <option value>농구</option>
+                        <option value>풋살</option>
+                        <option value>배드민턴</option>
+                        <option value>헬스</option>
+                        <option value>잡담</option>
+                    </select>
+                </div>
+
+                <div class="col-sm-10" style="margin-top: 10px;">
+                    <h4 name="title" th:text="${board.title}"/>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-sm-10">
+                    <p name="content" th:utext="${board.content}"></p>
+                </div>
+            </div>
+
+            <div class="btn_wrap text-center" style="margin-bottom: 130px;">
+                <a th:href="@{/detail}" class="btn btn-outline-dark">목록 가기</a>
+                <a th:href="@{/boardUpdate(boardId=${board.boardId})}" class="btn btn-outline-primary">게시글 수정</a>
+            </div>
+<!--        </form>-->
+    </div>
+</main>
+
+
+</body>
+</html>

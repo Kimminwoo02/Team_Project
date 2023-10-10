@@ -10,18 +10,30 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Getter
 @AllArgsConstructor
-public class MemberMatching {
+public class MatchingMember {
     @Id
     @Column(name = "memberMatching_id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long matchingUser_id;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "matchingId")
     private Matching matching;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "memberId")
     private Member member;
+
+    private Integer quota;
+
+    private Boolean matchingYN;
+
+    public void addMatching(Matching matching){
+        this.matching = matching;
+    }
+
+    public void addMember(Member member){
+        this.member = member;
+    }
 
 }

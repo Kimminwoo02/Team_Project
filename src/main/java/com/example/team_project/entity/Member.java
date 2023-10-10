@@ -1,11 +1,11 @@
 package com.example.team_project.entity;
 
-import com.example.team_project.entity.matching.MatchingMessanger;
-import com.example.team_project.entity.matching.MemberMatching;
+import com.example.team_project.entity.matching.MatchingMember;
 import jakarta.persistence.*;
 import lombok.*;
 
-import java.security.Principal;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @NoArgsConstructor
@@ -38,10 +38,8 @@ public class Member {
     private Review review;
 
     @OneToMany(mappedBy = "member", cascade = CascadeType.ALL)
-    private List<MemberMatching> memberMatchingList;
+    private List<MatchingMember> memberMatchingList;
 
-    @OneToMany(mappedBy = "member", cascade = CascadeType.ALL)
-    private List<MatchingMessanger> matchingMessangerList;
 
     @Builder
     public Member(String email, String password, String name, String phone, String gender, String memberRole, String nickName) {

@@ -35,23 +35,11 @@ public class TestController {
         return "main/welcome";
     }
 
-
-
-    @GetMapping("/matching")
-    public ModelAndView matching(Model model){
-        ModelAndView modelAndView=null;
-        List<>
-        return modelAndView;
-    }
-
-
-
-
     @PostMapping ("/review")
     public String review(ReviewDto reviewDto, @AuthenticationPrincipal CustomUserDetails principal) {
         reviewDto.setMember(principal.getMember());
         reviewService.addReview(reviewDto);
-        return "redirect/home";
+        return "redirect:/home";
     }
 
 }

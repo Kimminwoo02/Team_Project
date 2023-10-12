@@ -1,25 +1,25 @@
 package com.example.team_project.entity;
 
 import jakarta.persistence.*;
-import lombok.Builder;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
-import lombok.ToString;
+import lombok.*;
 
 @Entity
 @ToString
 @NoArgsConstructor
-
+@Builder
+@Getter
+@AllArgsConstructor
 public class Facility {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long facilityId;
 
-    @Setter
-    @ManyToOne(optional = false)
-    @JoinColumn(name = "memberId")
-    private Member member;
+//    @Setter
+//    @ManyToOne(optional = false)
+//    @JoinColumn(name = "memberId")
+//    private Member member;
 
+    @Setter private Long memberId;
 
     @Column(nullable = false)
     private String address;
@@ -33,13 +33,14 @@ public class Facility {
     @Column(nullable = false)
     private Float altitude;
 
-    @Builder
-    public Facility(Member member,String name, String address, Float longitude, Float altitude){
-        this.member = member;
-        this.name = name;
-        this.address = address;
-        this.longitude = longitude;
-        this.altitude = altitude;
-    }
+   public static Facility of(Long memberId, String address, String name, Float longitude, Float altitude){
+       return  Facility.builder()
+               .memberId(memberId)
+               .address(address)
+               .name(name)
+               .longitude(longitude)
+               .altitude(altitude)
+               .build();
+   }
 
 }

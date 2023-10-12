@@ -36,8 +36,7 @@ public class TestController {
     }
 
     @PostMapping ("/review")
-    public String review(ReviewDto reviewDto, @AuthenticationPrincipal CustomUserDetails principal) {
-        reviewDto.setMember(principal.getMember());
+    public String review(ReviewDto reviewDto) {
         reviewService.addReview(reviewDto);
         return "redirect:/home";
     }

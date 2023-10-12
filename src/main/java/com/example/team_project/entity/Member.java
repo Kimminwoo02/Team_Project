@@ -56,17 +56,6 @@ public class Member {
         this.memberRole = memberRole;
     }
 
-    public static Member createMember(String email, String password, String name, String phone, String gender ,String memberRole, String nickName){
-        return Member.builder()
-                .email(email)
-                .password(password)
-                .name(name)
-                .phone(phone)
-                .gender(gender)
-                .nickName(nickName)
-                .memberRole(memberRole)
-                .build();
-    }
 
 
 

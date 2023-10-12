@@ -51,7 +51,7 @@ public class UserController {
     }
 
     @PostMapping("/signup")
-    public String signup1(@ModelAttribute SignupDto signupDto) throws IOException {
+    public String signup1(@ModelAttribute SignupDto signupDto) {
         log.info(String.valueOf(signupDto));
         if(signupDto.getFile().isEmpty()){
             memberService.joinWithoutFile(signupDto);

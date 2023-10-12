@@ -52,23 +52,24 @@ public class BoardController {
     @PostMapping("/boardWrite")
     public String write2(@RequestParam String title,@RequestParam String content, @AuthenticationPrincipal CustomUserDetails principal){
         System.out.println(title+" ######################### "+content);
-        BoardCreate boardCreate = new BoardCreate(title, content.substring(1), principal.getMember(),principal.getMember().getMemberId());
+        BoardCreate boardCreate = new BoardCreate(title, content.substring(1), principal.getMember());
         boardServiceJpa.write(boardCreate);
 
         return "redirect:/detail";
     }
 
-    @GetMapping("/board/{boardId}")
-    public String update1(@PathVariable Long boardId, Model model){
+    @GetMapping("/board")
+    public String update1(Long boardId, Model model, @AuthenticationPrincipal CustomUserDetails principal){
+        System.out.println(boardId);
         BoardDTO board = boardServiceJpa.getBoard(boardId);
         model.addAttribute("board",board);
     return "main/boardUpdate";
     }
 
     @PutMapping("/board")
-    public String update2(@RequestParam String title,@RequestParam String content, Long boardId) {
+    public String update2(@RequestParam String title,@RequestParam String content, Long boardId, @AuthenticationPrincipal CustomUserDetails principal) {
         BoardUpdate boardUpdate = new BoardUpdate(title, content);
-        boardServiceJpa.update(boardUpdate, boardId);
+        boardServiceJpa.update(boardUpdate, boardId, principal.getMember().getMemberId());
 
         return "redirect:/detail";
     }
@@ -76,6 +77,7 @@ public class BoardController {
     @DeleteMapping("/board/{boardId}")
     public String delete(@PathVariable Long boardId){
         BoardDTO board = boardServiceJpa.getBoard(boardId);
+        boardServiceJpa.delete(boardId);
         boardServiceJpa.delete(boardId);
         return "redirect:/detail";
     }

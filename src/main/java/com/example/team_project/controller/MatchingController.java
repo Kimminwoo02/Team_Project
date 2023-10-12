@@ -24,7 +24,7 @@ public class MatchingController {
     }
 
     @PostMapping("/matching")
-    public String matching2(@AuthenticationPrincipal CustomUserDetails principal , MatchingDTO matchingDTO){
+    public String matching2( MatchingDTO matchingDTO){
 //        matchingDTO.setMatch();
         matchingService.createMatching(matchingDTO);
         return "redirect:/matching";

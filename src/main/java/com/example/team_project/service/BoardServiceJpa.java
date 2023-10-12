@@ -35,10 +35,13 @@ public class BoardServiceJpa implements BoardService {
 
     @Transactional
     @Override
-    public void update(BoardUpdate boardUpdate, Long boardId) {
+    public void update(BoardUpdate boardUpdate, Long boardId,Long memberId) {
         Optional<Board> byId = boardRepository.findById(boardId);
         Board board = byId.get();
-
+        Member member = memberRepository.getReferenceById(memberId);
+        if(board.getMember().getMemberId()!=member.getMemberId()){
+            throw new IllegalStateException();
+        }
         board.toBoard(boardUpdate.getTitle(), boardUpdate.getContent(), boardUpdate.toBoardEntity().getMember());
     }
 
@@ -62,10 +65,12 @@ public class BoardServiceJpa implements BoardService {
     @Override
     public BoardDTO getBoard(Long boardId) {
         Board board = boardRepository.findById(boardId).get();
+
         return BoardDTO.builder()
                 .boardId(board.getBoardId())
                 .title(board.getTitle())
                 .content(board.getContent())
+                .member(board.getMember())
                 .build();
     }
 

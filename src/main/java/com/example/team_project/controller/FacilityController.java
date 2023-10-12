@@ -24,8 +24,7 @@ public class FacilityController {
 
     @ResponseBody
     @PostMapping("/facility")
-    public Response<Void> getfacilities(CreateFacility createFacility, @AuthenticationPrincipal CustomUserDetails principal ){
-        createFacility.setMember(principal.getMember());
+    public Response<Void> getFacilities(CreateFacility createFacility ){
         facilityService.save(createFacility);
 
         return Response.success();

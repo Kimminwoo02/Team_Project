@@ -23,7 +23,6 @@ public class BoardCreate {
     private String title;
     private String content;
     private Member member;
-    private Long memberId;
 
     public Board toBoardEntity(String title, String content, Member member){
         return Board.builder()

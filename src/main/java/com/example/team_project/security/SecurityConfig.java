@@ -11,6 +11,7 @@ import org.springframework.security.config.annotation.web.configurers.AbstractHt
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 import org.springframework.security.web.servlet.util.matcher.MvcRequestMatcher;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 import org.springframework.web.servlet.handler.HandlerMappingIntrospector;
@@ -20,6 +21,10 @@ import org.springframework.web.servlet.handler.HandlerMappingIntrospector;
 @EnableWebSecurity
 public class SecurityConfig {
     private final UserDetailsService userDetailsService;
+
+    private final AuthenticationSuccessHandler authenticationSuccessHandler;
+
+
 
     private static final int ONE_MONTH = 2678400;
 
@@ -60,7 +65,7 @@ public class SecurityConfig {
                         .requestMatchers(new MvcRequestMatcher(introspect,"/home")).permitAll()
                         .requestMatchers(new MvcRequestMatcher(introspect,"/login")).permitAll()
                         .requestMatchers(new MvcRequestMatcher(introspect,"/signup")).permitAll()
-                        .requestMatchers(new MvcRequestMatcher(introspect,"/board")).permitAll()
+                        .requestMatchers(new MvcRequestMatcher(introspect,"/boardMain")).permitAll()
                         .requestMatchers(new MvcRequestMatcher(introspect,"/welcome")).permitAll()
                         .requestMatchers(new MvcRequestMatcher(introspect,"/matching")).permitAll()
                         .requestMatchers(new MvcRequestMatcher(introspect,"/detail")).permitAll()
@@ -70,8 +75,9 @@ public class SecurityConfig {
                 .formLogin(login -> login
                         .loginPage("/login")
                         .loginProcessingUrl("/login")
-                        .defaultSuccessUrl("/home",true)
+                        .successHandler(authenticationSuccessHandler)
                         .usernameParameter("email")
+
                 )
 
                 .logout((logout)->logout
@@ -80,6 +86,8 @@ public class SecurityConfig {
                         .deleteCookies("JSESSIONID")
                         .permitAll()
                 )
+
+
 
                 .build();
     }

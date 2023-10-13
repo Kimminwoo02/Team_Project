@@ -16,10 +16,12 @@ import java.util.List;
 @Getter
 public class Matching {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue
     @Column(name = "matching_id")
     private Long matchingId;
 
+    @Setter
+    private Long memberId;
 
     private String matchingName;
 
@@ -29,23 +31,25 @@ public class Matching {
 
     private String address;
 
-
-
     @OneToMany(mappedBy = "matching", cascade = CascadeType.ALL)
-    private List<MatchingMember> match;
+    private List<MatchingMember> matchingMemberList;
 
-
+    @Enumerated(EnumType.STRING)
     private Category category;
 
     @Builder
-    public Matching(String matchingName,String level,List<MatchingMember> match,String content,String address, Category category){
+    public Matching(Long memberId,
+                    String matchingName,
+                    String level,
+                    String content,
+                    String address,
+                    Category category) {
+        this.memberId = memberId;
         this.matchingName = matchingName;
         this.level = level;
         this.content = content;
-        this.match = match;
         this.address = address;
         this.category = category;
-
     }
 
 }

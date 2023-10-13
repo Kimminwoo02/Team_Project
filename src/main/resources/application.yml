@@ -36,7 +36,8 @@ spring:
       location: ${IMAGES}
   jpa:
     hibernate:
-      ddl-auto: update
+      ddl-auto: none
+    show-sql: true
   jooq:
     sql-dialect:
 com:

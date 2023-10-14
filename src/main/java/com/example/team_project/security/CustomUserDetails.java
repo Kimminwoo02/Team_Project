@@ -1,12 +1,10 @@
 package com.example.team_project.security;
 
 import com.example.team_project.entity.Member;
-import com.example.team_project.entity.MemberImg;
 import lombok.Getter;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.web.multipart.MultipartFile;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -16,18 +14,13 @@ import java.util.List;
 
 
 @Getter
+public class CustomUserDetails extends User implements UserDetails {
 
-
-public class CustomUserDetails extends User implements UserDetails  {
-
-    private final String myName;
     private final Member member;
-
 
 
     public CustomUserDetails(Member member, List<GrantedAuthority> authorities){
         super(member.getEmail(),member.getPassword(),authorities);
-        this.myName = member.getName();
         this.member = member;
     }
 

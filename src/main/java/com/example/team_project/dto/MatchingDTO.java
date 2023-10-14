@@ -19,27 +19,24 @@ import java.util.List;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-
 public class MatchingDTO {
     private Long matchingId;
+    private Long memberId;
     private String matchingName;
-    private List<MatchingMember> match;
-    private Member member;
     private String level;
     private String content;
     private String address;
-
     private Category category;
 
 
-    public Matching createMatching(String matchingName,List<MatchingMember> match,String level, String content,String address,Category category,Member member){
+    public Matching createMatching(){
         return Matching.builder()
+                .memberId(memberId)
                 .matchingName(matchingName)
-                .match(match)
-                .category(category)
                 .level(level)
                 .content(content)
                 .address(address)
+                .category(category)
                 .build();
     }
 

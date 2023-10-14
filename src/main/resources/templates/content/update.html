@@ -8,8 +8,8 @@
         <h1>게시글 수정</h1>
     </div>
     <div class="starter-template">
-        <form class="form-horizontal" method="post" action="/board" id="postForm">
-            <input type="hidden" name="_method" value="PUT">
+        <form class="form-horizontal"th:action="@{/board/{boardId}(boardId=${board.boardId})}" id="postForm" method="post">
+            <input type="hidden" name="_method" value="put"/>
             <div class="form-group">
                 <div class="InpBox" style="margin-top: 30px; margin-left: -32px; margin-bottom: 10px;">
                     <select name="option_select_category" title="활동 전체">
@@ -33,10 +33,11 @@
 
             <div class="form-group">
                 <label style="float: left" for="content" class="col-sm-2 control-label"></label>
-                <input name="content" id = "content" type="hidden" th:text="${board.content}">
+                <input name="content" id = "content" type="hidden">
                 <div class="col-sm-10">
-                    <div id="editor-container" style="height: 300px;">
+                    <div class="container" id="editor-container" style="height:300px">
                     </div>
+<!--                    <div class="container javascript" id="delta-container"></div>-->
                     <input type="hidden" id="quill_html" name="content">
                 </div>
             </div>
@@ -44,41 +45,40 @@
             <div class="btn_wrap text-center" style="margin-bottom: 130px;">
                 <a th:href="@{/detail}" class="btn btn-outline-dark">목록 가기</a>
                 <button type="submit" class="btn btn-outline-primary" id="submitBoardBtn">수정완료</button>
-                <form th:action="@{/board/{boardId}(boardId=${board.id})}" method="post" >
-                    <input type="hidden" name="_method" value="DELETE">
-                    <button type="submit" class="btn btn-outline-danger">게시글 삭제</button>
-                </form>
+
             </div>
         </form>
     </div>
-
-    <script>
+    <script th:inline="javascript">
+        var post = /*[[${board.content}]]*/;
         $(document).ready(function(){
             var quill = new Quill('#editor-container', {
-                modules: {
-                    toolbar: [
-                        ['bold', 'italic'],
-                        ['link', 'blockquote', 'image'],
-                        [{ list: 'ordered' }, { list: 'bullet' }]
-                    ]
-                },
-                placeholder: '내용입력',
                 theme: 'snow'
             });
+            console.log("++++++++++++++++++++"+post);
+            const delta = htmlToDelta(post);
+            quill.setContents(delta);
+
             quill.on('text-change', function() {
+                console.log(quill.root.innerHTML);
                 document.getElementById("quill_html").value = quill.root.innerHTML;
             });
-
-            quill.setHTML = (html) => {
-                document.getElementById(".ql-editor").children[0].innerHTML = html;
-            };
-
-            var content = document.getElementById("content").value;
-            quill.setHTML('<b>Hello my friend</b>');
         })
+
+        function htmlToDelta(html) {
+            const div = document.createElement('div');
+            div.setAttribute('id', 'htmlToDelta');
+            div.innerHTML = `<div id="quillEditor" style="display:none">${html}</div>`;
+            document.body.appendChild(div);
+            const quill = new Quill('#quillEditor', {
+                theme: 'snow',
+            });
+            const delta = quill.getContents();
+            document.getElementById('htmlToDelta').remove();
+            return delta;
+        }
+
     </script>
 </main>
-
-
 </body>
 </html>

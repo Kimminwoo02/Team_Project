@@ -2,10 +2,7 @@ package com.example.team_project.entity;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Size;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import org.springframework.boot.autoconfigure.web.WebProperties;
 import org.springframework.data.annotation.CreatedBy;
 import org.springframework.data.annotation.CreatedDate;
@@ -26,9 +23,11 @@ public class Board {
     @Column(name="board_id")
     private Long boardId;
 
+    @Setter
     @Column(name="title")
     private String title;
 
+    @Setter
     @Column(name="content", length = 10000)
     private String content;
 

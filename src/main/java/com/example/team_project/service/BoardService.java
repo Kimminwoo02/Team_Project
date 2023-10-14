@@ -11,7 +11,7 @@ public interface BoardService {
 
     public void write(BoardCreate boardCreate);
     public void delete(Long boardId);
-    public void update(BoardUpdate boardUpdate, Long boardId,Long memberId);
+    public void update(BoardUpdate boardUpdate, Long boardId);
     public List<BoardDTO> getBoardList();
     public BoardDTO getBoard(Long boardId);
 }

@@ -43,6 +43,10 @@ spring:
   jpa:
     hibernate:
       ddl-auto: update
+  mvc:
+    hiddenmethod:
+      filter:
+        enabled: true
 com:
   example:
     upload : C:/Users/Playdata/git/Team_Project/src/main/resources/static/img

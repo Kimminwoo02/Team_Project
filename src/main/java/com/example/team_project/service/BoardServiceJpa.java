@@ -7,9 +7,12 @@ import com.example.team_project.entity.Board;
 import com.example.team_project.entity.Member;
 import com.example.team_project.repository.BoardRepository;
 import com.example.team_project.repository.MemberRepository;
+import com.example.team_project.security.CustomUserDetails;
+import jakarta.persistence.EntityNotFoundException;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
 
@@ -26,7 +29,8 @@ public class BoardServiceJpa implements BoardService {
 
     public void write(BoardCreate boardCreate) {
         Member member = memberRepository.getReferenceById(boardCreate.getMember().getMemberId());
-        boardRepository.save(boardCreate.toBoardEntity(boardCreate.getTitle(), boardCreate.getContent(), member));
+        System.out.println("========================="+boardCreate.getContent().substring(1));
+        boardRepository.save(boardCreate.toBoardEntity(boardCreate.getTitle(), boardCreate.getContent().substring(1), member));
     }
 
     public void delete(Long boardId) {
@@ -35,14 +39,15 @@ public class BoardServiceJpa implements BoardService {
 
     @Transactional
     @Override
-    public void update(BoardUpdate boardUpdate, Long boardId,Long memberId) {
-        Optional<Board> byId = boardRepository.findById(boardId);
-        Board board = byId.get();
-        Member member = memberRepository.getReferenceById(memberId);
-        if(board.getMember().getMemberId()!=member.getMemberId()){
-            throw new IllegalStateException();
-        }
-        board.toBoard(boardUpdate.getTitle(), boardUpdate.getContent(), boardUpdate.toBoardEntity().getMember());
+    public void update(BoardUpdate boardUpdate,Long boardId) {
+        Board board = boardRepository.getReferenceById(boardId);
+        System.out.println("================================="+boardUpdate.getContent());
+        Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+
+        Member member = ((CustomUserDetails) principal).getMember();
+         board.setTitle(boardUpdate.getTitle());
+         board.setContent(boardUpdate.getContent());
+
     }
 
     @Override
@@ -73,5 +78,4 @@ public class BoardServiceJpa implements BoardService {
                 .member(board.getMember())
                 .build();
     }
-
 }

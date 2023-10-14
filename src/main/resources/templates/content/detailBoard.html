@@ -117,7 +117,7 @@
                                 <hr/>
                                 <li  th:each="board:${boardList }">
                                     <div class="qna_subject_wrap">
-                                        <a th:href="@{/boardRead(boardId=${board.boardId})}" class="qna_subject"><span th:text="${board.title}+${board.boardId}"></span></a>
+                                        <a th:href="@{/boardRead(boardId=${board.boardId})}" class="qna_subject"><span th:text="${board.title}"></span></a>
                                     </div>
                                     <span class="qna_desc" th:utext="${board.content}"></span>
                                     <span class="qna_like">

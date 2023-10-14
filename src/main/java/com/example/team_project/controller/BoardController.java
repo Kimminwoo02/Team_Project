@@ -45,39 +45,35 @@ public class BoardController {
 
     @GetMapping("/boardWrite")
     public String write1(){
-
         return "main/boardWrite";
     }
 
     @PostMapping("/boardWrite")
-    public String write2(@RequestParam String title,@RequestParam String content, @AuthenticationPrincipal CustomUserDetails principal){
-        System.out.println(title+" ######################### "+content);
-        BoardCreate boardCreate = new BoardCreate(title, content.substring(1), principal.getMember());
+    public String write2(BoardCreate boardCreate, @AuthenticationPrincipal CustomUserDetails principal){
+        System.out.println(boardCreate.getTitle()+" ######################### "+boardCreate.getContent());
+        boardCreate.setMember(principal.getMember());
         boardServiceJpa.write(boardCreate);
-
         return "redirect:/detail";
     }
 
     @GetMapping("/board")
-    public String update1(Long boardId, Model model, @AuthenticationPrincipal CustomUserDetails principal){
-        System.out.println(boardId);
+    public String update1(Long boardId, Model model){
+
         BoardDTO board = boardServiceJpa.getBoard(boardId);
         model.addAttribute("board",board);
-    return "main/boardUpdate";
+        return "main/boardUpdate";
     }
 
-    @PutMapping("/board")
-    public String update2(@RequestParam String title,@RequestParam String content, Long boardId, @AuthenticationPrincipal CustomUserDetails principal) {
-        BoardUpdate boardUpdate = new BoardUpdate(title, content);
-        boardServiceJpa.update(boardUpdate, boardId, principal.getMember().getMemberId());
+    @PutMapping("/board/{boardId}")
+    public String update2(@ModelAttribute BoardUpdate boardUpdate,@PathVariable Long boardId, @AuthenticationPrincipal CustomUserDetails principal) {
+        log.info("++++++++++++++++++"+boardId+"*************"+boardUpdate);
+        boardServiceJpa.update(boardUpdate, boardId);
 
         return "redirect:/detail";
     }
 
     @DeleteMapping("/board/{boardId}")
-    public String delete(@PathVariable Long boardId){
-        BoardDTO board = boardServiceJpa.getBoard(boardId);
-        boardServiceJpa.delete(boardId);
+    public String delete(@PathVariable("boardId") Long boardId){
         boardServiceJpa.delete(boardId);
         return "redirect:/detail";
     }

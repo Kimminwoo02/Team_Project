@@ -8,6 +8,7 @@ import lombok.*;
 @Getter
 @Builder
 @ToString
+@Setter
 public class BoardUpdate {
     private String title;
     private String content;

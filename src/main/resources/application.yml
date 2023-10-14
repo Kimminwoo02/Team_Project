@@ -23,6 +23,10 @@ spring:
     check-template-location: true
     enabled: true
 
+  mvc:
+    hiddenmethod:
+      filter:
+        enabled: true
 
   security:
     user:

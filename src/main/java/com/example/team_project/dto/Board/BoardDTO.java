@@ -17,6 +17,4 @@ public class BoardDTO {
     private String content;
     private Member member;
 
-
-
 }

@@ -38,14 +38,18 @@ spring:
     multipart:
       max-file-size: 10MB
       max-request-size: 10MB
-      location: C:/Users/Playdata/git/Team_Project/src/main/resources/static/img
+      location: C:/Users/Playdata/git/Team_Project/src/main/resources/static/images
   jpa:
     hibernate:
       ddl-auto: update
 com:
   example:
-    upload : C:/Users/Playdata/git/Team_Project/src/main/resources/static/img
+    upload : C:/Users/Playdata/git/Team_Project/src/main/resources/static/images
 
+  mvc:
+    hiddenmethod:
+      filter:
+        enabled: true
 
 #mybatis
 mybatis:

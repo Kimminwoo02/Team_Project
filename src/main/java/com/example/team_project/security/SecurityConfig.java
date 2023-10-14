@@ -22,7 +22,7 @@ import org.springframework.web.servlet.handler.HandlerMappingIntrospector;
 public class SecurityConfig {
     private final UserDetailsService userDetailsService;
 
-    private final AuthenticationSuccessHandler authenticationSuccessHandler;
+    private final CustomAuthSuccessHandler authenticationSuccessHandler;
 
 
 

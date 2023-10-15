@@ -1,7 +1,8 @@
-package com.example.team_project.service;
+package com.example.team_project.service.member;
 
 import com.example.team_project.dto.auth.SignupDto;
 import com.example.team_project.dto.auth.SignupResponse;
+import com.example.team_project.dto.member.MemberSearchCond;
 import com.example.team_project.entity.Member;
 import com.example.team_project.entity.MemberImg;
 import com.example.team_project.file.FileStore;
@@ -94,6 +95,11 @@ public class MemberServiceJpa implements MemberService {
         if (findMember != null){
             throw new IllegalStateException("이미 존재하는 회원입니다.");
         }
+    }
+
+    @Override
+    public Member getMemberId(MemberSearchCond memberSearchCond) {
+        return memberRepository.findByNameAndPhone(memberSearchCond.getName(),memberSearchCond.getPhone());
     }
 
 }

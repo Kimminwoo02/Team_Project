@@ -65,6 +65,8 @@ public class SecurityConfig {
                 .authorizeHttpRequests(auth->auth
                         .requestMatchers(new MvcRequestMatcher(introspect,"/home")).permitAll()
                         .requestMatchers(new MvcRequestMatcher(introspect,"/login")).permitAll()
+                        .requestMatchers(new MvcRequestMatcher(introspect,"/findemail")).permitAll()
+                        .requestMatchers(new MvcRequestMatcher(introspect,"/findpw")).permitAll()
                         .requestMatchers(new MvcRequestMatcher(introspect,"/signup")).permitAll()
                         .requestMatchers(new MvcRequestMatcher(introspect,"/boardMain")).permitAll()
                         .requestMatchers(new MvcRequestMatcher(introspect,"/welcome")).permitAll()

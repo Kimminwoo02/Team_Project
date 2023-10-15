@@ -3,6 +3,7 @@ package com.example.team_project.service;
 import com.example.team_project.dto.auth.SignupResponse;
 import com.example.team_project.dto.auth.SignupDto;
 import com.example.team_project.repository.MemberRepository;
+import com.example.team_project.service.member.MemberServiceJpa;
 import groovy.util.logging.Log4j2;
 import jakarta.transaction.Transactional;
 

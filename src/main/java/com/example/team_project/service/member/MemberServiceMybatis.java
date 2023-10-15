@@ -10,6 +10,7 @@ import com.example.team_project.file.ResultFileStore;
 import com.example.team_project.repository.MemberImgRepository;
 import com.example.team_project.repository.MemberRepositoryMybatis;
 
+import com.example.team_project.service.MemberService;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -92,8 +93,11 @@ public class MemberServiceMybatis implements MemberService {
 
     @Override
     public Member getMemberId(MemberSearchCond memberSearchCond) {
-        return null;
+        Member member = new Member();
+        return member;
     }
+
+
 
 
 }

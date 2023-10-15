@@ -5,6 +5,7 @@ import lombok.Data;
 @Data
 public class MemberSearchCond {
     String name;
+    String phone;
     String email;
 
 }

@@ -1,26 +1,30 @@
 package com.example.team_project.controller;
 
 import com.example.team_project.dto.auth.SignupDto;
+import com.example.team_project.dto.member.Mail;
+import com.example.team_project.dto.member.MemberSearchCond;
+import com.example.team_project.entity.Member;
+import com.example.team_project.service.mail.MailService;
 import com.example.team_project.service.MemberService;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-
-import java.io.IOException;
+import org.springframework.web.bind.annotation.*;
 
 @Controller
 @RequiredArgsConstructor
 @Slf4j
 public class UserController {
     private final MemberService memberService;
+    private final MailService mailService;
 
     @GetMapping("/login")
     public String login(HttpServletRequest request){
@@ -45,11 +49,21 @@ public class UserController {
     @PostMapping("/findemail")
     public ResponseEntity<String> findId(MemberSearchCond memberSearchCond) {
         Member user = memberService.getMemberId(memberSearchCond);
-        if(user == null) {
+
+        if(user.getEmail() == null) {
             return ResponseEntity.status(HttpStatus.CONFLICT).body("아이디를 찾지 못했습니다.");
         }
         return ResponseEntity.ok(user.getEmail());
     }
+    @Transactional
+    @PostMapping("/findpw")
+    public String sendEmail(MemberSearchCond memberSearchCond){
+        Mail dto = mailService.createMailAndChangePassword(memberSearchCond.getEmail());
+        mailService.mailSend(dto);
+
+        return "redirect:/home";
+    }
+
 
 
     @GetMapping("/signup")
@@ -79,6 +93,7 @@ public class UserController {
         return "redirect:/welcome";
 
     }
+
 
 
     @GetMapping("/mypage")

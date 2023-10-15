@@ -3,7 +3,6 @@ spring:
     url: ${DB_URL}
     username: ${DB_USER}
     driver-class-name: org.h2.Driver
-
   h2:
     console:
       enabled: true
@@ -44,6 +43,12 @@ spring:
     show-sql: true
   jooq:
     sql-dialect:
+  mail:
+    host: smtp.naver.com
+    port: 465
+    username: ${MAIL_ID}
+    password: ${MAIL_PASSWORD}
+    protocol: smtps
 com:
   example:
     upload : ${IMAGES}

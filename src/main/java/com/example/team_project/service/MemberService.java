@@ -2,6 +2,8 @@ package com.example.team_project.service;
 
 import com.example.team_project.dto.auth.SignupDto;
 import com.example.team_project.dto.auth.SignupResponse;
+import com.example.team_project.dto.member.Mail;
+import com.example.team_project.dto.member.MemberSearchCond;
 import com.example.team_project.entity.Member;
 import java.util.List;
 
@@ -12,4 +14,7 @@ public interface MemberService {
     Member getLoginUserById(Long memberId);
      List<Member> findMembers();
      void validateDuplicateMember(String email);
+
+     Member getMemberId(MemberSearchCond memberSearchCond);
+
 }

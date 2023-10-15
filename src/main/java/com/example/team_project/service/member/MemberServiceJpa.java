@@ -9,6 +9,7 @@ import com.example.team_project.file.FileStore;
 import com.example.team_project.file.ResultFileStore;
 import com.example.team_project.repository.MemberImgRepository;
 import com.example.team_project.repository.MemberRepository;
+import com.example.team_project.service.MemberService;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;

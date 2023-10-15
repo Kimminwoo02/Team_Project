@@ -1,4 +1,4 @@
-package com.example.team_project.service;
+package com.example.team_project.service.member;
 
 import com.example.team_project.dto.auth.SignupDto;
 import com.example.team_project.dto.auth.SignupResponse;
@@ -13,7 +13,6 @@ import com.example.team_project.repository.MemberRepositoryMybatis;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.stereotype.Service;
 
 import java.io.IOException;
 import java.util.List;
@@ -90,5 +89,11 @@ public class MemberServiceMybatis implements MemberService {
             throw new IllegalStateException("이미 존재하는 회원입니다.");
         }
     }
+
+    @Override
+    public Member getMemberId(MemberSearchCond memberSearchCond) {
+        return null;
+    }
+
 
 }

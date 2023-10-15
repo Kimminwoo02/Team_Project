@@ -40,6 +40,18 @@ public class UserController {
         return "main/findemailid";
     }
 
+    // REST 방식에서 값을 읽어내는 동작은 GET이다. ★ 매핑 주소 find_id 아닌 find/id으로 주는 것 주의!
+    @ResponseBody
+    @PostMapping("/findemail")
+    public ResponseEntity<String> findId(MemberSearchCond memberSearchCond) {
+        Member user = memberService.getMemberId(memberSearchCond);
+        if(user == null) {
+            return ResponseEntity.status(HttpStatus.CONFLICT).body("아이디를 찾지 못했습니다.");
+        }
+        return ResponseEntity.ok(user.getEmail());
+    }
+
+
     @GetMapping("/signup")
     public String signup(){
         return "main/signup";

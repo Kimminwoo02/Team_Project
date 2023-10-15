@@ -10,15 +10,43 @@
 </head>
 <body>
     <div id="content">
-        <img class="logo" alt="logo" src="images/logo.png">
-        <div id="idpwText"><p class="idpwText">Find EmailID</p></div>
+        <a th:href="@{/home}"><img class="logo" alt="logo" src="../images/logo.png"></a>
+        <div id="idpwText"><p class="idpwText">이메일 찾기</p></div>
         <form>
-            <input type="text" name="phonenumber" class="login_input_text" placeholder="Phone Number"><br>
-            <input type="text" name="username" class="login_input_text" placeholder="Name"><br>
+            <input type="text" id="name" name="name" class="login_input_text" placeholder="name"><br>
+            <input type="text" id="phone" name="phone" class="login_input_text" placeholder="Phone Number"><br>
             <input type="submit" class="login_input_btn" value="Find ID">
         </form>
       
         <p id="copyright">Copyright © JihyeHong, MinwooKim, YejunKim, YongsuSon All Rights Reserved.</p>
     </div>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script th:inline="javascript">
+        var name = $('#name').val();
+        var phone = $('#phone').val();
+
+        var url = /*[[@{/user/findEmail}]]*/;
+    const create = () => {
+        fetch(url, {
+            // 전송 방식: default - get
+            method: "POST",
+            // 전송 헤더 설정
+            headers: {
+                "Content-type": "application/json;charset=utf-8",     // json으로 보낼 때
+                // 'Content-Type': 'application/x-www-form-urlencoded' // parameter로 보낼 때
+            },
+            // 전송 객체: JSON을 문자열로 변환해서 전달
+            body: JSON.stringify({name: name, phone: phone}), // json으로 보낼 때
+            //body: "title=제목&body=내용&userId=1",                          // parameter로 보낼 때
+        })
+            .then((response) => response.json())
+            .then((json) => alert(json))
+            .catch(err => {
+                alert('에러가 발생했습니다!' + err)
+            });
+    }
+
+</script>
 </body>
+
 </html>

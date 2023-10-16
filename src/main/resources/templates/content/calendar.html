@@ -1,146 +1,76 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Calendar</title>
-    <link rel="stylesheet" href="style.css">
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <title>calendar</title>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/fullcalendar@5.7.0/main.min.css">
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/fullcalendar@5.7.0/main.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script type="text/javascript">
+        document.addEventListener('DOMContentLoaded', function () {
+            var calendarEl = document.getElementById('calendar');
+            var calendar = new FullCalendar.Calendar(calendarEl, {
+                timeZone: 'UTC',
+                initialView: 'dayGridMonth', // 홈페이지에서 다른 형태의 view를 확인할  수 있다.
+                events:[ // 일정 데이터 추가 , DB의 event를 가져오려면 JSON 형식으로 변환해 events에 넣어주면된다.
+                    {
+                        title:'일정',
+                        start:'2023-09-26',
+                        end:'2023-09-27'
+                    },
+
+                    {
+                        title:'일정1',
+                        start:'2023-09-20',
+                        end:'2023-09-24'
+                    }
+                ],
+                editable: true // false로 변경 시 draggable 작동 x
+            });
+            calendar.render();
+        });
+    </script>
+
 </head>
 <body>
-    <div class = "calendarContainer" th:fragment="calendarFragment"  style="margin-left: 250px">
-    <th:block th:replace="/../fragment/sidebar :: sidebarFragment"></th:block>
-    <div class="calendar">
-        <div class="calendarHeader">
-            <button class="nav-btn go-prev" onclick="prevMonth()">&lt;</button>
-            <div class="year-month","nav-btn go-today" onclick="goToday()"></div>
-            <button class="nav-btn go-next" onclick="nextMonth()">&gt;</button>
-            <div class="nav">
-                
-                <!-- <button class="nav-btn go-today" onclick="goToday()">Today</button> -->
-                
-            </div>
+<div th:fragment="calendarFragment" style="margin-left: 150px ">
+    <div class="row">
+        <div  class="col-md-2" style="margin-top: 50px;">
+            <th:block th:replace="/../fragment/sidebar :: sidebarFragment"></th:block>
         </div>
-        <div class="main">
-            <div class="days">
-                <div class="day">SUN</div>
-                <div class="day">MON</div>
-                <div class="day">TUE</div>
-                <div class="day">WED</div>
-                <div class="day">THU</div>
-                <div class="day">FRI</div>
-                <div class="day">SAT</div>
+        <div class="col-md-7" style="margin-top: 100px;">
+            <div id="calendarBox">
+                <div id="calendar"></div>
             </div>
-            <div class="dates"></div>
         </div>
     </div>
-    <script>
-        let date = new Date();
 
-        const renderCalendar = () => {
-            const viewYear = date.getFullYear();
-            const viewMonth = date.getMonth();
-            const months = [
-                'January',
-                'February',
-                'March',
-                'April',
-                'May',
-                'June',
-                'July',
-                'August',
-                'September',
-                'October',
-                'November',
-                'December',
-            ];
+    <script type="text/javascript">
+        document.addEventListener('DOMContentLoaded', function () {
+            var calendarEl = document.getElementById('calendar');
+            var calendar = new FullCalendar.Calendar(calendarEl, {
+                timeZone: 'UTC',
+                initialView: 'dayGridMonth', // 홈페이지에서 다른 형태의 view를 확인할  수 있다.
+                events:[ // 일정 데이터 추가 , DB의 event를 가져오려면 JSON 형식으로 변환해 events에 넣어주면된다.
+                    {
+                        title:'일정',
+                        start:'2023-09-26',
+                        end:'2023-09-27'
+                    },
 
-            // year-month 채우기
-            document.querySelector('.year-month').textContent = ` ${months[viewMonth]} ${viewYear}`;
-
-            // 지난 달 마지막 Date, 이번 달 마지막 Date
-            const prevLast = new Date(viewYear, viewMonth, 0);
-            const thisLast = new Date(viewYear, viewMonth + 1, 0);
-
-            const PLDate = prevLast.getDate();
-            const PLDay = prevLast.getDay();
-
-            const TLDate = thisLast.getDate();
-            const TLDay = thisLast.getDay();
-
-            // Dates 기본 배열들
-            const prevDates = [];
-            const thisDates = [...Array(TLDate + 1).keys()].slice(1);
-            const nextDates = [];
-
-            // prevDates 계산
-            if (PLDay !== 6) {
-                for (let i = 0; i < PLDay + 1; i++) {
-                    prevDates.unshift(PLDate - i);
-                }
-            }
-
-            // nextDates 계산
-            for (let i = 1; i < 7 - TLDay; i++) {
-                nextDates.push(i);
-            }
-
-            // Dates 합치기
-            const dates = prevDates.concat(thisDates, nextDates);
-
-            // Dates 정리
-            const firstDateIndex = dates.indexOf(1);
-            const lastDateIndex = dates.lastIndexOf(TLDate);
-            dates.forEach((date, i) => {
-                const condition = i >= firstDateIndex && i < lastDateIndex + 1
-                    ? 'this'
-                    : 'other';
-                if(viewYear == 2023 & viewMonth == 8 & date == 5){
-                    dates[i] = `<div class="date"><div class ="datenum"><span class="${condition}">${date}</span></div><div class = "content">클라이밍</div></div>`;
-                }else{
-                    dates[i] = `<div class="date"><div class = "datenum"><span class="${condition}">${date}</span></div></div>`;
-                }
-
-
-            })
-
-            // Dates 그리기
-            document.querySelector('.dates').innerHTML = dates.join('');
-
-            const today = new Date();
-            if (viewMonth === today.getMonth() && viewYear === today.getFullYear()) {
-                for (let date of document.querySelectorAll('.this')) {
-                    if (+date.innerText === today.getDate()) {
-                        date.classList.add('today');
-                        break;
+                    {
+                        title:'일정1',
+                        start:'2023-09-20',
+                        end:'2023-09-24'
                     }
-                }
-            }
-
-
-        }
-
-        renderCalendar();
-
-        const prevMonth = () => {
-            date.setDate(1);
-            date.setMonth(date.getMonth() - 1);
-            renderCalendar();
-        }
-
-        const nextMonth = () => {
-            date.setDate(1);
-            date.setMonth(date.getMonth() + 1);
-            renderCalendar();
-        }
-
-        const goToday = () => {
-            date = new Date();
-            renderCalendar();
-        }
-
-
+                ],
+                editable: true // false로 변경 시 draggable 작동 x
+            });
+            calendar.render();
+        });
     </script>
-    </div>
-    <script src="index.js"></script> 
+</div>
 </body>
 </html>

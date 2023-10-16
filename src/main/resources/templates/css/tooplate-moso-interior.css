@@ -1481,13 +1481,13 @@ strong {
 
 #sidebar {
     z-index: 1000;
-    position: fixed;
     left: 250px;
     width: 250px;
     height: 100vh;
     margin-left: -250px;
     margin-top: 30px;
-    background: ivory;
+    background: white;
+    color: black;
     overflow-y: auto;
     -webkit-transition: all 0.5s ease;
     -moz-transition: all 0.5s ease;
@@ -1496,14 +1496,14 @@ strong {
 }
 
 #sidebar header {
-    background-color: #263238;
+    background-color: #ffffff;
     font-size: 20px;
     line-height: 52px;
     text-align: center;
 }
 
-#sidebar header a {
-    color: #fff;
+#sidebar header h3 {
+    color: black;
     display: block;
     text-decoration: none;
 }
@@ -1513,12 +1513,15 @@ strong {
 }
 
 #sidebar .nav{
-
+    border:hidden;
 }
+
 
 #sidebar .nav a{
     background: none;
     color: black;
+    border-color: white;
+    border-bottom-color: #bcbebf;
     font-size: 20px;
     padding: 16px 24px;
     display: block;
@@ -1688,38 +1691,87 @@ strong {
     border-radius: 5px;
 }
 
+/*member_update_profile*/
 
-
-
-
-.star-rating {
-    display: flex;
-    flex-direction: row-reverse;
-    font-size: 2.25rem;
-    line-height: 2.5rem;
-    justify-content: space-around;
-    padding: 0 0.2em;
-    text-align: center;
-    width: 5em;
-    margin-left: 165px;
+.photo_wrap .btn_photo {
+    position: absolute;
+    right: -8px;
+    bottom: 0;
+    z-index: 2;
+    width: 32px;
+    height: 32px;
+    border: 1px solid #d7dce5;
+    border-radius: 100%;
+    background: #fff url(//www.saraminimage.co.kr/sri/person/ico/ico_camera.png) no-repeat center center;
 }
 
-.star-rating input {
+.photo_wrap .photo {
+    display: block;
+    overflow: hidden;
+    position: relative;
+    height: 100%;
+    border-radius: 100%;
+    box-sizing: border-box;
+    /*background: #d7dce5 url(//www.saraminimage.co.kr/sri/person/img/profile_noimg.png) no-repeat center center;*/
+}
+
+.person_update_sidearea .photo_wrap {
+    position: relative;
+    width: 96px;
+    height: 96px;
+}
+
+.photo_wrap .photo_border {
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 1;
+    width: 100%;
+    height: 100%;
+    border: 1px solid rgba(150,160,181,0.2);
+    border-radius: 100%;
+    box-sizing: border-box;
+}
+.person_update_sidearea {
+    float: left;
+    width: 160px;
+}
+
+.photo_edit_btn {
     display: none;
+    position: absolute;
+    top: 104px;
+    left: 72px;
+    z-index: 2;
+    padding: 9px 1px;
+    width: 114px;
+    border: 1px solid #edeef0;
+    border-radius: 8px;
+    background-color: #fff;
+    box-shadow: 2px 6px 16px 0 rgba(17, 42, 128, 0.08);
 }
 
-.star-rating label {
-    -webkit-text-fill-color: transparent;
-    -webkit-text-stroke-width: 2.3px;
-    -webkit-text-stroke-color: #2b2a29;
-    cursor: pointer;
+.photo_edit_btn>button {
+    padding: 8px 0;
+    width: 100%;
+    height: 40px;
+    box-sizing: border-box;
+    color: #5c667b;
+    font-size: 14px;
+    letter-spacing: -1px;
+    line-height: 1.43;
+    text-align: center;
+    background: transparent;
 }
 
-.star-rating :checked ~ label {
-    -webkit-text-fill-color: gold;
+.person_update_main {
+    padding-left: 176px;
+    width: 616px;
 }
 
-.star-rating label:hover,
-.star-rating label:hover ~ label {
-    -webkit-text-fill-color: #fff58c;
+/*calendar*/
+
+#calendarBox{
+    width: 100%;
+    padding-left: 15%;
 }

@@ -18,8 +18,9 @@ public class MemberImg {
     @JoinColumn(name = "memberId")
     private Member member;
 
+    @Setter
     private String folderPath;
-
+    @Setter
     private String storeFileName;
 
 }

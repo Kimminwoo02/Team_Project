@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="individualBoard.css">
+</head>
+<body>
+    <header id="main-header">
+        <!-- 헤더 들어갈 공간 -->
+    </header>
+    <div id="content_wrap">
+        <div id="content">
+            <div class="company_honest_qna">
+                <div class="contents_container">
+                    <div class="view_wrap">
+                        <!--게시글 상단-->
+                        <div class="post_top">
+                            <h1 class="qna_subject" style="margin: bottom 10px;">게시글 제목이 출력되는 부분</h1> 
+                            <!--신고버튼-->
+                            <div class="post_btns">
+                                <button type="button" class="SizeXS" onclick="window.login()" style="float: right">신고</button>
+                            </div>
+                        </div>
+                        <!--//게시글 상단 끝-->
+                        <!--게시글 정보-->
+                        <div class="post_infos">
+                            <div class="post_profile">
+                                <div class="profile_pic" onmousedown="">
+                                    <a href="#" target="_blank">
+                                        <div class="profile_pic profile1">
+                                            <svg>
+                                                <use xlink:href="#"></use>
+                                            </svg>
+                                        </div>
+                                    </a>
+                                </div>
+                                <a href="#" target="_blank">
+                                    <span class="nickname">yongsu</span>
+                                </a>
+                                <span class="post_date">x일 전</span>
+                            </div>
+                            <!--게시글 내용-->
+                            <div class="post_cont">
+                                <span class="post_at_theme"></span>
+                                <div>
+                                    으아아아아아아아아악 집주인 나쁜사람...
+                                    으아아아아아아아아악 집주인 나쁜사람...
+                                    으아아아아아아아아악 집주인 나쁜사람...
+                                    으아아아아아아아아악 집주인 나쁜사람...
+                                    으아아아아아아아아악 집주인 나쁜사람...
+                                    으아아아아아아아아악 집주인 나쁜사람...
+                                    으아아아아아아아아악 집주인 나쁜사람...
+                                    으아아아아아아아아악 집주인 나쁜사람...
+                                    
+                                    <br>
+                                </div>
+                            </div>
+                            </div>
+                        </div>
+                        <div class="comment_input">
+                            <textarea class="scrollbar" placeholder= "여러분이 남긴 댓글은 자신을 나타냅니다."></textarea>
+                        </div>
+                        <button type="button" class="comment_summit" onclick="">댓글 등록</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+</body>
+</html>

@@ -24,13 +24,20 @@ public class Member {
     @Setter
     private String password;
 
+    @Setter
     private String name;
+    @Setter
     private String nickName;
-
+    @Setter
     private String phone;
     private String gender;
-    private String memberRole;
 
+    private String memberRole;
+    @Setter
+    private String addr;
+    @Setter
+    private String detailAddr;
+    @Setter
     @OneToOne(mappedBy = "member", cascade = CascadeType.ALL)
     private MemberImg memberImg;
 
@@ -46,13 +53,15 @@ public class Member {
 
 
     @Builder
-    public Member(String email, String password, String name, String phone, String gender, String memberRole, String nickName) {
+    public Member(String email, String password, String name, String phone, String gender, String nickName, String addr, String detailAddr, String memberRole) {
         this.email = email;
         this.password = password;
         this.name = name;
         this.phone = phone;
         this.gender = gender;
         this.nickName = nickName;
+        this.addr = addr;
+        this.detailAddr=detailAddr;
         this.memberRole = memberRole;
     }
 

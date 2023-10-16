@@ -2,6 +2,7 @@ package com.example.team_project.security;
 
 import com.example.team_project.entity.Member;
 import lombok.Getter;
+import lombok.Setter;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -38,6 +39,7 @@ public class CustomUserDetails extends User implements UserDetails {
         return collection;
     }
 
+    public Long getMemberId() {return member.getMemberId();}
     @Override
     public String getPassword() {
         return member.getPassword();

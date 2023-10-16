@@ -31,8 +31,9 @@ public class BoardServiceJpa implements BoardService {
     public void write(BoardCreate boardCreate) {
         Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         Member member = ((CustomUserDetails)principal).getMember();
-        boardRepository.save(boardCreate.toBoardEntity());
         boardCreate.setMember(member);
+        boardRepository.save(boardCreate.toBoardEntity());
+
     }
 
     public void delete(Long boardId) {

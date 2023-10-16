@@ -3,7 +3,8 @@
 <head>
 </head>
 <body>
-<main th:fragment="readFragment" class="container">
+
+<main th:fragment="" class="container">
     <div class="page-header" style="margin-top: 100px;">
         <h1 th:text="${board.title}"></h1>
     </div>
@@ -48,6 +49,55 @@
     </div>
 </main>
 
+<main th:fragment="readFragment">
+    <link rel="stylesheet" type="text/css" href="../css/individualBoard.css">
+    <div id="content_wrap">
+        <div id="content">
+            <div class="company_honest_qna">
+                <div class="contents_container">
+                    <div class="view_wrap">
+                        <div class="post_top">
+                            <h1 class="qna_subject" style="margin-bottom: 10px;" th:text="${board.title}"></h1>
+                            <!--신고버튼-->
+                            <div class="post_btns">
+                                <button type="button" class="SizeXS" onclick="window.login()" style="float: right">신고</button>
+                            </div>
+                        </div>
+
+                        <!--게시글 정보-->
+                        <div class="post_infos">
+                            <div class="post_profile">
+                                <div class="profile_pic" onmousedown="">
+                                    <a href="#" target="_blank">
+                                        <div class="profile_pic profile1">
+                                            <svg>
+                                                <use xlink:href="#"></use>
+                                            </svg>
+                                        </div>
+                                    </a>
+                                </div>
+                                    <span class="nickname" th:text="${board.member.name}"></span>
+                                <span class="post_date" th:text="${#dates.format(board.createdAt,'yyyy-MM-dd')}">x일 전</span>
+                            </div>
+                            <!--게시글 내용-->
+                            <div class="post_cont">
+                                <span class="post_at_theme"></span>
+                                <div id="board_content" th:utext="${board.content}">
+
+                                    <br>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="comment_input">
+                        <textarea class="scrollbar" placeholder= "여러분이 남긴 댓글은 자신을 나타냅니다."></textarea>
+                    </div>
+                    <button type="button" class="comment_summit" onclick="">댓글 등록</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
 
 </body>
 </html>

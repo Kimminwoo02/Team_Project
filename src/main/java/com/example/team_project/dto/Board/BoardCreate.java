@@ -1,6 +1,7 @@
 package com.example.team_project.dto.Board;
 
 import com.example.team_project.entity.Board;
+import com.example.team_project.entity.Category;
 import com.example.team_project.entity.Member;
 import jakarta.persistence.Column;
 import jakarta.persistence.JoinColumn;
@@ -24,12 +25,14 @@ public class BoardCreate {
     private String title;
     private String content;
     private Member member;
+    private Category category;
 
-    public Board toBoardEntity(String title, String content, Member member){
+    public Board toBoardEntity(){
         return Board.builder()
                 .title(title)
-                .content(content)
+                .content(content.substring(1))
                 .member(member)
+                .category(category)
                 .build();
     }
 }

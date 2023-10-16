@@ -17,30 +17,37 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 @Getter
 @Builder
-public class Board {
+public class Board extends AuditingFields {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name="board_id")
+    @Column(name = "board_id")
     private Long boardId;
 
     @Setter
-    @Column(name="title")
+    @Column(name = "title")
     private String title;
 
     @Setter
-    @Column(name="content", length = 10000)
+    @Column(name = "content", length = 10000)
     private String content;
 
     @ManyToOne
     @JoinColumn(name = "memberId")
     private Member member;
+
+    @Setter
+    @Enumerated(EnumType.STRING)
+    private Category category;
+
+
     @Builder
-    public Board(String title, String content){
+    public Board(String title, String content, Category category) {
         this.title = title;
         this.content = content;
+        this.category = category;
     }
 
-    public static Board toBoard(String title, String content, Member member){
+    public static Board toBoard(String title, String content, Member member) {
         return Board.builder()
                 .title(title)
                 .content(content)

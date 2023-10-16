@@ -4,6 +4,7 @@ package com.example.team_project.controller;
 import com.example.team_project.dto.Board.BoardCreate;
 import com.example.team_project.dto.Board.BoardDTO;
 import com.example.team_project.dto.Board.BoardUpdate;
+import com.example.team_project.entity.Category;
 import com.example.team_project.security.CustomUserDetails;
 import com.example.team_project.service.BoardService;
 import com.example.team_project.service.BoardServiceJpa;
@@ -24,56 +25,59 @@ public class BoardController {
     private final BoardServiceJpa boardServiceJpa;
 
     @GetMapping("/boardMain")
-    public String board(){
+    public String board(Model model) {
+        model.addAttribute("categories", Category.values());
+
         return "main/board";
     }
 
 
     @GetMapping("/detail")
-    public String boardlist(Model model){
+    public String boardlist(Model model) {
         List<BoardDTO> boardList = boardServiceJpa.getBoardList();
         model.addAttribute("boardList", boardList);
+        model.addAttribute("categories",Category.values());
         return "main/detailBoard";
     }
 
     @GetMapping("/boardRead")
-    public String read(Long boardId, Model model){
+    public String read(Long boardId, Model model) {
         BoardDTO board = boardServiceJpa.getBoard(boardId);
         model.addAttribute("board", board);
+        model.addAttribute("categories",Category.values());
         return "main/boardRead";
     }
 
     @GetMapping("/boardWrite")
-    public String write1(){
+    public String write1(Model model) {
+        model.addAttribute("categories",Category.values());
         return "main/boardWrite";
     }
 
     @PostMapping("/boardWrite")
-    public String write2(BoardCreate boardCreate, @AuthenticationPrincipal CustomUserDetails principal){
-        System.out.println(boardCreate.getTitle()+" ######################### "+boardCreate.getContent());
-        boardCreate.setMember(principal.getMember());
+    public String write2(BoardCreate boardCreate) {
         boardServiceJpa.write(boardCreate);
         return "redirect:/detail";
     }
 
     @GetMapping("/board")
-    public String update1(Long boardId, Model model){
+    public String update1(Long boardId, Model model) {
 
         BoardDTO board = boardServiceJpa.getBoard(boardId);
-        model.addAttribute("board",board);
+        model.addAttribute("board", board);
         return "main/boardUpdate";
     }
 
     @PutMapping("/board/{boardId}")
-    public String update2(@ModelAttribute BoardUpdate boardUpdate,@PathVariable Long boardId, @AuthenticationPrincipal CustomUserDetails principal) {
-        log.info("++++++++++++++++++"+boardId+"*************"+boardUpdate);
+    public String update2(@ModelAttribute BoardUpdate boardUpdate, @PathVariable Long boardId, @AuthenticationPrincipal CustomUserDetails principal) {
+        log.info("++++++++++++++++++" + boardId + "*************" + boardUpdate);
         boardServiceJpa.update(boardUpdate, boardId);
 
         return "redirect:/detail";
     }
 
     @DeleteMapping("/board/{boardId}")
-    public String delete(@PathVariable("boardId") Long boardId){
+    public String delete(@PathVariable("boardId") Long boardId) {
         boardServiceJpa.delete(boardId);
         return "redirect:/detail";
     }

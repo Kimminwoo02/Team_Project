@@ -4,6 +4,7 @@ import com.example.team_project.dto.Board.BoardCreate;
 import com.example.team_project.dto.Board.BoardDTO;
 import com.example.team_project.dto.Board.BoardUpdate;
 import com.example.team_project.entity.Board;
+import com.example.team_project.entity.Category;
 import com.example.team_project.entity.Member;
 import com.example.team_project.repository.BoardRepository;
 import com.example.team_project.repository.MemberRepository;
@@ -28,9 +29,11 @@ public class BoardServiceJpa implements BoardService {
     private final MemberRepository memberRepository;
 
     public void write(BoardCreate boardCreate) {
-        Member member = memberRepository.getReferenceById(boardCreate.getMember().getMemberId());
-        System.out.println("========================="+boardCreate.getContent().substring(1));
-        boardRepository.save(boardCreate.toBoardEntity(boardCreate.getTitle(), boardCreate.getContent().substring(1), member));
+
+        Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        Member member = ((CustomUserDetails)principal).getMember();
+        boardCreate.setMember(member);
+        boardRepository.save(boardCreate.toBoardEntity());
     }
 
     public void delete(Long boardId) {

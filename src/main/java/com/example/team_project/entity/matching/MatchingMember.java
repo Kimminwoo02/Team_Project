@@ -5,6 +5,7 @@ import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 @Entity
 @NoArgsConstructor
@@ -18,22 +19,16 @@ public class MatchingMember {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "matchingId")
+    @Setter
     private Matching matching;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "memberId")
+    @Setter
     private Member member;
 
     private Integer quota;
 
     private Boolean matchingYN;
-
-    public void addMatching(Matching matching){
-        this.matching = matching;
-    }
-
-    public void addMember(Member member){
-        this.member = member;
-    }
 
 }

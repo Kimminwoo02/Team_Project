@@ -3,7 +3,6 @@ package com.example.team_project.controller;
 import com.example.team_project.dto.ReviewDto;
 import com.example.team_project.entity.Review;
 import com.example.team_project.security.CustomUserDetails;
-import com.example.team_project.service.MemberServiceMybatis;
 import com.example.team_project.service.ReviewService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;

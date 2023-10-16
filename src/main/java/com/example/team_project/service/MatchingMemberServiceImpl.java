@@ -1,7 +1,6 @@
 package com.example.team_project.service;
 
 import com.example.team_project.dto.MatchingDTO;
-import com.example.team_project.dto.member.MemberDto;
 import com.example.team_project.entity.Member;
 import com.example.team_project.entity.matching.Matching;
 import com.example.team_project.entity.matching.MatchingMember;
@@ -19,13 +18,14 @@ public class MatchingMemberServiceImpl implements MatchingMemberService {
     private final MatchingMemberRepository matchingMemberRepository;
 
     @Override 
-    public void addMatching(MatchingDTO matchingDto, MemberDto memberDto) {
+    public void addMatching(MatchingDTO matchingDto, Member memberDto) {
         Member member = memberRepository.getReferenceById(memberDto.getMemberId());
         Matching matched = matchingRepository.getReferenceById(matchingDto.getMatchingId());
 
         MatchingMember matchingMember = new MatchingMember();
-        matchingMember.addMatching(matched);
-        matchingMember.addMember(member);
+        matchingMember.setMatching(matched);
+        matchingMember.setMember(member);
 
+        matchingMemberRepository.save(matchingMember);
     }
 }

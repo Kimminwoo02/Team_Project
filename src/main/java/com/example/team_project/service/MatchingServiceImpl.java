@@ -21,14 +21,14 @@ import java.util.List;
 @RequiredArgsConstructor
 @Transactional
 public class MatchingServiceImpl implements MatchingService {
-    private final MemberRepository memberRepository;
+//    private final MemberRepository memberRepository;
     private final MatchingRepository matchingRepository;
     private final MatchingMemberRepository matchingMemberRepository;
 
     // 매칭 등록
     @Override
     public void createMatching(MatchingDTO matchingDTO) {
-        System.out.println(matchingDTO.getCategory()+"=====================");
+//        System.out.println(matchingDTO.getCategory()+"=====================");
         // transform DTO to Entity
         Matching matching = matchingDTO.createMatching();
 

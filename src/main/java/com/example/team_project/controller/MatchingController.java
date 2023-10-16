@@ -9,6 +9,7 @@ import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
 @Controller
@@ -30,4 +31,8 @@ public class MatchingController {
         return "redirect:/matching";
     }
 
+    @GetMapping("/matching/{Category}")
+    public String mat3(@PathVariable String Category){
+        return "redirect:/matching";
+    }
 }

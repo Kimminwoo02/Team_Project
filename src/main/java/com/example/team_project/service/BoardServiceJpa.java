@@ -29,11 +29,11 @@ public class BoardServiceJpa implements BoardService {
     private final MemberRepository memberRepository;
 
     public void write(BoardCreate boardCreate) {
-
         Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         Member member = ((CustomUserDetails)principal).getMember();
         boardCreate.setMember(member);
         boardRepository.save(boardCreate.toBoardEntity());
+
     }
 
     public void delete(Long boardId) {

@@ -5,16 +5,16 @@
 <body>
 <main th:fragment="detailFragment">
 
-        <header class="site-header d-flex justify-content-center align-items-center">
-            <div class="container">
-                <div class="row">
-                    <div class="col-lg-12 col-12">
-                        <h1 class="text-white">게시판</h1>
-                    </div>
-
+    <header class="site-header d-flex justify-content-center align-items-center">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 col-12">
+                    <h1 class="text-white">게시판</h1>
                 </div>
+
             </div>
-        </header>
+        </div>
+    </header>
 
     <div id="sri_section" class="">
         <div id="sri_wrap">
@@ -43,24 +43,16 @@
                         </div>
                         <div class="search_form">
                             <div class="list_num_tit">전체
-                                <strong style>72184</strong>
+                                <strong ><th:block th:value="${#lists.size(boardList)}"/> </strong>
                                 건
                             </div>
                         </div>
                         <div class="qna_list_wrap">
                             <div class="qna_list_sort">
                                 <div class="InpBox">
-                                    <select name="option_select_category" title="활동 전체">
-                                        <option value>활동 전체</option>
-                                        <option value>산책</option>
-                                        <option value>러닝</option>
-                                        <option value>등산</option>
-                                        <option value>축구</option>
-                                        <option value>농구</option>
-                                        <option value>풋살</option>
-                                        <option value>배드민턴</option>
-                                        <option value>헬스</option>
-                                        <option value>잡담</option>
+                                    <select name="category" title="활동 전체">
+                                        <option th:each="category:${categories}" th:value="${category}"
+                                                th:text="${category.title}"/>
                                     </select>
                                 </div>
                                 <div class="InpBox Line filter">
@@ -83,41 +75,13 @@
                                 <a th:href="@{/boardWrite}" style="float: right; white-space: nowrap;">게시글 작성
                                 </a>
                             </div>
-                                <ul class="qna_list" id="qst_and_ans_list">
+                            <ul class="qna_list" id="qst_and_ans_list">
 
-                                <div class="list_qna">
-                                    <span class="position" style="transform:translateY(66px);">
-                                    </span>
-                                    <li>
-                                        <div class="qna_subject_wrap">
-                                            <hr>
-                                            </hr>
-                                            <em class="label_hot">HOT🔥</em>
-                                            <a th:href="@{/boardUpdate}" span class="qna_subject" >23살 남자에요! 축구팀 구합니다!</span></a>
-                                        </div>
-                                        <span class="qna_desc">
-                                            선출은 아니고 구력 5년 이상입니다. 조기축구 회원이였다가 새로 이사와서 팀 구하고 있어요. 팀플레이 좋아합니다.
-                                        </span>
-                                        <span class="qna_like">
-                                            <img src="../images/heart_icon-icons.com_48290.png" style="width:20px;">
-                                            공감하기
-                                        </span>
-                                        <span class="qna_reply">
-                                            <img src="../images/pngwing.com.png" style="width: 20px; height:20px;">
-                                            댓글
-                                            <strong>1</strong>
-                                        </span>
-                                        <span class="qna_views">
-                                            <img src="../images/clipart870923.png" style="width: 15px; height:15px;">
-                                            조회수
-                                            <strong>155</strong>
-                                        </span>
-                                    </li>
-                                </div>
                                 <hr/>
-                                <li  th:each="board:${boardList }">
+                                <li th:each="board:${boardList }" th:height="150px">
                                     <div class="qna_subject_wrap">
-                                        <a th:href="@{/boardRead(boardId=${board.boardId})}" class="qna_subject"><span th:text="${board.title}"></span></a>
+                                        <a th:href="@{/boardRead(boardId=${board.boardId})}" class="qna_subject"><span
+                                                th:text="${board.title}"></span></a>
                                     </div>
                                     <span class="qna_desc" th:utext="${board.content}"></span>
                                     <span class="qna_like">
@@ -127,15 +91,14 @@
                                     <span class="qna_reply">
                                         <img src="../images/pngwing.com.png" style="width: 20px; height:20px;">
                                         댓글
-                                        <strong>1</strong>
+                                        <strong>TODO</strong>
                                     </span>
                                     <span class="qna_views">
                                         <img src="../images/clipart870923.png" style="width: 15px; height:15px;">
                                         조회수
-                                        <strong>33</strong>
+                                        <strong>TODO</strong>
                                     </span>
                                     <hr>
-                                    </hr>
                                 </li>
                             </ul>
                         </div>
@@ -146,9 +109,11 @@
     </div>
 
 
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320"><path fill="#36363e" fill-opacity="1" d="M0,96L40,117.3C80,139,160,181,240,186.7C320,192,400,160,480,149.3C560,139,640,149,720,176C800,203,880,245,960,250.7C1040,256,1120,224,1200,229.3C1280,235,1360,277,1400,298.7L1440,320L1440,320L1400,320C1360,320,1280,320,1200,320C1120,320,1040,320,960,320C880,320,800,320,720,320C640,320,560,320,480,320C400,320,320,320,240,320C160,320,80,320,40,320L0,320Z"></path></svg>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320">
+        <path fill="#36363e" fill-opacity="1"
+              d="M0,96L40,117.3C80,139,160,181,240,186.7C320,192,400,160,480,149.3C560,139,640,149,720,176C800,203,880,245,960,250.7C1040,256,1120,224,1200,229.3C1280,235,1360,277,1400,298.7L1440,320L1440,320L1400,320C1360,320,1280,320,1200,320C1120,320,1040,320,960,320C880,320,800,320,720,320C640,320,560,320,480,320C400,320,320,320,240,320C160,320,80,320,40,320L0,320Z"></path>
+    </svg>
 </main>
-
 
 
 </body>

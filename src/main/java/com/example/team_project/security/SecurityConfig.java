@@ -20,7 +20,7 @@ import org.springframework.web.servlet.handler.HandlerMappingIntrospector;
 @Configuration
 @RequiredArgsConstructor
 @EnableWebSecurity
-public class SecurityConfig {
+public class SecurityConfig  {
     private final UserDetailsService userDetailsService;
 
     private final CustomAuthSuccessHandler authenticationSuccessHandler;
@@ -57,6 +57,10 @@ public class SecurityConfig {
 
 
 
+
+
+
+
     @Bean
     protected SecurityFilterChain filterChain(HttpSecurity http, HandlerMappingIntrospector introspect) throws Exception {
         return http
@@ -75,6 +79,7 @@ public class SecurityConfig {
                         .requestMatchers(new MvcRequestMatcher(introspect,"/detail")).permitAll()
                         .requestMatchers(new MvcRequestMatcher(introspect,"/chat")).permitAll()
                         .requestMatchers(new MvcRequestMatcher(introspect,"/write")).permitAll()
+                        .requestMatchers(new MvcRequestMatcher(introspect,"/mypageEdit")).permitAll()
                         .anyRequest().authenticated())
                 .formLogin(login -> login
                         .loginPage("/login")

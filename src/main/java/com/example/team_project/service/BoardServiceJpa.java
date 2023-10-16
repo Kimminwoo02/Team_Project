@@ -29,7 +29,6 @@ public class BoardServiceJpa implements BoardService {
 
     public void write(BoardCreate boardCreate) {
         Member member = memberRepository.getReferenceById(boardCreate.getMember().getMemberId());
-        System.out.println("========================="+boardCreate.getContent().substring(1));
         boardRepository.save(boardCreate.toBoardEntity(boardCreate.getTitle(), boardCreate.getContent().substring(1), member));
     }
 
@@ -41,7 +40,6 @@ public class BoardServiceJpa implements BoardService {
     @Override
     public void update(BoardUpdate boardUpdate,Long boardId) {
         Board board = boardRepository.getReferenceById(boardId);
-        System.out.println("================================="+boardUpdate.getContent());
         Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 
         Member member = ((CustomUserDetails) principal).getMember();

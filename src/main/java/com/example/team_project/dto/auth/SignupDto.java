@@ -28,6 +28,9 @@ public class SignupDto {
     private String gender;
     private String nickName;
 
+    private String addr;
+    private String detailAddr;
+
     private MultipartFile file;
 
     public Member toMemberEntity(){
@@ -38,6 +41,8 @@ public class SignupDto {
                 .phone(phone)
                 .gender(gender)
                 .nickName(nickName)
+                .addr(addr)
+                .detailAddr(detailAddr)
                 .build();
 
     }

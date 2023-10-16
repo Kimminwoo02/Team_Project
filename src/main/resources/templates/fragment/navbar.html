@@ -9,7 +9,7 @@
 
 <body>
 <div th:fragment="navFragment">
-    <nav class="navbar navbar-expand-lg bg-light fixed-top shadow-lg" style="font-family: 'Black Han Sans', sans-serif">
+    <nav class="navbar navbar-expand-lg bg-light fixed-top shadow-sm" style="font-family: 'Black Han Sans', sans-serif">
         <div class="container">
             <a class="navbar-brand" th:href="@{/home}">Acti<span class="tooplate-red">ma</span><span
                     class="tooplate-green">te</span></a>
@@ -36,7 +36,7 @@
                         <a class="nav-link" th:href="@{/home}">홈</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" sec:authorize="isAuthenticated()" th:href="@{/mypage}">마이페이지</a>
+                        <a class="nav-link" sec:authorize="isAuthenticated()" th:href="@{/mypageEdit}">마이페이지</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link " th:href="@{/facility}">시설관리</a>

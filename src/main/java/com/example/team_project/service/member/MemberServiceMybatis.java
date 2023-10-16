@@ -2,7 +2,10 @@ package com.example.team_project.service.member;
 
 import com.example.team_project.dto.auth.SignupDto;
 import com.example.team_project.dto.auth.SignupResponse;
+import com.example.team_project.dto.member.MemberImgDTO;
+import com.example.team_project.dto.member.MemberInfoDTO;
 import com.example.team_project.dto.member.MemberSearchCond;
+import com.example.team_project.dto.member.MemberUpdateDto;
 import com.example.team_project.entity.Member;
 import com.example.team_project.entity.MemberImg;
 import com.example.team_project.file.FileStore;
@@ -56,21 +59,25 @@ public class MemberServiceMybatis implements MemberService {
 
 
     }
-    @Transactional
-    public void joinWithoutFile (SignupDto signupDto)  {
-        Member member = signupDto.toMemberEntity();
-        isDuplicateEmail(member.getEmail());
-        member.setPassword(passwordEncoder.encode(member.getPassword()));
-        memberRepositoryMybatis.saveWithoutFileMybatis(member);
-    }
+//    @Transactional
+//    public void joinWithoutFile (SignupDto signupDto)  {
+//        Member member = signupDto.toMemberEntity();
+//        isDuplicateEmail(member.getEmail());
+//        member.setPassword(passwordEncoder.encode(member.getPassword()));
+//        memberRepositoryMybatis.saveWithoutFileMybatis(member);
+//    }
 
 
 
-    public Member getLoginUserById(Long memberId) {
+    public MemberInfoDTO getLoginUserById(Long memberId) {
         if(memberId == null) return null;
 
-        Optional<Member> optionalUser = memberRepositoryMybatis.findByIdMybatis(memberId);
-        return optionalUser.orElse(null);
+        Member optionalUser = memberRepositoryMybatis.findByIdMybatis(memberId).get();
+        MemberImgDTO img = new MemberImgDTO(optionalUser.getMemberImg().getFolderPath(),optionalUser.getMemberImg().getStoreFileName());
+        MemberInfoDTO member = new MemberInfoDTO(optionalUser.getMemberId(), optionalUser.getEmail(),
+                optionalUser.getPassword(),optionalUser.getName(),optionalUser.getNickName(),
+                optionalUser.getPhone(),optionalUser.getAddr(),optionalUser.getDetailAddr(),img);
+        return member;
 
     }
 
@@ -89,6 +96,11 @@ public class MemberServiceMybatis implements MemberService {
         if (findMember.isPresent()){
             throw new IllegalStateException("이미 존재하는 회원입니다.");
         }
+    }
+
+    @Override
+    public void update(MemberUpdateDto memberUpdateDto, Long memberId) {
+
     }
 
     @Override

@@ -16,12 +16,11 @@
         body {
             min-height: 100vh;
             background-color: #fff;
-            margin-left: 250px;
+            margin-left: 100px;
         }
 
         .input-form {
             max-width: 680px;
-
             margin-top: 80px;
             padding: 32px;
             background: #fff;
@@ -43,65 +42,155 @@
 </head>
 
 <body>
-<main th:fragment="mypageInfoFragment" style="margin-left: 250px">
-    <th:block th:replace="/../fragment/sidebar :: sidebarFragment"></th:block>
-    <div class="container">
-        <div class="input-form-backgroud row">
-            <div class="input-form col-md-12 mx-auto" style="margin-top: 9%; padding: 5%;margin-bottom: 11vh">
-                <a th:href="@{/home}"><img class="logo" alt="logo" src="../images/logo.png"
-                                           style="width: 100px; height: 50px;margin-left: 39%"></a>
-                <div class="mb-3">
-                        <label for="email">이메일</label>
-                        <input type="email" name="email" class="form-control" id="email" placeholder="아이디로 사용할 이메일입니다."
-                               required>
-                        <div class="invalid-feedback">
-                            이메일을 입력해주세요.
+<div class="container">
+    <main th:fragment="mypageInfoFragment" style="margin-left: 150px ">
+        <div class="row">
+            <div  class="col-md-3" style="margin-top: 50px;">
+                <th:block th:replace="/../fragment/sidebar :: sidebarFragment"></th:block>
+            </div>
+            <div class="col-md-5">
+                <form class="form-horizontal" method="post" th:action="@{/mypageEdit}" id="userUpdateForm"   enctype="multipart/form-data" th:object="${member}" style="margin-top: 100px;">
+                    <input type="hidden" name="_method" value="put"/>
+                    <h2 class="wrap_title">개인정보 수정</h2>
+                        <div class="mb-3 mt-3">
+                            <div class="person_update_sidearea">
+                                <div class="photo_wrap">
+                                <img class="photo" id="myhome_profile_photo" url="//www.saraminimage.co.kr/sri/person/img/profile_noimg.png">
+<!--                                    <img class="photo" id="myhome_profile_photo" th:url="${member.file.folderPath}">-->
+                                </img>
+                                    <span class="photo_border"></span>
+                                    <label type="button" class="btn_photo" for="file" aria-label="프로필 편집/삭제" aria-haspopup="menu"></label>
+    <!--                                <div class="photo_edit_btn" style="display: block;">-->
+    <!--                                    <button type="button" id="btnPhotoEdit">프로필 편집</button>-->
+    <!--                                    <button type="button" id="btnPhotoDelete">프로필 삭제</button>-->
+    <!--                                </div>-->
+                                    <div class="frame">
+                                        <div class="mb-3 imageContainer">
+                                            <div class="frame">
+                                                <input name="file" id="file" type="file" style="display: none" >
+                                            </div>
+
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
                         </div>
-                </div>
 
-                <div class="mb-3">
-                    <label for="name">이름</label>
-                    <input type="text" name="name" class="form-control" id="name" placeholder="이름을 입력해주세요" value=""
-                           required>
-                    <div class="invalid-feedback">
-                        이름을 입력해주세요.
-                    </div>
-                </div>
+                        <div class="person_update_main mt-3">
+                            <div class="mb-3">
+                                <label for="email">이메일</label>
+                                <input type="email" name="email" class="form-control" id="email" th:value="${member.email}" readonly>
+                                <div class="invalid-feedback">
+                                    이메일을 입력해주세요.
+                                </div>
+                            </div>
+                            <div class="mb-3">
+                                <label for="password">비밀번호</label>
+                                <input type="text" name="password" class="form-control" id="password"  placeholder="비밀번호를 입력해주세요" >
+                                <div class="invalid-feedback">
+                                    이름을 입력해주세요.
+                                </div>
+                            </div>
 
-                <div class="mb-3">
-                    <label for="name"> 닉네임</label>
-                    <input type="text" name="nickName" class="form-control" id="nickname" placeholder="이름을 입력해주세요"
-                           value="" required>
-                    <div class="invalid-feedback">
-                        별명을 입력하세요!
-                    </div>
-                </div>
+                            <div class="mb-3">
+                                <label for="name">이름</label>
+                                <input type="text" name="name" class="form-control" id="name"  placeholder="이름을 입력해주세요" th:value="${member.name}" required>
+                                <div class="invalid-feedback">
+                                    이름을 입력해주세요.
+                                </div>
+                            </div>
+
+                            <div class="mb-3">
+                                <label for="name"> 닉네임</label>
+                                <input type="text" name="nickName" class="form-control" id="nickname"  placeholder="닉네임을 입력해주세요" th:value="${member.nickName}" required>
+                                <div class="invalid-feedback">
+                                    별명을 입력하세요!
+                                </div>
+                            </div>
+
+                            <div class="mb-3">
+                                <label for="detailAddr">전화번호</label>
+                                <input type="text" class="form-control" id="phone" name="phone" placeholder="전화번호를 입력해주세요." th:value="${member.phone}">
+                            </div>
 
 
-                <div class="mb-3">
-                    <label for="address">주소</label>
-                    <input type="text" class="form-control" id="address" placeholder="서울특별시 강남구" required>
-                    <div class="invalid-feedback">
-                        주소를 입력해주세요.
-                    </div>
-                </div>
-                <div class="mb-3">
-                    <label for="address2">상세주소<span class="text-muted">&nbsp;(필수 아님)</span></label>
-                    <input type="text" class="form-control" id="address2" placeholder="상세주소를 입력해주세요.">
-                </div>
 
+                            <div class="mb-3">
+                                <label for="addr">주소</label>
+                                <input type="text" class="form-control" id="addr" name="addr" placeholder="서울특별시 강남구" th:value="${member.addr}" required>
+                                <div class="invalid-feedback">
+                                    주소를 입력해주세요.
+                                </div>
+                            </div>
+                            <div class="mb-3">
+                                <label for="detailAddr">상세주소<span class="text-muted">&nbsp;(필수 아님)</span></label>
+                                <input type="text" class="form-control" id="detailAddr" name= "detailAddr" placeholder="상세주소를 입력해주세요." th:value="${member.detailAddr}">
+                            </div>
+
+                            <div class="btn_wrap text-center mb-3" style="margin-bottom: 130px;">
+                                <button type="submit" class="btn btn-outline-primary" id="submitBoardBtn">수정완료</button>
+                            </div>
+                        </div>
+                </form>
             </div>
         </div>
-        <footer class="my-3 text-center text-small">
 
-        </footer>
-    </div>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"
+                    integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm"
+                    crossorigin="anonymous"></script>
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"
-            integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm"
-            crossorigin="anonymous"></script>
+        <script>
+            window.addEventListener('load', () => {
+                const forms = document.getElementsByClassName('userUpdateForm');
+                Array.prototype.filter.call(forms, (form) => {
+                    form.addEventListener('submit', function (event) {
+                        if (form.checkValidity() === false) {
+                            event.preventDefault();
+                            event.stopPropagation();
+                        }
+                        form.classList.add('was-validated');
+                    }, false);
+                });
+            }, false);
 
-</main>
+
+            window.addEventListener('load', function() {
+
+                const container = document.querySelector('.imageContainer');
+                const frame = container.querySelector('.frame');
+                const fileInput = container.querySelector('input[type="file"]');
+
+
+                fileInput.addEventListener('input', () => {
+
+                    if(!isImage(fileInput.files[0])) {
+                        alert('Image 파일만 업로드 할 수 있습니다.');
+                        return;
+                    }
+
+                    const reader = new FileReader();
+
+                    reader.addEventListener('load', () => {
+
+                        const img = document.createElement('IMG');
+                        img.classList.add('thumnail');
+                        img.src = reader.result;
+
+                        frame.insertAdjacentElement('beforeend', img);
+                    });
+
+                    reader.readAsDataURL(fileInput.files[0]);
+                });
+
+                function isImage(file){
+                    return file.type.indexOf('image') >= 0;
+                }
+            });
+
+        </script>
+    </main>
+</div>
 </body>
 
 </html>

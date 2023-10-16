@@ -1,5 +1,8 @@
 package com.example.team_project.dto.comment;
 
+import com.example.team_project.entity.Board;
+import com.example.team_project.entity.Facility;
+import com.example.team_project.entity.Member;
 import jakarta.persistence.Entity;
 import lombok.Getter;
 import lombok.Setter;
@@ -13,17 +16,17 @@ public class CommentDTO {
     private Long id;
     private String commentWriter;
     private String commentContents;
-    private Long boardId;
+    private Board board;
     private Long memberId;
-    public static CommentDTO toCommentDTO(Comment comment, Long boardId) {
-        CommentDTO commentDTO = new CommentDTO();
-        commentDTO.setId(me.getId());
-        commentDTO.setCommentWriter(comment.getCommentWriter());
-        commentDTO.setCommentContents(comment.getCommentContents());
-        commentDTO.setBoardId(boardId);
-        return commentDTO;
-    }
 
+    public Comment toComment(){
+        return Comment.builder()
+                .commentContents(commentContents)
+                .commentWriter(commentWriter)
+                .board(board)
+                .build();
+
+    }
 
 
 }

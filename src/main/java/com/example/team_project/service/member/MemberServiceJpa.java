@@ -5,6 +5,8 @@ import com.example.team_project.dto.auth.SignupResponse;
 import com.example.team_project.dto.member.MemberSearchCond;
 import com.example.team_project.entity.Member;
 import com.example.team_project.entity.MemberImg;
+import com.example.team_project.exception.ApplicationException;
+import com.example.team_project.exception.ErrorCode;
 import com.example.team_project.file.FileStore;
 import com.example.team_project.file.ResultFileStore;
 import com.example.team_project.repository.MemberImgRepository;
@@ -13,18 +15,23 @@ import com.example.team_project.service.MemberService;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.io.IOException;
+import java.util.HashMap;
 import java.util.List;
-import java.util.Optional;
 
 
 @RequiredArgsConstructor
 @Log4j2
 @Service
 public class MemberServiceJpa implements MemberService {
+    @Value("${IMAGES}")
+    private  String imagePath;
+
+
     private final MemberRepository memberRepository;
     private final MemberImgRepository memberImgRepository;
     private final PasswordEncoder passwordEncoder;
@@ -39,16 +46,22 @@ public class MemberServiceJpa implements MemberService {
     @Transactional
     public SignupResponse join (SignupDto signupDto) {
 
+
         Member member = signupDto.toMemberEntity();
 
-        isDuplicateEmail(member.getName());
+        isDuplicateEmail(member.getEmail());
         member.setPassword(passwordEncoder.encode(member.getPassword()));
         Member memberEntity = memberRepository.save(member);
 
         try{
             MemberImg memberImgEntity = null;
             ResultFileStore resultFileStore = filestore.storeProfileFile(signupDto.getFile());
-            MemberImg memberImg = signupDto.toMemberImgEntity(resultFileStore.getFolderPath(), resultFileStore.getStoreFileName(),member);
+            MemberImg memberImg;
+            if(resultFileStore== null){
+                memberImg = signupDto.toMemberImgEntity(imagePath, "cat.jpg",member);
+            }else{
+                memberImg = signupDto.toMemberImgEntity(resultFileStore.getFolderPath(), resultFileStore.getStoreFileName(),member);
+            }
             memberImgEntity = memberImgRepository.save(memberImg);
             return new SignupResponse(memberEntity,memberImgEntity);
         }
@@ -58,33 +71,13 @@ public class MemberServiceJpa implements MemberService {
 
 
     }
-    @Transactional
-    public void joinWithoutFile (SignupDto signupDto)  {
-
-        Member member = signupDto.toMemberEntity();
-
-        isDuplicateEmail(member.getName());
-        member.setPassword(passwordEncoder.encode(member.getPassword()));
-        Member memberEntity = memberRepository.save(member);
-
-        new SignupResponse(memberEntity);
-
-    }
 
 
 
     public Member getLoginUserById(Long memberId) {
-        if(memberId == null) return null;
-
-        Optional<Member> optionalUser = memberRepository.findById(memberId);
-        return optionalUser.orElse(null);
-
+        return memberRepository.findById(memberId).orElseThrow
+                (() -> new ApplicationException(ErrorCode.USER_NOT_FOUND));
     }
-
-
-
-
-
 
 
     public List<Member> findMembers(){
@@ -94,7 +87,7 @@ public class MemberServiceJpa implements MemberService {
     public void validateDuplicateMember(String email){
         Member findMember = memberRepository.findByEmail(email);
         if (findMember != null){
-            throw new IllegalStateException("이미 존재하는 회원입니다.");
+            throw new ApplicationException(ErrorCode.DUPLICATED_USER_MAIL, String.format("%s 는 이미 사용중인 메일입니다!", email));
         }
     }
 
@@ -102,5 +95,13 @@ public class MemberServiceJpa implements MemberService {
     public Member getMemberId(MemberSearchCond memberSearchCond) {
         return memberRepository.findByNameAndPhone(memberSearchCond.getName(),memberSearchCond.getPhone());
     }
+
+
+    public HashMap<String, Object> usernameOverlap(String email) {
+        HashMap<String, Object> map = new HashMap<>();
+        map.put("result", memberRepository.existsByEmail(email));
+        return map;
+    }
+
 
 }

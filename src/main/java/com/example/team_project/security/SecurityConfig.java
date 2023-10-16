@@ -50,6 +50,7 @@ public class SecurityConfig {
                 .requestMatchers(new AntPathRequestMatcher("/config/**"))
                 .requestMatchers(new AntPathRequestMatcher("/content/**"))
                 .requestMatchers(new AntPathRequestMatcher("/images/**"))
+                .requestMatchers(new AntPathRequestMatcher("/error"))
                 .requestMatchers(PathRequest.toStaticResources().atCommonLocations());
 
     }

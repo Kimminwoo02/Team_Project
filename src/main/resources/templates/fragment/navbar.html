@@ -24,10 +24,9 @@
 
 
                     <li class="nav-item">
-                        <a class="nav-link" sec:authorize="isAuthenticated()"><img id="profile"
-                                                                                   th:src="@{../images/cat.jpg}"
-                                                                                   style="width: 50px;height: 50px;border-radius: 50%;"
-                                                                                   disabled></a>
+
+                        <a class="nav-link" sec:authorize="isAuthenticated()">
+                            <img  id="profile" th:src="@{../images/cat.jpg}" style="width: 50px;height: 50px;border-radius: 50%;"  disabled></a>
                     </li>
 
                     <li class="nav-item">
@@ -64,13 +63,14 @@
         </div>
 
         <script th:inline="javascript" sec:authorize="isAuthenticated()">
-            const url = [[${#authentication.principal.member.memberImg.storeFileName}]];
-            let fullUrl ="/images/"+url;
-
-            console.log(fullUrl);
-
-            $("#profile").attr("src", fullUrl);
-
+            const url = /*[[${#authentication.principal.member.memberImg.storeFileName}]]*/;
+            console.log(url)
+            if (url == null){
+                $("#profile").attr("src", "@{../images/cat.jpg}");
+            }else {
+                let fullUrl ="/images/"+url;
+                $("#profile").attr("src", fullUrl);
+            }
 
         </script>
     </nav>

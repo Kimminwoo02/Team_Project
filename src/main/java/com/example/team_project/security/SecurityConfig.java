@@ -55,12 +55,6 @@ public class SecurityConfig  {
 
     }
 
-
-
-
-
-
-
     @Bean
     protected SecurityFilterChain filterChain(HttpSecurity http, HandlerMappingIntrospector introspect) throws Exception {
         return http
@@ -70,6 +64,8 @@ public class SecurityConfig  {
                 .authorizeHttpRequests(auth->auth
                         .requestMatchers(new MvcRequestMatcher(introspect,"/home")).permitAll()
                         .requestMatchers(new MvcRequestMatcher(introspect,"/login")).permitAll()
+                        .requestMatchers(new MvcRequestMatcher(introspect,"/id")).permitAll()
+                        .requestMatchers(new MvcRequestMatcher(introspect,"/pw")).permitAll()
                         .requestMatchers(new MvcRequestMatcher(introspect,"/findemail")).permitAll()
                         .requestMatchers(new MvcRequestMatcher(introspect,"/findpw")).permitAll()
                         .requestMatchers(new MvcRequestMatcher(introspect,"/signup")).permitAll()
@@ -79,7 +75,8 @@ public class SecurityConfig  {
                         .requestMatchers(new MvcRequestMatcher(introspect,"/detail")).permitAll()
                         .requestMatchers(new MvcRequestMatcher(introspect,"/chat")).permitAll()
                         .requestMatchers(new MvcRequestMatcher(introspect,"/write")).permitAll()
-                        .requestMatchers(new MvcRequestMatcher(introspect,"/mypageEdit")).permitAll()
+                        .requestMatchers(new MvcRequestMatcher(introspect,"/emailCheck")).permitAll()
+
                         .anyRequest().authenticated())
                 .formLogin(login -> login
                         .loginPage("/login")

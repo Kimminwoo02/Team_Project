@@ -1,0 +1,23 @@
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="../../css/findView.css">
+    <title>Actimate - 아이디 찾기</title>
+</head>
+<body>
+    <div class="container">
+        <h1>Actimate</h1>
+        <div class="info-box">
+            <p class="description">입력하신 정보와 일치하는 <br>Actimate계정을 확인해보세요.</p>
+            <p class="user-details" th:text="${email}" > <p>로 비밀번호를 전송했습니다</p></p>
+
+            <a href="/home" class="confirm-btn">확인</a>
+        </div>
+    </div>
+</body>
+</html>

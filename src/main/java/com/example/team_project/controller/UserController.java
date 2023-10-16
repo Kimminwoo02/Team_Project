@@ -1,6 +1,5 @@
 package com.example.team_project.controller;
 
-import com.example.team_project.dto.Board.BoardUpdate;
 import com.example.team_project.dto.auth.SignupDto;
 import com.example.team_project.dto.member.Mail;
 import com.example.team_project.dto.member.MemberSearchCond;
@@ -8,23 +7,19 @@ import com.example.team_project.dto.member.MemberUpdateDto;
 import com.example.team_project.entity.Member;
 import com.example.team_project.service.mail.MailService;
 import com.example.team_project.dto.member.MemberInfoDTO;
-import com.example.team_project.entity.Member;
 import com.example.team_project.security.CustomUserDetails;
 import com.example.team_project.service.MemberService;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import jakarta.servlet.http.HttpSession;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
-import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
 import org.springframework.stereotype.Controller;
@@ -33,6 +28,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 @Controller
 @RequiredArgsConstructor
@@ -53,32 +49,47 @@ public class UserController {
 
     @GetMapping("/findpw")
     public String findPw(){
-        return "main/findpw";
+        return "main/findmenu/findpw";
     }
     @GetMapping("/findemail")
     public String findEmail(){
-        return "main/findemailid";
+        return "main/findmenu/findemailid";
     }
 
     // REST 방식에서 값을 읽어내는 동작은 GET이다. ★ 매핑 주소 find_id 아닌 find/id으로 주는 것 주의!
     @ResponseBody
     @PostMapping("/findemail")
-    public ResponseEntity<String> findId(MemberSearchCond memberSearchCond) {
+    public String findId(MemberSearchCond memberSearchCond , RedirectAttributes rttr) {
         Member user = memberService.getMemberId(memberSearchCond);
         if(user.getEmail() == null) {
-            return ResponseEntity.status(HttpStatus.CONFLICT).body("아이디를 찾지 못했습니다.");
+            rttr.addAttribute("data", "");
+        }else {
+            rttr.addAttribute("data", memberSearchCond);
         }
-        return ResponseEntity.ok(user.getEmail());
+        return "redirect:/id";
     }
+    @GetMapping("/id")
+    public String foundid(@ModelAttribute("data") MemberSearchCond memberSearchCond, Model model){
+        Member member = memberService.getMemberId(memberSearchCond);
+        model.addAttribute("email", member.getEmail());
+        return "main/findmenu/findIdView";
+    }
+
+
     @Transactional
-    @PostMapping("/findpw")
-    public String sendEmail(MemberSearchCond memberSearchCond){
+    @PostMapping("/findpw" )
+    public String sendEmail(MemberSearchCond memberSearchCond , RedirectAttributes rttr){
         Mail dto = mailService.createMailAndChangePassword(memberSearchCond.getEmail());
+        rttr.addFlashAttribute("data", memberSearchCond);
         mailService.mailSend(dto);
 
-        return "redirect:/home";
+        return "redirect:/pw";
     }
-
+    @GetMapping("/pw")
+    public String foundpw(@ModelAttribute("data") MemberSearchCond memberSearchCond, Model model){
+        model.addAttribute("email", memberSearchCond.getEmail());
+        return "main/findmenu/findPwView";
+    }
 
 
     @GetMapping("/signup")
@@ -97,13 +108,21 @@ public class UserController {
 
     @PostMapping("/signup")
     public String signup1(@ModelAttribute SignupDto signupDto) {
-        log.info(String.valueOf(signupDto.getAddr() + "#####" + signupDto.getDetailAddr()));
         memberService.join(signupDto);
 
         return "redirect:/welcome";
 
     }
 
+    @PostMapping( "/emailCheck")
+    @ResponseBody
+    public Long idCheck(String email) {
+
+        System.out.println("컨트롤러 테스트 ++++++ "+ email);
+
+        return memberService.emailCheck(email);
+
+    }
     @GetMapping("/mypage")
     public String mypage1(){
         return "main/mypage";
@@ -115,6 +134,10 @@ public class UserController {
         model.addAttribute("member", member);
         return "main/mypage";
     }
+
+
+
+
 
     @PutMapping("/mypageEdit")
     public String mypageUpdate(@ModelAttribute MemberUpdateDto memberUpdateDto, @AuthenticationPrincipal CustomUserDetails principal) {

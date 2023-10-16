@@ -3,13 +3,16 @@ package com.example.team_project.service.mail;
 import com.example.team_project.dto.member.Mail;
 import com.example.team_project.entity.Member;
 import com.example.team_project.repository.MemberRepository;
+import groovy.util.logging.Slf4j;
 import lombok.RequiredArgsConstructor;
 import org.springframework.mail.MailSender;
 import org.springframework.mail.SimpleMailMessage;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 @Service
+@Slf4j
 @RequiredArgsConstructor
 public class MailServiceImpl implements MailService{
     private final MemberRepository memberRepository;
@@ -21,8 +24,7 @@ public class MailServiceImpl implements MailService{
         Mail dto = new Mail();
         dto.setAddress(email);
         dto.setTitle("Actimate 임시비밀번호 안내 이메일 입니다.");
-        dto.setMessage("안녕하세요. Actimate 임시비밀번호 안내 관련 이메일 입니다." + " 회원님의 임시 비밀번호는 "
-                + str + " 입니다." + "로그인 후에 비밀번호를 변경을 해주세요");
+        dto.setMessage("안녕하세요. Actimate 임시비밀번호 안내 관련 이메일 입니다." + " 회원님의 임시 비밀번호는 " + str + " 입니다." + "로그인 후에 비밀번호를 변경을 해주세요");
         updatePassword(str,email);
         return dto;
     }
@@ -30,8 +32,9 @@ public class MailServiceImpl implements MailService{
     @Override
     public void updatePassword(String str, String userEmail) {
         Member member = memberRepository.findByEmail(userEmail);
-        passwordEncoder.encode(str);
-        member.setPassword(str);
+        member.setPassword(passwordEncoder.encode(str));
+        System.out.println(" 잘 됏겠지?");
+
     }
 
     @Override

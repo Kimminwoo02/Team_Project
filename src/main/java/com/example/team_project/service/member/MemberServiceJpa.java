@@ -141,4 +141,12 @@ public class MemberServiceJpa implements MemberService {
         map.put("result", memberRepository.existsByEmail(email));
         return map;
     }
+
+    @Override
+    public Long emailCheck(String email) {
+        return memberRepository.countByEmail(email);
+    }
+
+
+
 }

@@ -19,7 +19,9 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
 import java.io.IOException;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 
 @RequiredArgsConstructor
@@ -109,7 +111,15 @@ public class MemberServiceMybatis implements MemberService {
         return member;
     }
 
+    @Override
+    public HashMap<String, Object> usernameOverlap(String username) {
+        return new HashMap<>();
 
+    }
 
+    @Override
+    public Long emailCheck(String email) {
+        return 0L;
+    }
 
 }

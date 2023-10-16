@@ -2,7 +2,7 @@
 <html lang="en">
 <meta name="referrer" content="no-referrer-when-downgrade" />
     <style>
-        @import url(../css/login.css);
+        @import url(../../css/login.css);
     </style>
 <head>
     <meta charset="UTF-8">
@@ -11,7 +11,7 @@
 </head>
 <body>
     <div id="content">
-        <a th:href="@{/home}"><img class="logo" alt="logo" src="../images/logo.png"></a>
+        <a th:href="@{/home}"><img class="logo" alt="logo" src="../../images/logo.png"></a>
         <div id="idpwText"><p class="idpwText">비밀번호 찾기</p></div>
             <form id="data" method="post" action="/findpw"  name="sendEmail">
                 <input type="text" id="email" name="email" class="login_input_text" placeholder="Email ID"><br>

@@ -12,6 +12,9 @@ import com.example.team_project.service.comment.CommentService;
 import lombok.RequiredArgsConstructor;
 
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -44,12 +47,15 @@ public class BoardController {
     }
 
     @GetMapping("/boardRead")
-    public String read( Long boardId, ModelMap model) {
+    public String read(Long boardId, ModelMap model) {
+        int pageNumber = 0;  // 페이지 번호
+        int size = 10;       // 페이지 크기
+
         BoardDTO board = boardServiceJpa.getBoard(boardId);
         model.addAttribute("board", board);
-        model.addAttribute("categories",Category.values());
-        model.addAttribute("boardId",boardId);
-        model.addAttribute("comments",commentService.getComment(boardId));
+        model.addAttribute("categories", Category.values());
+        model.addAttribute("boardId", boardId);
+        model.addAttribute("comments", commentService.getComment(boardId, pageNumber, size));
 
         return "main/boardRead";
     }

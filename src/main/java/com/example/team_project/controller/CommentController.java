@@ -1,5 +1,6 @@
 package com.example.team_project.controller;
 
+import com.example.team_project.Response.CommentResponse;
 import com.example.team_project.dto.Board.BoardDTO;
 import com.example.team_project.dto.Response;
 import com.example.team_project.dto.comment.CommentDTO;
@@ -12,6 +13,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @Slf4j
 @Controller
 @RequiredArgsConstructor
@@ -22,12 +25,11 @@ public class CommentController {
 
     @PostMapping("/write")
     @ResponseBody
-    public String save( CommentDTO commentDTO, Model model) {
-        model.addAttribute("comment",commentDTO);
+    public CommentResponse save(CommentDTO commentDTO) {
         commentService.save(commentDTO);
-
-        return "redirect:/boardRead/{commentDTO.boardId}";
+        return new CommentResponse(commentDTO.getCommentWriter(), commentDTO.getCommentContents());
     }
+
 
 
     @PostMapping("/delete")
@@ -35,6 +37,21 @@ public class CommentController {
         commentService.delete(commentDTO.getId(),principal.getName());
         return "redirect:/board";
 
+    }
+
+    //댓글 조회
+
+    @GetMapping("/list")
+    public String getComments(
+            @RequestParam("boardId") Long boardId,
+            @RequestParam(value = "page", defaultValue = "0") int page,
+            @RequestParam(value = "size", defaultValue = "10") int size,
+            Model model) {
+
+        List<CommentDTO> comments = commentService.getComment(boardId, page, size);
+        model.addAttribute("comments", comments);
+
+        return "commentList";  // 댓글 리스트를 보여주는 뷰 이름
     }
 
 

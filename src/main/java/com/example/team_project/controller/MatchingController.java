@@ -43,4 +43,9 @@ public class MatchingController {
     public String history(){
         return "main/matchingHistory";
     }
+
+    @GetMapping("/matchingMemberList")
+    public String matchingMemberList(){
+        return "main/matchingMemberList";
+    }
 }

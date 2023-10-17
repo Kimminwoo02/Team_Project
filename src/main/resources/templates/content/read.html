@@ -89,10 +89,10 @@
                             </div>
                         </div>
                     </div>
-                    <div class="comment_input">
-                        <div th:each= "comment : ${comments}" class="card" style=" width: 963px; height: 90px; margin-top: 10px">
+                    <div class="comments">
+                        <div th:each= "comment : ${comments}" class="div" style=" width: 963px; height: 90px; margin-top: 10px">
                             <div  class="card-content">
-                                <h5 th:text="${comment.commentWriter}"></h5>
+                                <h5 th:text="${comment.commentWriter}" style="font-weight: bold;"></h5>
                                 <p th:text="${comment.commentContents}">이것은 세 번째 카드의 내용입니다. 내용이 조금 더 길어질 때 어떻게 나타나는지 확인합니다.</p>
                             </div>
                         </div>
@@ -132,7 +132,16 @@
                     console.log("데이터 들어간다~" + data);
                     $("#data").val('');
                     location.href= window.location.host +"/boradRead/"+boardId
-
+                //-----------
+                    var newComment = `
+            <div class="div" style="width: 963px; height: 90px; margin-top: 10px">
+                <div class="card-content">
+                    <h5 style="font-weight: bold;">${data.commentWriter}</h5>
+                    <p>${data.commentContents}</p>
+                </div>
+            </div>
+        `;
+                    $(".comments").append(newComment);
                 },
                 error : function(request){
                     console.log("request" + request);
@@ -143,6 +152,7 @@
 
         }
     </script>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320"><path fill="#36363e" fill-opacity="1" d="M0,96L40,117.3C80,139,160,181,240,186.7C320,192,400,160,480,149.3C560,139,640,149,720,176C800,203,880,245,960,250.7C1040,256,1120,224,1200,229.3C1280,235,1360,277,1400,298.7L1440,320L1440,320L1400,320C1360,320,1280,320,1200,320C1120,320,1040,320,960,320C880,320,800,320,720,320C640,320,560,320,480,320C400,320,320,320,240,320C160,320,80,320,40,320L0,320Z"></path></svg>
 </main>
 
 </body>

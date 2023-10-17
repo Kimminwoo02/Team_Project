@@ -11,10 +11,11 @@ import java.util.Optional;
 
 public interface MemberRepository extends JpaRepository<Member,Long> {
     Member findByEmail(String email);
+    Long countByEmail(String email);
 
     Member findByNameAndPhone(String name, String phone);
 
     Object existsByEmail(String email);
 
-    Long countByEmail(String email);
+
 }

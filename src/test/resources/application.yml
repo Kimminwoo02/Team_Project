@@ -1,8 +1,9 @@
 spring:
   datasource:
-    url: jdbc:h2:mem:testdb
+    url:  jdbc:h2:tcp://localhost/C:\Users\USER\Desktop\dbServer
     username: sa
     driver-class-name: org.h2.Driver
+    password: :1234
 
   h2:
     console:

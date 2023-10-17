@@ -35,4 +35,9 @@ public class MatchingController {
     public String mat3(@PathVariable String Category){
         return "redirect:/matching";
     }
+
+    @GetMapping("/matchingHistory")
+    public String history(){
+        return "main/matchingHistory";
+    }
 }

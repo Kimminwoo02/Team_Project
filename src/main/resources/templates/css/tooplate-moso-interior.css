@@ -1481,14 +1481,13 @@ strong {
 
 #sidebar {
     z-index: 1000;
-    left: 250px;
-    width: 250px;
+    left: 300px;
+    width: 170px;
     height: 100vh;
-    margin-left: -250px;
+    margin-left: -200px;
     margin-top: 30px;
     background: white;
     color: black;
-    overflow-y: auto;
     -webkit-transition: all 0.5s ease;
     -moz-transition: all 0.5s ease;
     -o-transition: all 0.5s ease;
@@ -1774,4 +1773,66 @@ strong {
 #calendarBox{
     width: 100%;
     padding-left: 15%;
+}
+
+/*matching history*/
+.card-container {
+    font-family: Arial, sans-serif;
+    max-width: 300px;
+    margin: 20px;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-auto-flow: row;
+    gap: 20px;
+}
+
+.card {
+    width: 250px;
+    height: 300px;
+    background-color: #fff;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+    border-radius: 10px;
+    overflow: hidden;
+    transition: transform 0.2s;
+}
+
+.card:hover {
+    transform: scale(1.05);
+}
+
+.thumbnail {
+    width: 100%;
+    height: 150px; /* 썸네일 이미지의 높이를 조정하세요 */
+    object-fit: cover;
+    padding: 10px; /* 이미지 주위에 마진 추가 */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* 이미지에 그림자 효과 추가 */
+    border-radius: 5px;
+}
+
+.card-content {
+    padding: 20px;
+}
+
+.card h2 {
+    margin: 0;
+    font-size: 20px;
+    color: #333;
+}
+
+.card p {
+    margin: 10px 0;
+    font-size: 16px;
+    color: #666;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.read-more {
+    text-align: right;
+}
+
+.read-more a {
+    text-decoration: none;
+    color: #007bff;
 }

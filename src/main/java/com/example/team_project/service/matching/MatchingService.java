@@ -11,4 +11,6 @@ public interface MatchingService {
 
     List<Matching> findAll();
 
+    Matching getMatching(Long matchingId);
+
 }

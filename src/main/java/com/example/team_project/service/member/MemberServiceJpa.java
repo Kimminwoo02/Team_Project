@@ -27,6 +27,7 @@ import org.springframework.stereotype.Service;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Optional;
 
 
 @RequiredArgsConstructor
@@ -131,6 +132,11 @@ public class MemberServiceJpa implements MemberService {
     @Override
     public Member getMemberId(MemberSearchCond memberSearchCond) {
         return memberRepository.findByNameAndPhone(memberSearchCond.getName(),memberSearchCond.getPhone());
+    }
+
+    @Override
+    public Member getMember(Long memberId) {
+        return memberRepository.findById(memberId).orElseThrow();
     }
 
 

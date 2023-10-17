@@ -104,7 +104,7 @@
                 return;
 
             }
-            doAction(data)
+            // doAction(data)
 
         }
 
@@ -200,18 +200,19 @@
 
             console.log(name +" ### " + address + " ### " +longitude + "  ### " + altitude  )
             var createFacility = {"name" :name , "address" : address, "longitude" : longitude, "altitude" : altitude}
-
-
-                $.ajax({
-                    url: '/facility'
-                    , method: 'POST'
-                    , data: createFacility
-                    , success: function (data) {
-                        alert("등록을 완료했습니다!");
-                        window.close();
-                    }
-
-                })
+            opener.document.getElementById("addr").value = address
+            alert("등록을 완료했습니다!")
+            window.close();
+                // $.ajax({
+                //     url: '/facility'
+                //     , method: 'POST'
+                //     , data: createFacility
+                //     , success: function (data) {
+                //         alert("등록을 완료했습니다!");
+                //         window.close();
+                //     }
+                //
+                // })
 
         }
 

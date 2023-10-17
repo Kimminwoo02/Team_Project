@@ -112,6 +112,11 @@ public class MemberServiceMybatis implements MemberService {
     }
 
     @Override
+    public Member getMember(Long memberId) {
+        return null;
+    }
+
+    @Override
     public HashMap<String, Object> usernameOverlap(String username) {
         return new HashMap<>();
 

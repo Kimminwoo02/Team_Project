@@ -1,6 +1,7 @@
 <!doctype html>
 <html lang="ko"
-      xmlns:th="http://www.thymeleaf.org">
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">>
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -66,7 +67,7 @@
                                             <div class="frame">
                                                 <span class="photo_border">
                                                     <input name="file" id="file" type="file" style="display: none" >
-                                                    <img class="photo" id="myhome_profile_photo" url="//www.saraminimage.co.kr/sri/person/img/profile_noimg.png">
+                                                    <img class="photo" id="profile" th:src="@{../images/cat.jpg}">
                                                 <!--                                    <img class="photo" id="myhome_profile_photo" th:url="${member.file.folderPath}">-->
                                                     </img>
                                                 </span>
@@ -150,7 +151,17 @@
                     integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm"
                     crossorigin="anonymous"></script>
 
-        <script>
+        <script th:inline="javascript" sec:authorize="isAuthenticated()">
+
+            let personal_info = /*[[${#authentication.principal.member.memberImg.storeFileName}]]*/;
+
+            if (personal_info != null){
+                let fullUrl ="/images/"+personal_info;
+                $("#profile").attr("src", fullUrl);
+            }
+
+
+
             window.addEventListener('load', () => {
                 const forms = document.getElementsByClassName('userUpdateForm');
                 Array.prototype.filter.call(forms, (form) => {

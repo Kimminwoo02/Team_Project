@@ -2,6 +2,8 @@ package com.example.team_project.entity.matching;
 
 import com.example.team_project.entity.Facility;
 import com.example.team_project.entity.Member;
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -16,17 +18,19 @@ public class MatchingMember {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long matchingUserId;
 
+    @JsonManagedReference
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "matchingId")
     @Setter
     private Matching matching;
 
+    @JsonManagedReference
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "memberId")
     @Setter
     private Member member;
 
-    private Integer quota;
+    private Integer quota = 0;
 
     private String introduce;
 

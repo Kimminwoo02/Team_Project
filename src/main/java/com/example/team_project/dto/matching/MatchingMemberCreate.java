@@ -13,8 +13,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 
 public class MatchingMemberCreate {
 
-    private Matching matching;
-    private Member member;
+    private Long matchingId;
+    private Long memberId;
     private String introduce;
 
 

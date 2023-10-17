@@ -135,10 +135,6 @@ public class UserController {
         return "main/mypage";
     }
 
-
-
-
-
     @PutMapping("/mypageEdit")
     public String mypageUpdate(@ModelAttribute MemberUpdateDto memberUpdateDto, @AuthenticationPrincipal CustomUserDetails principal) {
         memberService.update(memberUpdateDto,principal.getMemberId());

@@ -8,12 +8,14 @@ import com.example.team_project.entity.Category;
 import com.example.team_project.security.CustomUserDetails;
 import com.example.team_project.service.BoardService;
 import com.example.team_project.service.BoardServiceJpa;
+import com.example.team_project.service.comment.CommentService;
 import lombok.RequiredArgsConstructor;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -23,6 +25,7 @@ import java.util.List;
 @Controller
 public class BoardController {
     private final BoardServiceJpa boardServiceJpa;
+    private final CommentService commentService;
 
     @GetMapping("/boardMain")
     public String board(Model model) {
@@ -41,10 +44,13 @@ public class BoardController {
     }
 
     @GetMapping("/boardRead")
-    public String read(Long boardId, Model model) {
+    public String read( Long boardId, ModelMap model) {
         BoardDTO board = boardServiceJpa.getBoard(boardId);
         model.addAttribute("board", board);
         model.addAttribute("categories",Category.values());
+        model.addAttribute("boardId",boardId);
+        model.addAttribute("comments",commentService.getComment(boardId));
+
         return "main/boardRead";
     }
 

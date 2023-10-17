@@ -12,6 +12,9 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 
 @Service
 @RequiredArgsConstructor
@@ -24,7 +27,7 @@ public class CommentServiceImpl implements CommentService {
         Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         Long memberId = ((CustomUserDetails) principal).getMember().getMemberId();
 
-        Board board = boardRepository.getReferenceById(commentDTO.getBoard().getBoardId());
+        Board board = boardRepository.getReferenceById(commentDTO.getBoardId());
         Member member = memberRepository.getReferenceById(memberId);
 
         Comment comment = Comment.toComment(member.getNickName(), commentDTO.getCommentContents(), board);
@@ -35,6 +38,11 @@ public class CommentServiceImpl implements CommentService {
         commentRepository.deleteByIdAndCommentWriter(articleCommentId,userId);
     }
 
-
-
+    @Override
+    public List<CommentDTO> getComment(Long boardId) {
+        return  commentRepository.findByBoard_BoardId(boardId)
+                    .stream()
+                    .map(CommentDTO::from)
+                    .collect(Collectors.toList());
+    }
 }

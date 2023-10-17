@@ -21,6 +21,8 @@ public interface MemberService {
      void update(MemberUpdateDto memberUpdateDto, Long memberId);
      Member getMemberId(MemberSearchCond memberSearchCond);
 
+     Member getMember(Long memberId);
+
     HashMap<String, Object> usernameOverlap(String username);
 
      Long emailCheck(String email);

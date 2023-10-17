@@ -51,7 +51,7 @@
 
                             <div class="form-group">
                                 <label for="email">이메일</label>
-                                <input type="email" class="form-control" id="email" name="email" placeholder="ID" required >
+                                <input type="email" class="form-control" id="email" name="email" placeholder="ID"  >
                                 <div class="check_font" id="id_check"></div>
                                 <button type="button"  onclick="emailChecking()" id="data" class="btn btn-outline-primary" style="margin-top: 20px;">중복검사</button>
                             </div>
@@ -130,7 +130,7 @@
                     <label class="custom-control-label" for="aggrement">개인정보 수집 및 이용에 동의합니다.</label>
                 </div>
                 <div class="mb-4"></div>
-                <button class="btn btn-primary btn-lg btn-block" type="submit">가입 완료</button>
+                <button onclick="check()" class="btn btn-primary btn-lg btn-block" type="submit">가입 완료</button>
             </form>
         </div>
     </div>
@@ -213,6 +213,7 @@
 
     let isEmailCheck = false;
     function emailChecking(){
+
         // 이메일 유효성 검사
         if($("#email").val() == ''){
             $("#id_check").html( '<h6 style="color: red"> 이메일을 입력해주세요</h6>' );
@@ -223,7 +224,7 @@
         let getYouEmail =  RegExp(/^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([\-.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/i);
 
         if(!getYouEmail.test($("#email").val())){
-            $("#id_check").html( '<h6> style="color: red"> 이메일 형식에 맞게 작성해주세요!</h6>' );
+            $("#id_check").html( '<h6 style="color: red"> 이메일 형식에 맞게 작성해주세요!</h6>' );
             $("#email").val('');
             $("#email").focus();
             return false;
@@ -242,6 +243,7 @@
                 success : function(data){
                     if(data === 0){
                         $("#id_check").html( '<h6 style="color: dodgerblue">사용 가능한 이메일 입니다!</h6>' );
+                        isEmailCheck = true
                     } else {
                         $("#id_check").html( '<h6 style="color: red">이미 존재하는 이메일 입니다</h6>' );
 
@@ -256,6 +258,13 @@
         }
     }
 
+
+    function check(){
+        if( isEmailCheck === false){
+            alert(" 중복 체크를 먼저 해주세요!")
+            return false
+        }
+    }
 
 </script>
 </body>

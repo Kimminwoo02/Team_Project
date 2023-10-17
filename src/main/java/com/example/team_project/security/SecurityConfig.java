@@ -51,6 +51,8 @@ public class SecurityConfig  {
                 .requestMatchers(new AntPathRequestMatcher("/content/**"))
                 .requestMatchers(new AntPathRequestMatcher("/images/**"))
                 .requestMatchers(new AntPathRequestMatcher("/error"))
+                .requestMatchers(new AntPathRequestMatcher("/matching"))
+                .requestMatchers(new AntPathRequestMatcher("/matchingMember"))
                 .requestMatchers(PathRequest.toStaticResources().atCommonLocations());
 
     }

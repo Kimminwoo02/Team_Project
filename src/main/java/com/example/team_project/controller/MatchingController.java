@@ -1,18 +1,22 @@
 package com.example.team_project.controller;
 
+import com.example.team_project.dto.Response;
 import com.example.team_project.dto.matching.MatchingDTO;
 import com.example.team_project.dto.matching.MatchingMemberCreate;
 import com.example.team_project.dto.matching.MatchingMemberResponse;
 import com.example.team_project.entity.Category;
+import com.example.team_project.entity.Member;
+import com.example.team_project.entity.matching.Matching;
 import com.example.team_project.entity.matching.MatchingMember;
+import com.example.team_project.security.CustomUserDetails;
+import com.example.team_project.service.MemberService;
 import com.example.team_project.service.matching.MatchingMemberService;
 import com.example.team_project.service.matching.MatchingService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -21,12 +25,13 @@ import java.util.List;
 public class MatchingController {
     private final MatchingService matchingService;
     private final MatchingMemberService matchingMemberService;
+    private final MemberService memberService;
 
     @GetMapping("/matching")
     public String matching(Model model){
-        List<MatchingMember> matching = matchingMemberService.getMatching();
+        List<Matching> matches = matchingService.findAll();
         model.addAttribute("categories",Category.values());
-        model.addAttribute("matches", matching);
+        model.addAttribute("matches", matches);
         return "main/matching";
     }
 
@@ -38,11 +43,14 @@ public class MatchingController {
         return "redirect:/matching";
     }
 
-    @PostMapping
-    public String matchingMember(MatchingMemberCreate matchingMemberCreate){
-        matchingMemberService.matchingApply(matchingMemberCreate.getMatching().getMemberId(), matchingMemberCreate.getMatching().getMatchingId(), matchingMemberCreate);
+    @PostMapping("/matchingMember")
+    @ResponseBody
+    public Response<Void> matchingMember(@RequestBody MatchingMemberCreate matchingMemberCreate, @AuthenticationPrincipal CustomUserDetails principal){
+        Member member = memberService.getMember(principal.getMemberId());
+        Matching matching = matchingService.getMatching(matchingMemberCreate.getMatchingId());
+        matchingMemberService.matchingApply(member,matching,matchingMemberCreate.getIntroduce());
 
-        return "redirect:/matching";
+        return Response.success();
     }
 
 

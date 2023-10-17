@@ -1,6 +1,8 @@
 package com.example.team_project.entity;
 
 import com.example.team_project.entity.matching.MatchingMember;
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -45,12 +47,16 @@ public class Member {
     @Setter
     private Review review;
 
+    @JsonBackReference
     @OneToMany(mappedBy = "member", cascade = CascadeType.ALL)
     private List<Board> board = new ArrayList<>();
 
+    @JsonBackReference
     @OneToMany(mappedBy = "member", cascade  = CascadeType.ALL)
     private List<MatchingMember> memberMatchingList = new ArrayList<>();
 
+    @JsonManagedReference
+    @JsonBackReference
     @OneToMany(mappedBy = "reviewedMember", cascade  = CascadeType.ALL)
     private List<MemberReview> receivedReviews = new ArrayList<>();
 

@@ -23,7 +23,7 @@ public class MatchingMemberServiceImpl implements MatchingMemberService {
     private final MatchingRepository matchingRepository;
     private final MatchingMemberRepository matchingMemberRepository;
 
-    @Override 
+    @Override
     public void createAndAddMember2Matching() {
         Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         Long memberId = ((CustomUserDetails) principal).getMember().getMemberId();
@@ -53,20 +53,10 @@ public class MatchingMemberServiceImpl implements MatchingMemberService {
     }
 
     @Override
-    public void matchingApply(Long memberId, Long matchingId, MatchingMemberCreate matchingMemberCreate) {
-
-        Member mem = memberRepository.getReferenceById(memberId);
-        Matching mat = matchingRepository.getReferenceById(matchingId);
-        MatchingMember matchingMember = MatchingMember.builder()
-                .member(mem)
-                .matching(mat)
-                .introduce(matchingMemberCreate.getIntroduce())
-                .build();
-
-        matchingMemberRepository.save(matchingMember);
-
+    public void matchingApply(Member member, Matching matching, String introduce) {
 
     }
+
 
     @Override
     public List<MatchingMember> getMatching() {
@@ -84,9 +74,6 @@ public class MatchingMemberServiceImpl implements MatchingMemberService {
 //        matchingMemberResponse.setIntroduce(matchingMember.getIntroduce());
 //
 //        return matchingMemberResponse;
-
-
-
 
 
 }

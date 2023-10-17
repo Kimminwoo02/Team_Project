@@ -118,10 +118,8 @@ public class MemberServiceJpa implements MemberService {
         try{
             ResultFileStore resultFileStore = filestore.storeProfileFile(memberUpdateDto.getFile());
             MemberImg memberImg =memberImgRepository.getReferenceById(member.getMemberImg().getImgId());
-            if(resultFileStore != null){
+            if(resultFileStore != null) {
                 memberImg.setStoreFileName(resultFileStore.getStoreFileName());
-            }else{
-                memberImg.setStoreFileName("cat.jpg");
             }
             memberImgRepository.save(memberImg);
         }

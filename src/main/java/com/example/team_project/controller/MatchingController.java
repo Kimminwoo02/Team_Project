@@ -61,8 +61,12 @@ public class MatchingController {
     public String matchingMemberList(){
         return "main/matchingMemberList";
     }
-
-
-
-
+    @GetMapping("/matchingStatus")
+    public String matchingStatus(){
+        return "main/matchingStatus";
+    }
+    @GetMapping("/matchingApplyList")
+    public String matchingApplyList(){
+        return "main/matchingApplyList";
+    }
 }

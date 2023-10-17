@@ -176,6 +176,12 @@
 
             reader.addEventListener('load', () => {
 
+                // 기존 미리보기 이미지 제거
+                const existingThumbnail = frame.querySelector('.thumbnail');
+                if (existingThumbnail) {
+                    existingThumbnail.remove();
+                }
+
                 const img = document.createElement('IMG');
                 img.classList.add('thumbnail');
                 img.src = reader.result;

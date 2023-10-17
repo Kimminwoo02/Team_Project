@@ -1,7 +1,8 @@
-package com.example.team_project.service;
+package com.example.team_project.service.matching;
 
-import com.example.team_project.dto.matching.MatchingDTO;
+import com.example.team_project.dto.matching.MatchingMemberCreate;
 import com.example.team_project.dto.matching.MatchingMemberDTO;
+import com.example.team_project.dto.matching.MatchingMemberResponse;
 import com.example.team_project.entity.Member;
 import com.example.team_project.entity.matching.Matching;
 import com.example.team_project.entity.matching.MatchingMember;
@@ -12,6 +13,8 @@ import com.example.team_project.security.CustomUserDetails;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @RequiredArgsConstructor
 @Service
@@ -48,4 +51,42 @@ public class MatchingMemberServiceImpl implements MatchingMemberService {
 
         MatchingMember matchingMember = matchingMemberRepository.getReferenceById(matchingMemberDTO.getMatchingUserId());
     }
+
+    @Override
+    public void matchingApply(Long memberId, Long matchingId, MatchingMemberCreate matchingMemberCreate) {
+
+        Member mem = memberRepository.getReferenceById(memberId);
+        Matching mat = matchingRepository.getReferenceById(matchingId);
+        MatchingMember matchingMember = MatchingMember.builder()
+                .member(mem)
+                .matching(mat)
+                .introduce(matchingMemberCreate.getIntroduce())
+                .build();
+
+        matchingMemberRepository.save(matchingMember);
+
+
+    }
+
+    @Override
+    public List<MatchingMember> getMatching() {
+        return matchingMemberRepository.findAll();
+    }
+
+//    @Override
+//    public MatchingMemberResponse getMatchingMember(Long matchingId) {
+////        matchin
+////        MatchingMember matchingMember = matchingMemberRepository.getReferenceById(matchingMemberId);
+//
+//        MatchingMemberResponse matchingMemberResponse = new MatchingMemberResponse();
+//        matchingMemberResponse.setMatching(matchingMember.getMatching());
+//        matchingMemberResponse.setMember(matchingMember.getMember());
+//        matchingMemberResponse.setIntroduce(matchingMember.getIntroduce());
+//
+//        return matchingMemberResponse;
+
+
+
+
+
 }

@@ -59,18 +59,23 @@
                      aria-hidden="true">
                     <div class="modal-dialog">
                         <div class="modal-content">
+                            <!--modal header-->
                             <div class="modal-header">
                                 <h5 class="modal-title" id="exampleModalLabel">매칭</h5>
                                 <button type="button" class="btn-close" data-bs-dismiss="modal"
                                         aria-label="Close"></button>
                             </div>
+                            <!--modal body-->
                             <div class="modal-body">
                                 <form method="post" action="/matching">
+                                    <!--matching title-->
                                     <div class="mb-3">
+
                                         <label for="recipient-name" class="col-form-label" style="width: 50%">매칭
                                             제목</label>
                                         <input type="text" class="form-control" name="matchingName">
                                     </div>
+                                    <!--matching category-->
                                     <div class="mb-3" ≈>
                                         <label for="recipient-name" class="col-form-label"
                                                style="width: 80%">카테고리</label>
@@ -83,32 +88,42 @@
                                                                            step="1"/>
                                         </div>
                                     </div>
+                                    <!--matching level-->
                                     <div class="mb-3">
                                         <label for="recipient-name" class="col-form-label" style="width: 50%">예상 활동
                                             강도</label>
                                         <input type="text" class="form-control" id="recipient-name" name="level">
                                     </div>
+                                    <!--matching location-->
+                                    <!--HERE'S ANOTHER MODAL BUTTON-->
                                     <div class="mb-3">
                                         <label for="recipient-name" class="col-form-label" style="width: 50%">장소</label>
                                         <!--test-->
                                         <div class="review-btn-wrapper">
-                                            <button type="button" class="btn btn-outline" data-toggle="modal"
-                                                    data-target="#matchingform"> 장소 선택
-                                            </button>
-
+                                            <script>
+                                                function pop() {
+                                                    var url = "/facility";
+                                                    var name = "Facility Map";
+                                                    var width = 1200;
+                                                    var height = 900;
+                                                    var winW = (screen.width-width)/2;
+                                                    var winH=(screen.height-height)/2;
+                                                    var option="width="+width+"px,height="+900+"px,top="+winW+"px," +
+                                                        "left="+winH+"px,location=no, toolbars=no, status=no, history=no, scrollbars=no,menubar=no";
+                                                    window.open(url, name, option);
+                                                }
+                                            </script>
+                                            <button type="button" onclick="javascript:pop()">장소 선택</button>
                                         </div>
-
-
                                         <!--test-->
                                     </div>
-
-                                    <!--                                        <input type="text" class="form-control" name="location">-->
-
+                                    <!--matching content-->
                                     <div class="mb-3">
                                         <label class="col-form-label">내용</label>
                                         <textarea name="content" class="form-control" placeholder="200자 이하로 적어주세요"
                                                   rows="10" style="width: 100%"></textarea>
                                     </div>
+                                    <!--modal footer-->
                                     <div class="modal-footer">
                                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">닫기
                                         </button>

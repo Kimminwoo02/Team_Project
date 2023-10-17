@@ -16,20 +16,25 @@
     <header>
       <h3>마이페이지</h3>
     </header>
-    <ul class="nav">
+    <ul class="nav row">
       <li>
-        <a href="@{/mypage}">
-          <i class="zmdi zmdi-view-dashboard"></i> 내 정보
+        <a th:href="@{/mypage}">
+          <i class="zmdi zmdi-face"></i> 내 정보
         </a>
       </li>
       <li>
         <a th:href="@{/mySchedule}">
-          <i class="zmdi zmdi-link"></i> 일정
+          <i class="zmdi zmdi-calendar-check"></i>  일정
         </a>
       </li>
       <li>
-        <a href="#">
-<!--          <i class="zmdi zmdi-widgets"></i> Overview-->
+        <a th:href="@{/matchingHistory}">
+          <i class="zmdi zmdi-accounts-outline"></i>매칭
+        </a>
+      </li>
+      <li>
+        <a th:href="@{/chat}">
+          <i class="zmdi zmdi-comments"></i> 채팅
         </a>
       </li>
     </ul>

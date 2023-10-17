@@ -9,6 +9,8 @@ import com.example.team_project.repository.CommentRepository;
 import com.example.team_project.repository.MemberRepository;
 import com.example.team_project.security.CustomUserDetails;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
@@ -39,10 +41,12 @@ public class CommentServiceImpl implements CommentService {
     }
 
     @Override
-    public List<CommentDTO> getComment(Long boardId) {
-        return  commentRepository.findByBoard_BoardId(boardId)
-                    .stream()
-                    .map(CommentDTO::from)
-                    .collect(Collectors.toList());
+    public List<CommentDTO> getComment(Long boardId, int page, int size) {
+        Page<Comment> comments = commentRepository.findByBoard_BoardId(boardId, PageRequest.of(page, size));
+        return comments.stream()
+                .map(CommentDTO::from)
+                .collect(Collectors.toList());
     }
+
+
 }

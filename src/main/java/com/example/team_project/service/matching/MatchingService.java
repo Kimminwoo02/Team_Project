@@ -1,4 +1,4 @@
-package com.example.team_project.service;
+package com.example.team_project.service.matching;
 
 import com.example.team_project.dto.matching.MatchingDTO;
 import com.example.team_project.entity.matching.Matching;

@@ -90,13 +90,59 @@
                         </div>
                     </div>
                     <div class="comment_input">
-                        <textarea class="scrollbar" placeholder= "여러분이 남긴 댓글은 자신을 나타냅니다."></textarea>
+                        <div th:each= "comment : ${comments}" class="card" style=" width: 963px; height: 90px; margin-top: 10px">
+                            <div  class="card-content">
+                                <h5 th:text="${comment.commentWriter}"></h5>
+                                <p th:text="${comment.commentContents}">이것은 세 번째 카드의 내용입니다. 내용이 조금 더 길어질 때 어떻게 나타나는지 확인합니다.</p>
+                            </div>
+                        </div>
                     </div>
-                    <button type="button" class="comment_summit" onclick="">댓글 등록</button>
+                    <div class="comment_input">
+                        <textarea id="data" class="scrollbar" placeholder= "여러분이 남긴 댓글은 자신을 나타냅니다."></textarea>
+                    </div>
+
+                    <button type="button" class="comment_summit" onclick="doAction()">댓글 등록</button>
                 </div>
             </div>
         </div>
     </div>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script th:inline="javascript">
+
+        function doAction(){
+            var commentContents = $("#data").val();
+            const memberId = /*[[${#authentication.principal.member.memberId}]]*/
+            const commentWriter = /*[[${#authentication.principal.member.name}]]*/
+
+            const boardId = /*[[${boardId}]]*/
+            console.log(boardId);
+
+            console.log(memberId)
+            console.log(commentContents)
+            console.log(window.location.host +"/boradRead/"+boardId)
+
+
+
+            $.ajax({
+                url: "/comment/write"
+                , method: 'POST'
+                , data:  { "commentWriter" : commentWriter , "commentContents" : commentContents, "memberId" : memberId, "boardId" : boardId }
+                , success: function (data) {
+                    console.log("데이터 들어간다~" + data);
+                    $("#data").val('');
+                    location.href= window.location.host +"/boradRead/"+boardId
+
+                },
+                error : function(request){
+                    console.log("request" + request);
+                }
+
+
+            })
+
+        }
+    </script>
 </main>
 
 </body>

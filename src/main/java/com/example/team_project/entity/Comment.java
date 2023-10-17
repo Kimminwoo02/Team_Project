@@ -1,6 +1,7 @@
 package com.example.team_project.entity;
 
 import com.example.team_project.dto.comment.CommentDTO;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 
 import lombok.*;
@@ -20,9 +21,10 @@ public class Comment {
     @Column(length = 20, nullable = false)
     private String commentWriter;
 
-   @Column
+    @Column
     private String commentContents;
 
+    @JsonManagedReference
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name="boardId")
     private Board board; //boardEntity에 코드 추가해야할 것. private List<Comment> commentList = new ArrayList<>();

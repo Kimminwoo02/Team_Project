@@ -1,5 +1,6 @@
 package com.example.team_project.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Size;
 import lombok.*;
@@ -11,6 +12,7 @@ import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Entity
 @NoArgsConstructor
@@ -38,6 +40,13 @@ public class Board extends AuditingFields {
     @Setter
     @Enumerated(EnumType.STRING)
     private Category category;
+
+
+    @JsonBackReference
+    @OneToMany(mappedBy = "board", cascade = CascadeType.ALL)
+    private List<Comment> comments;
+
+
 
 
     @Builder

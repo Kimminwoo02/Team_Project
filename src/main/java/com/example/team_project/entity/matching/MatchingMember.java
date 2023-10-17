@@ -2,20 +2,16 @@ package com.example.team_project.entity.matching;
 
 import com.example.team_project.entity.Member;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 @Entity
 @NoArgsConstructor
 @Getter
-@AllArgsConstructor
 public class MatchingMember {
     @Id
     @Column(name = "memberMatching_id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long matchingUser_id;
+    private Long matchingUserId;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "matchingId")
@@ -31,4 +27,12 @@ public class MatchingMember {
 
     private Boolean matchingYN;
 
+    @Builder
+    public MatchingMember(Long matchingUserId, Matching matching, Member member, Integer quota, Boolean matchingYN) {
+        this.matchingUserId = matchingUserId;
+        this.matching = matching;
+        this.member = member;
+        this.quota = quota;
+        this.matchingYN = matchingYN;
+    }
 }

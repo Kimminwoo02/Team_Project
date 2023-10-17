@@ -4,16 +4,15 @@ import com.example.team_project.entity.AuditingFields;
 import com.example.team_project.entity.Category;
 import com.example.team_project.entity.Member;
 import jakarta.persistence.*;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import java.util.List;
 
 @Entity
+@Builder
 @NoArgsConstructor
 @Getter
+@AllArgsConstructor
 public class Matching {
     @Id
     @GeneratedValue
@@ -31,25 +30,13 @@ public class Matching {
 
     private String address;
 
+    private String capacity;
+
     @OneToMany(mappedBy = "matching", cascade = CascadeType.ALL)
     private List<MatchingMember> matchingMemberList;
 
     @Enumerated(EnumType.STRING)
     private Category category;
 
-    @Builder
-    public Matching(Long memberId,
-                    String matchingName,
-                    String level,
-                    String content,
-                    String address,
-                    Category category) {
-        this.memberId = memberId;
-        this.matchingName = matchingName;
-        this.level = level;
-        this.content = content;
-        this.address = address;
-        this.category = category;
-    }
 
 }

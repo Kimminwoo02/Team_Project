@@ -1,11 +1,9 @@
 package com.example.team_project.service;
 
-import com.example.team_project.dto.MatchingDTO;
+import com.example.team_project.dto.matching.MatchingDTO;
 
 import com.example.team_project.entity.matching.Matching;
-import com.example.team_project.repository.MatchingMemberRepository;
 import com.example.team_project.repository.MatchingRepository;
-import com.example.team_project.repository.MemberRepository;
 import com.example.team_project.security.CustomUserDetails;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -17,9 +15,7 @@ import java.util.List;
 @RequiredArgsConstructor
 @Transactional
 public class MatchingServiceImpl implements MatchingService {
-    private final MemberRepository memberRepository;
     private final MatchingRepository matchingRepository;
-    private final MatchingMemberRepository matchingMemberRepository;
 
     // 매칭 등록
     @Override

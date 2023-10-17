@@ -1,4 +1,4 @@
-package com.example.team_project.dto;
+package com.example.team_project.dto.matching;
 
 import com.example.team_project.entity.Category;
 import com.example.team_project.entity.Member;
@@ -26,6 +26,7 @@ public class MatchingDTO {
     private String level;
     private String content;
     private String address;
+    private String capacity;
     private Category category;
 
 
@@ -36,6 +37,7 @@ public class MatchingDTO {
                 .level(level)
                 .content(content)
                 .address(address)
+                .capacity(capacity)
                 .category(category)
                 .build();
     }

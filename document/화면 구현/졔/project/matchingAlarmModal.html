@@ -1,0 +1,61 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <!-- <link rel="stylesheet" href="./review.css"> -->
+</head>
+<body>
+    <div class="review-btn-wrapper">
+        <button type="button" class="btn btn-outline" data-toggle="modal" data-target="#matchingform"> 알림 </button>
+        <div class="modal fade" id="matchingform" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered" role="document" >
+                <div class="modal-content" style=" border-style: hidden;">
+                    <!-- <div class="modal-header" style=" border-style: 'hidden';">
+                        <button type="button" class="text-right close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div> -->
+                    <!-- <div class="card-body text-center"> <img src=" https://i.imgur.com/d2dKtI7.png" height="100" width="100"> -->
+                    
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="myModalLabel">매칭 신청</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="comment-box ">
+                        <div class="modal-body">
+                            <form>
+                                <div class="form-group">
+                                    <label for="name">매칭</label>
+                                    <input type="text" class="form-control" id="name" name="name" value="반포 러닝크루" style="border-style: hidden;" readonly>
+                                </div>
+                                <div class="form-group">
+                                    <label for="email">닉네임</label>
+                                    <input type="email" class="form-control" id="email" name="email" value="러린이" style="border-style: hidden; " readonly>
+                                </div>
+                            </form>
+                        </div>
+                        <div class="comment-area" ><textarea class="form-control" placeholder="짧은 소개글을 써주세요" rows="4" style="width:95%; margin-left: 15px; border-style:  hidden;" readonly>2개월차 러린이입니다. 학교 러닝크루에 참여해본 경험있어요!</textarea> </div> 
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-outline-secondary" data-dismiss="modal">고민해볼게요</button>
+                            <button type="submit" class="btn btn-outline-primary">수락할게요</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        </div
+    </div>
+
+    <script src = "https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.bundle.min.js"></script>
+
+</body>
+</html>

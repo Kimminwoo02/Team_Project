@@ -1,6 +1,6 @@
 package com.example.team_project.service;
 
-import com.example.team_project.dto.MatchingDTO;
+import com.example.team_project.dto.matching.MatchingDTO;
 import com.example.team_project.entity.matching.Matching;
 
 import java.util.List;

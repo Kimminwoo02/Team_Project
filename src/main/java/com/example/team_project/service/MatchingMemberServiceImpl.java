@@ -1,13 +1,16 @@
 package com.example.team_project.service;
 
-import com.example.team_project.dto.MatchingDTO;
+import com.example.team_project.dto.matching.MatchingDTO;
+import com.example.team_project.dto.matching.MatchingMemberDTO;
 import com.example.team_project.entity.Member;
 import com.example.team_project.entity.matching.Matching;
 import com.example.team_project.entity.matching.MatchingMember;
 import com.example.team_project.repository.MatchingMemberRepository;
 import com.example.team_project.repository.MatchingRepository;
 import com.example.team_project.repository.MemberRepository;
+import com.example.team_project.security.CustomUserDetails;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
 @RequiredArgsConstructor
@@ -18,14 +21,31 @@ public class MatchingMemberServiceImpl implements MatchingMemberService {
     private final MatchingMemberRepository matchingMemberRepository;
 
     @Override 
-    public void addMatching(MatchingDTO matchingDto, Member memberDto) {
-        Member member = memberRepository.getReferenceById(memberDto.getMemberId());
-        Matching matched = matchingRepository.getReferenceById(matchingDto.getMatchingId());
+    public void createAndAddMember2Matching() {
+        Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        Long memberId = ((CustomUserDetails) principal).getMember().getMemberId();
+        Member member = memberRepository.getReferenceById(memberId);
+        Matching matching = matchingRepository.getReferenceById(memberId);
+
+        matching.setMemberId(memberId);
 
         MatchingMember matchingMember = new MatchingMember();
-        matchingMember.setMatching(matched);
+        matchingMember.setMatching(matching);
         matchingMember.setMember(member);
 
         matchingMemberRepository.save(matchingMember);
+    }
+
+    @Override
+    public void addMember2Matching(MatchingMemberDTO matchingMemberDTO) {
+        Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        Long memberId = ((CustomUserDetails) principal).getMember().getMemberId();
+        Member member = memberRepository.getReferenceById(memberId);
+        Matching matching = matchingRepository.getReferenceById(memberId);
+        matching.setMemberId(memberId);
+        // TODO /* 일단 지금 MM entity는 멤버와 1:N, 근데 MM entity PK로 조회 때려서 여러 member 가져오는 거 */
+
+
+        MatchingMember matchingMember = matchingMemberRepository.getReferenceById(matchingMemberDTO.getMatchingUserId());
     }
 }

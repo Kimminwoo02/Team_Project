@@ -74,22 +74,39 @@
                                             제목</label>
                                         <input type="text" class="form-control" name="matchingName">
                                     </div>
-                                    <div class="mb-3">
+                                    <div class="mb-3" ≈>
                                         <label for="recipient-name" class="col-form-label"
                                                style="width: 80%">카테고리</label>
                                         <select name="category">
                                             <option th:each="category : ${categories}" th:value="${category}"
                                                     th:text="${category.getTitle}"></option>
                                         </select>
+                                        <div class="mb-3">
+                                            <span>활동 정원&nbsp;</span><input type="number" name="capacity" min="1"
+                                                                           step="1"/>
+                                        </div>
                                     </div>
                                     <div class="mb-3">
-                                        <label for="recipient-name" class="col-form-label" style="width: 50%">수듄</label>
+                                        <label for="recipient-name" class="col-form-label" style="width: 50%">예상 활동
+                                            강도</label>
                                         <input type="text" class="form-control" id="recipient-name" name="level">
                                     </div>
                                     <div class="mb-3">
                                         <label for="recipient-name" class="col-form-label" style="width: 50%">장소</label>
-                                        <input type="text" class="form-control" name="location">
+                                        <!--test-->
+                                        <div class="review-btn-wrapper">
+                                            <button type="button" class="btn btn-outline" data-toggle="modal"
+                                                    data-target="#matchingform"> 장소 선택
+                                            </button>
+
+                                        </div>
+
+
+                                        <!--test-->
                                     </div>
+
+                                    <!--                                        <input type="text" class="form-control" name="location">-->
+
                                     <div class="mb-3">
                                         <label class="col-form-label">내용</label>
                                         <textarea name="content" class="form-control" placeholder="200자 이하로 적어주세요"
@@ -105,7 +122,25 @@
                         </div>
                     </div>
                 </div>
-
+                <div class="modal fade" id="matchingform" tabindex="-1" role="dialog"
+                     aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered" role="document">
+                        <div class="modal-content" style=" border-style: hidden;">
+                            <!--<div class="modal-header"/>-->
+                            <div class="comment-box ">
+                                <div class="modal-xl">
+                                    <th:block th:replace="/../config/Config :: configFragment"></th:block>
+                                    <th:block th:replace="/content/facility :: facilityFragment"></th:block>
+s                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-outline-secondary"
+                                            data-dismiss="modal">닫기
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
 
                 <div class="col-lg-3 col-12">
                     <div class="shop-thumb">
@@ -129,6 +164,7 @@
 
             </div>
         </div>
+
     </section>
 
 

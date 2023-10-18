@@ -72,8 +72,6 @@ public class MemberServiceJpa implements MemberService {
     }
 
 
-
-
     public MemberInfoDTO getLoginUserById(Long memberId) {
         if(memberId == null) return null;
         Member optionalUser = memberRepository.findById(memberId).get();
@@ -83,10 +81,6 @@ public class MemberServiceJpa implements MemberService {
                 optionalUser.getPhone(),optionalUser.getAddr(), optionalUser.getDetailAddr(),img);
         return member;
     }
-
-
-
-
 
 
     public List<Member> findMembers(){

@@ -2,6 +2,7 @@ package com.example.team_project.service.matching;
 
 import com.example.team_project.dto.matching.MatchingDTO;
 
+import com.example.team_project.entity.Category;
 import com.example.team_project.entity.matching.Matching;
 import com.example.team_project.repository.MatchingRepository;
 import com.example.team_project.security.CustomUserDetails;
@@ -36,7 +37,13 @@ public class MatchingServiceImpl implements MatchingService {
 
     }
 
-        // 매칭 맴버 등록
+    @Override
+    public List<Matching> findByCategory(Category category) {
+
+        return matchingRepository.findByCategory(category);
+    }
+
+    // 매칭 맴버 등록
     @Override
     public List<Matching> findAll() {
         return matchingRepository.findAll();

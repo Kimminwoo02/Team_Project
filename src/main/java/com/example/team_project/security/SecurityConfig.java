@@ -73,10 +73,12 @@ public class SecurityConfig  {
                         .requestMatchers(new MvcRequestMatcher(introspect,"/boardMain")).permitAll()
                         .requestMatchers(new MvcRequestMatcher(introspect,"/welcome")).permitAll()
                         .requestMatchers(new MvcRequestMatcher(introspect,"/matching")).permitAll()
+                        .requestMatchers(new MvcRequestMatcher(introspect,"/matching/category")).permitAll()
                         .requestMatchers(new MvcRequestMatcher(introspect,"/detail")).permitAll()
                         .requestMatchers(new MvcRequestMatcher(introspect,"/chat")).permitAll()
                         .requestMatchers(new MvcRequestMatcher(introspect,"/write")).permitAll()
                         .requestMatchers(new MvcRequestMatcher(introspect,"/emailCheck")).permitAll()
+
 
                         .anyRequest().authenticated())
                 .formLogin(login -> login

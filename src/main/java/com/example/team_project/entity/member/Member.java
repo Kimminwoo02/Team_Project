@@ -53,11 +53,18 @@ public class Member {
     @OneToMany(mappedBy = "member", cascade = CascadeType.ALL)
     private List<Board> board = new ArrayList<>();
 
+<<<<<<< Updated upstream
     @JsonIgnore
     @OneToMany(mappedBy = "member", cascade  = CascadeType.ALL)
     private List<MatchingMember> memberMatchingList = new ArrayList<>();
 
     @JsonBackReference
+=======
+    @OneToMany(mappedBy = "member", cascade  = CascadeType.ALL)
+    private List<MatchingMember> memberMatchingList = new ArrayList<>();
+
+
+>>>>>>> Stashed changes
     @OneToMany(mappedBy = "reviewedMember", cascade  = CascadeType.ALL)
     private List<MemberReview> receivedReviews = new ArrayList<>();
 

@@ -6,6 +6,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.util.Date;
 import java.util.List;
 
 @Entity
@@ -32,6 +33,9 @@ public class Matching {
 
     private String capacity;
 
+    private String sDate;
+
+    @JsonBackReference
     @JsonIgnore
     @OneToMany(mappedBy = "matching", cascade = CascadeType.ALL)
     private List<MatchingMember> matchingMemberList;

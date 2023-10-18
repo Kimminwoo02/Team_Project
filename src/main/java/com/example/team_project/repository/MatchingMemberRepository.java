@@ -8,4 +8,5 @@ import org.springframework.stereotype.Repository;
 public interface MatchingMemberRepository extends JpaRepository<MatchingMember,Long> {
 
 
+
 }

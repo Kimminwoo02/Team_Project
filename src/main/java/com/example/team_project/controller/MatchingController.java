@@ -24,6 +24,7 @@ import java.util.List;
 @Controller
 @Slf4j
 @RequiredArgsConstructor
+@Slf4j
 public class MatchingController {
     private final MatchingService matchingService;
     private final MatchingMemberService matchingMemberService;
@@ -39,7 +40,7 @@ public class MatchingController {
 
     @PostMapping("/matching")
     public String matching2(MatchingDTO matchingDTO){
-
+        System.out.println(matchingDTO.getSDate());
         matchingService.createMatching(matchingDTO);
         matchingMemberService.createAndAddMember2Matching();
         return "redirect:/matching";
@@ -88,8 +89,9 @@ public class MatchingController {
 
 
     @GetMapping("/matchingApplyList")
-    public String matchingApplyList() {
+    public String matchingApplyList(Model model) {
+        List<MatchingMemberResponse> matching = matchingMemberService.getMatching();
+        model.addAttribute("matchingList",matching);
         return "main/matchingApplyList";
-
     }
 }

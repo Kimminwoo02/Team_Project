@@ -1,13 +1,12 @@
 package com.example.team_project.service.mail;
 
 import com.example.team_project.dto.member.Mail;
-import com.example.team_project.entity.Member;
+import com.example.team_project.entity.member.Member;
 import com.example.team_project.repository.MemberRepository;
 import groovy.util.logging.Slf4j;
 import lombok.RequiredArgsConstructor;
 import org.springframework.mail.MailSender;
 import org.springframework.mail.SimpleMailMessage;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 

@@ -1,6 +1,6 @@
 package com.example.team_project.repository;
 
-import com.example.team_project.entity.Board;
+import com.example.team_project.entity.board.Board;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

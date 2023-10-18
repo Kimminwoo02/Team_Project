@@ -1,7 +1,7 @@
 package com.example.team_project.dto.member;
 
-import com.example.team_project.entity.Member;
-import com.example.team_project.entity.MemberImg;
+import com.example.team_project.entity.member.Member;
+import com.example.team_project.entity.member.MemberImg;
 import lombok.Data;
 import org.springframework.web.multipart.MultipartFile;
 

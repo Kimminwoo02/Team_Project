@@ -1,15 +1,8 @@
 package com.example.team_project.dto;
 
-import com.example.team_project.entity.Member;
-import com.example.team_project.entity.Review;
-import jakarta.persistence.Column;
+import com.example.team_project.entity.member.Member;
+import com.example.team_project.entity.member.Review;
 import lombok.*;
-import org.springframework.data.annotation.CreatedBy;
-import org.springframework.data.annotation.LastModifiedBy;
-import org.springframework.data.annotation.LastModifiedDate;
-import org.springframework.format.annotation.DateTimeFormat;
-
-import java.time.LocalDateTime;
 
 @Data
 public class ReviewDto {

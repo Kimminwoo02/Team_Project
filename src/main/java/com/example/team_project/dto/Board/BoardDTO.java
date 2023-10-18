@@ -1,8 +1,7 @@
 package com.example.team_project.dto.Board;
 
-import com.example.team_project.entity.Board;
 import com.example.team_project.entity.Category;
-import com.example.team_project.entity.Member;
+import com.example.team_project.entity.member.Member;
 import lombok.*;
 
 import java.time.LocalDateTime;

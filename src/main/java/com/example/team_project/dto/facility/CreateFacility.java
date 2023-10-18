@@ -1,10 +1,6 @@
 package com.example.team_project.dto.facility;
 
 import com.example.team_project.entity.Facility;
-import com.example.team_project.entity.Member;
-import jakarta.persistence.Column;
-import lombok.Builder;
-import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 

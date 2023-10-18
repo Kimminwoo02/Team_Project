@@ -1,4 +1,4 @@
-package com.example.team_project.service;
+package com.example.team_project.service.chat;
 
 import com.example.team_project.entity.chat.ChatRoom;
 import jakarta.annotation.PostConstruct;

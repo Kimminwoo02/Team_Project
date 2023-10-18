@@ -1,15 +1,15 @@
 package com.example.team_project.controller;
 
 import com.example.team_project.dto.Response;
+import com.example.team_project.dto.matching.GetMatchingMemberRist;
 import com.example.team_project.dto.matching.MatchingDTO;
 import com.example.team_project.dto.matching.MatchingMemberCreate;
 import com.example.team_project.dto.matching.MatchingMemberResponse;
 import com.example.team_project.entity.Category;
-import com.example.team_project.entity.Member;
+import com.example.team_project.entity.member.Member;
 import com.example.team_project.entity.matching.Matching;
-import com.example.team_project.entity.matching.MatchingMember;
 import com.example.team_project.security.CustomUserDetails;
-import com.example.team_project.service.MemberService;
+import com.example.team_project.service.member.MemberService;
 import com.example.team_project.service.matching.MatchingMemberService;
 import com.example.team_project.service.matching.MatchingService;
 import lombok.RequiredArgsConstructor;
@@ -74,7 +74,12 @@ public class MatchingController {
         return "main/matchingStatus";
     }
     @GetMapping("/matchingApplyList")
-    public String matchingApplyList(){
+    public String matchingApplyList(Model model) {
+        List<MatchingMemberResponse> matching = matchingMemberService.getMatching();
+        model.addAttribute("matchingList",matching);
+
+
         return "main/matchingApplyList";
+
     }
 }

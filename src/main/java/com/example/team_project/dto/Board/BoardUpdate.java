@@ -1,6 +1,6 @@
 package com.example.team_project.dto.Board;
 
-import com.example.team_project.entity.Board;
+import com.example.team_project.entity.board.Board;
 import lombok.*;
 
 @AllArgsConstructor

@@ -6,28 +6,23 @@ import com.example.team_project.dto.member.MemberImgDTO;
 import com.example.team_project.dto.member.MemberInfoDTO;
 import com.example.team_project.dto.member.MemberSearchCond;
 import com.example.team_project.dto.member.MemberUpdateDto;
-import com.example.team_project.entity.Member;
-import com.example.team_project.entity.MemberImg;
+import com.example.team_project.entity.member.Member;
+import com.example.team_project.entity.member.MemberImg;
 import com.example.team_project.file.FileStore;
 import com.example.team_project.file.ResultFileStore;
 import com.example.team_project.repository.MemberImgRepository;
 import com.example.team_project.repository.MemberRepository;
-import com.example.team_project.service.MemberService;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Optional;
 
 
 @RequiredArgsConstructor

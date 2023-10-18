@@ -1,9 +1,8 @@
 package com.example.team_project.service.matching;
 
-import com.example.team_project.dto.matching.MatchingMemberCreate;
 import com.example.team_project.dto.matching.MatchingMemberDTO;
 import com.example.team_project.dto.matching.MatchingMemberResponse;
-import com.example.team_project.entity.Member;
+import com.example.team_project.entity.member.Member;
 import com.example.team_project.entity.matching.Matching;
 import com.example.team_project.entity.matching.MatchingMember;
 import com.example.team_project.repository.MatchingMemberRepository;
@@ -14,7 +13,11 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
+
+import static org.codehaus.groovy.runtime.DefaultGroovyMethods.collect;
 
 @RequiredArgsConstructor
 @Service
@@ -59,8 +62,14 @@ public class MatchingMemberServiceImpl implements MatchingMemberService {
 
 
     @Override
-    public List<MatchingMember> getMatching() {
-        return matchingMemberRepository.findAll();
+    public List<MatchingMemberResponse> getMatching() {
+        List<MatchingMember> matchingMembers = matchingMemberRepository.findAll();
+
+        return matchingMembers.stream().map(MatchingMemberResponse::from )
+                .collect(Collectors.toList());
+
+
+
     }
 
 //    @Override

@@ -16,54 +16,44 @@
             <th:block th:replace="/../fragment/sidebar :: sidebarFragment"></th:block>
         </div>
         <div class="card-container col-md-6" style="margin-top: 100px;">
-            <div class="card">
+            <div class="card" th:each="matching : ${matchingList}">
                 <img class="thumbnail" src="https://via.placeholder.com/150" alt="썸네일 이미지">
                 <div class="card-content">
-                    <h2>첫 번째 신청</h2>
-                    <p>이것은 첫 번째 카드의 내용입니다. 내용이 조금 더 길어질 때 어떻게 나타나는지 확인합니다.</p>
+                    <h2 th:text="matching.matching.matchingName">첫 번째 신청</h2>
+                    <p th:text="matching.matching.content">이것은 첫 번째 카드의 내용입니다. 내용이 조금 더 길어질 때 어떻게 나타나는지 확인합니다.</p>
                     <div class="read-more">
-                        <button type="button" class="btn btn-outline-primary">수락</button>
-                        <button type="button" class="btn btn-outline-danger">거절</button>
+                        <button type="button" class="btn btn-outline-primary" onclick="doPost()">수락</button>
+                        <button type="button" class="btn btn-outline-danger" onclick="close()">거절</button>
                     </div>
                 </div>
             </div>
 
-            <div class="card">
-                <img class="thumbnail" src="https://via.placeholder.com/150" alt="썸네일 이미지">
-                <div class="card-content">
-                    <h2>두 번째 신청</h2>
-                    <p>이것은 두 번째 카드의 내용입니다. 내용이 조금 더 길어질 때 어떻게 나타나는지 확인합니다.</p>
-                    <div class="read-more">
-                        <button type="button" class="btn btn-outline-primary">수락</button>
-                        <button type="button" class="btn btn-outline-danger">거절</button>
-                    </div>
-                </div>
-            </div>
-
-            <div class="card">
-                <img class="thumbnail" src="https://via.placeholder.com/150" alt="썸네일 이미지">
-                <div class="card-content">
-                    <h2>세 번째 신청</h2>
-                    <p>이것은 세 번째 카드의 내용입니다. 내용이 조금 더 길어질 때 어떻게 나타나는지 확인합니다.</p>
-                    <div class="read-more">
-                        <button type="button" class="btn btn-outline-primary">수락</button>
-                        <button type="button" class="btn btn-outline-danger">거절</button>
-                    </div>
-                </div>
-            </div>
-            <div class="card">
-                <img class="thumbnail" src="https://via.placeholder.com/150" alt="썸네일 이미지">
-                <div class="card-content">
-                    <h2>네 번째 신청</h2>
-                    <p>이것은 네 번째 카드의 내용입니다. 내용이 조금 더 길어질 때 어떻게 나타나는지 확인합니다.</p>
-                    <div class="read-more">
-                        <button type="button" class="btn btn-outline-primary">수락</button>
-                        <button type="button" class="btn btn-outline-danger">거절</button>
-                    </div>
-                </div>
-            </div>
         </div>
     </div>
+
+
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script th:inline="javascript">
+        function doPost (){
+                console.log("ddddddddd")
+            $.ajax({
+                url: '/boardWrite'
+                , method: 'POST'
+                , data: boardCreate
+                , success: function (data) {
+                    alert("등록을 완료했습니다!");
+                }
+                , error: function (rs) {
+                    console.log("에러 호출")
+                    console.log(rs)
+                }
+            })
+        }
+
+
+
+    </script>
 </div>
 </body>
 </html>

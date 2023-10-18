@@ -1,9 +1,8 @@
 package com.example.team_project.service.matching;
 
-import com.example.team_project.dto.matching.MatchingMemberCreate;
 import com.example.team_project.dto.matching.MatchingMemberDTO;
 import com.example.team_project.dto.matching.MatchingMemberResponse;
-import com.example.team_project.entity.Member;
+import com.example.team_project.entity.member.Member;
 import com.example.team_project.entity.matching.Matching;
 import com.example.team_project.entity.matching.MatchingMember;
 
@@ -19,6 +18,6 @@ public interface MatchingMemberService {
 
     void matchingApply(Member member, Matching matching, String introduce);
 
-    List<MatchingMember> getMatching();
+    List<MatchingMemberResponse> getMatching();
 
 }

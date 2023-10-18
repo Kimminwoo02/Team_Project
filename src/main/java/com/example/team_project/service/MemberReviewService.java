@@ -1,7 +1,6 @@
 package com.example.team_project.service;
 
-import com.example.team_project.entity.Member;
-import com.example.team_project.entity.MemberReview;
+import com.example.team_project.entity.member.MemberReview;
 import com.example.team_project.repository.MemberReviewRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

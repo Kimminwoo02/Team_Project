@@ -1,10 +1,8 @@
 package com.example.team_project.dto.auth;
 
-import com.example.team_project.entity.Member;
-import com.example.team_project.entity.MemberImg;
+import com.example.team_project.entity.member.Member;
+import com.example.team_project.entity.member.MemberImg;
 
-import jakarta.validation.constraints.NotEmpty;
-import jakarta.validation.constraints.Pattern;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;

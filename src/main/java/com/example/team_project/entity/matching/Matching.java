@@ -1,8 +1,6 @@
 package com.example.team_project.entity.matching;
 
-import com.example.team_project.entity.AuditingFields;
 import com.example.team_project.entity.Category;
-import com.example.team_project.entity.Member;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import lombok.*;

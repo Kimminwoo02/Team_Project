@@ -1,12 +1,12 @@
-package com.example.team_project.entity;
+package com.example.team_project.entity.member;
 
+import com.example.team_project.entity.board.Board;
 import com.example.team_project.entity.matching.MatchingMember;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.*;
 
-import java.security.Principal;
 import java.util.ArrayList;
 import java.util.List;
 

@@ -1,8 +1,6 @@
 package com.example.team_project.entity.matching;
 
-import com.example.team_project.entity.Facility;
-import com.example.team_project.entity.Member;
-import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.example.team_project.entity.member.Member;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.*;

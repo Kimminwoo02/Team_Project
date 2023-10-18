@@ -13,52 +13,168 @@
             <th:block th:replace="/../fragment/sidebar :: sidebarFragment"></th:block>
         </div>
         <div class="card-container col-md-6" style="margin-top: 100px;">
-            <div class="card">
+
+
+            <div class="card" th:each="mat : ${matchingList}"  data-toggle="modal" data-target="#exampleModal" >
                 <img class="thumbnail" src="https://via.placeholder.com/150" alt="썸네일 이미지">
                 <div class="card-content">
-                    <h2>첫 번째 카드</h2>
-                    <p>이것은 첫 번째 카드의 내용입니다. 내용이 조금 더 길어질 때 어떻게 나타나는지 확인합니다.</p>
+                    <h2 th:text="${mat.member.nickName}">첫 번째 신청</h2>
+                    <p th:text="${mat.member.nickName} +'님이 매칭 신청을 하셨습니다!'" style="font-size: 16px">이것은 첫 번째 카드의 내용입니다. 내용이 조금 더 길어질 때 어떻게 나타나는지 확인합니다.</p>
+                    <p th:text="${mat.matching.content}">이것은 첫 번째 카드의 내용입니다. 내용이 조금 더 길어질 때 어떻게 나타나는지 확인합니다.</p>
+
+
                     <div class="read-more">
-                        <a th:href="@{/matchingApplyList}">자세히 보기</a>
+                        <button type="button" class="btn btn-outline-primary"    th:getId="${mat.matching.matchingId}" th:getnick="${mat.matching.matchingId}" th:getcontent="${mat.matching.content}"
+                                th:onclick="transfer(this.getAttribute('getId'),this.getAttribute('getnick'), this.getAttribute('getcontent'))">보기</button>
                     </div>
                 </div>
             </div>
 
-            <div class="card">
-                <img class="thumbnail" src="https://via.placeholder.com/150" alt="썸네일 이미지">
-                <div class="card-content">
-                    <h2>두 번째 카드</h2>
-                    <p>이것은 두 번째 카드의 내용입니다. 내용이 조금 더 길어질 때 어떻게 나타나는지 확인합니다.</p>
-                    <div class="read-more">
-                        <a th:href="@{/matchingApplyList}">자세히 보기</a>
+
+            <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" >
+                <div class="modal-dialog modal-dialog-centered" role="document">
+                    <div class="modal-content" style=" border-style: hidden;">
+                        <div class="modal-header">
+                            <h5 class="modal-title" on> 매칭 신청 </h5>
+                            <span id="modalValue" > </span>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="comment-box ">
+                            <div class="modal-body">
+                                <form>
+                                    <div class="form-group">
+                                        <label for="name">매칭 </label>
+                                        <input type="text" class="form-control" name="matchingName" id="matchingName" value=""
+                                               style="border-style: hidden;" disabled>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="email">닉네임</label>
+                                        <input id="nickName" type="text" class="form-control"
+                                               name="nickName" value=""
+                                               style="border-style: hidden; color: black "  disabled>
+                                    </div>
+
+
+                                    <div class="comment-area"><textarea class="form-control"
+                                                                        name="introduce" id="introduce"
+                                                                        placeholder="짧은 소개글을 써주세요" rows="4"
+                                                                        style="width:95%; margin-left: 15px; border-style:  hidden;" disabled></textarea>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-outline-secondary"
+                                                data-dismiss="modal" onclick="close()">거절
+                                        </button>
+                                        <button id="posting" type="submit" class="btn btn-outline-primary" onclick="doPost()">수락</button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
 
-            <div class="card">
-                <img class="thumbnail" src="https://via.placeholder.com/150" alt="썸네일 이미지">
-                <div class="card-content">
-                    <h2>세 번째 카드</h2>
-                    <p>이것은 세 번째 카드의 내용입니다. 내용이 조금 더 길어질 때 어떻게 나타나는지 확인합니다.</p>
-                    <div class="read-more">
-                        <a th:href="@{/matchingApplyList}">자세히 보기</a>
-                    </div>
-                </div>
-            </div>
-            <div class="card">
-                <img class="thumbnail" src="https://via.placeholder.com/150" alt="썸네일 이미지">
-                <div class="card-content">
-                    <h2>네 번째 카드</h2>
-                    <p>이것은 네 번째 카드의 내용입니다. 내용이 조금 더 길어질 때 어떻게 나타나는지 확인합니다.</p>
-                    <div class="read-more">
-                        <a th:href="@{/matchingApplyList}">자세히 보기</a>
-                    </div>
-                </div>
-            </div>
+
 
         </div>
     </div>
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320"><path fill="#36363e" fill-opacity="1" d="M0,96L40,117.3C80,139,160,181,240,186.7C320,192,400,160,480,149.3C560,139,640,149,720,176C800,203,880,245,960,250.7C1040,256,1120,224,1200,229.3C1280,235,1360,277,1400,298.7L1440,320L1440,320L1400,320C1360,320,1280,320,1200,320C1120,320,1040,320,960,320C880,320,800,320,720,320C640,320,560,320,480,320C400,320,320,320,240,320C160,320,80,320,40,320L0,320Z"></path></svg>
+
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script defer="defer" th:inline="javascript">
+
+        // $("#apply").on("hidden.bs.modal",function (){
+        //     alert("tet")
+        // })
+
+
+
+        function transfer(data,data2,data3){
+            console.log(" 일로 오시나요??" + data)
+            let mymodal = document.querySelector("#apply");
+            mymodal.addEventListener("shown.bs.modal",function(){
+                alert("test")
+            })
+            var value = {"matchingUserId" : data}
+
+           /* $.ajax({
+                type: "POST",
+                url: "/matchingStatus",
+                data: value,
+                success: function (res) {
+                    console.log("완료했다..")
+                    matchingName = res.matching.matchingName
+                    nickName = res.member.nickName
+                    introduce = res.introduce
+                },
+
+                error: function (request) {
+                    console.log("request" + request);
+
+                }
+            })*/
+
+        }
+
+
+
+        // function transfer(data){
+        //     var gtg = {"data":data};
+        //     console.log("가즈아" + data)
+        //     var matchingName
+        //     var nickName
+        //     var introduce
+
+            // $.ajax({
+            //     type: "POST",
+            //     url: "/matchingStatus",
+            //     data: gtg,
+            //     success: function (res) {
+            //         console.log("완료했다..")
+            //         matchingName = res.matching.matchingName
+            //         nickName = res.member.nickName
+            //         introduce = res.introduce
+            //     },
+            //
+            //     error: function (request) {
+            //         console.log("request" + request);
+            //
+            //     }
+            // })
+
+
+        function getPost() {
+
+            console.log("들어왔냥." + temp)
+
+
+        }
+
+
+        function doPost() {
+            $.ajax({
+                type: "POST",
+                url: "/matchingStatus",
+                data: temp,
+                success: function (data) {
+                    $("#matchingName").val(data.matching.matchingName)
+                    $("#nickName").val(data.member.nickName)
+                    $("#introduce").val(data.introduce)
+                    console.log("완료했다..")
+                },
+
+                error: function (request) {
+                    console.log("request" + request);
+
+                }
+            })
+        }
+
+
+
+    </script>
 </main>
 </body>
 </html>

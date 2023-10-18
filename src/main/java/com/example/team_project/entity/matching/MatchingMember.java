@@ -1,6 +1,7 @@
 package com.example.team_project.entity.matching;
 
 import com.example.team_project.entity.member.Member;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.*;
@@ -22,7 +23,7 @@ public class MatchingMember {
     @Setter
     private Matching matching;
 
-    @JsonManagedReference
+
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "memberId")
     @Setter
@@ -49,5 +50,9 @@ public class MatchingMember {
         this.member = member;
         this.introduce= introduce;
 
+    }
+
+    public void AcceptMatch () {
+        this.quota += 1;
     }
 }

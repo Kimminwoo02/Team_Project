@@ -129,7 +129,6 @@
                 , method: 'POST'
                 , data:  { "commentWriter" : commentWriter , "commentContents" : commentContents, "memberId" : memberId, "boardId" : boardId }
                 , success: function (data) {
-                    console.log("데이터 들어간다~" + data);
                     $("#data").val('');
                     location.href= window.location.host +"/boradRead/"+boardId
                 //-----------

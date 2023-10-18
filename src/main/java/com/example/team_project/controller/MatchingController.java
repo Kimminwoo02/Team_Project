@@ -13,6 +13,7 @@ import com.example.team_project.service.member.MemberService;
 import com.example.team_project.service.matching.MatchingMemberService;
 import com.example.team_project.service.matching.MatchingService;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -21,6 +22,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @Controller
+@Slf4j
 @RequiredArgsConstructor
 public class MatchingController {
     private final MatchingService matchingService;
@@ -55,10 +57,19 @@ public class MatchingController {
 
 
 
-    @GetMapping("/matching/{Category}")
-    public String mat3(@PathVariable String Category){
-        return "redirect:/matching";
-    }
+//    @GetMapping("/matching/{Category}")
+//    public String mat3(@PathVariable String Category){
+//        return "redirect:/matching";
+//    }
+//
+//    @GetMapping("/matching/{category}")
+//    public String mat3(@PathVariable String category, Model model ,Category cate){
+//        String title = cate.getTitle();
+//        System.out.println(category);
+//        model.addAttribute("matches",matchingService.findByCategory(Category category);
+//
+//        return "main/matching";
+//    }
 
     @GetMapping("/matchingHistory")
     public String history(){
@@ -70,15 +81,22 @@ public class MatchingController {
         return "main/matchingMemberList";
     }
     @GetMapping("/matchingStatus")
-    public String matchingStatus(){
-        return "main/matchingStatus";
-    }
-    @GetMapping("/matchingApplyList")
-    public String matchingApplyList(Model model) {
+    public String matchingStatus(Model model){
         List<MatchingMemberResponse> matching = matchingMemberService.getMatching();
         model.addAttribute("matchingList",matching);
+        return "main/matchingStatus";
+    }
+
+//    @ResponseBody
+//    @PostMapping("/matchingStatus")
+//    public MatchingMemberResponse matchingAccpet(Long matchingUserId){
+////        log.info(matchingMemberService.getMatchingMember(matchingUserId).toString() + "+++++ +++++" );
+////        return matchingMemberService.getMatchingMember(matchingUserId);
+//    }
 
 
+    @GetMapping("/matchingApplyList")
+    public String matchingApplyList() {
         return "main/matchingApplyList";
 
     }

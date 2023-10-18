@@ -3,6 +3,7 @@ package com.example.team_project.entity.member;
 import com.example.team_project.entity.board.Board;
 import com.example.team_project.entity.matching.MatchingMember;
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.*;
@@ -13,6 +14,7 @@ import java.util.List;
 @Entity
 @NoArgsConstructor
 @Getter
+@ToString
 public class Member {
 
     @Id
@@ -51,11 +53,10 @@ public class Member {
     @OneToMany(mappedBy = "member", cascade = CascadeType.ALL)
     private List<Board> board = new ArrayList<>();
 
-    @JsonBackReference
+    @JsonIgnore
     @OneToMany(mappedBy = "member", cascade  = CascadeType.ALL)
     private List<MatchingMember> memberMatchingList = new ArrayList<>();
 
-    @JsonManagedReference
     @JsonBackReference
     @OneToMany(mappedBy = "reviewedMember", cascade  = CascadeType.ALL)
     private List<MemberReview> receivedReviews = new ArrayList<>();
@@ -83,6 +84,8 @@ public class Member {
         this.detailAddr=detailAddr;
         this.memberRole = memberRole;
     }
+
+
 
 
 

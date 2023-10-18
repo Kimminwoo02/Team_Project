@@ -52,6 +52,39 @@
         }
 
 
+        function transfer(data){
+            console.log("::::::::::::::")
+            console.log(data)
+            temp = data;
+            $("#modalValue").text(temp)
+
+        }
+
+        var matchingName = $("#matchingName").val()
+        var introduce = $("#introduce").val()
+        // 모달 전송
+        var go = $("#posting")
+        var gtg = {"matchingName" : matchingName, "introduce": introduce, "matchingId": temp}
+
+        function submit (){
+            $.ajax({
+                url:'/matchingMember'
+                ,method: 'POST'
+                ,data : gtg
+                ,contentType: 'application/json; charset=utf-8'
+                , success: function () {
+                    alert("신청 완료했습니다!");
+                    console.log("신청 됫나요?")
+
+                }
+                ,error : function (rs){
+                    alert("에러 호출")
+                    console.log(rs)
+                }
+            })
+        };
+
+
 
     </script>
 </div>

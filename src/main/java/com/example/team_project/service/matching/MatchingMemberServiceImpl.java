@@ -91,11 +91,12 @@ public class MatchingMemberServiceImpl implements MatchingMemberService {
     @Override
     @Transactional
     public List<MatchingScheduleDTO> getSchedule(){
-        List<MatchingMember> all = matchingMemberRepository.findAll();
+        Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        Member member = ((CustomUserDetails) principal).getMember();
+        List<MatchingMember> list = matchingMemberRepository.findAllByMemberEquals(member);
 
-        List<MatchingScheduleDTO> list=  all.stream()
+            return list.stream()
                 .map(MatchingScheduleDTO::from)
                 .collect(Collectors.toList());
-        return list;
     }
 }

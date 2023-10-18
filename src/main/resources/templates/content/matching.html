@@ -1,11 +1,11 @@
 <!doctype html>
 <html lang="ko"
-      xmlns:th="http://www.thymeleaf.org">
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+>
 
 <body>
 <main th:fragment="matchingFragment">
-
-
     <header class="site-header d-flex justify-content-center align-items-center">
         <div class="container">
             <div class="row">
@@ -28,7 +28,7 @@
                 <div class="col-lg-2 col-12" th:each="category: ${categories}">
                     <div class="shop-thumb">
                         <div class="shop-image-wrap">
-                            <a th:href="@{/matching/}+${category}">
+                            <a th:href="@{/matching/{category}(category=${category})}">
                                 <img class="shop-image img-fluid"
                                      style="width: 130px" alt="" th:src="@{images/shop/}+${category}+@{.jpg}">
                             </a>
@@ -44,13 +44,14 @@
     <section class="shop-section section-padding" id="section_3" style="background-color: #f9f9f9;">
         <div class="container">
             <div class="row">
+                <!--현황-->
                 <div class="col-lg-12 col-12">
                     <h2 class="mt-2 mb-4">현황 </h2>
                     <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal"
-                            data-bs-whatever="@fat" style="position: absolute; right: 10%; top: 6%;">매칭 등록
+                            data-bs-whatever="@fat" style="position: absolute; right: 10%; top: 6%;" sec:authorize="isAuthenticated()">매칭 등록
                     </button>
                 </div>
-                <!--               모달 폼 -->
+                <!--modal-->
                 <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
                      aria-hidden="true">
                     <div class="modal-dialog">
@@ -121,6 +122,7 @@
                         </div>
                     </div>
                 </div>
+                <!--facility modal-->
                 <div class="modal fade" id="matchingform" tabindex="-1" role="dialog"
                      aria-labelledby="exampleModalLabel" aria-hidden="true">
                     <div class="modal-dialog modal-dialog-centered" role="document">
@@ -128,8 +130,8 @@
                             <!--<div class="modal-header"/>-->
                             <div class="comment-box ">
                                 <div class="modal-xl">
-                                    <th:block th:replace="/../config/Config :: configFragment"></th:block>
-                                    <th:block th:replace="/content/facility :: facilityFragment"></th:block>
+                                    <th:block th:replace="~{/../config/Config :: configFragment}"></th:block>
+                                    <th:block th:replace="~{/content/facility :: facilityFragment}"></th:block>
                                 </div>
                                 <div class="modal-footer">
                                     <button type="button" class="btn btn-outline-secondary"
@@ -141,137 +143,74 @@
                     </div>
                 </div>
 
-                <div class="col-lg-3 col-12">
-                    <div class="shop-thumb">
-                        <div class="shop-image-wrap">
-                            <a th:each="match: ${matches}">
-                                <img src="images/shop/chat.png" class="shop-image img-fluid" alt="">
+                <div class="row">
+
+                    <div class="card-container col-2" th:each="match : ${matches}">
+                        <div class="matching_post">
+                            <a data-toggle="modal" data-target="#matchingapply" th:getId="${match.matchingId}"
+                               th:onclick="transfer(this.getAttribute('getId'))">
+                                <img class="matching-thumbnail" src="https://via.placeholder.com/150" alt="썸네일 이미지">
+                                <div class="matching-content">
+                                    <h2 th:text="${match.matchingName}">첫 번째 카드 </h2>
+                                    <span id="idValue" th:text="${match.matchingId}"> 아이디값입니다.</span>
+                                    <p th:text="${match.content}">이것은 첫 번째 카드의 내용입니다. 내용이 조금 더 길어질 때 어떻게 나타나는지
+                                        확인합니다.
+                                    </p>
+                                </div>
                             </a>
-
-                            <!--                            <div class="shop-icons-wrap"></div>-->
-
-                            <div class="shop-btn-wrap">
-                                <!--                                <a href="shop-detail.html"  class="shop-btn custom-btn btn d-flex align-items-center align-items-center">들어가기</a>-->
-                            </div>
                         </div>
-
-                        <div class="shop-body">
-                            <h4>방 이름</h4>
-                        </div>
+                    </div>
 
 
-                        <div class="modal fade" id="apply" tabindex="-1" role="dialog"
-                             aria-labelledby="exampleModalLabel" aria-hidden="true">
-                            <div class="modal-dialog modal-dialog-centered" role="document">
-                                <div class="modal-content" style=" border-style: hidden;">
-                                    <!-- <div class="modal-header" style=" border-style: 'hidden';">
-                                        <button type="button" class="text-right close" data-dismiss="modal" aria-label="Close">
-                                            <span aria-hidden="true">&times;</span>
-                                        </button>
-                                    </div> -->
-                                    <!-- <div class="card-body text-center"> <img src=" https://i.imgur.com/d2dKtI7.png" height="100" width="100"> -->
+                    <!--매칭 신청 영역-->
+                    <div class="modal fade" id="matchingapply" tabindex="-1" role="dialog"
+                         aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <div class="modal-dialog modal-dialog-centered" role="document">
+                            <div class="modal-content" style=" border-style: hidden;">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" on> 매칭 신청 </h5>
+                                    <span id="modalValue"> </span>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div class="comment-box ">
+                                    <div class="modal-body">
+                                        <form>
+                                            <div class="form-group">
+                                                <label for="matchingName">매칭 </label>
+                                                <input type="text" class="form-control" name="matchingName"
+                                                       id="matchingName" value=""
+                                                       style="border-style: hidden;">
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="matchingNickname">닉네임</label>
+                                                <input type="text" class="form-control"
+                                                       name="nickName" value=""
+                                                       id="matchingNickname"
+                                                       style="border-style: hidden; color: black ">
+                                            </div>
 
-                                    <div class="modal-header">
-                                        <h5 class="modal-title" id="myModalLabel">매칭 </h5>
-                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                            <span aria-hidden="true">&times;</span>
-                                        </button>
-                                    </div>
-                                    <div class="comment-box ">
-                                        <div class="modal-body">
-                                            <form method="post" action="/matching">
-                                                <div class="form-group">
-                                                    <label for="name">매칭</label>
-                                                    <input type="text" class="form-control" id="name" name="name"
-                                                           value="반포 러닝크루" style="border-style: hidden;">
-                                                </div>
-                                                <div class="form-group">
-                                                    <label for="email">닉네임</label>
-                                                    <input type="email" class="form-control" id="email" name="nickname"
-                                                           value="러린이" style="border-style: hidden; " disabled>
-                                                </div>
-                                                <div class="comment-area">
-                                                    <textarea class="form-control" placeholder="짧은 소개글을 써주세요" rows="4"
-                                                              style="width:95%; margin-left: 15px; border-style:  hidden;"></textarea>
-                                                </div>
-                                                <div class="modal-footer">
-                                                    <button type="button" class="btn btn-outline-secondary"
-                                                            data-dismiss="modal">닫기
-                                                    </button>
-                                                    <button type="submit" class="btn btn-outline-primary"
-                                                            onclick=" alert(" 제출을 완료하였습니다!") ">제출</button>
-                                                </div>
-                                            </form>
-                                        </div>
 
+                                            <div class="form-group"><textarea class="form-control"
+                                                                              name="introduce" id="introduce"
+                                                                              placeholder="짧은 소개글을 써주세요." rows="4"
+                                                                              style="width:95%; margin-left: 15px; border-style:  hidden;"></textarea>
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-outline-secondary"
+                                                        data-dismiss="modal" onclick="close()">취소
+                                                </button>
+                                                <button id="posting" type="submit" class="btn btn-outline-primary"
+                                                        onclick="submit()">신청
+                                                </button>
+                                            </div>
+                                        </form>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-
-                        <div class="card-container col-sm-2" th:each="match : ${matches}" >
-                            <div class="matching_post">
-                                <a data-toggle="modal" data-target="#matchingapply"  th:getId="${match.matchingId}" th:onclick="transfer(this.getAttribute('getId'))">
-                                    <img class="matching-thumbnail" src="https://via.placeholder.com/150" alt="썸네일 이미지">
-                                    <div class="matching-content"  >
-                                        <h2 th:text="${match.matchingName}">첫 번째 카드 </h2>
-                                        <span id="idValue" th:text="${match.matchingId}"> 아이디값입니다.</span>
-                                        <p th:text="${match.content}">이것은 첫 번째 카드의 내용입니다. 내용이 조금 더 길어질 때 어떻게 나타나는지
-                                            확인합니다.
-                                        </p>
-                                    </div>
-                                </a>
-                            </div>
-                        </div>
-
-
-                        <!--                    매칭 신청 영역-->
-
-                        <div class="modal fade" id="matchingapply" tabindex="-1" role="dialog"
-                             aria-labelledby="exampleModalLabel" aria-hidden="true">
-                            <div class="modal-dialog modal-dialog-centered" role="document">
-                                <div class="modal-content" style=" border-style: hidden;">
-                                    <div class="modal-header">
-                                        <h5 class="modal-title" on> 매칭 신청 </h5>
-                                        <span id="modalValue" > </span>
-                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                            <span aria-hidden="true">&times;</span>
-                                        </button>
-                                    </div>
-                                    <div class="comment-box ">
-                                        <div class="modal-body">
-                                            <form>
-                                                <div class="form-group">
-                                                    <label for="name">매칭 </label>
-                                                    <input type="text" class="form-control" name="matchingName" id="matchingName" value=""
-                                                           style="border-style: hidden;">
-                                                </div>
-                                                <div class="form-group">
-                                                    <label for="email">닉네임</label>
-                                                    <input type="text" class="form-control"
-                                                           name="nickName" value=""
-                                                           style="border-style: hidden; color: black " >
-                                                </div>
-
-
-                                                <div class="comment-area"><textarea class="form-control"
-                                                                                    name="introduce" id="introduce"
-                                                                                    placeholder="짧은 소개글을 써주세요" rows="4"
-                                                                                    style="width:95%; margin-left: 15px; border-style:  hidden;"></textarea>
-                                                </div>
-                                                <div class="modal-footer">
-                                                    <button type="button" class="btn btn-outline-secondary"
-                                                            data-dismiss="modal" onclick="close()">취소
-                                                    </button>
-                                                    <button id="posting" type="submit" class="btn btn-outline-primary" onclick="submit()">신청</button>
-                                                </div>
-                                            </form>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
 
                 </div>
             </div>
@@ -281,7 +220,8 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script th:inline="javascript">
         var temp
-        function transfer(data){
+
+        function transfer(data) {
             console.log("::::::::::::::")
             console.log(data)
             temp = data;
@@ -293,20 +233,19 @@
         var introduce = $("#introduce").val()
         // 모달 전송
         var go = $("#posting")
-        var gtg = {"matchingName" : matchingName, "introduce": introduce, "matchingId": temp}
+        var gtg = {"matchingName": matchingName, "introduce": introduce, "matchingId": temp}
 
-        function submit (){
+        function submit() {
             $.ajax({
-                url:'/matchingMember'
-                ,method: 'POST'
-                ,data : gtg
-                ,contentType: 'application/json; charset=utf-8'
+                url: '/matchingMember'
+                , method: 'POST'
+                , data: gtg
+                , contentType: 'application/json; charset=utf-8'
                 , success: function () {
                     alert("신청 완료했습니다!");
-                    console.log("신청 됫나요?")
-
+                    console.log("신청 됐나요?")
                 }
-                ,error : function (rs){
+                , error: function (rs) {
                     alert("에러 호출")
                     console.log(rs)
                 }
@@ -338,9 +277,6 @@
             window.open(url, name, option);
 
         }
-
-
-
 
 
     </script>

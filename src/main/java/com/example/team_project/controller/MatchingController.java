@@ -1,38 +1,59 @@
 package com.example.team_project.controller;
 
+import com.example.team_project.dto.Response;
+import com.example.team_project.dto.matching.GetMatchingMemberRist;
 import com.example.team_project.dto.matching.MatchingDTO;
+import com.example.team_project.dto.matching.MatchingMemberCreate;
+import com.example.team_project.dto.matching.MatchingMemberResponse;
 import com.example.team_project.entity.Category;
-import com.example.team_project.service.MatchingMemberService;
-import com.example.team_project.service.MatchingService;
+import com.example.team_project.entity.member.Member;
+import com.example.team_project.entity.matching.Matching;
+import com.example.team_project.security.CustomUserDetails;
+import com.example.team_project.service.member.MemberService;
+import com.example.team_project.service.matching.MatchingMemberService;
+import com.example.team_project.service.matching.MatchingService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @Controller
 @RequiredArgsConstructor
 public class MatchingController {
     private final MatchingService matchingService;
     private final MatchingMemberService matchingMemberService;
-
+    private final MemberService memberService;
 
     @GetMapping("/matching")
     public String matching(Model model){
+        List<Matching> matches = matchingService.findAll();
         model.addAttribute("categories",Category.values());
-
+        model.addAttribute("matches", matches);
         return "main/matching";
     }
 
     @PostMapping("/matching")
     public String matching2(MatchingDTO matchingDTO){
-//        matchingDTO.setMatch();
 
         matchingService.createMatching(matchingDTO);
         matchingMemberService.createAndAddMember2Matching();
         return "redirect:/matching";
     }
+
+    @PostMapping("/matchingMember")
+    @ResponseBody
+    public Response<Void> matchingMember(@RequestBody MatchingMemberCreate matchingMemberCreate, @AuthenticationPrincipal CustomUserDetails principal){
+        Member member = memberService.getMember(principal.getMemberId());
+        Matching matching = matchingService.getMatching(matchingMemberCreate.getMatchingId());
+        matchingMemberService.matchingApply(member,matching,matchingMemberCreate.getIntroduce());
+
+        return Response.success();
+    }
+
+
 
     @GetMapping("/matching/{Category}")
     public String mat3(@PathVariable String Category){
@@ -47,5 +68,18 @@ public class MatchingController {
     @GetMapping("/matchingMemberList")
     public String matchingMemberList(){
         return "main/matchingMemberList";
+    }
+    @GetMapping("/matchingStatus")
+    public String matchingStatus(){
+        return "main/matchingStatus";
+    }
+    @GetMapping("/matchingApplyList")
+    public String matchingApplyList(Model model) {
+        List<MatchingMemberResponse> matching = matchingMemberService.getMatching();
+        model.addAttribute("matchingList",matching);
+
+
+        return "main/matchingApplyList";
+
     }
 }

@@ -6,15 +6,14 @@ import com.example.team_project.dto.Board.BoardDTO;
 import com.example.team_project.dto.Board.BoardUpdate;
 import com.example.team_project.entity.Category;
 import com.example.team_project.security.CustomUserDetails;
-import com.example.team_project.service.BoardService;
-import com.example.team_project.service.BoardServiceJpa;
+import com.example.team_project.service.PaginationService;
+import com.example.team_project.service.board.BoardServiceJpa;
 import com.example.team_project.service.comment.CommentService;
 import lombok.RequiredArgsConstructor;
 
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Sort;
+import org.springframework.data.domain.Pageable;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -29,6 +28,7 @@ import java.util.List;
 public class BoardController {
     private final BoardServiceJpa boardServiceJpa;
     private final CommentService commentService;
+    private final PaginationService paginationService;
 
     @GetMapping("/boardMain")
     public String board(Model model) {
@@ -47,15 +47,14 @@ public class BoardController {
     }
 
     @GetMapping("/boardRead")
-    public String read(Long boardId, ModelMap model) {
-        int pageNumber = 0;  // 페이지 번호
-        int size = 10;       // 페이지 크기
+    public String read(Long boardId, ModelMap model ,Pageable pageable) {
 
         BoardDTO board = boardServiceJpa.getBoard(boardId);
         model.addAttribute("board", board);
         model.addAttribute("categories", Category.values());
         model.addAttribute("boardId", boardId);
-        model.addAttribute("comments", commentService.getComment(boardId, pageNumber, size));
+        model.addAttribute("comments", commentService.getComment(boardId,pageable));
+
 
         return "main/boardRead";
     }

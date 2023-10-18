@@ -1,4 +1,4 @@
-package com.example.team_project.service;
+package com.example.team_project.service.matching;
 
 import com.example.team_project.dto.matching.MatchingDTO;
 
@@ -40,5 +40,10 @@ public class MatchingServiceImpl implements MatchingService {
     @Override
     public List<Matching> findAll() {
         return matchingRepository.findAll();
+    }
+
+    @Override
+    public Matching getMatching(Long matchingId) {
+        return matchingRepository.findById(matchingId).orElseThrow();
     }
 }

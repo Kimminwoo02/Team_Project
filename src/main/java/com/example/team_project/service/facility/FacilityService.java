@@ -1,4 +1,4 @@
-package com.example.team_project.service;
+package com.example.team_project.service.facility;
 
 import com.example.team_project.dto.facility.CreateFacility;
 

@@ -1,6 +1,6 @@
 package com.example.team_project.dto.matching;
 
-import com.example.team_project.entity.Member;
+import com.example.team_project.entity.member.Member;
 import com.example.team_project.entity.matching.Matching;
 import com.example.team_project.entity.matching.MatchingMember;
 import lombok.AllArgsConstructor;

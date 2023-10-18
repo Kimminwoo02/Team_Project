@@ -1,7 +1,7 @@
 package com.example.team_project.repository;
 
 import com.example.team_project.dto.member.MemberSearchCond;
-import com.example.team_project.entity.Member;
+import com.example.team_project.entity.member.Member;
 
 import org.apache.ibatis.annotations.Mapper;
 import org.springframework.stereotype.Repository;

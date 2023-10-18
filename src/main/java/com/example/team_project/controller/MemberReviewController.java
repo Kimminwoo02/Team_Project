@@ -2,7 +2,7 @@ package com.example.team_project.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import com.example.team_project.entity.MemberReview;
+import com.example.team_project.entity.member.MemberReview;
 import com.example.team_project.service.MemberReviewService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;

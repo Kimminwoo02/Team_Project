@@ -1,6 +1,5 @@
-package com.example.team_project.entity;
+package com.example.team_project.entity.board;
 
-import com.example.team_project.dto.comment.CommentDTO;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 

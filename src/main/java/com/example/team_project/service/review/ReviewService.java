@@ -1,8 +1,8 @@
-package com.example.team_project.service;
+package com.example.team_project.service.review;
 
 
 import com.example.team_project.dto.ReviewDto;
-import com.example.team_project.entity.Review;
+import com.example.team_project.entity.member.Review;
 
 import java.util.List;
 

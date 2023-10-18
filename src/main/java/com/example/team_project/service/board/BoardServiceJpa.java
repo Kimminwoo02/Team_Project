@@ -1,25 +1,21 @@
-package com.example.team_project.service;
+package com.example.team_project.service.board;
 
 import com.example.team_project.dto.Board.BoardCreate;
 import com.example.team_project.dto.Board.BoardDTO;
 import com.example.team_project.dto.Board.BoardUpdate;
-import com.example.team_project.entity.Board;
-import com.example.team_project.entity.Category;
-import com.example.team_project.entity.Member;
+import com.example.team_project.entity.board.Board;
+import com.example.team_project.entity.member.Member;
 import com.example.team_project.repository.BoardRepository;
 import com.example.team_project.repository.MemberRepository;
 import com.example.team_project.security.CustomUserDetails;
-import jakarta.persistence.EntityNotFoundException;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
-import org.springframework.ui.Model;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 @RequiredArgsConstructor
 @Log4j2

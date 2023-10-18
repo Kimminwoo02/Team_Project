@@ -1,6 +1,6 @@
 package com.example.team_project.security;
 
-import com.example.team_project.entity.Member;
+import com.example.team_project.entity.member.Member;
 import com.example.team_project.repository.MemberRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.GrantedAuthority;
@@ -11,7 +11,6 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 @RequiredArgsConstructor
 @Service

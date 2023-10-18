@@ -25,7 +25,7 @@ public class MybatisConfig {
         dataSourceBuilder.driverClassName("org.h2.Driver");
         dataSourceBuilder.url(databasePath);
         dataSourceBuilder.username("sa");
-        dataSourceBuilder.password("1234");
+//        dataSourceBuilder.password("1234");
 
 
         return dataSourceBuilder.build();

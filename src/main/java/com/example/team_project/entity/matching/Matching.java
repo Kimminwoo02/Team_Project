@@ -1,8 +1,7 @@
 package com.example.team_project.entity.matching;
 
-import com.example.team_project.entity.AuditingFields;
 import com.example.team_project.entity.Category;
-import com.example.team_project.entity.Member;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -16,7 +15,6 @@ import java.util.List;
 public class Matching {
     @Id
     @GeneratedValue
-    @Column(name = "matching_id")
     private Long matchingId;
 
     @Setter
@@ -32,6 +30,7 @@ public class Matching {
 
     private String capacity;
 
+    @JsonBackReference
     @OneToMany(mappedBy = "matching", cascade = CascadeType.ALL)
     private List<MatchingMember> matchingMemberList;
 

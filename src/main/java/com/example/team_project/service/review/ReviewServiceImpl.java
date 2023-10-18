@@ -1,9 +1,9 @@
-package com.example.team_project.service;
+package com.example.team_project.service.review;
 
 import com.example.team_project.dto.ReviewDto;
 
-import com.example.team_project.entity.Member;
-import com.example.team_project.entity.Review;
+import com.example.team_project.entity.member.Member;
+import com.example.team_project.entity.member.Review;
 import com.example.team_project.repository.MemberRepository;
 import com.example.team_project.repository.ReviewRepository;
 import lombok.RequiredArgsConstructor;

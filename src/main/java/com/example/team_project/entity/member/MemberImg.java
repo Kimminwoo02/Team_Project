@@ -1,4 +1,4 @@
-package com.example.team_project.entity;
+package com.example.team_project.entity.member;
 
 import jakarta.persistence.*;
 import lombok.*;

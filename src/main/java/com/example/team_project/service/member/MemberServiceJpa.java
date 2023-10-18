@@ -6,21 +6,17 @@ import com.example.team_project.dto.member.MemberImgDTO;
 import com.example.team_project.dto.member.MemberInfoDTO;
 import com.example.team_project.dto.member.MemberSearchCond;
 import com.example.team_project.dto.member.MemberUpdateDto;
-import com.example.team_project.entity.Member;
-import com.example.team_project.entity.MemberImg;
+import com.example.team_project.entity.member.Member;
+import com.example.team_project.entity.member.MemberImg;
 import com.example.team_project.file.FileStore;
 import com.example.team_project.file.ResultFileStore;
 import com.example.team_project.repository.MemberImgRepository;
 import com.example.team_project.repository.MemberRepository;
-import com.example.team_project.service.MemberService;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -76,8 +72,6 @@ public class MemberServiceJpa implements MemberService {
     }
 
 
-
-
     public MemberInfoDTO getLoginUserById(Long memberId) {
         if(memberId == null) return null;
         Member optionalUser = memberRepository.findById(memberId).get();
@@ -87,10 +81,6 @@ public class MemberServiceJpa implements MemberService {
                 optionalUser.getPhone(),optionalUser.getAddr(), optionalUser.getDetailAddr(),img);
         return member;
     }
-
-
-
-
 
 
     public List<Member> findMembers(){
@@ -118,10 +108,8 @@ public class MemberServiceJpa implements MemberService {
         try{
             ResultFileStore resultFileStore = filestore.storeProfileFile(memberUpdateDto.getFile());
             MemberImg memberImg =memberImgRepository.getReferenceById(member.getMemberImg().getImgId());
-            if(resultFileStore != null){
+            if(resultFileStore != null) {
                 memberImg.setStoreFileName(resultFileStore.getStoreFileName());
-            }else{
-                memberImg.setStoreFileName("cat.jpg");
             }
             memberImgRepository.save(memberImg);
         }
@@ -133,6 +121,11 @@ public class MemberServiceJpa implements MemberService {
     @Override
     public Member getMemberId(MemberSearchCond memberSearchCond) {
         return memberRepository.findByNameAndPhone(memberSearchCond.getName(),memberSearchCond.getPhone());
+    }
+
+    @Override
+    public Member getMember(Long memberId) {
+        return memberRepository.findById(memberId).orElseThrow();
     }
 
 

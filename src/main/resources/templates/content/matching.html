@@ -99,8 +99,9 @@
                                         <div class="review-btn-wrapper">
 
                                             <button type="button" onclick="pop()">장소 선택</button>
-                                            <input type="text" class="form-control" id="addr" name="addr" value=""
-                                                   style="border-style: hidden; margin-top: 10px;" disabled>
+                                            <input type="text" class="form-control" id="address" name="address"
+readonly
+                                            >
                                         </div>
                                         <!--test-->
                                     </div>
@@ -144,7 +145,7 @@
                 </div>
 
                 <div class="row">
-
+                    <!--card-->
                     <div class="card-container col-2" th:each="match : ${matches}">
                         <div class="matching_post">
                             <a data-toggle="modal" data-target="#matchingapply" th:getId="${match.matchingId}"
@@ -160,7 +161,6 @@
                             </a>
                         </div>
                     </div>
-
 
                     <!--매칭 신청 영역-->
                     <div class="modal fade" id="matchingapply" tabindex="-1" role="dialog"
@@ -211,7 +211,6 @@
                             </div>
                         </div>
                     </div>
-
                 </div>
             </div>
         </div>

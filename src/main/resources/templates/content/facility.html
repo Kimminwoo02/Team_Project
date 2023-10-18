@@ -3,7 +3,7 @@
       xmlns:th="http://www.thymeleaf.org">
 
 <body>
-<main th:fragment="facilityFragment">
+<main th:fragment="facilityFragment" >
 
 
 <!--        <header class="site-header d-flex justify-content-center align-items-center">-->
@@ -200,7 +200,8 @@
 
             console.log(name +" ### " + address + " ### " +longitude + "  ### " + altitude  )
             var createFacility = {"name" :name , "address" : address, "longitude" : longitude, "altitude" : altitude}
-            opener.document.getElementById("addr").value = address
+            opener.document.getElementById("address").value = address
+            opener.document.getElementById("address").style = "border-style: hidden; margin-top: 10px;"
             alert("등록을 완료했습니다!")
             window.close();
                 // $.ajax({
@@ -210,7 +211,7 @@
                 //     , success: function (data) {
                 //         alert("등록을 완료했습니다!");
                 //         window.close();
-                //     }
+                //     }error:
                 //
                 // })
 

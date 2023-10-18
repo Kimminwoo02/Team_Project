@@ -48,6 +48,13 @@
 
         $(document).ready(function(){
             var quill = new Quill('#editor-container', {
+                modules: {
+                    toolbar: [
+                            ['bold', 'italic'],
+                            ['link', 'blockquote', 'image'],
+                            [{ list: 'ordered' }, { list: 'bullet' }]
+                        ]
+                    },
                 theme: 'snow',
                 placeholder: '내용입력'
             });

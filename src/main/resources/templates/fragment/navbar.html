@@ -46,7 +46,9 @@
                     <li class="nav-item">
                         <a class="nav-link" th:href="@{/matching}">매칭</a>
                     </li>
-
+                    <li class="nav-item">
+                        <a class="nav-link" sec:authorize="isAuthenticated()" th:href="@{/chat}">채팅</a>
+                    </li>
                     <li class="nav-item">
                         <a class="nav-link" sec:authorize="isAnonymous()" th:href="@{/login}">로그인</a>
                         <!--                            <a class="nav-link" sec:authorize="isAuthenticated()"><img id="imgId" th:src="@{/accounts/}+${accountDto.userId}" width="100" height="100"  alt="첨부이미지" th:if="${accountDto.profileImgPath() != null}" /></a>-->

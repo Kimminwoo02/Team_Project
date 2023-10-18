@@ -4,187 +4,120 @@
 
 <body>
 <main th:fragment="chatFragment">
-
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-12 col-12">
-                    <h1 class="text-white">채팅</h1>
+    <div class="row"  style="margin-left: 150px ">
+        <div  class="col-md-3" style="margin-top: 50px;">
+            <th:block th:replace="/../fragment/chatSidebar :: chatSidebarFragment"></th:block>
+        </div>
+        <div class="col-md-8" style="margin-top: 80px;">
+            <div class="chat_wrap" >
+                <div class="header" style="font-family: 'Cafe24Ssurround'">
+                    채팅
+                </div>
+                <div class="chat">
+                    <ul>
+<!--                        <li class="left"><span>김예준</span>안녕안녕</li>-->
+<!--                        <li class="right"><span>김민우</span>hihi</li>-->
+                        <!-- 동적 생성 -->
+                    </ul>
+                </div>
+                <div class="input-div">
+                    <textarea placeholder="Press Enter for send message."></textarea>
                 </div>
 
-            </div>
-        </div>
-    </header>
+                <!-- format -->
 
+                <div class="chat format">
+                    <ul>
+                        <li>
+                            <div class="sender">
+                                <span></span>
+                            </div>
+                            <div class="message">
+                                <span></span>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
 
-    <div class='chatContainer'>
-        <div id='sidenav' class='sidenav'>
-            <div class="profileimg1"></div>
-            <button class='navbtn'><i class="fa-solid fa-house"></i></button>
-            <button class='navbtn'><i class="fa-solid fa-bell"></i></button>
-            <button class='navbtn'><i class="fa-solid fa-comment"></i></button>
-            <button class='navbtn'><i class="fa-solid fa-location-dot"></i></button>
-            <button class='navbtn'><i class="fa-solid fa-gear"></i></button>
-        </div>
-        <div class='searchbox'>
-            <i class="fa-solid fa-magnifying-glass"></i>
-            <input type="text" id='search' class='search' value="search"></input>
-        </div>
-        <div class='chatroomlist'>
-            <div class="chatTitle">채팅리스트</div>
-            <div class = "group-wrapper">
-                <div class="group">
-                    <img class="profileimg3" src="../images/cat.jpg"></img>
-                    <span class="groupInfo">Mary</span>
-                    <span class="notRead">3</span>
-                    <span class="lastmsg">hi!! Do you like running?</span>
-                    <span class="chatTime">Today, 1.52pm</span>
-                </div></div>
-        </div>
-        <div class='chatMember' style="overflow: hidden">
-            <div class="chatTitle">멤버</div>
-            <div id="member"  class="member" >
-                <img class="profileimg3" src="../images/dog.jpg"></img>
-                <span class="memberInfo"></span>
-            </div>
-        </div>
-        <div class='chatting'>
-            <div class="chatheader">
-                <img class="profileimg2" src="../images/dog.jpg"></img>
-                <span class="chatroomname">Mary</span>
-                <span class="chatInfo">Online - Last seen, 2.02pm</span>
-                <button class='chatBtn'><i class="fa-solid fa-ellipsis-vertical"></i></button>
-            </div>
-            <div id="msgArea" class="col" style="overflow-y: scroll; width:70%;height:70%"></div>
-            <div class = 'chatinputcontainer'style="width: 80%">
-                <label for="msg"></label>
-                <input type="text" id="msg" class="chatinput form-control" style="position: absolute;">
-                <button class='chatbtn' type="button" id="button-send"><i class="fa-solid fa-arrow-right"></i></button>
-            </div>
         </div>
     </div>
+    <script>
+        const Chat = (function(){
+            const myName = "blue";
 
+            // init 함수
+            function init() {
+                // enter 키 이벤트
+                $(document).on('keydown', 'div.input-div textarea', function(e){
+                    if(e.keyCode == 13 && !e.shiftKey) {
+                        e.preventDefault();
+                        const message = $(this).val();
 
-
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320"><path fill="#36363e" fill-opacity="1" d="M0,96L40,117.3C80,139,160,181,240,186.7C320,192,400,160,480,149.3C560,139,640,149,720,176C800,203,880,245,960,250.7C1040,256,1120,224,1200,229.3C1280,235,1360,277,1400,298.7L1440,320L1440,320L1400,320C1360,320,1280,320,1200,320C1120,320,1040,320,960,320C880,320,800,320,720,320C640,320,560,320,480,320C400,320,320,320,240,320C160,320,80,320,40,320L0,320Z"></path></svg>
-
-    <script th:inline="javascript">
-
-        $(document).ready(function(){
-
-            const username = [[${#authentication.principal.member.name}]];
-            var isFirst = 0;
-
-            $("#disconn").on("click", (e) => {
-                disconnect();
-            })
-
-            $("#button-send").on("click", (e) => {
-                send();
-            })
-
-            $("#msg").on("keyup",(e)=>{
-                if (e.keyCode ===13){
-                    send();
-                }
-
-            });
-
-
-
-            const websocket = new WebSocket("ws://localhost:9091/ws/chat");
-
-            websocket.onmessage = onMessage;
-            websocket.onopen = onOpen;
-            websocket.onclose = onClose;
-
-            function send(){
-
-                let msg = document.getElementById("msg");
-
-                console.log(username + ":" + msg.value);
-                websocket.send(username + ":" + msg.value);
-                msg.value = '';
-            }
-
-            //채팅창에서 나갔을 때
-            function onClose(evt) {
-                var str = username + ": 님이 방을 나가셨습니다.";
-                websocket.send(str);
-            }
-
-            //채팅창에 들어왔을 때
-            function onOpen(evt) {
-                isFirst = 1
-                websocket.send(str);
-
-            }
-
-            function onMessage(msg) {
-
-                var data = msg.data;
-                var sessionId = null;
-                //데이터를 보낸 사람
-                var message = null;
-                var arr = data.split(":");
-                console.log(msg)
-                console.log(data)
-
-
-                for(var i=0; i<arr.length; i++){
-                    console.log('arr[' + i + ']: ' + arr[i]);
-                }
-
-                var cur_session = username;
-
-                //현재 세션에 로그인 한 사람
-                console.log("cur_session : " + cur_session);
-                sessionId = arr[0];
-                message = arr[1];
-
-                console.log("sessionID : " + sessionId);
-                console.log("cur_session : " + cur_session);
-
-
-                if(isFirst === 1){
-                    if(sessionId === cur_session){
-                        var str = "<div class='col-6'>";
-                        str += "<div class='alert alert-secondary' style='background-color: transparent; border-color: transparent'>";
-                        str += "<b>" + sessionId + "</b>";
-                        str += "</div></div>";
-                        $("#member").append(str);
-                        console.log("더 킹이스 백")
-                        isFirst = 0
+                        // 메시지 전송
+                        sendMessage(message);
+                        // 입력창 clear
+                        clearTextarea();
                     }
-                    else{
-                        var str = "<div class='col-6'>";
-                        str += "<div class='alert alert-secondary' style='background-color: transparent; border-color: transparent'>";
-                        str += "<b>" + sessionId + " : " + message + "</b>";
-                        str += "</div></div>";
-                        $("#member").append(str);
-                        console.log("더 킹이스 백")
-                        isFirst = 0
-                    }
-                }
-
-                //로그인 한 클라이언트와 타 클라이언트를 분류하기 위함
-                if(sessionId === cur_session){
-                    var str = "<div class='col-6'>";
-                    str += "<div class='alert alert-secondary' style='background-color: transparent; border-color: transparent'>";
-                    str += "<b>" + sessionId + " : " + message + "</b>";
-                    str += "</div></div>";
-                    $("#msgArea").append(str);
-                }
-                else{
-                    var str = "<div class='col-6'>";
-                    str += "<div class='alert alert-warning' style='background-color: transparent; border-color: transparent'>";
-                    str += "<b>" + sessionId + " : " + message + "</b>";
-                    str += "</div></div>";
-                    $("#msgArea").append(str);
-                }
+                });
             }
-        })
+
+            // 메세지 태그 생성
+            function createMessageTag(LR_className, senderName, message) {
+                // 형식 가져오기
+                let chatLi = $('div.chat.format ul li').clone();
+
+                // 값 채우기
+                chatLi.addClass(LR_className);
+                chatLi.find('.sender span').text(senderName);
+                chatLi.find('.message span').text(message);
+
+                return chatLi;
+            }
+
+            // 메세지 태그 append
+            function appendMessageTag(LR_className, senderName, message) {
+                const chatLi = createMessageTag(LR_className, senderName, message);
+
+                $('div.chat:not(.format) ul').append(chatLi);
+
+                // 스크롤바 아래 고정
+                $('div.chat').scrollTop($('div.chat').prop('scrollHeight'));
+            }
+
+            // 메세지 전송
+            function sendMessage(message) {
+                // 서버에 전송하는 코드로 후에 대체
+                const data = {
+                    "senderName"    : "blue",
+                    "message"        : message
+                };
+
+                // 통신하는 기능이 없으므로 여기서 receive
+                resive(data);
+            }
+
+            // 메세지 입력박스 내용 지우기
+            function clearTextarea() {
+                $('div.input-div textarea').val('');
+            }
+
+            // 메세지 수신
+            function resive(data) {
+                const LR = (data.senderName != myName)? "left" : "right";
+                appendMessageTag("right", data.senderName, data.message);
+            }
+
+            return {
+                'init': init
+            };
+        })();
+
+        $(function(){
+            Chat.init();
+        });
     </script>
-
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320"><path fill="#36363e" fill-opacity="1" d="M0,96L40,117.3C80,139,160,181,240,186.7C320,192,400,160,480,149.3C560,139,640,149,720,176C800,203,880,245,960,250.7C1040,256,1120,224,1200,229.3C1280,235,1360,277,1400,298.7L1440,320L1440,320L1400,320C1360,320,1280,320,1200,320C1120,320,1040,320,960,320C880,320,800,320,720,320C640,320,560,320,480,320C400,320,320,320,240,320C160,320,80,320,40,320L0,320Z"></path></svg>
 </main>
 
 

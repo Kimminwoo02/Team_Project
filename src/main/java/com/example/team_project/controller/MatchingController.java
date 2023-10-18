@@ -1,7 +1,6 @@
 package com.example.team_project.controller;
 
 import com.example.team_project.dto.Response;
-import com.example.team_project.dto.matching.GetMatchingMemberRist;
 import com.example.team_project.dto.matching.MatchingDTO;
 import com.example.team_project.dto.matching.MatchingMemberCreate;
 import com.example.team_project.dto.matching.MatchingMemberResponse;
@@ -18,6 +17,7 @@ import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.ModelAndView;
 
 import java.util.List;
 
@@ -56,20 +56,12 @@ public class MatchingController {
     }
 
 
-
-//    @GetMapping("/matching/{Category}")
-//    public String mat3(@PathVariable String Category){
-//        return "redirect:/matching";
-//    }
-//
-//    @GetMapping("/matching/{category}")
-//    public String mat3(@PathVariable String category, Model model ,Category cate){
-//        String title = cate.getTitle();
-//        System.out.println(category);
-//        model.addAttribute("matches",matchingService.findByCategory(Category category);
-//
-//        return "main/matching";
-//    }
+    @GetMapping("/matching/{cat}")
+    public ModelAndView mat3(@PathVariable(name = "cat") String category){
+       ModelAndView modelAndView = new ModelAndView("main/matching");
+       modelAndView.addObject("matches",matchingService.findByCategory(Category.valueOf(category)));
+        return modelAndView;
+    }
 
     @GetMapping("/matchingHistory")
     public String history(){

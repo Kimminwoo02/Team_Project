@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="ko"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>CodePen - Bootstrap 3 - Sidebar Layout</title>
+  <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css'>
+<link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/material-design-iconic-font/2.2.0/css/material-design-iconic-font.min.css'><link rel="stylesheet" href="../css/sidebar.css">
+
+</head>
+<body>
+<!-- partial:index.partial.html -->
+<div th:fragment="chatSidebarFragment" id="viewport" style="font-family: 'Cafe24Ssurround'">
+  <!-- Sidebar -->
+  <div id="sidebar">
+    <header>
+      <h3>채팅</h3>
+    </header>
+    <ul class="nav row">
+      <li>
+        <a th:href="@{#}">
+          <i class="zmdi zmdi-comments"></i>채팅 만들기
+        </a>
+      </li>
+      <li>
+        <ul>
+          <li>
+            <a>방 이름1</a>
+          </li>
+          <li>
+            <a>방 이름2</a>
+          </li>
+          <li>
+            <a>방 이름3</a>
+          </li>
+        </ul>
+      </li>
+    </ul>
+  </div>
+</div>
+<!-- partial -->
+  
+</body>
+</html>

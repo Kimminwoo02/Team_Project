@@ -2,6 +2,7 @@ package com.example.team_project.service.matching;
 
 import com.example.team_project.dto.matching.MatchingMemberDTO;
 import com.example.team_project.dto.matching.MatchingMemberResponse;
+import com.example.team_project.dto.matching.MatchingScheduleDTO;
 import com.example.team_project.entity.member.Member;
 import com.example.team_project.entity.matching.Matching;
 import com.example.team_project.entity.matching.MatchingMember;
@@ -9,6 +10,7 @@ import com.example.team_project.repository.MatchingMemberRepository;
 import com.example.team_project.repository.MatchingRepository;
 import com.example.team_project.repository.MemberRepository;
 import com.example.team_project.security.CustomUserDetails;
+import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
@@ -38,6 +40,7 @@ public class MatchingMemberServiceImpl implements MatchingMemberService {
         MatchingMember matchingMember = new MatchingMember();
         matchingMember.setMatching(matching);
         matchingMember.setMember(member);
+        matchingMember.setSDate(matching.getSDate());
 
         matchingMemberRepository.save(matchingMember);
     }
@@ -68,9 +71,9 @@ public class MatchingMemberServiceImpl implements MatchingMemberService {
         return matchingMembers.stream().map(MatchingMemberResponse::from )
                 .collect(Collectors.toList());
 
-
-
     }
+
+
 
 //    @Override
 //    public MatchingMemberResponse getMatchingMember(Long matchingId) {
@@ -85,4 +88,14 @@ public class MatchingMemberServiceImpl implements MatchingMemberService {
 //        return matchingMemberResponse;
 
 
+    @Override
+    @Transactional
+    public List<MatchingScheduleDTO> getSchedule(){
+        List<MatchingMember> all = matchingMemberRepository.findAll();
+
+        List<MatchingScheduleDTO> list=  all.stream()
+                .map(MatchingScheduleDTO::from)
+                .collect(Collectors.toList());
+        return list;
+    }
 }

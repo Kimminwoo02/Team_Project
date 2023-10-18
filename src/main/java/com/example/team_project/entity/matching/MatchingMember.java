@@ -34,6 +34,8 @@ public class MatchingMember {
     private String introduce;
 
     private Boolean matchingYN;
+    @Setter
+    private String sDate;
 
 
 

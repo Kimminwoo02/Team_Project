@@ -144,10 +144,4 @@ public class UserController {
         return "redirect:/home";
     }
 
-    @GetMapping("/mySchedule")
-    public String mypage2(){
-        return "main/mySchedule";
-    }
-
-
 }

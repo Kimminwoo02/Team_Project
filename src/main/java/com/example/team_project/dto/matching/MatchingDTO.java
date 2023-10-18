@@ -7,6 +7,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.Date;
+
 @Getter
 @Setter
 @NoArgsConstructor
@@ -20,6 +22,7 @@ public class MatchingDTO {
     private String address;
     private String capacity;
     private Category category;
+    private String sDate;
 
 
     public Matching createMatching(){
@@ -29,6 +32,7 @@ public class MatchingDTO {
                 .level(level)
                 .content(content)
                 .address(address)
+                .sDate(sDate)
                 .capacity(capacity)
                 .category(category)
                 .build();

@@ -24,7 +24,6 @@ import java.util.List;
 @Controller
 @Slf4j
 @RequiredArgsConstructor
-@Slf4j
 public class MatchingController {
     private final MatchingService matchingService;
     private final MatchingMemberService matchingMemberService;

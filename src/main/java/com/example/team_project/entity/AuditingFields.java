@@ -25,13 +25,13 @@ public class AuditingFields {
     private LocalDateTime createdAt; // 생성일시
     @CreatedBy
 //    @Column(nullable = false, length = 100,updatable = false)
-    private String createdBy; // 생성자
+    private Long createdBy; // 생성자ID
     @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)
     @LastModifiedDate
 //    @Column(nullable = false)
     private LocalDateTime modifiedAt; //수정일시
     @LastModifiedBy
 //    @Column(nullable = false, length = 100)
-    private String modifiedBy;//수정자
+    private Long modifiedBy;//수정자ID
 
 }

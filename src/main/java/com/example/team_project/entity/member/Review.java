@@ -13,7 +13,6 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 @NoArgsConstructor
 @Getter
 @AllArgsConstructor
-@EntityListeners(AuditingEntityListener.class)
 public class Review extends AuditingFields {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

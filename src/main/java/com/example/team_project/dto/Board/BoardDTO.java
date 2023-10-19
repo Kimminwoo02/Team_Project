@@ -23,4 +23,9 @@ public class BoardDTO {
     private Category category;
     private LocalDateTime createdAt;
 
+    public BoardDTO(Long boardId, String title, String content) {
+        this.boardId = boardId;
+        this.title = title;
+        this.content = content;
+    }
 }

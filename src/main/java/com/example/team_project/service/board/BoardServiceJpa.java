@@ -16,6 +16,8 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
+import java.util.stream.Collectors;
 
 @RequiredArgsConstructor
 @Log4j2
@@ -25,8 +27,7 @@ public class BoardServiceJpa implements BoardService {
     private final MemberRepository memberRepository;
 
     public void write(BoardCreate boardCreate) {
-        Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        Member member = ((CustomUserDetails)principal).getMember();
+        Member member = memberRepository.getReferenceById(getMyId());
         boardCreate.setMember(member);
         boardRepository.save(boardCreate.toBoardEntity());
 
@@ -40,10 +41,7 @@ public class BoardServiceJpa implements BoardService {
     @Override
     public void update(BoardUpdate boardUpdate,Long boardId) {
         Board board = boardRepository.getReferenceById(boardId);
-        Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-
-        Member member = ((CustomUserDetails) principal).getMember();
-         board.setTitle(boardUpdate.getTitle());
+        board.setTitle(boardUpdate.getTitle());
          board.setContent(boardUpdate.getContent());
 
     }
@@ -51,19 +49,14 @@ public class BoardServiceJpa implements BoardService {
     @Override
     public List<BoardDTO> getBoardList() {
         List<Board> findAll = boardRepository.findAll();
-        List<BoardDTO> allPost = new ArrayList<>();
 
-        for(Board board : findAll){
-            BoardDTO build = BoardDTO.builder()
-                    .boardId(board.getBoardId())
-                    .content(board.getContent())
-                    .title(board.getTitle())
-                    .build();
+        return findAll.stream()
+                .map(m -> new BoardDTO(m.getBoardId(),m.getContent(),m.getTitle()))
+                .collect(Collectors.toList());
 
-            allPost.add(build);
-        }
-        return allPost;
     }
+
+
 
     @Override
     public BoardDTO getBoard(Long boardId) {
@@ -75,5 +68,11 @@ public class BoardServiceJpa implements BoardService {
                 .content(board.getContent())
                 .member(board.getMember())
                 .build();
+    }
+
+
+    public static Long  getMyId(){
+        Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        return ((CustomUserDetails) principal).getMember().getMemberId();
     }
 }

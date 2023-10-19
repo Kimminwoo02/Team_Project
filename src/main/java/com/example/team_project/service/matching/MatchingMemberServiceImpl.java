@@ -30,12 +30,10 @@ public class MatchingMemberServiceImpl implements MatchingMemberService {
 
     @Override
     public void createAndAddMember2Matching() {
-        Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        Long memberId = ((CustomUserDetails) principal).getMember().getMemberId();
-        Member member = memberRepository.getReferenceById(memberId);
-        Matching matching = matchingRepository.getReferenceById(memberId);
+        Member member = memberRepository.getReferenceById(getMyId());
+        Matching matching = matchingRepository.getReferenceById(getMyId());
 
-        matching.setMemberId(memberId);
+        matching.setMemberId(getMyId());
 
         MatchingMember matchingMember = new MatchingMember();
         matchingMember.setMatching(matching);
@@ -47,11 +45,9 @@ public class MatchingMemberServiceImpl implements MatchingMemberService {
 
     @Override
     public void addMember2Matching(MatchingMemberDTO matchingMemberDTO) {
-        Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        Long memberId = ((CustomUserDetails) principal).getMember().getMemberId();
-        Member member = memberRepository.getReferenceById(memberId);
-        Matching matching = matchingRepository.getReferenceById(memberId);
-        matching.setMemberId(memberId);
+        Member member = memberRepository.getReferenceById(getMyId());
+        Matching matching = matchingRepository.getReferenceById(getMyId());
+        matching.setMemberId(getMyId());
         // TODO /* 일단 지금 MM entity는 멤버와 1:N, 근데 MM entity PK로 조회 때려서 여러 member 가져오는 거 */
 
 
@@ -63,14 +59,12 @@ public class MatchingMemberServiceImpl implements MatchingMemberService {
 
     }
 
-
     @Override
     public List<MatchingMemberResponse> getMatching() {
         List<MatchingMember> matchingMembers = matchingMemberRepository.findAll();
 
         return matchingMembers.stream().map(MatchingMemberResponse::from )
                 .collect(Collectors.toList());
-
     }
 
 
@@ -88,15 +82,21 @@ public class MatchingMemberServiceImpl implements MatchingMemberService {
 //        return matchingMemberResponse;
 
 
+
     @Override
     @Transactional
     public List<MatchingScheduleDTO> getSchedule(){
-        Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        Member member = ((CustomUserDetails) principal).getMember();
+        Member member = memberRepository.getReferenceById(getMyId());
         List<MatchingMember> list = matchingMemberRepository.findAllByMemberEquals(member);
 
-            return list.stream()
+        return list.stream()
                 .map(MatchingScheduleDTO::from)
                 .collect(Collectors.toList());
+    }
+
+
+    public static Long getMyId(){
+        Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        return ((CustomUserDetails) principal).getMember().getMemberId();
     }
 }

@@ -25,20 +25,16 @@ public class CommentServiceImpl implements CommentService {
     private final BoardRepository boardRepository;
     private final MemberRepository memberRepository;
 
-    public void save(CommentDTO commentDTO,CustomUserDetails principalDetails) {
-        Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        Long memberId = ((CustomUserDetails) principal).getMember().getMemberId();
-
+    public void save(CommentDTO commentDTO) {
         Board board = boardRepository.getReferenceById(commentDTO.getBoardId());
-        Member member = memberRepository.getReferenceById(memberId);
+        Member member = memberRepository.getReferenceById(getMyId());
 
         Comment comment = Comment.toComment(member.getNickName(), commentDTO.getCommentContents(), board);
         commentRepository.save(comment);
-
     }
 
-    public void delete(Long articleCommentId,String userId) {
-        commentRepository.deleteByIdAndCommentWriter(articleCommentId,userId);
+    public void delete(Long articleCommentId) {
+        commentRepository.deleteByIdAndCommentWriter(articleCommentId, memberRepository.getReferenceById(getMyId()).getName());
     }
 
     @Override
@@ -49,5 +45,10 @@ public class CommentServiceImpl implements CommentService {
                 .collect(Collectors.toList());
     }
 
+    public static Long getMyId(){
+        Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        return ((CustomUserDetails) principal).getMember().getMemberId();
+
+    }
 
 }

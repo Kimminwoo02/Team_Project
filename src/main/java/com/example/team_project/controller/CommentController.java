@@ -30,16 +30,16 @@ public class CommentController {
 
     @PostMapping("/write")
     @ResponseBody
-    public CommentResponse save(CommentDTO commentDTO,@AuthenticationPrincipal CustomUserDetails principal) {
-        commentService.save(commentDTO,principal);
+    public CommentResponse save(CommentDTO commentDTO) {
+        commentService.save(commentDTO);
         return new CommentResponse(commentDTO.getCommentWriter(), commentDTO.getCommentContents());
     }
 
 
 
     @PostMapping("/delete")
-    public String delete(@AuthenticationPrincipal CustomUserDetails principal, CommentDTO commentDTO) {
-        commentService.delete(commentDTO.getId(),principal.getName());
+    public String delete(CommentDTO commentDTO) {
+        commentService.delete(commentDTO.getId());
         return "redirect:/board";
 
     }

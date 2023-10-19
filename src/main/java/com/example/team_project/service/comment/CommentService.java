@@ -10,9 +10,9 @@ import java.util.List;
 
 public interface CommentService {
 
-    void save(CommentDTO commentDTO, CustomUserDetails principalDetails);
+    void save(CommentDTO commentDTO);
 
-    void delete(Long articleCommentId,String userId);
+    void delete(Long articleCommentId);
 
     List<CommentDTO> getComment(Long boardId,Pageable pageable);
 

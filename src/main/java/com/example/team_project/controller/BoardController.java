@@ -43,6 +43,7 @@ public class BoardController {
         List<BoardDTO> boardList = boardServiceJpa.getBoardList();
         model.addAttribute("boardList", boardList);
         model.addAttribute("categories",Category.values());
+
         return "main/detailBoard";
     }
 
@@ -54,7 +55,6 @@ public class BoardController {
         model.addAttribute("categories", Category.values());
         model.addAttribute("boardId", boardId);
         model.addAttribute("comments", commentService.getComment(boardId,pageable));
-
 
         return "main/boardRead";
     }
@@ -73,15 +73,13 @@ public class BoardController {
 
     @GetMapping("/board")
     public String update1(Long boardId, Model model) {
-
         BoardDTO board = boardServiceJpa.getBoard(boardId);
         model.addAttribute("board", board);
         return "main/boardUpdate";
     }
 
     @PutMapping("/board/{boardId}")
-    public String update2(@ModelAttribute BoardUpdate boardUpdate, @PathVariable Long boardId, @AuthenticationPrincipal CustomUserDetails principal) {
-        log.info("++++++++++++++++++" + boardId + "*************" + boardUpdate);
+    public String update2(@ModelAttribute BoardUpdate boardUpdate, @PathVariable Long boardId) {
         boardServiceJpa.update(boardUpdate, boardId);
 
         return "redirect:/detail";

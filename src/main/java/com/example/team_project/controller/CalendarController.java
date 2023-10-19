@@ -24,6 +24,4 @@ public class CalendarController {
          model.addAttribute("result",list);
         return "main/mySchedule";
     }
-
-
 }

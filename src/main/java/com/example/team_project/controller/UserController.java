@@ -116,8 +116,6 @@ public class UserController {
     @ResponseBody
     public Long idCheck(String email) {
 
-        System.out.println("컨트롤러 테스트 ++++++ "+ email);
-
         return memberService.emailCheck(email);
 
     }

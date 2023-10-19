@@ -51,7 +51,7 @@
 
                             <div class="form-group">
                                 <label for="email">이메일</label>
-                                <input type="email" class="form-control" id="email" name="email" placeholder="ID"  >
+                                <input type="email" class="form-control" id="email" name="email" placeholder="ID" ONKEYUP="Initcheck()">
                                 <div class="check_font" id="id_check"></div>
                                 <button type="button"  onclick="emailChecking()" id="data" class="btn btn-outline-primary" style="margin-top: 20px;">중복검사</button>
                             </div>
@@ -130,7 +130,7 @@
                     <label class="custom-control-label" for="aggrement">개인정보 수집 및 이용에 동의합니다.</label>
                 </div>
                 <div class="mb-4"></div>
-                <button onclick="check()" class="btn btn-primary btn-lg btn-block" type="submit">가입 완료</button>
+                <button onclick="return check()" class="btn btn-primary btn-lg btn-block" type="submit">가입 완료</button>
             </form>
         </div>
     </div>
@@ -209,8 +209,6 @@
 
     var email = {"email":$('#email').val()};
 
-
-
     let isEmailCheck = false;
     function emailChecking(){
 
@@ -246,13 +244,12 @@
                         isEmailCheck = true
                     } else {
                         $("#id_check").html( '<h6 style="color: red">이미 존재하는 이메일 입니다</h6>' );
-
                     }
+
                 },
 
                 error : function(request){
                     console.log("request" + request);
-
                 }
             })
         }
@@ -262,9 +259,11 @@
     function check(){
         if( isEmailCheck === false){
             alert(" 중복 체크를 먼저 해주세요!")
-            return false
-
+            return false;
         }
+    }
+    function Initcheck(){
+        isEmailCheck = false;
     }
 
 </script>

@@ -24,20 +24,21 @@ import static org.codehaus.groovy.runtime.DefaultGroovyMethods.collect;
 
 @RequiredArgsConstructor
 @Service
+@Transactional
 public class MatchingMemberServiceImpl implements MatchingMemberService {
     private final MemberRepository memberRepository;
     private final MatchingRepository matchingRepository;
     private final MatchingMemberRepository matchingMemberRepository;
 
-    @Override
-    public List<MatchingMember> findAll() {
-        return matchingMemberRepository.findAll();
-    }
+//    @Override
+//    public List<MatchingMember> findAll() {
+//        return matchingMemberRepository.findAll();
+//    }
 
-    @Override
-    public MatchingMember findMatchingMemberByMatching_MatchingId(Long matchingIdOfMatchingWannaFind) {
-        return matchingMemberRepository.findMatchingMemberByMatching_MatchingId(matchingIdOfMatchingWannaFind);
-    }
+//    @Override
+//    public MatchingMember findMatchingMemberByMatching_MatchingId(Long matchingIdOfMatchingWannaFind) {
+//        return matchingMemberRepository.findMatchingMemberByMatching_MatchingId(matchingIdOfMatchingWannaFind);
+//    }
 
     @Override
     public void createAndAddMember2Matching(Long id) {

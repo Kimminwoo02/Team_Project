@@ -8,6 +8,7 @@ import com.example.team_project.repository.BoardRepository;
 import com.example.team_project.repository.CommentRepository;
 import com.example.team_project.repository.MemberRepository;
 import com.example.team_project.security.CustomUserDetails;
+import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -20,6 +21,7 @@ import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
+@Transactional
 public class CommentServiceImpl implements CommentService {
     private final CommentRepository commentRepository;
     private final BoardRepository boardRepository;

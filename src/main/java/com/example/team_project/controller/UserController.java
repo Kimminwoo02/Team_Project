@@ -55,14 +55,16 @@ public class UserController {
     }
 
     // REST 방식에서 값을 읽어내는 동작은 GET이다. ★ 매핑 주소 find_id 아닌 find/id으로 주는 것 주의!
-    @ResponseBody
+    @Transactional
     @PostMapping("/findemail")
-    public String findId(MemberSearchCond memberSearchCond , RedirectAttributes rttr) {
+    public String findId(String name, String phone , RedirectAttributes rttr) {
+        MemberSearchCond memberSearchCond = new MemberSearchCond(name,phone);
         Member user = memberService.getMemberId(memberSearchCond);
+        log.info(name + " +++++++" + phone + "cccccccc"  );
         if(user.getEmail() == null) {
             rttr.addAttribute("data", "");
         }else {
-            rttr.addAttribute("data", memberSearchCond);
+            rttr.addAttribute("data", user);
         }
         return "redirect:/id";
     }

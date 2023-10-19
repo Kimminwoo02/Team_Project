@@ -19,7 +19,7 @@ public class ReviewServiceImpl implements ReviewService{
 
     @Override
     public void addReview(ReviewDto reviewDto) {
-       Member member = memberRepository.getReferenceById(reviewDto.getMember().getMemberId());
+       Member member = memberRepository.getReferenceById(reviewDto.getMemberId());
        reviewRepository.save(reviewDto.createReview(reviewDto.getRating(), reviewDto.getContent(),member));
     }
 

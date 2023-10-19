@@ -4,6 +4,7 @@ import com.example.team_project.dto.member.Mail;
 import com.example.team_project.entity.member.Member;
 import com.example.team_project.repository.MemberRepository;
 import groovy.util.logging.Slf4j;
+import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.mail.MailSender;
 import org.springframework.mail.SimpleMailMessage;
@@ -13,6 +14,7 @@ import org.springframework.stereotype.Service;
 @Service
 @Slf4j
 @RequiredArgsConstructor
+@Transactional
 public class MailServiceImpl implements MailService{
     private final MemberRepository memberRepository;
     private final MailSender mailSender;

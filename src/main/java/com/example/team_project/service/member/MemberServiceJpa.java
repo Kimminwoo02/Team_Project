@@ -28,6 +28,7 @@ import java.util.List;
 @RequiredArgsConstructor
 @Log4j2
 @Service
+@Transactional
 public class MemberServiceJpa implements MemberService {
     @Value("${IMAGES}")
     private  String imagePath;
@@ -39,13 +40,13 @@ public class MemberServiceJpa implements MemberService {
     private final FileStore filestore;
     private final AuthenticationManager authenticationManager;
 
-    @Transactional
+
     public void isDuplicateEmail(String nickname){
         validateDuplicateMember(nickname);
     }
 
 
-    @Transactional
+
     public SignupResponse join (SignupDto signupDto) {
 
 
@@ -120,6 +121,7 @@ public class MemberServiceJpa implements MemberService {
 
     @Override
     public Member getMemberId(MemberSearchCond memberSearchCond) {
+        log.info(memberSearchCond.getName() + " +++++++" + memberSearchCond.getPhone() + "cccccccc"  );
         return memberRepository.findByNameAndPhone(memberSearchCond.getName(),memberSearchCond.getPhone());
     }
 

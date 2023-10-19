@@ -2,6 +2,7 @@ package com.example.team_project.service.chat;
 
 import com.example.team_project.entity.chat.ChatRoom;
 import jakarta.annotation.PostConstruct;
+import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -11,6 +12,7 @@ import java.util.*;
 @Service
 @Slf4j
 @RequiredArgsConstructor
+@Transactional
 public
 class ChatService {
 

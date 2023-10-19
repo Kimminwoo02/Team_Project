@@ -32,7 +32,7 @@ public class CommentController {
     @ResponseBody
     public CommentResponse save(CommentDTO commentDTO) {
         commentService.save(commentDTO);
-        return new CommentResponse(commentDTO.getCommentWriter(), commentDTO.getCommentContents());
+        return new CommentResponse(commentDTO.getCommentWriter(), commentDTO.getMemberId(),commentDTO.getCommentContents());
     }
 
 

@@ -8,4 +8,9 @@ public class MemberSearchCond {
     String phone;
     String email;
 
+    public MemberSearchCond(String name, String phone){
+        this.name = name;
+        this.phone=phone;
+    }
+
 }

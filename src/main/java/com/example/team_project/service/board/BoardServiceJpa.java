@@ -22,6 +22,7 @@ import java.util.stream.Collectors;
 @RequiredArgsConstructor
 @Log4j2
 @Service
+@Transactional
 public class BoardServiceJpa implements BoardService {
     private final BoardRepository boardRepository;
     private final MemberRepository memberRepository;
@@ -55,6 +56,7 @@ public class BoardServiceJpa implements BoardService {
                 .collect(Collectors.toList());
 
     }
+
 
 
 

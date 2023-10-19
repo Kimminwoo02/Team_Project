@@ -20,9 +20,11 @@ public class MatchingServiceImpl implements MatchingService {
 
     // 매칭 등록
     @Override
-    public void createMatching(MatchingDTO matchingDTO) {
+    public Long createMatching(MatchingDTO matchingDTO) {
         // transform DTO to Entity
         Matching matching = matchingDTO.createMatching();
+
+
 
         // get Authenticated logged-in object in session
         Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
@@ -32,8 +34,9 @@ public class MatchingServiceImpl implements MatchingService {
         Long memberId = ((CustomUserDetails) principal).getMember().getMemberId();
         matching.setMemberId(memberId);
 
-        matchingRepository.save(matching);
 //        Member와 N:M으로 통신하지 않기 위해
+
+        return matchingRepository.save(matching).getMatchingId();
 
     }
 

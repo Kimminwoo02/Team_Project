@@ -19,7 +19,7 @@ import java.util.List;
 @ToString
 public class Matching extends AuditingFields {
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Long matchingId;
 
     @Setter

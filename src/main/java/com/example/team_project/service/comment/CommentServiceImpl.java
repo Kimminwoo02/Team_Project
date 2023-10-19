@@ -27,14 +27,12 @@ public class CommentServiceImpl implements CommentService {
 
     public void save(CommentDTO commentDTO) {
         Board board = boardRepository.getReferenceById(commentDTO.getBoardId());
-        Member member = memberRepository.getReferenceById(getMyId());
-
-        Comment comment = Comment.toComment(member.getNickName(), commentDTO.getCommentContents(), board);
+        Comment comment = Comment.toComment(getMyId(), commentDTO.getCommentContents(), board);
         commentRepository.save(comment);
     }
 
     public void delete(Long articleCommentId) {
-        commentRepository.deleteByIdAndCommentWriter(articleCommentId, memberRepository.getReferenceById(getMyId()).getName());
+        commentRepository.deleteByIdAndMemberId(articleCommentId,getMyId());
     }
 
     @Override

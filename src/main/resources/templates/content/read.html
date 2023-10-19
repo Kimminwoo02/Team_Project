@@ -93,7 +93,7 @@
                         <div th:each= "comment : ${comments}" class="div" style=" width: 963px; height: 90px; margin-top: 10px">
                             <div  class="card-content">
                                 <h5 th:text="${comment.commentWriter}" style="font-weight: bold;"></h5>
-                                <p th:text="${comment.commentContents}">이것은 세 번째 카드의 내용입니다. 내용이 조금 더 길어질 때 어떻게 나타나는지 확인합니다.</p>
+                                <p th:text="${comment.commentContents}"></p>
                             </div>
                         </div>
                     </div>
@@ -120,17 +120,19 @@
 
             console.log(memberId)
             console.log(commentContents)
-            console.log(window.location.host +"/boradRead/"+boardId)
+            console.log(window.location.host +"/boardRead/"+boardId)
 
 
 
             $.ajax({
                 url: "/comment/write"
                 , method: 'POST'
-                , data:  { "commentWriter" : commentWriter , "commentContents" : commentContents, "memberId" : memberId, "boardId" : boardId }
+                , data:  { "commentWriter": commentWriter, "commentContents" : commentContents, "memberId" : memberId, "boardId" : boardId }
                 , success: function (data) {
+                    console.log("commentWriter")
                     $("#data").val('');
-                    location.href= window.location.host +"/boradRead/"+boardId
+                    location.href= window.location.host +"/boardRead/"+boardId
+                //-----------
                 //-----------
                     var newComment = `
             <div class="div" style="width: 963px; height: 90px; margin-top: 10px">

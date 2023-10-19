@@ -45,19 +45,16 @@ public class MatchingController {
 
     @PostMapping("/matchingMember")
     @ResponseBody
-    public Response<Void> matchingMember(@RequestBody MatchingMemberCreate matchingMemberCreate, @AuthenticationPrincipal CustomUserDetails principal){
-        Member member = memberService.getMember(principal.getMemberId());
+    public Response<Void> matchingMember(@RequestBody MatchingMemberCreate matchingMemberCreate){
         Matching matching = matchingService.getMatching(matchingMemberCreate.getMatchingId());
-        matchingMemberService.matchingApply(member,matching,matchingMemberCreate.getIntroduce());
 
         return Response.success();
     }
-
-
     @GetMapping("/matching/{cat}")
     public ModelAndView mat3(@PathVariable(name = "cat") String category){
        ModelAndView modelAndView = new ModelAndView("main/matching");
        modelAndView.addObject("matches",matchingService.findByCategory(Category.valueOf(category)));
+
         return modelAndView;
     }
 
@@ -68,12 +65,14 @@ public class MatchingController {
 
     @GetMapping("/matchingMemberList")
     public String matchingMemberList(){
+
         return "main/matchingMemberList";
     }
     @GetMapping("/matchingStatus")
     public String matchingStatus(Model model){
-        List<MatchingMemberResponse> matching = matchingMemberService.getMatching();
-        model.addAttribute("matchingList",matching);
+        List<MatchingDTO> dto = matchingMemberService.getMyMatching();
+        model.addAttribute("matchingList",dto);
+
         return "main/matchingStatus";
     }
 
@@ -84,11 +83,28 @@ public class MatchingController {
 ////        return matchingMemberService.getMatchingMember(matchingUserId);
 //    }
 
+    @GetMapping("/matchingApplyList/{matchingId}")
+    public String matchingApplyList(Model model,@PathVariable Long matchingId) {
+        System.out.println(matchingId);
+        List<MatchingMemberResponse> matching = matchingMemberService.matchingApplyList(1L);
 
-    @GetMapping("/matchingApplyList")
-    public String matchingApplyList(Model model) {
-        List<MatchingMemberResponse> matching = matchingMemberService.getMatching();
+        log.info(matching.toString()+ " wrgaergsegserg");
         model.addAttribute("matchingList",matching);
+
         return "main/matchingApplyList";
     }
+//    @PostMapping("/matchingApplyList")
+//    public String m2(@RequestBody String matchingName){
+//        return "redirect:";
+//    }
+
+    @PostMapping("/matchingApply/{matchingUserId}")
+    @ResponseBody
+    public String applyDeny(String state, @PathVariable Long matchingUserId) {
+        matchingMemberService.applyDeny(state, matchingUserId);
+
+        return "main/matchingApplyList";
+    }
+
+
 }

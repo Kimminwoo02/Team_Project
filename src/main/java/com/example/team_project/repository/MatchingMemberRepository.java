@@ -1,6 +1,8 @@
 package com.example.team_project.repository;
 
+import com.example.team_project.dto.matching.MatchingMemberResponse;
 import com.example.team_project.dto.matching.MatchingScheduleDTO;
+import com.example.team_project.entity.matching.Matching;
 import com.example.team_project.entity.matching.MatchingMember;
 import com.example.team_project.entity.member.Member;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -13,4 +15,7 @@ public interface MatchingMemberRepository extends JpaRepository<MatchingMember,L
 
         public List<MatchingMember> findAllByMemberEquals(Member member);
 
+        public List<MatchingMemberResponse> findAllByMatching(Matching matching);
+
+//        public List<MatchingMemberResponse> findMatchingMembersBy
 }

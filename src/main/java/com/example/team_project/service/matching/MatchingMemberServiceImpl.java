@@ -1,8 +1,10 @@
 package com.example.team_project.service.matching;
 
+import com.example.team_project.dto.matching.MatchingDTO;
 import com.example.team_project.dto.matching.MatchingMemberDTO;
 import com.example.team_project.dto.matching.MatchingMemberResponse;
 import com.example.team_project.dto.matching.MatchingScheduleDTO;
+import com.example.team_project.entity.Category;
 import com.example.team_project.entity.member.Member;
 import com.example.team_project.entity.matching.Matching;
 import com.example.team_project.entity.matching.MatchingMember;
@@ -56,18 +58,27 @@ public class MatchingMemberServiceImpl implements MatchingMemberService {
     }
 
     @Override
-    public void matchingApply(Member member, Matching matching, String introduce) {
-
+    public List<MatchingMemberResponse> matchingApplyList(Long matchingId) {
+        List<MatchingMemberResponse> list = matchingMemberRepository.findAllByMatching(matchingRepository.getReferenceById(1L));
+        return list;
     }
 
     @Override
     public List<MatchingMemberResponse> getMatching() {
         List<MatchingMember> matchingMembers = matchingMemberRepository.findAll();
 
-        return matchingMembers.stream().map(MatchingMemberResponse::from )
+        return matchingMembers.stream().map(MatchingMemberResponse::from)
                 .collect(Collectors.toList());
     }
 
+    @Override
+    public List<MatchingDTO> getMyMatching() {
+        Member member = memberRepository.getReferenceById(getMyId());
+        List<MatchingMember> myMatchingList = matchingMemberRepository.findAllByMemberEquals(member);
+        return myMatchingList.stream()
+                .map(m -> new MatchingDTO(m.getMatching().getMatchingId(), m.getMatching().getMatchingName(), m.getMatching().getLevel(), m.getMatching().getContent(), m.getMatching().getAddress(), m.getMatching().getCapacity(), m.getMatching().getCategory(), m.getMatching().getSDate()))
+                .collect(Collectors.toList());
+    }
 
 
 //    @Override
@@ -95,6 +106,16 @@ public class MatchingMemberServiceImpl implements MatchingMemberService {
                 .collect(Collectors.toList());
     }
 
+    @Override
+    public void applyDeny(String state, Long matchingUserId) {
+        MatchingMember matchingMember = matchingMemberRepository.getReferenceById(matchingUserId);
+        if(state=="false"){
+            matchingMember.setMatchingYN(false);
+        }else if(state=="true"){
+            matchingMember.setMatchingYN(true);
+        }
+
+    }
 
     public static Long getMyId(){
         Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();

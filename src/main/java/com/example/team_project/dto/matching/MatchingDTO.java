@@ -22,6 +22,16 @@ public class MatchingDTO {
     private Category category;
     private String sDate;
 
+    public MatchingDTO(Long matchingId, String matchingName, String level, String content, String address, String capacity, Category category, String sDate) {
+        this.matchingId = matchingId;
+        this.matchingName = matchingName;
+        this.level = level;
+        this.content = content;
+        this.address = address;
+        this.capacity = capacity;
+        this.category = category;
+        this.sDate = sDate;
+    }
 
     public Matching createMatching(){
         return Matching.builder()

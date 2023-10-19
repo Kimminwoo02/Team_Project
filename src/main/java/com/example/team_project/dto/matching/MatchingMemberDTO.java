@@ -15,6 +15,7 @@ public class MatchingMemberDTO {
     private Matching matching;
     private Member member;
     private Integer quota;
+    private String introduce;
     private Boolean matchingYN;
 
 
@@ -24,6 +25,7 @@ public class MatchingMemberDTO {
                 .matching(matching)
                 .member(member)
                 .quota(quota)
+                .introduce(introduce)
                 .matchingYN(matchingYN)
                 .build();
     }

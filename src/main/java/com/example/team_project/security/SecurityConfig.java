@@ -91,8 +91,6 @@ public class SecurityConfig implements AuditorAware<Long>{
                         .requestMatchers(new MvcRequestMatcher(introspect,"/signup")).permitAll()
                         .requestMatchers(new MvcRequestMatcher(introspect,"/boardMain")).permitAll()
                         .requestMatchers(new MvcRequestMatcher(introspect,"/welcome")).permitAll()
-                        .requestMatchers(new MvcRequestMatcher(introspect,"/matching")).permitAll()
-                        .requestMatchers(new MvcRequestMatcher(introspect,"/matching/category")).permitAll()
                         .requestMatchers(new MvcRequestMatcher(introspect,"/detail")).permitAll()
                         .requestMatchers(new MvcRequestMatcher(introspect,"/chat")).permitAll()
                         .requestMatchers(new MvcRequestMatcher(introspect,"/write")).permitAll()

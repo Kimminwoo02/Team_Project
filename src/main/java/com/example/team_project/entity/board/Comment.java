@@ -1,5 +1,6 @@
 package com.example.team_project.entity.board;
 
+import com.example.team_project.entity.member.Member;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 
@@ -17,9 +18,8 @@ public class Comment {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(length = 20, nullable = false)
+    private Long memberId;
     private String commentWriter;
-
     @Column
     private String commentContents;
 
@@ -28,17 +28,14 @@ public class Comment {
     @JoinColumn(name="boardId")
     private Board board; //boardEntity에 코드 추가해야할 것. private List<Comment> commentList = new ArrayList<>();
 
-
-
-
-    public Comment(String commentWriter, String commentContents){
-        this.commentWriter = commentWriter;
+    public Comment(Long memberId, String commentContents){
+        this.memberId = memberId;
         this.commentContents = commentContents;
     }
 
-    public static Comment toComment(String commentWriter, String commentContents, Board board){
+    public static Comment toComment(Long memberId, String commentContents, Board board){
         return Comment.builder()
-                .commentWriter(commentWriter)
+                .memberId(memberId)
                 .commentContents(commentContents)
                 .board(board)
                 .build();

@@ -1,5 +1,6 @@
 package com.example.team_project.service.matching;
 
+import com.example.team_project.dto.matching.MatchingDTO;
 import com.example.team_project.dto.matching.MatchingMemberDTO;
 import com.example.team_project.dto.matching.MatchingMemberResponse;
 import com.example.team_project.dto.matching.MatchingScheduleDTO;
@@ -14,14 +15,13 @@ public interface MatchingMemberService {
     void addMember2Matching(MatchingMemberDTO matchingMemberDTO);
 
 
-    List<MatchingMember> findAll();
 //    MatchingMemberResponse getMatchingMember(Long matchingId);
 
-    MatchingMember findMatchingMemberByMatching_MatchingId(Long matchingIdOfMatchingWannaFind);
-
-    void matchingApply(Member member, Matching matching, String introduce);
+    List<MatchingMemberResponse> matchingApplyList(Long matchingId);
 
     List<MatchingMemberResponse> getMatching();
-
+    List<MatchingDTO> getMyMatching();
     public List<MatchingScheduleDTO> getSchedule();
+
+    public void applyDeny(String state, Long matchingUserId);
 }

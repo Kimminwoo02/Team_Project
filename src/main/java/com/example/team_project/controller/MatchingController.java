@@ -39,9 +39,7 @@ public class MatchingController {
 
     @PostMapping("/matching")
     public String matching2(MatchingDTO matchingDTO){
-        System.out.println(matchingDTO.getSDate());
-        matchingService.createMatching(matchingDTO);
-        matchingMemberService.createAndAddMember2Matching();
+        matchingMemberService.createAndAddMember2Matching(matchingService.createMatching(matchingDTO));
         return "redirect:/matching";
     }
 

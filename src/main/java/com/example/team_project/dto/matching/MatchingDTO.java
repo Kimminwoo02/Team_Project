@@ -2,10 +2,7 @@ package com.example.team_project.dto.matching;
 
 import com.example.team_project.entity.Category;
 import com.example.team_project.entity.matching.Matching;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import java.util.Date;
 
@@ -13,6 +10,7 @@ import java.util.Date;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
+@ToString
 public class MatchingDTO {
     private Long matchingId;
     private Long memberId;

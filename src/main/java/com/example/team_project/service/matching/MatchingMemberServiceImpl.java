@@ -15,7 +15,6 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -29,10 +28,9 @@ public class MatchingMemberServiceImpl implements MatchingMemberService {
     private final MatchingMemberRepository matchingMemberRepository;
 
     @Override
-    public void createAndAddMember2Matching() {
+    public void createAndAddMember2Matching(Long id) {
         Member member = memberRepository.getReferenceById(getMyId());
-        Matching matching = matchingRepository.getReferenceById(getMyId());
-
+        Matching matching=matchingRepository.getReferenceById(id);
         matching.setMemberId(getMyId());
 
         MatchingMember matchingMember = new MatchingMember();
@@ -46,12 +44,15 @@ public class MatchingMemberServiceImpl implements MatchingMemberService {
     @Override
     public void addMember2Matching(MatchingMemberDTO matchingMemberDTO) {
         Member member = memberRepository.getReferenceById(getMyId());
-        Matching matching = matchingRepository.getReferenceById(getMyId());
-        matching.setMemberId(getMyId());
-        // TODO /* 일단 지금 MM entity는 멤버와 1:N, 근데 MM entity PK로 조회 때려서 여러 member 가져오는 거 */
+        Matching matching = matchingRepository.getReferenceById(matchingMemberDTO.getMatching().getMatchingId());
 
+        matching.setMemberId(member.getMemberId());
 
-        MatchingMember matchingMember = matchingMemberRepository.getReferenceById(matchingMemberDTO.getMatchingUserId());
+        MatchingMember matchingMember = new MatchingMember();
+        matchingMember.setMatching(matching);
+        matchingMember.setMember(member);
+        matchingMemberRepository.save(matchingMember);
+
     }
 
     @Override

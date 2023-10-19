@@ -8,7 +8,7 @@ import java.util.List;
 
 public interface MatchingService {
 
-    void createMatching(MatchingDTO matchingDTO);
+    Long createMatching(MatchingDTO matchingDTO);
 
     List<Matching> findAll();
 

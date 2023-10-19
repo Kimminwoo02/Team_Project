@@ -5,6 +5,7 @@ import com.example.team_project.dto.matching.MatchingDTO;
 import com.example.team_project.dto.matching.MatchingMemberCreate;
 import com.example.team_project.dto.matching.MatchingMemberResponse;
 import com.example.team_project.entity.Category;
+import com.example.team_project.entity.matching.MatchingMember;
 import com.example.team_project.entity.member.Member;
 import com.example.team_project.entity.matching.Matching;
 import com.example.team_project.security.CustomUserDetails;
@@ -14,6 +15,7 @@ import com.example.team_project.service.matching.MatchingService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -30,10 +32,12 @@ public class MatchingController {
     private final MemberService memberService;
 
     @GetMapping("/matching")
-    public String matching(Model model){
+    public String matching(Model model, @AuthenticationPrincipal CustomUserDetails principal){
         List<Matching> matches = matchingService.findAll();
+
         model.addAttribute("categories",Category.values());
         model.addAttribute("matches", matches);
+        model.addAttribute("authenticatedPrincipalMember", principal.getMember());
         return "main/matching";
     }
 

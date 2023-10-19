@@ -30,7 +30,7 @@ public class MatchingMember {
     private Member member;
 
     private Integer quota = 0;
-
+    @Setter
     private String introduce;
 
     private Boolean matchingYN;

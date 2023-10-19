@@ -13,4 +13,5 @@ public interface MatchingMemberRepository extends JpaRepository<MatchingMember,L
 
         public List<MatchingMember> findAllByMemberEquals(Member member);
 
+        public MatchingMember findMatchingMemberByMatching_MatchingId(Long matchingIdOfMatchingWannaFind);
 }

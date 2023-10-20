@@ -208,6 +208,7 @@
     let isEmailCheck = false;
     function emailChecking(){
 
+        var emaildata={"email":$("#email").val()}
         // 이메일 유효성 검사
         if($("#email").val() == ''){
             $("#id_check").html( '<h6 style="color: red"> 이메일을 입력해주세요</h6>' );
@@ -234,7 +235,7 @@
             $.ajax({
                 type : "POST",
                 url : "/emailCheck",
-                data : $("#email").val(),
+                data : emaildata,
                 success : function(data){
                     if(data === 0){
                         $("#id_check").html( '<h6 style="color: dodgerblue">사용 가능한 이메일 입니다!</h6>' );

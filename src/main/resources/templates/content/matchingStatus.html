@@ -12,10 +12,9 @@
         <div  class="col-sm-3" style="margin-top: 50px;">
             <th:block th:replace="/../fragment/sidebar :: sidebarFragment"></th:block>
         </div>
-        <form method="post" action="/matchingApplyList">
         <div class="card-container col-md-6" style="margin-top: 100px;">
             <div class="card" th:each="mat : ${matchingList}">
-                <img class="thumbnail" src="https://via.placeholder.com/150" alt="썸네일 이미지">
+                <img class="thumbnail" src="../images/logo.png" alt="썸네일 이미지">
                 <div class="card-content">
                     <h2 th:text="${mat.matchingName}"></h2>
 <!--                    <input th:value="${mat.matchingName}" name="matchingName"></input>-->
@@ -29,7 +28,6 @@
                 </div>
             </div>
         </div>
-        </form>
 </main>
 </body>
 </html>

@@ -25,7 +25,7 @@ public class Board extends AuditingFields {
     private String title;
 
     @Setter
-    @Column(name = "content", length = 10000)
+    @Column(name = "content", length = 50000)
     private String content;
 
     @ManyToOne

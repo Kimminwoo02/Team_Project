@@ -795,7 +795,8 @@ strong {
 .shop-image {
     display: block;
     border-radius: var(--border-radius-medium);
-
+    width: 120px;
+    height: 100px;
 }
 
 .shop-image:hover {

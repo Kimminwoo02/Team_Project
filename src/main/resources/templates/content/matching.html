@@ -29,10 +29,10 @@
                     <div class="shop-thumb">
                         <div class="shop-image-wrap">
                             <a th:href="@{/matching/{category}(category=${category})}">
-                                <img class="shop-image img-fluid"
-                                     style="width: 130px" alt="" th:src="@{images/shop/}+${category}+@{.jpg}">
+<!--                                <img class="shop-image img-fluid"-->
+<!--                                     alt="" th:src="@{images/shop/}+${category}+@{.jpg}">-->
                             </a>
-                            <div th:text="${category.title}"/>
+                            <a th:text="${category.title}" th:href="@{#}"></a>
                         </div>
                     </div>
                 </div>
@@ -99,7 +99,7 @@
                                         <!--test-->
                                         <div class="review-btn-wrapper">
 
-                                            <button type="button" onclick="pop()">장소 선택</button>
+                                            <button type="button" class="btn btn-outline-primary" onclick="pop()">장소 선택</button>
                                             <input type="text" class="form-control" id="address" name="address"
                                                    readonly
                                             >
@@ -163,10 +163,10 @@
                                onclick="transfer(
                                    this.getAttribute('getId'),
                                    this.getAttribute('getMatchingName'))">
-                                <img class="matching-thumbnail" src="https://via.placeholder.com/150" alt="썸네일 이미지">
+                                <img class="matching-thumbnail" src="../images/logo.png" alt="썸네일 이미지">
                                 <div class="matching-content">
                                     <h2 th:text="${match.matchingName}">첫 번째 카드 </h2>
-                                    <span id="idValue" th:text="${match.matchingId}"> 아이디값입니다.</span>
+                                    <span id="idValue" th:text="${match.category}"> 아이디값입니다.</span>
                                     <p th:text="${match.content}">이것은 첫 번째 카드의 내용입니다. 내용이 조금 더 길어질 때 어떻게 나타나는지
                                         확인합니다.
                                     </p>

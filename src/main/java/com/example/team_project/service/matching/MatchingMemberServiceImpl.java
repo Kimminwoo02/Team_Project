@@ -70,7 +70,7 @@ public class MatchingMemberServiceImpl implements MatchingMemberService {
 
     @Override
     public List<MatchingMemberResponse> matchingApplyList(Long matchingId) {
-        List<MatchingMemberResponse> list = matchingMemberRepository.findAllByMatching(matchingRepository.getReferenceById(1L));
+        List<MatchingMemberResponse> list = matchingMemberRepository.findAllByMatching(matchingRepository.getReferenceById(matchingId));
         return list;
     }
 

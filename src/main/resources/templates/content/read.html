@@ -60,7 +60,7 @@
                             <h1 class="qna_subject" style="margin-bottom: 10px;" th:text="${board.title}"></h1>
                             <!--신고버튼-->
                             <div class="post_btns">
-                                <button type="button" class="SizeXS" onclick="window.login()" style="float: right">신고</button>
+                                <button type="button" class="SizeXS btn btn-danger" onclick="window.login()" style="float: right">신고</button>
                             </div>
                         </div>
 
@@ -70,9 +70,9 @@
                                 <div class="profile_pic" onmousedown="">
                                     <a href="#" target="_blank">
                                         <div class="profile_pic profile1">
-                                            <svg>
-                                                <use xlink:href="#"></use>
-                                            </svg>
+<!--                                            <svg>-->
+<!--                                                <use xlink:href="#"></use>-->
+<!--                                            </svg>-->
                                         </div>
                                     </a>
                                 </div>
@@ -101,7 +101,7 @@
                         <textarea id="data" class="scrollbar" placeholder= "여러분이 남긴 댓글은 자신을 나타냅니다."></textarea>
                     </div>
 
-                    <button type="button" class="comment_summit" onclick="doAction()">댓글 등록</button>
+                    <button type="button" class="btn btn-primary comment_summit" onclick="doAction()">댓글 등록</button>
                 </div>
             </div>
         </div>
@@ -109,48 +109,65 @@
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script th:inline="javascript">
+        $(document).ready(function() {
+            $('#data').on('keydown', function(event) {
+                // 'Shift + Enter'는 줄바꿈, 'Enter'만 눌렸을 때는 댓글 등록
+                if (event.key === 'Enter' && !event.shiftKey) {
+                    event.preventDefault();  // 기본 'Enter' 이벤트 (예: 줄바꿈) 방지
+                    submitComment();
+                }
+            });
 
-        function doAction(){
+            $('.comment_summit').click(function() {
+                submitComment();
+            });
+        });
+
+        function submitComment() {
             var commentContents = $("#data").val();
-            const memberId = /*[[${#authentication.principal.member.memberId}]]*/
-            const commentWriter = /*[[${#authentication.principal.member.name}]]*/
+            const memberId = /*[[${#authentication.principal.member.memberId}]]*/;
+            const commentWriter = /*[[${#authentication.principal.member.name}]]*/;
+            const boardId = /*[[${boardId}]]*/;
 
-            const boardId = /*[[${boardId}]]*/
+            // Debug logs
             console.log(boardId);
-
-            console.log(memberId)
-            console.log(commentContents)
-            console.log(window.location.host +"/boardRead/"+boardId)
-
-
+            console.log(memberId);
+            console.log(commentContents);
+            console.log(window.location.host + "/boardRead/" + boardId);
 
             $.ajax({
-                url: "/comment/write"
-                , method: 'POST'
-                , data:  { "commentWriter": commentWriter, "commentContents" : commentContents, "memberId" : memberId, "boardId" : boardId }
-                , success: function (data) {
-                    console.log("commentWriter")
-                    $("#data").val('');
-                    location.href= window.location.host +"/boardRead/"+boardId
-                //-----------
-                //-----------
-                    var newComment = `
-            <div class="div" style="width: 963px; height: 90px; margin-top: 10px">
-                <div class="card-content">
-                    <h5 style="font-weight: bold;">${data.commentWriter}</h5>
-                    <p>${data.commentContents}</p>
-                </div>
-            </div>
-        `;
-                    $(".comments").append(newComment);
+                url: "/comment/write",
+                method: 'POST',
+                data: {
+                    "commentWriter": commentWriter,
+                    "commentContents": commentContents,
+                    "memberId": memberId,
+                    "boardId": boardId
                 },
-                error : function(request){
+                success: function(data) {
+                    // Debug log
+                    console.log("데이터 들어간다~" + data);
+
+                    $("#data").val('');
+
+                    // Comment append logic
+                    var newComment = `
+                <div class="div" style="width: 963px; height: 90px; margin-top: 10px">
+                    <div class="card-content">
+                        <h5 style="font-weight: bold;">${data.commentWriter}</h5>
+                        <p>${data.commentContents}</p>
+                    </div>
+                </div>
+            `;
+                    $(".comments").append(newComment);
+
+                    location.href = window.location.host + "/boardRead/" + boardId;
+                },
+                error: function(request) {
+                    // Debug log
                     console.log("request" + request);
                 }
-
-
-            })
-
+            });
         }
     </script>
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320"><path fill="#36363e" fill-opacity="1" d="M0,96L40,117.3C80,139,160,181,240,186.7C320,192,400,160,480,149.3C560,139,640,149,720,176C800,203,880,245,960,250.7C1040,256,1120,224,1200,229.3C1280,235,1360,277,1400,298.7L1440,320L1440,320L1400,320C1360,320,1280,320,1200,320C1120,320,1040,320,960,320C880,320,800,320,720,320C640,320,560,320,480,320C400,320,320,320,240,320C160,320,80,320,40,320L0,320Z"></path></svg>

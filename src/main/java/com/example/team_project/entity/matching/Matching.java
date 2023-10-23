@@ -8,6 +8,7 @@ import jakarta.persistence.*;
 import lombok.*;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -37,10 +38,9 @@ public class Matching extends AuditingFields {
 
     private String sDate;
 
-    @JsonBackReference
     @JsonIgnore
     @OneToMany(mappedBy = "matching", cascade = CascadeType.ALL)
-    private List<MatchingMember> matchingMemberList;
+    private List<MatchingMember> matchingMember = new ArrayList<>();
 
     @Enumerated(EnumType.STRING)
     private Category category;

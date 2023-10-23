@@ -13,11 +13,10 @@ import lombok.*;
 @AllArgsConstructor
 public class MatchingMember {
     @Id
-    @Column(name = "memberMatching_id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long matchingUserId;
+    private Long matchingMemberId;
 
-    @JsonManagedReference
+    @JsonIgnore
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "matchingId")
     @Setter
@@ -39,8 +38,8 @@ public class MatchingMember {
 
 
 
-    public MatchingMember(Long matchingUserId, Matching matching, Member member, Integer quota, Boolean matchingYN) {
-        this.matchingUserId = matchingUserId;
+    public MatchingMember(Long matchingMemberId, Matching matching, Member member, Integer quota, Boolean matchingYN) {
+        this.matchingMemberId = matchingMemberId;
         this.matching = matching;
         this.member = member;
         this.quota = quota;

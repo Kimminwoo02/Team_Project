@@ -11,7 +11,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class MatchingMemberDTO {
-    private Long matchingUserId;
+    private Long matchingMemberId;
     private Matching matching;
     private Member member;
     private Integer quota;
@@ -21,7 +21,7 @@ public class MatchingMemberDTO {
 
     public MatchingMember createMatchingMember() {
         return MatchingMember.builder()
-                .matchingUserId(matchingUserId)
+                .matchingMemberId(matchingMemberId)
                 .matching(matching)
                 .member(member)
                 .quota(quota)

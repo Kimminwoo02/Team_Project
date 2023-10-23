@@ -4,6 +4,7 @@ import com.example.team_project.dto.matching.MatchingDTO;
 import com.example.team_project.dto.matching.MatchingMemberDTO;
 import com.example.team_project.dto.matching.MatchingMemberResponse;
 import com.example.team_project.dto.matching.MatchingScheduleDTO;
+import com.example.team_project.dto.member.MemberDTO;
 import com.example.team_project.entity.Category;
 import com.example.team_project.entity.member.Member;
 import com.example.team_project.entity.matching.Matching;
@@ -14,6 +15,7 @@ import com.example.team_project.repository.MemberRepository;
 import com.example.team_project.security.CustomUserDetails;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
@@ -24,6 +26,7 @@ import static org.codehaus.groovy.runtime.DefaultGroovyMethods.collect;
 
 @RequiredArgsConstructor
 @Service
+@Slf4j
 @Transactional
 public class MatchingMemberServiceImpl implements MatchingMemberService {
     private final MemberRepository memberRepository;
@@ -70,8 +73,11 @@ public class MatchingMemberServiceImpl implements MatchingMemberService {
 
     @Override
     public List<MatchingMemberResponse> matchingApplyList(Long matchingId) {
-        List<MatchingMemberResponse> list = matchingMemberRepository.findAllByMatching(matchingRepository.getReferenceById(matchingId));
-        return list;
+//        Matching matching = matchingRepository.getReferenceById(matchingId);
+        log.info("" + matchingMemberRepository.findAllByMatching_MatchingId(1L));
+        return matchingMemberRepository.findAllByMatching_MatchingId(matchingId).stream()
+                .map(m ->  new MatchingMemberResponse(m.getMatchingMemberId(),m.getMatching(),m.getMember(),m.getIntroduce()))
+                .toList();
     }
 
     @Override
@@ -84,8 +90,10 @@ public class MatchingMemberServiceImpl implements MatchingMemberService {
 
     @Override
     public List<MatchingDTO> getMyMatching() {
-        Member member = memberRepository.getReferenceById(getMyId());
-        List<MatchingMember> myMatchingList = matchingMemberRepository.findAllByMemberEquals(member);
+//        Member member = memberRepository.getReferenceById(getMyId());
+//        MemberDTO memberDTO = MemberDTO.fromEntity(member);
+        List<MatchingMember> myMatchingList = matchingMemberRepository.findAllByMember_MemberId(getMyId());
+
         return myMatchingList.stream()
                 .map(m -> new MatchingDTO(m.getMatching().getMatchingId(), m.getMatching().getMatchingName(), m.getMatching().getLevel(), m.getMatching().getContent(), m.getMatching().getAddress(), m.getMatching().getCapacity(), m.getMatching().getCategory(), m.getMatching().getSDate()))
                 .collect(Collectors.toList());
@@ -109,8 +117,9 @@ public class MatchingMemberServiceImpl implements MatchingMemberService {
     @Override
     @Transactional
     public List<MatchingScheduleDTO> getSchedule(){
-        Member member = memberRepository.getReferenceById(getMyId());
-        List<MatchingMember> list = matchingMemberRepository.findAllByMemberEquals(member);
+//        Member member = memberRepository.getReferenceById(getMyId());
+//        MemberDTO memberDTO = MemberDTO.fromEntity(member);
+        List<MatchingMember> list = matchingMemberRepository.findAllByMember_MemberId(getMyId());
 
         return list.stream()
                 .map(MatchingScheduleDTO::from)

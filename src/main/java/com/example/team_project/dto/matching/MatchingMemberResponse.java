@@ -12,14 +12,14 @@ import lombok.*;
 @AllArgsConstructor
 @ToString
 public class MatchingMemberResponse {
-    private Long matchingUserId;
+    private Long matchingMemberId;
     private Matching matching;
     private Member member;
     private String introduce;
 
     public static MatchingMemberResponse from(MatchingMember entity) {
         return new MatchingMemberResponse(
-                entity.getMatchingUserId(),
+                entity.getMatchingMemberId(),
                 entity.getMatching(),
                 entity.getMember(),
                 entity.getIntroduce()

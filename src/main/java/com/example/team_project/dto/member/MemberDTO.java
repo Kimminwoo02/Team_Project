@@ -16,7 +16,6 @@ public class MemberDTO {
         private String addr;
         private String detailAddr;
     public static MemberDTO fromEntity(Member entity){
-
         return new MemberDTO(
                 entity.getEmail(),
                 entity.getPassword(),

@@ -49,28 +49,16 @@ public class Member {
     @Setter
     private Review review;
 
-    @JsonBackReference
+    @JsonIgnore
     @OneToMany(mappedBy = "member", cascade = CascadeType.ALL)
     private List<Board> board = new ArrayList<>();
 
     @JsonIgnore
-    @JsonBackReference
     @OneToMany(mappedBy = "member", cascade  = CascadeType.ALL)
-    private List<MatchingMember> memberMatchingList = new ArrayList<>();
-
-    @OneToMany(mappedBy = "reviewedMember", cascade  = CascadeType.ALL)
-    private List<MemberReview> receivedReviews = new ArrayList<>();
+    private List<MatchingMember> MatchingMember = new ArrayList<>();
 
 
-    public double getAverageRatingFromMembers() {
-        return receivedReviews.stream()
-                .mapToInt(MemberReview::getRating)
-                .average()
-                .orElse(0.0);
-    }
 
-    @OneToMany(mappedBy = "reviewer", cascade = CascadeType.ALL)
-    private List<MemberReview> writtenReviews = new ArrayList<>();
 
     @Builder
     public Member(String email, String password, String name, String phone, String gender, String nickName, String addr, String detailAddr, String memberRole) {

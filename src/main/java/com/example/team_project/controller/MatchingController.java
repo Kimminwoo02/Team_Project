@@ -92,15 +92,11 @@ public class MatchingController {
         System.out.println(matchingId);
         List<MatchingMemberResponse> matching = matchingMemberService.matchingApplyList(1L);
 
-        log.info(matching.toString()+ " wrgaergsegserg");
         model.addAttribute("matchingList",matching);
 
         return "main/matchingApplyList";
     }
-//    @PostMapping("/matchingApplyList")
-//    public String m2(@RequestBody String matchingName){
-//        return "redirect:";
-//    }
+
 
     @PostMapping("/matchingApply/{matchingUserId}")
     @ResponseBody

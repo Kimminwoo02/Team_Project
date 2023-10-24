@@ -32,7 +32,7 @@ public class MatchingMember {
     @Setter
     private String introduce;
     @Setter
-    private Boolean matchingYN;
+    private Boolean matchingYN = false;
     @Setter
     private String sDate;
 

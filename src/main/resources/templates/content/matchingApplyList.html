@@ -18,32 +18,37 @@
         <div class="card-container col-md-6" style="margin-top: 100px;">
             <div class="card" th:each="matching : ${matchingList}">
                 <img class="thumbnail" src="../images/logo.png" alt="썸네일 이미지">
+                <input id ="matchingId" type="text" th:value="${matching.matching.matchingId}" style="display: none" >
                 <div class="card-content">
                     <h2 th:text="${matching.matching.matchingName}">첫 번째 신청</h2>
                     <div class="read-more">
                         <p th:text="${matching.introduce}"></p>
-                        <button type="button" class="btn btn-outline-primary" id="accept" onclick="doAccept()">수락</button>
+                        <button type="button"  th:getId="${matching.matching.matchingId}"
+                                th:getIntro="${matching.introduce}"
+                                class="btn btn-outline-primary" id="accept" onclick="doAccept(this.getAttribute('getId'),this.getAttribute('getIntro'))">수락</button>
                         <button type="button" class="btn btn-outline-danger" id="deny" onclick="doDeny()">거절</button>
                     </div>
                 </div>
             </div>
-
         </div>
     </div>
 
     <script th:inline="javascript">
 
-        function doAccept(){
+        var id = 0
+        var intro = ""
 
-            var matchingId =/*[[${matching.matching.matchingId}]]*/;
-            console.log(matchingId)
-            console.info(/*[[${matching.introduce}]]*/);
+        function doAccept(data1,data2){
+            id =  data1
+            intro = data2
+
+            console.info(intro);
             $.ajax({
-                type:"POST",
+                type:"PUT",
                 url:"/matchingApplyList/"+id,
-                data: state,
                 success:function(data) {
-                    location.href = window.location.host + "/matchingApply/" + matchingId
+                    alert("매칭이 성사되었습니다!")
+                    location.href = window.location.host + "/matchingApply/" + id
                     console.log("hi3")
                 }
             })
@@ -55,22 +60,11 @@
                 url:"/matchingApplyList/"+id,
                 data: state,
                 success:function(data) {
-                    location.href = window.location.host + "/matchingApply/" + matchingId
+                    location.href = window.location.host + "/matchingApply/" + id
                 }
             })
         }
 
-        function transfer(data1,data2,data3){
-            alert(data1+","+data2+","+data3)
-            $("#exampleModal").on("shown.bs.modal",function (){
-
-                alert("test")
-                $("#matchingName").focus()
-                $("#matchingName").val(data1);
-                $("#nickname").val(data2);
-                $("#introduce").val(data3);
-            })
-        }
 
     </script>
 

@@ -24,5 +24,5 @@ public interface MatchingMemberRepository extends JpaRepository<MatchingMember,L
         List<MatchingMember> findAllByMember_MemberId(Long  memberId);
 
         @EntityGraph(attributePaths = {"member"})
-        List<MatchingMemberResponse> findAllByMatching_MatchingId(Long MatchingId);
+        List<MatchingMember> findAllByMatching_MatchingId(Long MatchingId);
 }

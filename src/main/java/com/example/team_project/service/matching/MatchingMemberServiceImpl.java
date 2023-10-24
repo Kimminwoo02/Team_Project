@@ -72,11 +72,11 @@ public class MatchingMemberServiceImpl implements MatchingMemberService {
     }
 
     @Override
-    public List<MatchingMemberResponse> matchingApplyList(Long matchingId) {
+    public List<MatchingMemberDTO> matchingApplyList(Long matchingId) {
 //        Matching matching = matchingRepository.getReferenceById(matchingId);
         log.info("" + matchingMemberRepository.findAllByMatching_MatchingId(1L));
         return matchingMemberRepository.findAllByMatching_MatchingId(matchingId).stream()
-                .map(m ->  new MatchingMemberResponse(m.getMatchingMemberId(),m.getMatching(),m.getMember(),m.getIntroduce()))
+                .map(MatchingMemberDTO::from)
                 .toList();
     }
 
@@ -124,6 +124,11 @@ public class MatchingMemberServiceImpl implements MatchingMemberService {
         return list.stream()
                 .map(MatchingScheduleDTO::from)
                 .collect(Collectors.toList());
+    }
+
+    @Override
+    public void updateMatching(Long matchingMemberId) {
+
     }
 
     @Override

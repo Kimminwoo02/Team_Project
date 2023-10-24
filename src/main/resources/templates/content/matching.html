@@ -256,13 +256,13 @@
 
         function submit() {
             $.ajax({
-                url: '/matchingMember'
+                url: '/matching'
                 , method: 'POST'
                 , data: gtg
                 , contentType: 'application/json; charset=utf-8'
                 , success: function () {
                     alert("신청 완료했습니다!");
-                    console.log("신청 됐나요?")
+
                 }
                 , error: function (rs) {
                     alert("에러 호출")

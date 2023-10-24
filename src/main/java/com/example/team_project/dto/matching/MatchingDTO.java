@@ -33,6 +33,25 @@ public class MatchingDTO {
         this.sDate = sDate;
     }
 
+
+    public static MatchingDTO from(Matching entity) {
+        return new MatchingDTO(
+                entity.getMatchingId(),
+                entity.getMemberId(),
+                entity.getMatchingName(),
+                entity.getLevel(),
+                entity.getContent(),
+                entity.getAddress(),
+                entity.getCapacity(),
+                entity.getCategory(),
+                entity.getSDate()
+        );
+    }
+
+
+
+
+
     public Matching createMatching(){
         return Matching.builder()
                 .memberId(memberId)

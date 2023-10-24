@@ -4,6 +4,8 @@ import com.example.team_project.dto.matching.MatchingDTO;
 
 import com.example.team_project.entity.Category;
 import com.example.team_project.entity.matching.Matching;
+import com.example.team_project.entity.matching.MatchingMember;
+import com.example.team_project.entity.member.Member;
 import com.example.team_project.repository.MatchingRepository;
 import com.example.team_project.security.CustomUserDetails;
 import lombok.RequiredArgsConstructor;
@@ -24,8 +26,6 @@ public class MatchingServiceImpl implements MatchingService {
         // transform DTO to Entity
         Matching matching = matchingDTO.createMatching();
 
-
-
         // get Authenticated logged-in object in session
         Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 
@@ -36,7 +36,8 @@ public class MatchingServiceImpl implements MatchingService {
 
 //        Member와 N:M으로 통신하지 않기 위해
 
-        return matchingRepository.save(matching).getMatchingId();
+        matchingRepository.save(matching);
+        return matching.getMatchingId();
 
     }
 

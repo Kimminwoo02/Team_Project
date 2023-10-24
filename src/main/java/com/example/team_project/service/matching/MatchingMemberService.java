@@ -17,11 +17,13 @@ public interface MatchingMemberService {
 
 //    MatchingMemberResponse getMatchingMember(Long matchingId);
 
-    List<MatchingMemberResponse> matchingApplyList(Long matchingId);
+    List<MatchingMemberDTO> matchingApplyList(Long matchingId);
 
     List<MatchingMemberResponse> getMatching();
     List<MatchingDTO> getMyMatching();
-    public List<MatchingScheduleDTO> getSchedule();
+    List<MatchingScheduleDTO> getSchedule();
+
+    void updateMatching(Long matchingMemberId);
 
     public void applyDeny(String state, Long matchingUserId);
 }

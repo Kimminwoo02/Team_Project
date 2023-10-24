@@ -3,30 +3,34 @@ package com.example.team_project.dto.matching;
 import com.example.team_project.entity.member.Member;
 import com.example.team_project.entity.matching.Matching;
 import com.example.team_project.entity.matching.MatchingMember;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
+@ToString
+@Setter
 public class MatchingMemberDTO {
     private Long matchingMemberId;
     private Matching matching;
     private Member member;
     private Integer quota;
     private String introduce;
-    private Boolean matchingYN;
+    private Boolean matchingYN = false;
 
 
-    public MatchingMember createMatchingMember() {
-        return MatchingMember.builder()
-                .matchingMemberId(matchingMemberId)
-                .matching(matching)
-                .member(member)
-                .quota(quota)
-                .introduce(introduce)
-                .matchingYN(matchingYN)
-                .build();
+
+
+
+    public static  MatchingMemberDTO from (MatchingMember entity) {
+        return new MatchingMemberDTO(
+                entity.getMatchingMemberId(),
+                entity.getMatching(),
+                entity.getMember(),
+                entity.getQuota(),
+                entity.getIntroduce(),
+                entity.getMatchingYN()
+        );
+
     }
 }

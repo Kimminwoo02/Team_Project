@@ -3,6 +3,7 @@ package com.example.team_project.controller;
 import com.example.team_project.dto.Response;
 import com.example.team_project.dto.matching.MatchingDTO;
 import com.example.team_project.dto.matching.MatchingMemberCreate;
+import com.example.team_project.dto.matching.MatchingMemberDTO;
 import com.example.team_project.dto.matching.MatchingMemberResponse;
 import com.example.team_project.entity.Category;
 import com.example.team_project.entity.matching.MatchingMember;
@@ -89,12 +90,18 @@ public class MatchingController {
 
     @GetMapping("/matchingApplyList/{matchingId}")
     public String matchingApplyList(Model model,@PathVariable Long matchingId) {
-        System.out.println(matchingId);
-        List<MatchingMemberResponse> matching = matchingMemberService.matchingApplyList(1L);
 
+        List<MatchingMemberDTO> matching = matchingMemberService.matchingApplyList(matchingId);
         model.addAttribute("matchingList",matching);
 
         return "main/matchingApplyList";
+    }
+
+    @PutMapping("/matchingApplyList/{matchingId}")
+    @ResponseBody
+    public Response<Void> matchingUpdate (@PathVariable Long matchingId) {
+        matchingMemberService.updateMatching(matchingId);
+        return Response.success();
     }
 
 

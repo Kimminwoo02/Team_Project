@@ -24,8 +24,9 @@
                     <div class="read-more">
                         <p th:text="${matching.introduce}"></p>
                         <button type="button"  th:getId="${matching.matching.matchingId}"
+                                th:getmmId="${matching.matchingMemberId}"
                                 th:getIntro="${matching.introduce}"
-                                class="btn btn-outline-primary" id="accept" onclick="doAccept(this.getAttribute('getId'),this.getAttribute('getIntro'))">수락</button>
+                                class="btn btn-outline-primary" id="accept" onclick="doAccept(this.getAttribute('getId'),this.getAttribute('getIntro'),this.getAttribute('getmmId'))">수락</button>
                         <button type="button" class="btn btn-outline-danger" id="deny" onclick="doDeny()">거절</button>
                     </div>
                 </div>
@@ -38,18 +39,15 @@
         var id = 0
         var intro = ""
 
-        function doAccept(data1,data2){
-            id =  data1
-            intro = data2
-
-            console.info(intro);
+        function doAccept(data1,data2,data3){
+            console.info(data1 +"  "+data2 + " " + data3);
             $.ajax({
                 type:"PUT",
-                url:"/matchingApplyList/"+id,
+                data: data3,
+                url:"/matchingApplyList/"+data3,
                 success:function(data) {
                     alert("매칭이 성사되었습니다!")
-                    location.href = window.location.host + "/matchingApply/" + id
-                    console.log("hi3")
+                    location.href = window.location.host + "/matchingStatus"
                 }
             })
         }
@@ -60,7 +58,7 @@
                 url:"/matchingApplyList/"+id,
                 data: state,
                 success:function(data) {
-                    location.href = window.location.host + "/matchingApply/" + id
+                    location.href = window.location.host + "/matchingApply/" + data3
                 }
             })
         }

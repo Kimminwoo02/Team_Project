@@ -13,6 +13,7 @@ import lombok.*;
 public class MatchingMemberDTO {
     private Long matchingMemberId;
     private Matching matching;
+    private Long applierId;
     private Member member;
     private Integer quota;
     private String introduce;
@@ -26,6 +27,7 @@ public class MatchingMemberDTO {
         return new MatchingMemberDTO(
                 entity.getMatchingMemberId(),
                 entity.getMatching(),
+                entity.getApplierId(),
                 entity.getMember(),
                 entity.getQuota(),
                 entity.getIntroduce(),

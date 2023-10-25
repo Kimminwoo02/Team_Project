@@ -13,6 +13,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -32,7 +33,7 @@ public class MatchingServiceImpl implements MatchingService {
         // casting logged-in object to member and get PK from entity(named Member)
         // Class CustomUserDetails contains object member type Member to get own PK.
         Long memberId = ((CustomUserDetails) principal).getMember().getMemberId();
-        matching.setMemberId(memberId);
+        matching.setMasterId(memberId);
 
 //        Member와 N:M으로 통신하지 않기 위해
 
@@ -56,5 +57,19 @@ public class MatchingServiceImpl implements MatchingService {
     @Override
     public Matching getMatching(Long matchingId) {
         return matchingRepository.findById(matchingId).orElseThrow();
+    }
+
+    @Override
+    public List<MatchingDTO> findMyMatching() {
+
+         return matchingRepository.findAllByMasterId(getMyId()).stream()
+                 .map(MatchingDTO::from)
+                 .collect(Collectors.toList());
+    }
+
+
+    public static Long getMyId(){
+        Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        return ((CustomUserDetails) principal).getMember().getMemberId();
     }
 }

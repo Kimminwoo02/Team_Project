@@ -14,6 +14,5 @@ public interface MatchingRepository extends JpaRepository<Matching,Long> {
     List<Matching> findByCategory(Category category);
 
 
-    @EntityGraph(attributePaths = {"member"})
-    List<MatchingDTO> findAllByMatchingId(Long MatchingId);
+    List<Matching> findAllByMasterId(Long id);
 }

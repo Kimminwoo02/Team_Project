@@ -13,48 +13,48 @@
             <th:block th:replace="/../fragment/sidebar :: sidebarFragment"></th:block>
         </div>
         <div class="card-container col-md-6" style="margin-top: 100px;">
-            <div class="card">
+            <div class="card" th:each="matching : ${matchingList}">
                 <img class="thumbnail" src="../images/logo.png" alt="썸네일 이미지">
                 <div class="card-content">
-                    <h2>[9월 10일]가산 축구</h2>
-                    <p>가산동에서 주말에 축구 경기 뛰실 분</p>
+                    <h2 th:text="${matching.matching.matchingName}">[9월 10일]가산 축구</h2>
+                    <p th:text="${matching.matching.content}">가산동에서 주말에 축구 경기 뛰실 분</p>
                     <div class="read-more">
                         <a th:href="@{/matchingMemberList}">자세히 보기</a>
                     </div>
                 </div>
             </div>
 
-            <div class="card">
-                <img class="thumbnail" src="../images/logo.png" alt="썸네일 이미지">
-                <div class="card-content">
-                    <h2>신대방 테니스</h2>
-                    <p>신대방 근처에서 테니스 같이 해요</p>
-                    <div class="read-more">
-                        <a th:href="@{/matchingMemberList}">자세히 보기</a>
-                    </div>
-                </div>
-            </div>
+<!--            <div class="card">-->
+<!--                <img class="thumbnail" src="../images/logo.png" alt="썸네일 이미지">-->
+<!--                <div class="card-content">-->
+<!--                    <h2>신대방 테니스</h2>-->
+<!--                    <p>신대방 근처에서 테니스 같이 해요</p>-->
+<!--                    <div class="read-more">-->
+<!--                        <a th:href="@{/matchingMemberList}">자세히 보기</a>-->
+<!--                    </div>-->
+<!--                </div>-->
+<!--            </div>-->
 
-            <div class="card">
-                <img class="thumbnail" src="../images/logo.png" alt="썸네일 이미지">
-                <div class="card-content">
-                    <h2>연극 좋아하시는 분</h2>
-                    <p>이번주 주말에 대학로에서 연극 쉬어매드니스 같이 보러 가실 분 있나요??</p>
-                    <div class="read-more">
-                        <a th:href="@{/matchingMemberList}">자세히 보기</a>
-                    </div>
-                </div>
-            </div>
-            <div class="card">
-                <img class="thumbnail" src="../images/logo.png" alt="썸네일 이미지">
-                <div class="card-content">
-                    <h2>독산동 축구</h2>
-                    <p>독산동에서 저녁에 축구하실 분 계시나요??</p>
-                    <div class="read-more">
-                        <a th:href="@{/matchingMemberList}">자세히 보기</a>
-                    </div>
-                </div>
-            </div>
+<!--            <div class="card">-->
+<!--                <img class="thumbnail" src="../images/logo.png" alt="썸네일 이미지">-->
+<!--                <div class="card-content">-->
+<!--                    <h2>연극 좋아하시는 분</h2>-->
+<!--                    <p>이번주 주말에 대학로에서 연극 쉬어매드니스 같이 보러 가실 분 있나요??</p>-->
+<!--                    <div class="read-more">-->
+<!--                        <a th:href="@{/matchingMemberList}">자세히 보기</a>-->
+<!--                    </div>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--            <div class="card">-->
+<!--                <img class="thumbnail" src="../images/logo.png" alt="썸네일 이미지">-->
+<!--                <div class="card-content">-->
+<!--                    <h2>독산동 축구</h2>-->
+<!--                    <p>독산동에서 저녁에 축구하실 분 계시나요??</p>-->
+<!--                    <div class="read-more">-->
+<!--                        <a th:href="@{/matchingMemberList}">자세히 보기</a>-->
+<!--                    </div>-->
+<!--                </div>-->
+<!--            </div>-->
 
         </div>
     </div>

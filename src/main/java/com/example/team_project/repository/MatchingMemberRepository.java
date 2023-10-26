@@ -21,8 +21,16 @@ public interface MatchingMemberRepository extends JpaRepository<MatchingMember,L
 
 
         @EntityGraph(attributePaths = {"member"})
-        List<MatchingMember> findAllByMember_MemberId(Long  memberId);
+        MatchingMember findByMatchingMemberId(Long matchingMemberId);
+
+
 
         @EntityGraph(attributePaths = {"member"})
-        List<MatchingMember> findAllByMatching_MatchingId(Long MatchingId);
+        List<MatchingMember> findAllByMember_MemberIdAndMatchingYNIsFalse(Long  memberId);
+
+        @EntityGraph(attributePaths = {"member"})
+        List<MatchingMember> findAllByMember_MemberIdAndMatchingYNTrue(Long  memberId);
+
+        @EntityGraph(attributePaths = {"member"})
+        List<MatchingMember> findAllByMatching_MatchingIdAndMatchingYNIsNull(Long matchingId);
 }

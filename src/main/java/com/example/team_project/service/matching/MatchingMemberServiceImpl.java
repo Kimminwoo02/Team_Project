@@ -4,8 +4,6 @@ import com.example.team_project.dto.matching.MatchingDTO;
 import com.example.team_project.dto.matching.MatchingMemberDTO;
 import com.example.team_project.dto.matching.MatchingMemberResponse;
 import com.example.team_project.dto.matching.MatchingScheduleDTO;
-import com.example.team_project.dto.member.MemberDTO;
-import com.example.team_project.entity.Category;
 import com.example.team_project.entity.member.Member;
 import com.example.team_project.entity.matching.Matching;
 import com.example.team_project.entity.matching.MatchingMember;
@@ -33,21 +31,13 @@ public class MatchingMemberServiceImpl implements MatchingMemberService {
     private final MatchingRepository matchingRepository;
     private final MatchingMemberRepository matchingMemberRepository;
 
-//    @Override
-//    public List<MatchingMember> findAll() {
-//        return matchingMemberRepository.findAll();
-//    }
 
-//    @Override
-//    public MatchingMember findMatchingMemberByMatching_MatchingId(Long matchingIdOfMatchingWannaFind) {
-//        return matchingMemberRepository.findMatchingMemberByMatching_MatchingId(matchingIdOfMatchingWannaFind);
-//    }
 
     @Override
     public void createAndAddMember2Matching(Long id) {
         Member member = memberRepository.getReferenceById(getMyId());
         Matching matching=matchingRepository.getReferenceById(id);
-        matching.setMemberId(getMyId());
+        matching.setMasterId(getMyId());
 
         MatchingMember matchingMember = new MatchingMember();
         matchingMember.setMatching(matching);
@@ -62,7 +52,7 @@ public class MatchingMemberServiceImpl implements MatchingMemberService {
         Member member = memberRepository.getReferenceById(getMyId());
         Matching matching = matchingRepository.getReferenceById(matchingMemberDTO.getMatching().getMatchingId());
 
-        matching.setMemberId(member.getMemberId());
+        matching.setMasterId(member.getMemberId());
 
         MatchingMember matchingMember = new MatchingMember();
         matchingMember.setMatching(matching);
@@ -73,9 +63,8 @@ public class MatchingMemberServiceImpl implements MatchingMemberService {
 
     @Override
     public List<MatchingMemberDTO> matchingApplyList(Long matchingId) {
-//        Matching matching = matchingRepository.getReferenceById(matchingId);
-        log.info("" + matchingMemberRepository.findAllByMatching_MatchingId(1L));
-        return matchingMemberRepository.findAllByMatching_MatchingId(matchingId).stream()
+
+        return matchingMemberRepository.findAllByMatching_MatchingIdAndMatchingYNIsNull(matchingId).stream()
                 .map(MatchingMemberDTO::from)
                 .toList();
     }
@@ -88,38 +77,14 @@ public class MatchingMemberServiceImpl implements MatchingMemberService {
                 .collect(Collectors.toList());
     }
 
-    @Override
-    public List<MatchingDTO> getMyMatching() {
-//        Member member = memberRepository.getReferenceById(getMyId());
-//        MemberDTO memberDTO = MemberDTO.fromEntity(member);
-        List<MatchingMember> myMatchingList = matchingMemberRepository.findAllByMember_MemberId(getMyId());
-
-        return myMatchingList.stream()
-                .map(m -> new MatchingDTO(m.getMatching().getMatchingId(), m.getMatching().getMatchingName(), m.getMatching().getLevel(), m.getMatching().getContent(), m.getMatching().getAddress(), m.getMatching().getCapacity(), m.getMatching().getCategory(), m.getMatching().getSDate()))
-                .collect(Collectors.toList());
-    }
-
-
-//    @Override
-//    public MatchingMemberResponse getMatchingMember(Long matchingId) {
-////        matchin
-////        MatchingMember matchingMember = matchingMemberRepository.getReferenceById(matchingMemberId);
-//
-//        MatchingMemberResponse matchingMemberResponse = new MatchingMemberResponse();
-//        matchingMemberResponse.setMatching(matchingMember.getMatching());
-//        matchingMemberResponse.setMember(matchingMember.getMember());
-//        matchingMemberResponse.setIntroduce(matchingMember.getIntroduce());
-//
-//        return matchingMemberResponse;
 
 
 
     @Override
     @Transactional
     public List<MatchingScheduleDTO> getSchedule(){
-//        Member member = memberRepository.getReferenceById(getMyId());
-//        MemberDTO memberDTO = MemberDTO.fromEntity(member);
-        List<MatchingMember> list = matchingMemberRepository.findAllByMember_MemberId(getMyId());
+
+        List<MatchingMember> list = matchingMemberRepository.findAllByMember_MemberIdAndMatchingYNIsFalse(getMyId());
 
         return list.stream()
                 .map(MatchingScheduleDTO::from)
@@ -127,7 +92,18 @@ public class MatchingMemberServiceImpl implements MatchingMemberService {
     }
 
     @Override
+    public List<MatchingMemberDTO> getHistory() {
+        return matchingMemberRepository.findAllByMember_MemberIdAndMatchingYNTrue(getMyId()).stream()
+                .map(MatchingMemberDTO::from)
+                .collect(Collectors.toList());
+
+    }
+
+    @Override
     public void updateMatching(Long matchingMemberId) {
+        log.info("ccxcxcxcxcxcxc" + matchingMemberId );
+        MatchingMember matchingMember = matchingMemberRepository.findByMatchingMemberId(matchingMemberId);
+        matchingMember.setMatchingYN(true);
 
     }
 

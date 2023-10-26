@@ -30,7 +30,6 @@ import java.util.List;
 public class MatchingController {
     private final MatchingService matchingService;
     private final MatchingMemberService matchingMemberService;
-    private final MemberService memberService;
 
     @GetMapping("/matching")
     public String matching(Model model, @AuthenticationPrincipal CustomUserDetails principal){
@@ -75,7 +74,7 @@ public class MatchingController {
     }
     @GetMapping("/matchingStatus")
     public String matchingStatus(Model model){
-        List<MatchingDTO> dto = matchingMemberService.getMyMatching();
+        List<MatchingDTO> dto = matchingService.findMyMatching();
         model.addAttribute("matchingList",dto);
 
         return "main/matchingStatus";
@@ -89,7 +88,7 @@ public class MatchingController {
 //    }
 
     @GetMapping("/matchingApplyList/{matchingId}")
-    public String matchingApplyList(Model model,@PathVariable Long matchingId) {
+    public String matchingApplyList(Model model, @PathVariable Long matchingId) {
 
         List<MatchingMemberDTO> matching = matchingMemberService.matchingApplyList(matchingId);
         model.addAttribute("matchingList",matching);
@@ -97,12 +96,27 @@ public class MatchingController {
         return "main/matchingApplyList";
     }
 
-    @PutMapping("/matchingApplyList/{matchingId}")
+    @PutMapping("/matchingApplyList/{matchingMemberId}")
     @ResponseBody
-    public Response<Void> matchingUpdate (@PathVariable Long matchingId) {
-        matchingMemberService.updateMatching(matchingId);
+    public Response<Void> matchingUpdate (@PathVariable Long matchingMemberId) {
+        log.info(" 잘 들어 오나요??     " + matchingMemberId  );
+
+        matchingMemberService.updateMatching(matchingMemberId);
         return Response.success();
     }
+
+
+    @GetMapping("/matchingHistoryList")
+    public String matchingHistoryList(Model model, Long matchingId) {
+
+        List<MatchingMemberDTO> matching = matchingMemberService.getHistory();
+        log.info(matching.toString());
+        model.addAttribute("matchingList",matching);
+
+        return "main/matchingHistoryList";
+    }
+
+
 
 
     @PostMapping("/matchingApply/{matchingUserId}")

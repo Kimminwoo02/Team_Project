@@ -16,6 +16,9 @@ public class MatchingMember {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long matchingMemberId;
 
+    @Setter
+    private Long applierId;
+
     @JsonIgnore
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "matchingId")
@@ -28,11 +31,12 @@ public class MatchingMember {
     @Setter
     private Member member;
 
+
     private Integer quota = 0;
     @Setter
     private String introduce;
     @Setter
-    private Boolean matchingYN = false;
+    private Boolean matchingYN = null;
     @Setter
     private String sDate;
 

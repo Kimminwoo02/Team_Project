@@ -16,4 +16,7 @@ public interface MatchingService {
 
     Matching getMatching(Long matchingId);
 
+
+    List<MatchingDTO> findMyMatching();
+
 }

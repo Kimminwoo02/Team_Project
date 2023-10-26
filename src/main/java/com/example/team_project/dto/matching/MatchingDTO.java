@@ -9,11 +9,10 @@ import java.util.Date;
 @Getter
 @Setter
 @NoArgsConstructor
-@AllArgsConstructor
 @ToString
 public class MatchingDTO {
     private Long matchingId;
-    private Long memberId;
+    private Long masterId;
     private String matchingName;
     private String level;
     private String content;
@@ -22,8 +21,9 @@ public class MatchingDTO {
     private Category category;
     private String sDate;
 
-    public MatchingDTO(Long matchingId, String matchingName, String level, String content, String address, String capacity, Category category, String sDate) {
+    public MatchingDTO(Long matchingId, Long masterId,String matchingName, String level, String content, String address, String capacity, Category category, String sDate) {
         this.matchingId = matchingId;
+        this.masterId = masterId;
         this.matchingName = matchingName;
         this.level = level;
         this.content = content;
@@ -37,7 +37,7 @@ public class MatchingDTO {
     public static MatchingDTO from(Matching entity) {
         return new MatchingDTO(
                 entity.getMatchingId(),
-                entity.getMemberId(),
+                entity.getMasterId(),
                 entity.getMatchingName(),
                 entity.getLevel(),
                 entity.getContent(),
@@ -54,7 +54,7 @@ public class MatchingDTO {
 
     public Matching createMatching(){
         return Matching.builder()
-                .memberId(memberId)
+                .masterId(masterId)
                 .matchingName(matchingName)
                 .level(level)
                 .content(content)

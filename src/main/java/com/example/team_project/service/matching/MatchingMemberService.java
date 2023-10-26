@@ -15,13 +15,13 @@ public interface MatchingMemberService {
     void addMember2Matching(MatchingMemberDTO matchingMemberDTO);
 
 
-//    MatchingMemberResponse getMatchingMember(Long matchingId);
 
     List<MatchingMemberDTO> matchingApplyList(Long matchingId);
 
     List<MatchingMemberResponse> getMatching();
-    List<MatchingDTO> getMyMatching();
     List<MatchingScheduleDTO> getSchedule();
+
+    List<MatchingMemberDTO> getHistory();
 
     void updateMatching(Long matchingMemberId);
 

@@ -24,7 +24,7 @@ public class Matching extends AuditingFields {
     private Long matchingId;
 
     @Setter
-    private Long memberId;
+    private Long masterId;
 
     private String matchingName;
 

@@ -155,25 +155,113 @@
                     <!--card-->
                     <div class="card-container col-2" th:each="match : ${matches}" style="margin-right: 148px">
                         <div class="matching_post">
+<!--                            <a data-target="#matchingListModal" data-toggle="modal"-->
+<!--                               th:getId="${match.matchingId}"-->
+<!--                               th:getMatchingName="${match.matchingName}"-->
+<!--                               th:getMemberId="${match.memberId}"-->
+<!--                               th:getCategory="${match.category}"-->
+<!--                               th:getCapacity="${match.capacity}"-->
+<!--                               th:getLevel="${match.level}"-->
+<!--                               th:getAddress="${match.address}"-->
+<!--                               th:getSDate="${match.sDate}"-->
+<!--                               th:getContent="${match.content}"-->
+<!--                               onclick="transferToRead(-->
+<!--                                   this.getAttribute('getId'),-->
+<!--                                   this.getAttribute('getMatchingName'),-->
+<!--                                   this.getAttribute('getMemberId'),-->
+<!--                                   this.getAttribute('getCategory'),-->
+<!--                                   this.getAttribute('getCapacity'),-->
+<!--                                   this.getAttribute('getLevel'),-->
+<!--                                   this.getAttribute('getAddress'),-->
+<!--                                   this.getAttribute('getSDate'),-->
+<!--                                   this.getAttribute('getContent'))" th:if="${authenticatedPrincipalMember.memberId}==match.memberId"/>-->
                             <a data-target="#matchingapply" data-toggle="modal"
                                th:getId="${match.matchingId}"
                                th:getMatchingName="${match.matchingName}"
                                th:getAuthenticatedPrincipalMemberId="${authenticatedPrincipalMember.memberId}"
                                th:getAuthenticatedPrincipalMemberNickname="${authenticatedPrincipalMember.nickName}"
-                               onclick="transfer(
-                                   this.getAttribute('getId'),
-                                   this.getAttribute('getMatchingName'))">
+                               onclick="transfer(this.getAttribute('getId'),this.getAttribute('getMatchingName'))">
                                 <img class="matching-thumbnail" src="../images/logo.png" alt="썸네일 이미지">
                                 <div class="matching-content">
-                                    <h2 th:text="${match.matchingName}">첫 번째 카드 </h2>
-                                    <span id="idValue" th:text="${match.category}"> 아이디값입니다.</span>
-                                    <p th:text="${match.content}">이것은 첫 번째 카드의 내용입니다. 내용이 조금 더 길어질 때 어떻게 나타나는지
-                                        확인합니다.
-                                    </p>
+                                    <h2 th:text="${match.matchingName}"></h2>
+                                    <span id="idValue" th:text="${match.category}"></span>
+                                    <p th:text="${match.content}"></p>
                                 </div>
                             </a>
                         </div>
                     </div>
+                    <!--매칭글보여주는 모달-->
+<!--                    <div class="modal fade" id="matchingListModal" tabindex="-1" aria-labelledby="matchingModalLabel"-->
+<!--                         aria-hidden="true">-->
+<!--                        <div class="modal-dialog">-->
+<!--                            <div class="modal-content">-->
+<!--                                &lt;!&ndash;modal header&ndash;&gt;-->
+<!--                                <div class="modal-header">-->
+<!--                                    <h5 class="modal-title" id="matchingIdView">매칭</h5>-->
+<!--                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>-->
+<!--                                </div>-->
+<!--                                &lt;!&ndash;modal body&ndash;&gt;-->
+<!--                                <div class="modal-body">-->
+<!--                                    <form method="post" action="/matching">-->
+<!--                                        &lt;!&ndash;matching title&ndash;&gt;-->
+<!--                                        <div class="mb-3">-->
+
+<!--                                            <label for="recipient-name" class="col-form-label" style="width: 50%">매칭-->
+<!--                                                제목</label>-->
+<!--                                            <input type="text" class="form-control" readonly>-->
+<!--                                        </div>-->
+<!--                                        &lt;!&ndash;matching category&ndash;&gt;-->
+<!--                                        <div class="mb-3" ≈>-->
+<!--                                            <label for="recipient-name" class="col-form-label"-->
+<!--                                                   style="width: 80%">카테고리</label>-->
+<!--                                            <select>-->
+<!--                                                <option th:value="${category}"-->
+<!--                                                        th:text="${category.getTitle}" id="categoryView" readonly></option>-->
+<!--                                            </select>-->
+<!--                                            <div class="mb-3">-->
+<!--                                                <span>활동 정원&nbsp;</span><input type="number" id="capacityView"min="1"-->
+<!--                                                                               step="1"  readonly/>-->
+<!--                                            </div>-->
+<!--                                        </div>-->
+<!--                                        &lt;!&ndash;matching level&ndash;&gt;-->
+<!--                                        <div class="mb-3">-->
+<!--                                            <label for="recipient-name" class="col-form-label" style="width: 50%">예상 활동-->
+<!--                                                강도</label>-->
+<!--                                            <input type="text" class="form-control" id="levelView" readonly>-->
+<!--                                        </div>-->
+<!--                                        &lt;!&ndash;matching location&ndash;&gt;-->
+<!--                                        &lt;!&ndash;HERE'S ANOTHER MODAL BUTTON&ndash;&gt;-->
+<!--                                        <div class="mb-3">-->
+<!--                                            <label for="recipient-name" class="col-form-label" style="width: 50%"  readonly>장소</label>-->
+<!--                                            &lt;!&ndash;test&ndash;&gt;-->
+<!--                                            <div class="review-btn-wrapper">-->
+<!--                                                <input type="text" class="form-control" id="addressView" readonly>-->
+<!--                                            </div>-->
+
+<!--                                            <div class="review-btn-wrapper">-->
+<!--                                                <input type="date" class="form-control" id="sDateView" value=""-->
+<!--                                                       style="border-style: hidden; margin-top: 10px;"  readonly>-->
+<!--                                            </div>-->
+<!--                                            &lt;!&ndash;test&ndash;&gt;-->
+<!--                                        </div>-->
+<!--                                        &lt;!&ndash;matching content&ndash;&gt;-->
+<!--                                        <div class="mb-3">-->
+<!--                                            <label class="col-form-label">내용</label>-->
+<!--                                            <textarea class="form-control" id="contentView" placeholder="200자 이하로 적어주세요"-->
+<!--                                                      rows="10" style="width: 100%" readonly></textarea>-->
+<!--                                        </div>-->
+
+<!--                                        &lt;!&ndash;modal footer&ndash;&gt;-->
+<!--                                        <div class="modal-footer">-->
+<!--                                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">닫기-->
+<!--                                            </button>-->
+<!--                                            <button type="submit" class="btn btn-primary">신청</button>-->
+<!--                                        </div>-->
+<!--                                    </form>-->
+<!--                                </div>-->
+<!--                            </div>-->
+<!--                        </div>-->
+<!--                    </div>-->
 
                     <!--매칭 신청 영역-->
                     <div class="modal fade" id="matchingapply" tabindex="-1" role="dialog"
@@ -234,17 +322,12 @@
         var temp;
 
         function transfer(matchingId, matchingName) {
-            console.log("::::::::::::::::::::::::::::");
-            console.log(matchingId);
-            console.log(matchingName);
-            console.log("::::::::::::::::::::::::::::");
-
+            temp=matchingId;
             $("#matchingapply").on("shown.bs.modal",function (){
-                $("#modalValue").text(matchingId);
+                // $("#modalValue").text(matchingId);
                 $("#enrollingMatchingName").val(matchingName);
             });
         };
-
 
         var matchingName = $("#matchingName").val();
         var introduce = $("#introduce").val();
@@ -284,22 +367,27 @@
 
         }
 
-        function pop2() {
-            var url = "/facility";
-            var name = "Facility Map";
-            var width = 1200;
-            var height = 900;
-            var winW = (screen.width - width) / 2;
-            var winH = (screen.height - height) / 2;
-            var option = "width=" + width + "px,height=" + 900 + "px,top=" + winW + "px," +
-                "left=" + winH + "px,location=no, toolbars=no, status=no, history=no, scrollbars=no,menubar=no";
-            window.open(url, name, option);
 
-        }
+
+        // var temp1;
+
+        // function transferToRead(matchingId, matchingName, memberId, category, capacity, level, address, sDate, content) {
+        //     $("#matchingListModal").on("shown.bs.modal",function (){
+        //         $("#MatchingNameView").val(matchingName);
+        //         $("#categoryView").val(category);
+        //         $("#capacityView").val(capacity);
+        //         $("#levelView").val(level);
+        //         $("#addressView").val(address);
+        //         $("#sDateView").val(sDate);
+        //         $("#contentView").val(content);
+        //     });
+        // };
+        // 모달 전송
+        // var go = $("#posting");
+        // var gtg = {"matchingName": matchingName, "introduce": introduce, "matchingId": temp1}
 
 
     </script>
-
 
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320">
         <path fill="#36363e" fill-opacity="1"

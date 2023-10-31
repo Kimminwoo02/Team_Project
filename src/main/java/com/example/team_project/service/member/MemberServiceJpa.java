@@ -100,12 +100,25 @@ public class MemberServiceJpa implements MemberService {
     @Override
     public void update(MemberUpdateDto memberUpdateDto, Long memberId) {
         Member member = memberRepository.getReferenceById(memberId);
-        member.setPassword(passwordEncoder.encode(memberUpdateDto.getPassword()));
-        member.setName(memberUpdateDto.getName());
-        member.setNickName(memberUpdateDto.getNickName());
-        member.setPhone(memberUpdateDto.getPhone());
-        member.setAddr(memberUpdateDto.getAddr());
-        member.setDetailAddr(memberUpdateDto.getDetailAddr());
+        if(memberUpdateDto.getPassword()!=null){
+            member.setPassword(passwordEncoder.encode(memberUpdateDto.getPassword()));
+        }
+        if(memberUpdateDto.getName()!=null){
+            member.setName(memberUpdateDto.getName());
+        }
+
+        if(memberUpdateDto.getNickName()!=null){
+            member.setNickName(memberUpdateDto.getNickName());
+        }
+        if(memberUpdateDto.getPhone()!=null){
+            member.setPhone(memberUpdateDto.getPhone());
+        }
+        if(memberUpdateDto.getAddr()!=null){
+            member.setAddr(memberUpdateDto.getAddr());
+        }
+        if(memberUpdateDto.getDetailAddr()!=null){
+            member.setDetailAddr(memberUpdateDto.getDetailAddr());
+        }
         try{
             ResultFileStore resultFileStore = filestore.storeProfileFile(memberUpdateDto.getFile());
             MemberImg memberImg =memberImgRepository.getReferenceById(member.getMemberImg().getImgId());

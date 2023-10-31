@@ -63,9 +63,24 @@ public class MatchingController {
     }
 
     @GetMapping("/matchingHistory")
-    public String history(){
+    public String history(Model model){
+
+        List<MatchingMemberDTO> matching = matchingMemberService.getHistory();
+        model.addAttribute("matchingList",matching);
         return "main/matchingHistory";
     }
+
+
+    @GetMapping("/matchingHistoryList")
+    public String matchingHistoryList(Model model, Long matchingId) {
+
+        List<MatchingMemberDTO> matching = matchingMemberService.getHistory();
+        log.info(matching.toString());
+        model.addAttribute("matchingList",matching);
+
+        return "main/matchingHistoryList";
+    }
+
 
     @GetMapping("/matchingMemberList")
     public String matchingMemberList(){
@@ -106,15 +121,6 @@ public class MatchingController {
     }
 
 
-    @GetMapping("/matchingHistoryList")
-    public String matchingHistoryList(Model model, Long matchingId) {
-
-        List<MatchingMemberDTO> matching = matchingMemberService.getHistory();
-        log.info(matching.toString());
-        model.addAttribute("matchingList",matching);
-
-        return "main/matchingHistoryList";
-    }
 
 
 

@@ -190,3 +190,15 @@ package.json
 src/main/resources/static/images/
 
 
+
+DB/board.txt
+
+DB/matching.txt
+
+DB/matchingMember.txt
+
+DB/member.txt
+
+DB/memberImg.txt
+
+DB/review.txt

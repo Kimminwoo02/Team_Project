@@ -83,6 +83,7 @@ public class SecurityConfig implements AuditorAware<Long>{
 
                 .authorizeHttpRequests(auth->auth
                         .requestMatchers(new MvcRequestMatcher(introspect,"/home")).permitAll()
+                        .requestMatchers(new MvcRequestMatcher(introspect,"/swagger-ui.html")).permitAll()
                         .requestMatchers(new MvcRequestMatcher(introspect,"/login")).permitAll()
                         .requestMatchers(new MvcRequestMatcher(introspect,"/id")).permitAll()
                         .requestMatchers(new MvcRequestMatcher(introspect,"/pw")).permitAll()
@@ -94,6 +95,7 @@ public class SecurityConfig implements AuditorAware<Long>{
                         .requestMatchers(new MvcRequestMatcher(introspect,"/detail")).permitAll()
                         .requestMatchers(new MvcRequestMatcher(introspect,"/chat")).permitAll()
                         .requestMatchers(new MvcRequestMatcher(introspect,"/write")).permitAll()
+                        .requestMatchers(new MvcRequestMatcher(introspect,"/mypageEdit")).permitAll()
                         .requestMatchers(new MvcRequestMatcher(introspect,"/emailCheck")).permitAll()
 
 

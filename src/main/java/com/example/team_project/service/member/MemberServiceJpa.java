@@ -8,6 +8,7 @@ import com.example.team_project.dto.member.MemberSearchCond;
 import com.example.team_project.dto.member.MemberUpdateDto;
 import com.example.team_project.entity.member.Member;
 import com.example.team_project.entity.member.MemberImg;
+import com.example.team_project.exception.InvalidRequest;
 import com.example.team_project.file.FileStore;
 import com.example.team_project.file.ResultFileStore;
 import com.example.team_project.repository.MemberImgRepository;
@@ -68,7 +69,7 @@ public class MemberServiceJpa implements MemberService {
             return new SignupResponse(memberEntity,memberImgEntity);
         }
         catch (IOException e) {
-            throw new RuntimeException(e);
+            throw new InvalidRequest();
         }
     }
 
@@ -77,10 +78,9 @@ public class MemberServiceJpa implements MemberService {
         if(memberId == null) return null;
         Member optionalUser = memberRepository.findById(memberId).get();
         MemberImgDTO img = new MemberImgDTO(optionalUser.getMemberImg().getFolderPath(),optionalUser.getMemberImg().getStoreFileName());
-        MemberInfoDTO member = new MemberInfoDTO(optionalUser.getMemberId(), optionalUser.getEmail(),
+        return new MemberInfoDTO(optionalUser.getMemberId(), optionalUser.getEmail(),
                 optionalUser.getPassword(),optionalUser.getName(),optionalUser.getNickName(),
                 optionalUser.getPhone(),optionalUser.getAddr(), optionalUser.getDetailAddr(),img);
-        return member;
     }
 
 
@@ -100,36 +100,39 @@ public class MemberServiceJpa implements MemberService {
     @Override
     public void update(MemberUpdateDto memberUpdateDto, Long memberId) {
         Member member = memberRepository.getReferenceById(memberId);
-        if(memberUpdateDto.getPassword()!=null){
+        if(memberUpdateDto.getPassword()!=null && !memberUpdateDto.getPassword().isEmpty()){
             member.setPassword(passwordEncoder.encode(memberUpdateDto.getPassword()));
         }
-        if(memberUpdateDto.getName()!=null){
+        if(memberUpdateDto.getName()!=null && !memberUpdateDto.getName().isEmpty()){
             member.setName(memberUpdateDto.getName());
         }
 
-        if(memberUpdateDto.getNickName()!=null){
+        if(memberUpdateDto.getNickName()!=null  && !memberUpdateDto.getNickName().isEmpty()){
             member.setNickName(memberUpdateDto.getNickName());
         }
-        if(memberUpdateDto.getPhone()!=null){
+        if(memberUpdateDto.getPhone()!=null  && !memberUpdateDto.getPhone().isEmpty()){
             member.setPhone(memberUpdateDto.getPhone());
         }
-        if(memberUpdateDto.getAddr()!=null){
+        if(memberUpdateDto.getAddr()!=null  && !memberUpdateDto.getAddr().isEmpty()){
             member.setAddr(memberUpdateDto.getAddr());
         }
-        if(memberUpdateDto.getDetailAddr()!=null){
+        if(memberUpdateDto.getDetailAddr()!=null  && !memberUpdateDto.getDetailAddr().isEmpty()){
             member.setDetailAddr(memberUpdateDto.getDetailAddr());
         }
-        try{
-            ResultFileStore resultFileStore = filestore.storeProfileFile(memberUpdateDto.getFile());
-            MemberImg memberImg =memberImgRepository.getReferenceById(member.getMemberImg().getImgId());
-            if(resultFileStore != null) {
-                memberImg.setStoreFileName(resultFileStore.getStoreFileName());
+        if(memberUpdateDto.getFile()!=null){
+            try{
+                ResultFileStore resultFileStore = filestore.storeProfileFile(memberUpdateDto.getFile());
+                MemberImg memberImg =memberImgRepository.getReferenceById(member.getMemberImg().getImgId());
+                if(resultFileStore != null) {
+                    memberImg.setStoreFileName(resultFileStore.getStoreFileName());
+                }
+                memberImgRepository.save(memberImg);
             }
-            memberImgRepository.save(memberImg);
+            catch (IOException e) {
+                throw new RuntimeException(e);
+            }
         }
-        catch (IOException e) {
-            throw new RuntimeException(e);
-        }
+
     }
 
     @Override

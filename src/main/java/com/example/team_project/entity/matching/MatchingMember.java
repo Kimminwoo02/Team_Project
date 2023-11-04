@@ -37,6 +37,7 @@ public class MatchingMember {
     private String introduce;
     @Setter
     private Boolean matchingYN = null;
+    private Boolean reviewYN = null;
     @Setter
     private String sDate;
 

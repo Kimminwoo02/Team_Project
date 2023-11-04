@@ -9,6 +9,12 @@ import com.example.team_project.service.mail.MailService;
 import com.example.team_project.dto.member.MemberInfoDTO;
 import com.example.team_project.security.CustomUserDetails;
 import com.example.team_project.service.member.MemberService;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.media.Schema;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.transaction.Transactional;
@@ -31,6 +37,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 @Controller
 @RequiredArgsConstructor
 @Slf4j
+@Tag(name = "Member", description = "Member 객체 및 아이디, 비밀번호에 관한 API입니다.")
 public class UserController {
     private final MemberService memberService;
     private final MailService mailService;
@@ -46,10 +53,12 @@ public class UserController {
     }
 
     @GetMapping("/findpw")
+    @Operation(summary = "find password", description = "비밀번호 찾기 페이지를 반환한다.")
     public String findPw(){
         return "main/findmenu/findpw";
     }
     @GetMapping("/findemail")
+    @Operation(summary = "find email", description = "아이디 찾기 페이지를 반환한다.")
     public String findEmail(){
         return "main/findmenu/findemailid";
     }
@@ -57,6 +66,7 @@ public class UserController {
     // REST 방식에서 값을 읽어내는 동작은 GET이다. ★ 매핑 주소 find_id 아닌 find/id으로 주는 것 주의!
     @Transactional
     @PostMapping("/findemail")
+    @Operation(summary = "find email", description = "이름과 휴대폰 번호를 이용하여 DB에 저장된 회원 아이디값을 찾아온다.")
     public String findId(String name, String phone , RedirectAttributes rttr) {
         MemberSearchCond memberSearchCond = new MemberSearchCond(name,phone);
         Member user = memberService.getMemberId(memberSearchCond);

@@ -4,25 +4,29 @@ import com.example.team_project.dto.auth.SignupResponse;
 import com.example.team_project.dto.auth.SignupDto;
 import com.example.team_project.repository.MemberRepository;
 import com.example.team_project.service.member.MemberServiceJpa;
-import groovy.util.logging.Log4j2;
-import jakarta.transaction.Transactional;
-
 import org.junit.jupiter.api.Test;
-
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.mock.web.MockMultipartFile;
+import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.transaction.annotation.Transactional;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
+@ExtendWith(MockitoExtension.class)
 @Transactional
-@Log4j2
-@SpringBootTest
-
 class MemberServiceJpaTest {
-    @Autowired
-    MemberServiceJpa memberServiceJpa;
-    @Autowired MemberRepository memberRepository;
+    @Mock
+    private MemberRepository memberRepository;
+    @Mock
+    private PasswordEncoder passwordEncoder;
+
+    @InjectMocks
+    private MemberServiceJpa memberService;
+
 
 
 
@@ -32,7 +36,7 @@ class MemberServiceJpaTest {
         SignupDto signupDtoImg = createSignupDtoImg();
 
         //when
-        SignupResponse join = memberServiceJpa.join(signupDtoImg);
+        SignupResponse join = memberService.join(signupDtoImg);
 
         //then
         assertThat(join.getEmail()).isEqualTo(signupDtoImg.getEmail());

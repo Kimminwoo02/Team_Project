@@ -19,13 +19,13 @@ public class CustomUserDetailsService implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String email) {
-        List<GrantedAuthority> authorities = new ArrayList<>();
+//        List<GrantedAuthority> authorities = new ArrayList<>();
         Member member = memberRepository.findByEmail(email);
         if(member == null){
             throw new  UsernameNotFoundException("해당 유저를 찾을 수 없습니다.");
         }
 
-        return new CustomUserDetails(member,authorities);
+        return new CustomUserDetails(member);
 
     }
 }

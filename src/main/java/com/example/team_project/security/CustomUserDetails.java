@@ -14,13 +14,12 @@ import java.util.List;
 
 
 @Getter
-public class CustomUserDetails extends User implements UserDetails {
+public class CustomUserDetails implements UserDetails {
 
     private final Member member;
 
 
-    public CustomUserDetails(Member member, List<GrantedAuthority> authorities){
-        super(member.getEmail(),member.getPassword(),authorities);
+    public CustomUserDetails(Member member){
         this.member = member;
     }
 

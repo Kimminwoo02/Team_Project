@@ -53,6 +53,10 @@ spring:
     username: ${MAIL_ID}
     password: ${MAIL_PASSWORD}
     protocol: smtps
+  data:
+    redis:
+      host: localhost
+      port: 6379
 com:
   example:
     upload : ${IMAGES}

@@ -19,6 +19,7 @@ public class RedisConfig {
 
     @Bean
     public RedisConnectionFactory redisConnectionFactory(){
+        // 크게 Lettuce 아니면 zedis를 사용하는데 Lettuce가 성능상 우수하여 사용
         return new LettuceConnectionFactory(redisHost,redisPort);
     }
 
@@ -31,5 +32,6 @@ public class RedisConfig {
         redisTemplate.setHashValueSerializer(new StringRedisSerializer());
         return redisTemplate;
     }
+
 
 }

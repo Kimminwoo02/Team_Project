@@ -1,37 +1,52 @@
-## 개요
-- 프로젝트 이름 : Actimate
-- 프로젝트 기간 : 2023.09.15 ~ 진행 중
-- 조원 : 김민우, 김예준, 손용수, 홍지혜
-- 소개
-  혼자 진행할 수 없는 다양한 활동을 다른 사람들과 같이 할 수 있도록 매칭을 해주는 서비스이다.
-  
-
-## 개발 환경
-
-* Intellij IDEA Ultimate
-* Java 17
-* Gradle 8.2.1
-* Spring Boot 3.1.3
+<div align="center">
+<img width="742" alt="sosikLogo" src="https://github.com/Kimminwoo02/catalogs/assets/71600656/8279d0db-7f9e-48a9-ac85-455112e16acb">
 
 
-## 기술 세부 스택
 
-* Spring Web
-* Spring Data JPA
-* Spring Security
-* Spring Configuration Processor
-* H2 Database
-* Lombok
-* Thymeleaf
 
-## 프로젝트 후기
-https://www.notion.so/minutaurus/10-afa254b9d154494eb90bff94250910fb
 
-## 사용방법
+</div>
 
-1. 깃 클론을 통해 프로젝트를 다운 받는다.
-https://github.com/Kimminwoo02/Team_Project.git
-2. H2 DB를 실행시킨다.
-3. 서버를 기동시킨 후 localhost:8080으로 접속한다.
+## **소개**
+혼자서 진행할 수 없는 다양한 활동들을 다른 사람들과 같이 할 수 있도록 도와주는 매칭 서비스 입니다!
+2023.09 ~ 2023.10
+<br>
+<br>
 
+<br>
+
+
+
+## 팀원 👨‍👩‍👧‍👦👨‍👩‍👦
+| **Backend** | **Backend** | **Backend** | **Backend** |
+| --- | --- | --- | --- | 
+| <img src="https://github.com/Kimminwoo02/catalogs/assets/71600656/9c70a75a-d46b-4255-a305-1961b5a74b6a" width=400px alt="minu"/> | <img src="https://github.com/TeamSosik/Sosik_Member_Service/assets/71600656/93be706f-2115-44b5-a970-e851bc1a1c12" width=400px alt="minu"/> | <img src="https://github.com/TeamSosik/.github/assets/71600656/1f608d6d-725a-47da-8096-321814c0273e" width=400px alt="밀리"/> | <img src="https://github.com/TeamSosik/Sosik_Member_Service/assets/71600656/3be5f2fa-ff0b-4ff5-ae85-cc1b8aed0b95" width=400px alt="져니"> 
+|       <div align="center">[Minutaurus](https://github.com/Kimminwoo02)</div>      |    <div align="center">[Yongsu](https://github.com/yongsuson)</div> |  <div align="center"> [YJ](https://github.com/FreeDistortion)</div>  |   <div align="center">[Jihye](https://github.com/jihye525)</div> 
+
+<br>
+
+## **프로젝트 구조**
+
+<img width="920" alt="structure" src="https://github.com/Kimminwoo02/Project-board/assets/71600656/b83886e7-b7f3-44de-b894-9116b64fc836">
+
+## **기술 스택 🛠️**
+
+<div align="center">
+
+### **Front-end**
+<img width="600"  alt="스크린샷 2023-12-21 오후 5 45 41" src="https://github.com/Kimminwoo02/catalogs/assets/71600656/35bbc1c3-85c9-4a28-ba49-d00477218f8e">
+
+
+### **Back-end**
+<img width="600" alt="스크린샷 2023-12-21 오후 5 44 09" src="https://github.com/Kimminwoo02/Project-board/assets/71600656/7b6cc63e-0a78-4311-887e-76abfe8c5499">
+
+
+### **COMMON**
+<img width="600" alt="스크린샷 2023-12-21 오후 5 46 14" src="https://github.com/Kimminwoo02/catalogs/assets/71600656/18cf0665-9e6b-4881-8435-ca8f16244a2b">
+
+</div>
+
+
+
+<br>
 

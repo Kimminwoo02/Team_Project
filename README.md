@@ -26,8 +26,9 @@
 <br>
 
 ## **프로젝트 구조**
-
-<img width="920" alt="structure" src="https://github.com/Kimminwoo02/Project-board/assets/71600656/b83886e7-b7f3-44de-b894-9116b64fc836">
+<div align="center">
+  <img width="920" alt="스크린샷 2023-12-25 오후 9 15 09" src="https://github.com/Kimminwoo02/Project-board/assets/71600656/08884d92-01a7-4618-adc9-1e260cf7203f">
+</div>
 
 ## **기술 스택 🛠️**
 
@@ -46,6 +47,9 @@
 
 </div>
 
+
+## **프로젝트 후기**
+https://www.notion.so/minutaurus/10-afa254b9d154494eb90bff94250910fb
 
 
 <br>
